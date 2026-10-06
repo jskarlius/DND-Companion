@@ -1,0 +1,3 @@
+# Private PDFs, scans, extracted text, and draft packs stay local.
+*
+!.gitignore
