@@ -37,7 +37,7 @@ Acceptance:
 - public documentation and directory markers do appear; and
 - no workbook content is copied into source code.
 
-## Work package 1: Vite and TypeScript migration
+## Work package 1: Vite and TypeScript migration — complete (2026-10-06)
 
 Goal: replace the untouched Create React App tooling while retaining the same
 repository and React 19 application.
@@ -54,6 +54,10 @@ Acceptance:
 - production build succeeds;
 - typecheck succeeds; and
 - one application smoke test passes.
+
+Completed verification: `npm run typecheck`, `npm run test`, and `npm run
+build` passed; the Vite development server was started and the application shell
+was confirmed in the browser.
 
 ## Architecture checkpoint A: Canonical domain contracts
 
@@ -228,11 +232,7 @@ After the vertical slice is stable, decide whether to prioritize broader class
 coverage, richer feature automation, print layout, document extraction, or
 native packaging. A hosted backend is not assumed.
 
-## Recommended first coding session
+## Next session
 
-Perform work package 1 only. The prompt for a coding model can be:
-
-> Read `docs/DESIGN.md` and `docs/IMPLEMENTATION_PLAN.md`. Implement work
-> package 1 only. Preserve unrelated files and the workbook. Explain every new
-> dependency in the handoff, run build/typecheck/tests, and stop after reporting
-> the results.
+Perform Architecture checkpoint A only. Review and approve the canonical domain
+contracts before beginning Work package 2.
