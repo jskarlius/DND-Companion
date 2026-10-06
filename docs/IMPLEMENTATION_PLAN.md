@@ -85,7 +85,7 @@ Approved decisions:
   their declared recovery effects, while direct adjustments remain available.
 - Return traceable calculation explanations for all core derived values.
 
-## Slice 2: Rules-engine foundation
+## Slice 2: Rules-engine foundation — complete (2026-10-06)
 
 Goal: implement pure, UI-independent calculations.
 
@@ -101,6 +101,11 @@ Acceptance:
 - table-driven unit tests cover levels 1-20;
 - multiclass totals are tested; and
 - calculations return both a value and enough detail to explain it in the UI.
+
+Completed verification: `npm run typecheck`, `npm run test`, and `npm run
+build` passed. The test suite includes table-driven proficiency coverage for
+levels 1–20, multiclass total/per-class level tests, saving throw and skill
+proficiency/expertise tests, modifier-trace tests, and manual-override tests.
 
 ## Slice 3: Minimal content fixture
 
@@ -250,5 +255,5 @@ native packaging. A hosted backend is not assumed.
 
 ## Next session
 
-Begin Slice 2: Rules-engine foundation. Implement the approved domain contracts
-and its stated pure-calculation scope only.
+Begin Slice 3: Minimal content fixture. Define the canonical content schemas
+and fixtures needed to exercise the completed rules-engine foundation.
