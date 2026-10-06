@@ -1,0 +1,551 @@
+# D&D Companion Design Document
+
+Status: Initial architecture approved for implementation  
+Last updated: 2026-10-06
+
+## 1. Purpose
+
+D&D Companion is a private, local-first React application for creating,
+leveling, and playing D&D fifth-edition characters. It is intended for the
+owner and a small group of friends, with no hosted application database. It
+combines a bundled rules knowledge base with optional private content owned and
+imported by each user.
+
+The first complete product slice will support:
+
+- creating a character from a selected ruleset and installed content packs;
+- using an editable character sheet during play;
+- tracking HP, temporary HP, resources, spell slots, and other temporary state;
+- calculating common derived statistics;
+- leveling a character from knowledge-base progression data;
+- importing and exporting characters and content packs; and
+- operating without a database server or continuous network connection.
+
+Accounts, cloud synchronization, a hosted database, public content publishing,
+and complete automation of every possible feature interaction are out of scope.
+
+## 2. Product principles
+
+1. **Local first.** A character must remain usable when the network or an
+   external rules API is unavailable.
+2. **Editable, not rigid.** Calculated values may be overridden deliberately,
+   and unsupported rules can still be tracked manually.
+3. **Ruleset aware.** 2014 and 2024 rules and similarly named content must not
+   be silently mixed.
+4. **Content provenance.** Every rules entity records its source, version,
+   license, and distribution classification.
+5. **Private means private.** Non-redistributable content is not committed to
+   the repository or shipped with the public application.
+6. **Incremental automation.** A feature can begin as reference text, gain a
+   usage tracker, and later receive full mechanical automation.
+7. **Portable data.** Users can export characters and private packs instead of
+   relying exclusively on browser storage.
+8. **Dynamic collections.** The interface presents as many classes, attacks,
+   spells, cantrips, features, items, and resources as the character has. The
+   spreadsheet's visible row counts are not application limits.
+9. **Multiclass from the start.** Calculations explicitly distinguish total
+   character level from levels in an individual class.
+
+## 3. High-level architecture
+
+```text
+Open5e v2 / official SRD       User-owned document or manual entry
+             |                              |
+      public importer              private import/editor
+             |                              |
+      validated public pack        validated private pack
+             |                              |
+             +--------------+---------------+
+                            |
+                     IndexedDB content
+                            |
+              rules engine + character data
+                            |
+                     React application
+```
+
+Open5e is an ingestion source, not a runtime dependency. The importer creates a
+pinned, validated snapshot so that API changes or outages cannot break a game
+session.
+
+## 4. Storage model
+
+The project uses JSON and IndexedDB for different responsibilities rather than
+choosing one exclusively.
+
+### 4.1 Distributable content
+
+Curated SRD content packs are versioned JSON files shipped with the application.
+They are read-only inputs and can be cached for offline use. Packs are separated
+by ruleset and version, for example `srd-5.1` and `srd-5.2.1`.
+
+The application loads these packs into its content repository. An installation
+may avoid duplicating immutable records in IndexedDB if querying the static pack
+is sufficient, but all content is exposed through one repository interface so
+the UI does not care where a record originated.
+
+### 4.2 Runtime database
+
+IndexedDB is the on-device runtime database. A small wrapper such as Dexie will
+provide schema versions, queries, transactions, and migrations.
+
+Planned stores are:
+
+| Store | Responsibility |
+| --- | --- |
+| `contentPacks` | Installed pack manifests and import status |
+| `contentEntities` | Private and optionally cached public entities |
+| `characters` | Character source data, choices, and manual overrides |
+| `playState` | Current HP, used resources, conditions, and other session state |
+| `settings` | Application and display preferences |
+
+Private imports **do live in IndexedDB during normal application use**, next to
+the public content from the perspective of the repository. Their source and
+distribution metadata remain distinct so they cannot accidentally be included
+in a public export.
+
+### 4.3 Private staging directory
+
+`private-imports/` is not the runtime database. It is an optional, Git-ignored
+staging location for source PDFs, scans, extracted text, and generated draft
+packs during development. After validation, a pack is imported into IndexedDB.
+The source file may then be retained privately or removed by its owner.
+
+### 4.4 Backups and portability
+
+IndexedDB is not the only copy of important user data. The application will
+support:
+
+- character export/import as a versioned JSON file;
+- content-pack export/import as a versioned JSON file;
+- bulk backup of local characters and permitted private packs; and
+- explicit warnings when an export contains records marked `private`.
+
+The application should request persistent browser storage where supported, but
+exports remain necessary because users can clear browser data or change devices.
+
+### 4.5 No hosted database
+
+PostgreSQL and other hosted databases are not part of the planned architecture.
+The word "database" in this document normally means IndexedDB, which is local
+to a user's browser. Static hosting may eventually distribute the application
+files, but it does not receive or store characters or private rules content.
+Exported files are the supported way to move data between devices or friends.
+
+## 5. Private-use content posture and provenance
+
+This is not a public content service or commercial product, so licensing work
+should remain proportionate and should not slow down ordinary development. At
+the same time, sharing the application or a content pack with friends is still
+copying that content. The project therefore keeps simple source and
+distribution metadata and avoids publishing book text in a public repository.
+This is a practical project boundary, not a digital-rights-management system or
+legal determination.
+
+The public application will include only material that can be redistributed,
+initially:
+
+- SRD 5.1 under its applicable open license; and
+- SRD 5.2.1 under CC BY 4.0.
+
+Open5e records are imported only from an allowlist of known documents and
+licenses. The importer must not assume that the Open5e software license applies
+to all game content returned by its API.
+
+Material from books owned by a user, such as *Forgotten Realms: Heroes of
+Faerun*, is classified as private unless a compatible redistribution license is
+verified. It can be stored and used locally. Keeping it out of public builds and
+public repositories is the default; sharing a private pack remains an explicit
+user action rather than something the application tries to police.
+
+Each content pack has a manifest similar to:
+
+```ts
+type ContentPackManifest = {
+  schemaVersion: number;
+  id: string;
+  name: string;
+  version: string;
+  ruleset: "5e-2014" | "5e-2024";
+  distribution: "public" | "private";
+  source: {
+    title: string;
+    publisher?: string;
+    license: string;
+    attribution?: string;
+    url?: string;
+  };
+};
+```
+
+Stable entity IDs include a namespace, source, type, and local key. An example
+is `private:frhof:subclass:bladesinger`. References use IDs instead of names so
+two versions of Bladesinger or Wizard can coexist without ambiguity.
+
+## 6. Import pipelines
+
+### 6.1 Public Open5e/SRD import
+
+1. Query Open5e API v2 for allowlisted documents.
+2. Retain only required player-facing entity types.
+3. Transform the API response into the application's canonical schema.
+4. attach source, license, ruleset, and upstream-version metadata;
+5. validate every record;
+6. report broken references and duplicates; and
+7. generate deterministic, versioned JSON packs.
+
+Generated packs are reviewed and committed. The application never requires the
+live API during play.
+
+### 6.2 Private document import
+
+Private ingestion is deliberately semi-automatic:
+
+1. Accept a user-provided PDF, scan, or pasted text.
+2. Extract embedded text or use OCR when necessary.
+3. Divide the extracted material into candidate entities.
+4. Produce a draft pack without silently inventing missing rules.
+5. Present validation errors and a human-review screen.
+6. Let the user correct fields and confirm the result against the source.
+7. Import the approved private pack into IndexedDB.
+
+PDF extraction can recover text, but it cannot reliably infer mechanical
+semantics from layout and prose. Authenticated sites and DRM/access controls are
+not scraped or bypassed.
+
+### 6.3 Manual content editor
+
+Every supported entity type will eventually have a form-based editor. This is
+the dependable fallback for physical books, inaccessible layouts, homebrew, and
+features that the automated importer cannot understand.
+
+## 7. Content and automation model
+
+Core entity categories include:
+
+- classes and subclasses;
+- class/subclass features;
+- backgrounds, species, and feats;
+- spells and spell-list membership;
+- equipment and items;
+- resources and recharge rules; and
+- choices and advancement grants.
+
+Class and subclass progression is declarative:
+
+```ts
+type AdvancementLevel = {
+  level: number;
+  grants: Array<
+    | { type: "feature"; featureId: string }
+    | { type: "choice"; choiceId: string }
+    | { type: "resource"; resourceId: string; amount: number }
+    | { type: "ability-score-improvement" }
+  >;
+};
+```
+
+Every feature declares an automation tier:
+
+| Tier | Behavior |
+| --- | --- |
+| Reference | Display description/reference; player manages the effect |
+| Tracked | App tracks uses, activation, duration, or recharge |
+| Automated | App applies explicit modifiers and derived-stat changes |
+
+This permits private Bladesinger content to work first as a readable feature
+with a Bladesong use tracker. Conditional statistics can be automated later
+without redesigning the subclass record.
+
+New private spells are normal spell entities associated with both their private
+source and the relevant Wizard spell list. Installing or removing the pack
+changes what can be selected without altering the base SRD Wizard record.
+
+## 8. Character model
+
+Character records store player decisions and source values, not copies of every
+calculated result.
+
+```ts
+type Character = {
+  schemaVersion: number;
+  id: string;
+  name: string;
+  ruleset: "5e-2014" | "5e-2024";
+  enabledContentPackIds: string[];
+  abilityScores: Record<Ability, number>;
+  classes: Array<{
+    id: string;
+    classId: string;
+    subclassId?: string;
+    level: number;
+    choices: Record<string, string | string[]>;
+  }>;
+  choices: Record<string, string | string[]>;
+  proficiencies: ProficiencySelection[];
+  knownSpellIds: string[];
+  preparedSpellIds: string[];
+  inventory: InventoryEntry[];
+  manualOverrides: Record<string, unknown>;
+};
+```
+
+Temporary play state is persisted independently:
+
+```ts
+type CharacterPlayState = {
+  characterId: string;
+  currentHp: number;
+  temporaryHp: number;
+  usedResources: Record<string, number>;
+  usedSpellSlots: Record<number, number>;
+  deathSaveSuccesses: number;
+  deathSaveFailures: number;
+  conditions: string[];
+};
+```
+
+Selectors/pure functions derive proficiency bonus, modifiers, saves, skills,
+initiative, armor class, maximum HP, spell statistics, and other calculated
+values. A manual override is explicit, visible, and reversible; it does not
+overwrite the underlying calculation.
+
+### 8.1 Character level and class level
+
+The rules engine exposes both concepts explicitly:
+
+```ts
+const characterLevel = character.classes.reduce(
+  (total, classEntry) => total + classEntry.level,
+  0,
+);
+
+const wizardLevel = getClassLevel(character, "srd-5.2.1:class:wizard");
+```
+
+They are never treated as interchangeable:
+
+- proficiency bonus is based on total character level;
+- class and subclass features are granted by the level in that class;
+- ability-score improvements and feats are advancement grants at the exact
+  levels specified by the selected class, not a universal `level % 4` rule;
+- the number of cantrips learned or prepared is normally read from the relevant
+  class progression;
+- damage or other scaling for many cantrips uses total character level, as
+  declared by the spell's scaling rule;
+- hit points gained at level-up use the class receiving the new level;
+- spell preparation/knowledge remains associated with its granting class;
+- multiclass spell slots use the selected ruleset's combined-caster-level
+  strategy, while systems such as Pact Magic remain separately modeled; and
+- features with similar effects do not stack unless the applicable rule says
+  that they do.
+
+Scaling is data driven rather than assumed globally:
+
+```ts
+type ScalingBasis =
+  | "character-level"
+  | "class-level"
+  | "ability-modifier"
+  | "proficiency-bonus"
+  | "fixed";
+```
+
+This supports ruleset differences and unusual class features without embedding
+Wizard-specific behavior in generic UI components.
+
+## 9. Level-up workflow
+
+Level-up is a staged transaction that supports advancing an existing class or
+adding a new class:
+
+1. Select an existing class or choose a new multiclass.
+2. Validate ruleset-specific multiclass prerequisites when applicable.
+3. Calculate the new total character level and new level in the target class.
+4. Compare the target class's current and next advancement grants.
+5. Apply only the starting proficiencies/grants allowed for a multiclass entry.
+6. Resolve required choices such as subclass, feat, spells, or ability scores.
+7. Recompute proficiency bonus, class resources, cantrip scaling, HP, and
+   multiclass spell-slot progression using the appropriate level basis.
+8. Preview every addition, lost option, and calculated-stat change.
+9. Warn about missing or incompatible content packs.
+10. Commit the class level and all choices together.
+11. Recalculate derived values without resetting temporary play state unless the
+   applicable rule explicitly requires it.
+
+The preview and atomic commit prevent partially completed level-ups.
+
+## 10. Workbook-derived character-sheet requirements
+
+The reference workbook `Voltash Vryn.xlsx` contains four worksheets:
+
+- `Base Sheet`: an empty reusable character template;
+- `Voltash Vryn`: the active level 7 character;
+- `Voltash Notes`: free-form character and world notes; and
+- `World Tree Barb`: another populated character example.
+
+The character sheets contain approximately 250 merged regions, 44-45 formulas,
+and 124 boolean cells each. Important spreadsheet sections include:
+
+- identity, class, level, species, and background;
+- ability scores and modifiers;
+- saving throws, skills, proficiency, and expertise;
+- inspiration and exhaustion;
+- initiative, speed, armor class, HP, temporary HP, hit dice, and death saves;
+- attacks and spellcasting;
+- proficiencies and languages;
+- features and feats;
+- inventory and item descriptions;
+- spell attack/save values and spell preparation; and
+- free-form notes.
+
+Google Sheets checkboxes were exported as boolean cell values, not Excel form
+controls. For example, proficiency and spell-preparation cells contain actual
+`TRUE` or `FALSE` values. The data therefore remains recoverable even though
+Excel displays plain booleans. The React UI will render these values as native,
+accessible checkboxes or equivalent toggle controls.
+
+The spreadsheet's formulas are requirements evidence, not code to reproduce
+literally. Several formulas contain character-specific or name-based conditions.
+The application will replace those formulas with tested rules functions and
+content-driven modifiers.
+
+The workbook is a reference for useful information and workflows, not a rigid
+screen specification. The application is not constrained by its exact cell
+grid, formulas, page size, or number of rows. Cantrips, spells, attacks,
+features, inventory, class entries, and other repeated data are dynamic lists.
+Rules may show an expected or allowed count, but the interface does not reserve
+an arbitrary fixed number of slots such as eight cantrip rows.
+
+Desktop can provide a dense sheet view, while narrow screens can arrange the
+same sections as cards, tabs, or collapsible groups. Exact colors, typography,
+navigation, and print layout remain a separate design decision after visual
+review.
+
+## 11. Frontend technology
+
+The current repository uses React 19 through Create React App. React remains
+appropriate, but Create React App and `react-scripts` are deprecated. Because
+the repository contains only the starter application, it will be migrated in
+place rather than deleting the repository.
+
+Technologies will be introduced only when their responsibility is needed:
+
+| Technology | Responsibility |
+| --- | --- |
+| React | Component-based interface |
+| TypeScript | Compile-time contracts for characters, rules, and UI props |
+| Vite | Development server and production build |
+| Zod | Runtime validation of packs, imports, and backups |
+| IndexedDB/Dexie | Local persistence and schema migrations |
+| React Router | Multi-screen navigation |
+| Vitest + Testing Library | Rules and interface tests |
+| Service worker/PWA | Installable shell and offline application assets |
+
+The first tooling migration installs only React, TypeScript, and Vite. Routing,
+validation, and persistence are added alongside the first features that use
+them.
+
+## 12. Proposed project structure
+
+```text
+dnd-companion/
+|-- content/
+|   |-- srd-5.1/
+|   `-- srd-5.2.1/
+|-- docs/
+|   `-- DESIGN.md
+|-- private-imports/           # Git-ignored private ingestion staging
+|-- reference/                 # Shareable design/reference files
+|   `-- private/               # Git-ignored private references
+|-- scripts/
+|   `-- import-content/
+|-- src/
+|   |-- app/                   # Application shell and routes
+|   |-- components/            # Reusable presentation components
+|   |-- domain/
+|   |   |-- character/         # Character types and calculations
+|   |   |-- content/           # Canonical rules entity types
+|   |   `-- rules/             # Ruleset-specific logic
+|   |-- features/
+|   |   |-- character-creation/
+|   |   |-- character-sheet/
+|   |   |-- content-library/
+|   |   `-- level-up/
+|   |-- storage/               # IndexedDB and file import/export
+|   |-- styles/
+|   `-- main.tsx
+|-- index.html
+|-- package.json
+|-- tsconfig.json
+`-- vite.config.ts
+```
+
+## 13. Delivery plan
+
+### Phase 1: Foundation
+
+- Migrate the starter from Create React App to Vite and TypeScript.
+- Establish domain types and automated testing.
+- Add a small, hand-verified SRD fixture rather than the full database.
+
+### Phase 2: Character-sheet vertical slice
+
+- Create/load one Wizard character modeled from the workbook.
+- Render abilities, saves, skills, combat statistics, features, and notes.
+- Support HP and boolean/toggle tracking.
+- Add explicit manual overrides.
+
+### Phase 3: Persistence and portability
+
+- Add versioned IndexedDB storage.
+- Add character JSON export/import and migration tests.
+- Request persistent browser storage and provide backup guidance.
+
+### Phase 4: Advancement and multiclassing
+
+- Model Wizard and a second class through a small range of levels.
+- Implement single-class and multiclass level-up previews, choices, and atomic
+  commit.
+- Test total-level proficiency/cantrip scaling against class-level grants, ASIs,
+  HP, and spell progression.
+- Verify that existing play state is preserved.
+
+### Phase 5: Content system
+
+- Build the allowlisted Open5e v2 importer.
+- Generate and validate SRD 5.1 and 5.2.1 packs.
+- Add content-library inspection and source/license display.
+
+### Phase 6: Private content
+
+- Add private pack import and form-based editing.
+- Add semi-automatic PDF/text extraction as a development aid.
+- Add warnings and filtering for private exports.
+- Use Bladesinger plus selected Wizard spells as the first private-pack test.
+
+### Phase 7: Offline installation
+
+- Add a service worker and installable PWA manifest.
+- Test fresh install, offline launch, updates, and recovery from backups.
+
+## 14. Testing strategy
+
+- Pure unit tests for modifiers, proficiency, saves, skills, HP, spell values,
+  advancement grants, and ruleset differences.
+- Schema tests for every bundled and imported content pack.
+- Migration tests using older character and database versions.
+- Integration tests for creating, editing, saving, exporting, importing, and
+  leveling a character.
+- Browser tests for offline startup and local persistence.
+- Regression fixtures based on the workbook's Base Sheet, Voltash Vryn, and
+  World Tree Barbarian examples without publishing private book text.
+
+## 15. Decisions intentionally deferred
+
+- Final visual theme and how closely desktop layout mirrors the spreadsheet.
+- Mobile navigation and print/PDF presentation.
+- The exact percentage of complex class features that should be automated.
+- Packaging as a native desktop/mobile application after the PWA is evaluated.
+
+These decisions do not block the initial character-sheet vertical slice.
