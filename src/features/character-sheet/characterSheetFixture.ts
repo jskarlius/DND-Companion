@@ -15,8 +15,11 @@ export interface CharacterSheetDetails {
     readonly armorClass: number;
     readonly speed: number;
     readonly maximumHp: number;
+    readonly spellAttackBonus: number;
+    readonly spellSaveDc: number;
     readonly hitDice: string;
   };
+  readonly spellSlots: readonly { readonly level: number; readonly maximum: number }[];
   readonly attacks: readonly {
     readonly name: string;
     readonly attackBonus: number;
@@ -91,6 +94,8 @@ export const representativePlayState: CharacterPlayState = {
   characterId: representativeCharacter.id,
   currentHp: 22,
   temporaryHp: 0,
+  temporaryMaximumHpBonus: 0,
+  inspiration: false,
   usedResources: {
     'srd-5.2.1:resource:wizard-arcane-recovery': 0,
     'srd-5.2.1:resource:fighter-second-wind': 1,
@@ -116,8 +121,11 @@ export const representativeCharacterSheetDetails: CharacterSheetDetails = {
     armorClass: 15,
     speed: 30,
     maximumHp: 26,
+    spellAttackBonus: 5,
+    spellSaveDc: 13,
     hitDice: '2d6 + 2d10',
   },
+  spellSlots: [{ level: 1, maximum: 3 }],
   attacks: [
     { name: 'Quarterstaff', attackBonus: 2, damage: '1d6 bludgeoning', notes: 'Versatile (1d8)' },
     { name: 'Fire Bolt', attackBonus: 5, damage: '1d10 fire', notes: 'Character-level scaling' },

@@ -482,9 +482,38 @@ Rules may show an expected or allowed count, but the interface does not reserve
 an arbitrary fixed number of slots such as eight cantrip rows.
 
 Desktop can provide a dense sheet view, while narrow screens can arrange the
-same sections as cards, tabs, or collapsible groups. Exact colors, typography,
-navigation, and print layout remain a separate design decision after visual
-review.
+same sections as cards, tabs, or collapsible groups. Print layout remains a
+separate design decision. The application UI direction, component-system
+boundaries, responsive principles, and review process are defined in
+`docs/UI_DESIGN.md`.
+
+### 10.1 Interface design system
+
+The application uses Tailwind CSS for design tokens, responsive styling, and
+composable utility classes. It adopts selected shadcn/ui components as owned
+source code for generic interface primitives such as buttons, form controls,
+tabs, dialogs, tooltips, badges, and separators. This is not a request to
+replace the character sheet with a stock template or to express every layout
+as utility classes.
+
+D&D-specific presentation remains application code. Ability summaries, saving
+throws, spell slots, resources, death saves, inventory entries, and other game
+concepts compose the shared primitives while retaining semantic HTML and the
+dynamic collections required by this design. Ordinary CSS remains acceptable
+when it communicates a complex sheet layout more clearly than inline utility
+classes.
+
+The visual direction is a restrained arcane field journal: warm neutral
+backgrounds, ink or forest-green primary actions, muted metallic accents, and
+danger colors reserved for destructive or harmful states. Display typography
+may use a restrained serif, while controls, dense data, and body text use a
+highly readable sans-serif. Fonts and icons used by the installed application
+are bundled locally rather than fetched from a runtime CDN.
+
+The design system is introduced before application navigation expands. A
+manual product checkpoint after the character-library slice validates the
+library, character sheet, responsive behavior, keyboard operation, and visual
+hierarchy before level-up work begins.
 
 ## 11. Frontend and packaging technology
 
@@ -502,6 +531,8 @@ Technologies will be introduced only when their responsibility is needed:
 | Zod | Runtime validation of packs, imports, and backups |
 | IndexedDB/Dexie | Local persistence and schema migrations |
 | React Router | Multi-screen navigation |
+| Tailwind CSS | Design tokens, responsive styling, and static utility CSS |
+| shadcn/ui | Owned, accessible source components for generic UI primitives |
 | Vitest + Testing Library | Rules and interface tests |
 | Service worker/PWA | Installable shell and offline application assets |
 | Tauri 2 | Planned Windows and Android native packaging after the PWA |
@@ -575,6 +606,7 @@ dnd-companion/
 |   |-- IMPLEMENTATION_PLAN.md
 |   |-- NATIVE_PACKAGING.md
 |   |-- RAG_IDEA.md
+|   |-- UI_DESIGN.md
 |   `-- TECH_STACK_GUIDE.html
 |-- private-imports/           # Git-ignored private ingestion staging
 |-- reference/                 # Shareable design/reference files
@@ -584,6 +616,7 @@ dnd-companion/
 |-- src/
 |   |-- app/                   # Application shell and routes
 |   |-- components/            # Reusable presentation components
+|   |   `-- ui/                # Owned generic UI primitives
 |   |-- domain/
 |   |   |-- character/         # Character types and calculations
 |   |   |-- content/           # Canonical rules entity types
@@ -623,6 +656,15 @@ dnd-companion/
 - Add versioned IndexedDB storage.
 - Add character JSON export/import and migration tests.
 - Request persistent browser storage and provide backup guidance.
+
+### Phase 3.5: Application shell and UI foundation
+
+- Establish the Tailwind and shadcn/ui foundation without replacing domain
+  components or rules behavior.
+- Extract reusable generic controls and apply the approved visual direction.
+- Add the character library and application routes.
+- Perform a manual UI and accessibility review at representative desktop,
+  tablet, and mobile widths before advancement work begins.
 
 ### Phase 4: Advancement and multiclassing
 
@@ -678,8 +720,7 @@ dnd-companion/
 
 ## 15. Decisions intentionally deferred
 
-- Final visual theme and how closely desktop layout mirrors the spreadsheet.
-- Mobile navigation and print/PDF presentation.
+- Print/PDF presentation and any print-specific visual theme.
 - The exact percentage of complex class features that should be automated.
 - Whether measured native requirements justify a SQLite storage adapter.
 - Windows installer format and whether Android distribution uses direct APK

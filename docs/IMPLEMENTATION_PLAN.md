@@ -155,7 +155,7 @@ Sheet/Character/Inventory tab panels; the character summary stays visible above
 the selected tab. The Character tab provides an appearance/portrait placeholder,
 backstory, and general notes; image persistence is deferred to Slice 6.
 
-## Slice 5: Editable play state
+## Slice 5: Editable play state — complete (2026-10-07)
 
 Goal: support play-session interactions before persistence.
 
@@ -169,6 +169,13 @@ Acceptance:
 - state changes never alter immutable content definitions;
 - removing an override restores the calculated result; and
 - component tests cover the main interactions.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. The representative sheet now manages an in-memory,
+separate play-state draft with accessible HP, inspiration, death-save,
+condition, and resource controls. Short and long rests use resource recharge
+metadata, while manual overrides remain explicit and reset to their calculated
+values without mutating the fixture or content definitions.
 
 ## Slice 6: IndexedDB persistence and backups
 
@@ -187,6 +194,36 @@ Acceptance:
 - migration tests pass; and
 - the app performs no character-data network requests.
 
+## Slice 6.25: UI design-system foundation
+
+Goal: establish a professional, accessible component and styling foundation
+before the application expands to multiple screens.
+
+- Add Tailwind CSS using the Vite integration.
+- Add and configure selected shadcn/ui primitives as owned source code.
+- Define semantic color, typography, spacing, radius, shadow, focus, and state
+  tokens following `docs/UI_DESIGN.md`.
+- Bundle any selected fonts and icons locally; do not add runtime CDN
+  dependencies.
+- Extract generic Button, form-control, Tabs, Dialog/AlertDialog, Tooltip,
+  Badge, Card, and Separator primitives only as they are needed.
+- Refactor the existing sheet incrementally so D&D-specific components retain
+  their meaning and behavior.
+- Split the monolithic character-sheet presentation into focused components
+  without moving domain logic into the UI layer.
+
+Acceptance:
+
+- the existing character-sheet workflows and automated tests still pass;
+- generic controls have consistent default, hover, focus, active, disabled,
+  and destructive states;
+- dialogs trap and restore focus and can be dismissed by keyboard where
+  appropriate;
+- tabs implement expected keyboard navigation;
+- semantic tokens, rather than repeated literal values, control the theme;
+- the production build has no font, icon, or component CDN requirement; and
+- `npm.cmd run typecheck`, `npm.cmd run test`, and `npm.cmd run build` pass.
+
 ## Slice 6.5: Character library and application navigation
 
 Goal: make the home screen the entry point for multiple locally stored
@@ -201,6 +238,9 @@ characters and future application features.
 - Add React Router only for the home and character-sheet routes required by
   this slice.
 - Show an empty-library state and a recent-character affordance.
+- Build new screens and actions from the Slice 6.25 tokens and primitives.
+- Include deliberate loading, empty, unknown-character, error, and destructive
+  confirmation states for manual UI review.
 
 Acceptance:
 
@@ -208,7 +248,27 @@ Acceptance:
   state;
 - direct navigation to a valid character ID loads its sheet, while an unknown
   ID is handled gracefully; and
-- deleting a character never removes unrelated characters or content packs.
+- deleting a character never removes unrelated characters or content packs;
+- the library and character sheet remain usable at the representative widths
+  in `docs/UI_DESIGN.md`; and
+- the UI product checkpoint can be exercised without fixture-only shortcuts.
+
+## Product checkpoint: UI foundation and navigation
+
+Stop before the level-up architecture checkpoint. The owner performs the full
+manual review in `docs/UI_DESIGN.md` and reports visual, responsive, keyboard,
+and usability feedback.
+
+- Classify reports as blocker, usability, polish, preference, or new product
+  scope.
+- Implement accepted UI fixes as a bounded review-adjustment pass.
+- Add regression tests for behavioral and accessibility defects where useful.
+- Record intentionally deferred items under the most relevant future slice.
+- Re-run typecheck, tests, build, and the affected manual scenarios.
+
+This checkpoint is complete only after blocker and serious accessibility issues
+are resolved and the owner explicitly approves proceeding. New domain features
+found during review do not expand the polish pass automatically.
 
 ## Architecture checkpoint B: Level-up transaction
 
@@ -376,6 +436,6 @@ implementation slice or delivery commitment.
 
 ## Next session
 
-Begin Slice 5: Editable play state. Add play-session controls over the
-read-only sheet while keeping temporary state separate from character and
-content records.
+Begin Slice 6: IndexedDB persistence and backups. Persist character decisions
+and play state separately, then add versioned character import/export and
+migration coverage without introducing character-data network requests.
