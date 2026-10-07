@@ -1,12 +1,14 @@
 import './App.css';
+import { CharacterSheet } from './features/character-sheet/CharacterSheet';
+import {
+  representativeCharacter,
+  representativeCharacterSheetDetails,
+  representativePlayState,
+} from './features/character-sheet/characterSheetFixture';
+import { minimalContentFixture } from './domain/content/fixtures';
 
 function App() {
-  return (
-    <main className="app-shell">
-      <h1>D&amp;D Companion</h1>
-      <p>Your local-first character companion is ready for its first feature.</p>
-    </main>
-  );
+  return <CharacterSheet character={representativeCharacter} playState={representativePlayState} content={minimalContentFixture} details={representativeCharacterSheetDetails} />;
 }
 
 export default App;

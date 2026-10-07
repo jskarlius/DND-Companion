@@ -129,7 +129,7 @@ stable source-qualified IDs, validates through Zod at runtime, and includes
 cross-reference tests for duplicate or missing content and display-name
 independence.
 
-## Slice 4: Read-only dynamic character sheet
+## Slice 4: Read-only dynamic character sheet — complete (2026-10-07)
 
 Goal: render a representative character from typed data.
 
@@ -145,6 +145,15 @@ Acceptance:
 - no repeated section has a hard-coded display capacity;
 - a multiclass fixture renders correctly; and
 - keyboard and screen-reader labels exist for interactive-looking elements.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. The public synthetic Wizard 2/Fighter 2 fixture
+renders dynamic class, attack, cantrip, spell, feature, resource, inventory,
+and note collections through a typed character-sheet view model. Component
+tests cover multiclass rendering, accessible proficiency markers, and local
+Sheet/Character/Inventory tab panels; the character summary stays visible above
+the selected tab. The Character tab provides an appearance/portrait placeholder,
+backstory, and general notes; image persistence is deferred to Slice 6.
 
 ## Slice 5: Editable play state
 
@@ -177,6 +186,29 @@ Acceptance:
 - export/delete/import restores a character;
 - migration tests pass; and
 - the app performs no character-data network requests.
+
+## Slice 6.5: Character library and application navigation
+
+Goal: make the home screen the entry point for multiple locally stored
+characters and future application features.
+
+- Add a home/library route that lists locally stored characters.
+- Open a character sheet by stable character ID rather than a hard-coded
+  fixture.
+- Provide create, duplicate, delete, import, and export entry points; the
+  creation workflow may begin with a minimal valid character before it gains
+  the full guided choice flow.
+- Add React Router only for the home and character-sheet routes required by
+  this slice.
+- Show an empty-library state and a recent-character affordance.
+
+Acceptance:
+
+- multiple characters can be opened independently and retain distinct play
+  state;
+- direct navigation to a valid character ID loads its sheet, while an unknown
+  ID is handled gracefully; and
+- deleting a character never removes unrelated characters or content packs.
 
 ## Architecture checkpoint B: Level-up transaction
 
@@ -211,6 +243,7 @@ Goal: unify bundled and locally installed content behind one interface.
 - Add Zod validation and pack manifests.
 - Load the small bundled fixture through the repository.
 - Add source/ruleset filtering and reference resolution.
+- Define item entities and searchable repository queries for inventory.
 - Build an allowlisted Open5e v2 importer.
 - Generate deterministic SRD packs after reviewing attribution output.
 
@@ -220,6 +253,17 @@ Acceptance:
 - duplicate IDs and broken references are reported;
 - application play remains independent of the live API; and
 - generated output is reproducible.
+
+## Later inventory-management follow-on (after Slice 8)
+
+Goal: turn the read-only Inventory tab into a structured, editable collection.
+
+- Add items by searching enabled public/private packs.
+- Permit standalone local custom items with a name, quantity, and notes.
+- Add per-entry notes and, when the item model supports them, worn/equipped,
+  attuned, and charge state.
+- Resolve class/background starting-equipment choices during character creation;
+  multiclass entries do not re-grant starting equipment.
 
 ## Slice 9: Private packs
 
@@ -261,5 +305,6 @@ native packaging. A hosted backend is not assumed.
 
 ## Next session
 
-Begin Slice 4: Read-only dynamic character sheet. Render representative typed
-character data using the completed calculation and minimal-content fixtures.
+Begin Slice 5: Editable play state. Add play-session controls over the
+read-only sheet while keeping temporary state separate from character and
+content records.

@@ -261,6 +261,23 @@ New private spells are normal spell entities associated with both their private
 source and the relevant Wizard spell list. Installing or removing the pack
 changes what can be selected without altering the base SRD Wizard record.
 
+### 7.1 Inventory interaction
+
+Inventory is a dynamic, structured collection rather than one large free-text
+field. Once the content repository and item schema exist, the normal add-item
+flow searches the enabled public and private content packs. An inventory entry
+records its referenced item and quantity, with per-entry notes and state such
+as worn/equipped, attuned, or charges added as their item mechanics are
+modeled.
+
+An explicit local custom-item flow remains available when an item is not in an
+installed pack. It permits a player to record a name, quantity, and notes
+without first creating a reusable content-pack entity. A user may later promote
+such an entry into a private pack through the manual editor. Character creation
+will resolve class and background starting-equipment choices into the same
+inventory collection; multiclassing does not silently re-grant starting
+equipment.
+
 ## 8. Character model
 
 Character records store player decisions and source values, not copies of every
@@ -563,6 +580,7 @@ dnd-companion/
 - Build the allowlisted Open5e v2 importer.
 - Generate and validate SRD 5.1 and 5.2.1 packs.
 - Add content-library inspection and source/license display.
+- Define item entities and repository queries needed by structured inventory.
 
 ### Phase 6: Private content
 
