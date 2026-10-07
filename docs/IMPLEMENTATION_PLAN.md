@@ -107,7 +107,7 @@ build` passed. The test suite includes table-driven proficiency coverage for
 levels 1–20, multiclass total/per-class level tests, saving throw and skill
 proficiency/expertise tests, modifier-trace tests, and manual-override tests.
 
-## Slice 3: Minimal content fixture
+## Slice 3: Minimal content fixture — complete (2026-10-07)
 
 Goal: prove progression without importing the complete knowledge base.
 
@@ -122,6 +122,12 @@ Acceptance:
 - fixtures validate at runtime;
 - references resolve; and
 - no progression logic depends on display names.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. The minimal 2024 Wizard and Fighter fixture uses
+stable source-qualified IDs, validates through Zod at runtime, and includes
+cross-reference tests for duplicate or missing content and display-name
+independence.
 
 ## Slice 4: Read-only dynamic character sheet
 
@@ -255,5 +261,5 @@ native packaging. A hosted backend is not assumed.
 
 ## Next session
 
-Begin Slice 3: Minimal content fixture. Define the canonical content schemas
-and fixtures needed to exercise the completed rules-engine foundation.
+Begin Slice 4: Read-only dynamic character sheet. Render representative typed
+character data using the completed calculation and minimal-content fixtures.
