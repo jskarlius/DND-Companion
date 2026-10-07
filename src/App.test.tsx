@@ -6,6 +6,6 @@ test('renders the application shell', () => {
   render(<App />);
 
   expect(
-    screen.getByRole('heading', { name: /d&d companion/i }),
+    screen.getByRole('heading', { name: /ariel thorne/i }),
   ).toBeInTheDocument();
 });
