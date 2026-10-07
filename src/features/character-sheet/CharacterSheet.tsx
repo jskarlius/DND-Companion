@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { resolveManualOverride } from '../../domain/character/calculations';
 import { setCurrentHp, setResourceUses, setSpellSlotUses, setTemporaryHp, setTemporaryMaximumHpBonus, takeRest } from '../../domain/character/playState';
 import type { Character, CharacterPlayState, ManualOverride, ManualOverrideTarget } from '../../domain/character/types';
@@ -12,6 +12,8 @@ interface CharacterSheetProps {
   readonly playState: CharacterPlayState;
   readonly content: ContentFixture;
   readonly details: CharacterSheetDetails;
+  readonly onCharacterChange?: (character: Character) => void;
+  readonly onPlayStateChange?: (playState: CharacterPlayState) => void;
 }
 
 function signed(value: number): string {
@@ -51,9 +53,11 @@ function OverrideDialog({
   return <div className="dialog-backdrop" role="presentation"><section className="override-dialog" role="dialog" aria-modal="true" aria-labelledby="override-dialog-title"><header><h2 id="override-dialog-title">Override {label}</h2><button type="button" aria-label="Close override editor" onClick={onClose}>×</button></header><p>Calculated value: <strong>{calculatedValue}</strong></p><label>Override value<input type="number" aria-label={`${label} override value`} value={value} onChange={(event) => setValue(event.currentTarget.value)} /></label><label>Reason <span>(optional)</span><textarea aria-label={`${label} override reason`} value={reason} onChange={(event) => setReason(event.currentTarget.value)} /></label><footer>{override && <button type="button" className="remove-override" onClick={() => { onReset(target); onClose(); }}>Remove override</button>}<button type="button" onClick={onClose}>Cancel</button><button type="button" onClick={() => { const numericValue = Number(value); if (Number.isFinite(numericValue)) { onSave(target, { value: numericValue, reason: reason.trim() || undefined }); onClose(); } }}>Save override</button></footer></section></div>;
 }
 
-export function CharacterSheet({ character, playState, content, details }: CharacterSheetProps) {
+export function CharacterSheet({ character, playState, content, details, onCharacterChange, onPlayStateChange }: CharacterSheetProps) {
   const [draftCharacter, setDraftCharacter] = useState(character);
   const [sessionState, setSessionState] = useState(playState);
+  const previousCharacter = useRef(draftCharacter);
+  const previousPlayState = useRef(sessionState);
   const [conditionName, setConditionName] = useState('');
   const [pendingRest, setPendingRest] = useState<'short' | 'long' | null>(null);
   const [editingOverride, setEditingOverride] = useState<ManualOverrideTarget | null>(null);
@@ -64,6 +68,26 @@ export function CharacterSheet({ character, playState, content, details }: Chara
   const speed = resolveManualOverride(baseCalculation(combat.speed, 'Calculated speed'), draftCharacter.manualOverrides, 'speed').value;
   const baseMaximumHp = resolveManualOverride(baseCalculation(combat.maximumHp, 'Calculated maximum HP'), draftCharacter.manualOverrides, 'maximumHp').value;
   const maximumHp = baseMaximumHp + sessionState.temporaryMaximumHpBonus;
+
+  useEffect(() => {
+    if (previousCharacter.current !== draftCharacter) onCharacterChange?.(draftCharacter);
+    previousCharacter.current = draftCharacter;
+  }, [draftCharacter, onCharacterChange]);
+
+  useEffect(() => {
+    if (previousPlayState.current !== sessionState) onPlayStateChange?.(sessionState);
+    previousPlayState.current = sessionState;
+  }, [onPlayStateChange, sessionState]);
+
+  useEffect(() => {
+    previousCharacter.current = character;
+    setDraftCharacter(character);
+  }, [character]);
+
+  useEffect(() => {
+    previousPlayState.current = playState;
+    setSessionState(playState);
+  }, [playState]);
 
   const changeOverride = (target: ManualOverrideTarget, override?: ManualOverride) => {
     setDraftCharacter((current) => {

@@ -177,7 +177,7 @@ condition, and resource controls. Short and long rests use resource recharge
 metadata, while manual overrides remain explicit and reset to their calculated
 values without mutating the fixture or content definitions.
 
-## Slice 6: IndexedDB persistence and backups
+## Slice 6: IndexedDB persistence and backups — complete (2026-10-07)
 
 Goal: persist local data without a hosted service.
 
@@ -193,6 +193,16 @@ Acceptance:
 - export/delete/import restores a character;
 - migration tests pass; and
 - the app performs no character-data network requests.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. Dexie stores permanent character decisions and
+temporary play state separately, while a repository keeps storage details out
+of the UI and domain modules. Versioned character JSON exports validate before
+import, and both backup-file and IndexedDB migrations add the later Aid
+maximum-HP field without altering other values. Tests cover database reopen
+persistence, export/delete/import restoration, and both migration paths. The
+app requests persistent browser storage where available and shows local backup
+guidance; no character-data network request is introduced.
 
 ## Slice 6.25: UI design-system foundation
 
@@ -436,6 +446,6 @@ implementation slice or delivery commitment.
 
 ## Next session
 
-Begin Slice 6: IndexedDB persistence and backups. Persist character decisions
-and play state separately, then add versioned character import/export and
-migration coverage without introducing character-data network requests.
+Begin Slice 6.25: UI design-system foundation. Add the approved local Tailwind
+and shadcn/ui foundation, semantic design tokens, and incremental component
+extraction without changing domain behavior.

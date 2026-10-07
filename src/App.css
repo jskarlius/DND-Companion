@@ -1,0 +1,10 @@
+.storage-status { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .75rem 1.25rem; max-width: 1500px; margin: 1rem auto 0; padding: .75rem 2rem; border: 1px solid #b8c8b0; background: #f4f6f0; color: #243126; }
+.storage-status p { margin: 0; }
+.storage-status div { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; }
+.storage-status button, .storage-status label { border: 1px solid #566a4e; border-radius: .25rem; background: #fffdf8; color: #243126; font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; padding: .4rem .55rem; }
+.storage-status label { display: inline-flex; align-items: center; }
+.storage-status input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.storage-status button:hover, .storage-status label:hover { background: #edf1e9; }
+.storage-status button:focus-visible, .storage-status label:focus-within { outline: 3px solid #2d6a9f; outline-offset: 2px; }
+.storage-error { width: 100%; color: #8a2d23; }
+@media (max-width: 620px) { .storage-status { margin-top: 0; padding: .75rem 1rem; } }
