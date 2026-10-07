@@ -1,7 +1,7 @@
 # D&D Companion Design Document
 
 Status: Initial architecture approved for implementation  
-Last updated: 2026-10-06
+Last updated: 2026-10-07
 
 ## 1. Purpose
 
@@ -486,12 +486,11 @@ same sections as cards, tabs, or collapsible groups. Exact colors, typography,
 navigation, and print layout remain a separate design decision after visual
 review.
 
-## 11. Frontend technology
+## 11. Frontend and packaging technology
 
-The current repository uses React 19 through Create React App. React remains
-appropriate, but Create React App and `react-scripts` are deprecated. Because
-the repository contains only the starter application, it will be migrated in
-place rather than deleting the repository.
+The application uses React 19, TypeScript, and Vite. The original Create React
+App scaffold was migrated in place during Slice 1; `react-scripts` is no longer
+part of the project.
 
 Technologies will be introduced only when their responsibility is needed:
 
@@ -505,10 +504,64 @@ Technologies will be introduced only when their responsibility is needed:
 | React Router | Multi-screen navigation |
 | Vitest + Testing Library | Rules and interface tests |
 | Service worker/PWA | Installable shell and offline application assets |
+| Tauri 2 | Planned Windows and Android native packaging after the PWA |
 
-The first tooling migration installs only React, TypeScript, and Vite. Routing,
-validation, and persistence are added alongside the first features that use
-them.
+Routing, validation, persistence, PWA support, and native packaging are added
+only alongside the first slices that require them.
+
+### 11.1 Deployment targets
+
+The application has three planned forms that share the same React interface and
+domain logic:
+
+1. the browser development build;
+2. an installable offline PWA; and
+3. Tauri 2 packages for Windows and Android.
+
+Tauri is a native shell around the compiled Vite application. Windows uses the
+system WebView2 runtime and Android uses the system Android WebView. Tauri may
+also provide narrowly scoped native capabilities such as file dialogs, local
+filesystem access, and—only if later justified—a native SQLite or inference
+adapter. Tauri is not a hosted backend, and packaging the application must not
+introduce accounts or network storage.
+
+The Windows target is implemented before Android so native packaging, upgrades,
+file import/export, and data retention can be learned and tested on the primary
+development platform. Android follows after the desktop shell is stable.
+
+### 11.2 Storage portability
+
+IndexedDB/Dexie remains the planned implementation through the web and PWA
+milestones and is the default for the first Tauri prototypes. Both Windows and
+Android webviews provide IndexedDB, so native packaging alone is not a reason to
+rewrite storage.
+
+Application code accesses data through repository and backup interfaces rather
+than importing Dexie directly into UI or domain modules. A future native SQLite
+adapter is considered only after measurements show a material need, such as
+full-text-search performance, very large content libraries, more controlled
+database-file backups, or webview-storage limitations. PostgreSQL remains out
+of scope.
+
+The versioned character, content-pack, and full-backup formats are independent
+of the storage adapter. They are the supported interchange mechanism between
+browser, Windows, and Android installations and provide the migration route if
+SQLite is adopted later.
+
+### 11.3 Native package boundaries
+
+- The compiled public application and redistributable public packs may be
+  included in installers.
+- Private packs, private reference files, characters, and model files are never
+  compiled into release artifacts.
+- Native capabilities follow least privilege; only required Tauri permissions
+  are enabled.
+- Windows package identity and Android application ID remain stable so upgrades
+  address the same application data.
+- Android signing keys and other release secrets remain outside the repository
+  and require a documented backup procedure.
+- Uninstalling the native application may remove its local data, so exportable
+  backups remain necessary even if a native database is introduced.
 
 ## 12. Proposed project structure
 
@@ -518,7 +571,11 @@ dnd-companion/
 |   |-- srd-5.1/
 |   `-- srd-5.2.1/
 |-- docs/
-|   `-- DESIGN.md
+|   |-- DESIGN.md
+|   |-- IMPLEMENTATION_PLAN.md
+|   |-- NATIVE_PACKAGING.md
+|   |-- RAG_IDEA.md
+|   `-- TECH_STACK_GUIDE.html
 |-- private-imports/           # Git-ignored private ingestion staging
 |-- reference/                 # Shareable design/reference files
 |   `-- private/               # Git-ignored private references
@@ -542,7 +599,8 @@ dnd-companion/
 |-- index.html
 |-- package.json
 |-- tsconfig.json
-`-- vite.config.ts
+|-- vite.config.ts
+`-- src-tauri/                   # Added in the post-PWA native phase
 ```
 
 ## 13. Delivery plan
@@ -594,6 +652,16 @@ dnd-companion/
 - Add a service worker and installable PWA manifest.
 - Test fresh install, offline launch, updates, and recovery from backups.
 
+### Phase 8: Native packaging
+
+- Package the existing Vite build with Tauri 2 for Windows first.
+- Verify offline startup, IndexedDB persistence, upgrades, and native
+  import/export dialogs.
+- Package and test the same application for Android.
+- Keep IndexedDB unless the native-storage checkpoint demonstrates a concrete
+  reason to add a SQLite adapter.
+- Document package identity, signing, release artifacts, and friend handoff.
+
 ## 14. Testing strategy
 
 - Pure unit tests for modifiers, proficiency, saves, skills, HP, spell values,
@@ -603,6 +671,8 @@ dnd-companion/
 - Integration tests for creating, editing, saving, exporting, importing, and
   leveling a character.
 - Browser tests for offline startup and local persistence.
+- Native smoke tests for Windows and Android offline startup, import/export,
+  restart persistence, and upgrade data retention.
 - Regression fixtures based on the workbook's Base Sheet, Voltash Vryn, and
   World Tree Barbarian examples without publishing private book text.
 
@@ -611,6 +681,9 @@ dnd-companion/
 - Final visual theme and how closely desktop layout mirrors the spreadsheet.
 - Mobile navigation and print/PDF presentation.
 - The exact percentage of complex class features that should be automated.
-- Packaging as a native desktop/mobile application after the PWA is evaluated.
+- Whether measured native requirements justify a SQLite storage adapter.
+- Windows installer format and whether Android distribution uses direct APK
+  handoff, an app bundle, or both.
+- The deferred local knowledge assistant described in `docs/RAG_IDEA.md`.
 
 These decisions do not block the initial character-sheet vertical slice.

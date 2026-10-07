@@ -1,6 +1,6 @@
 # D&D Companion Implementation Plan
 
-Last updated: 2026-10-06
+Last updated: 2026-10-07
 
 This plan breaks implementation into small, verifiable slices so routine
 coding can be handed to a less intensive model. Each coding task should include
@@ -297,11 +297,82 @@ Acceptance:
 - local characters remain local; and
 - a friend can install the app and import an explicitly shared backup or pack.
 
-## Architecture checkpoint C: Product expansion
+## Architecture checkpoint C: Native packaging readiness
 
-After the vertical slice is stable, decide whether to prioritize broader class
-coverage, richer feature automation, print layout, document extraction, or
-native packaging. A hosted backend is not assumed.
+After Slice 10 is stable, review the native plan in
+`docs/NATIVE_PACKAGING.md` before adding Tauri. Confirm:
+
+- PWA persistence and backup formats are stable and tested;
+- storage is accessed through repository interfaces rather than directly from
+  React components or domain code;
+- Windows package identity and Android application ID;
+- the minimum native file-dialog/filesystem capabilities required for
+  import/export;
+- release-signing and secret-backup responsibilities; and
+- a representative device list for Windows and Android testing.
+
+Do not introduce SQLite or native inference at this checkpoint.
+
+## Slice 11: Tauri Windows packaging
+
+Goal: package the existing offline application for Windows without changing its
+domain model or introducing a hosted service.
+
+- Add a Tauri 2 shell around the existing Vite production build.
+- Preserve the normal browser/PWA build as a supported target.
+- Configure a stable application identifier, version, icons, and Windows build
+  artifact.
+- Add only the native permissions required for explicit import/export dialogs.
+- Keep IndexedDB/Dexie as the first native persistence implementation.
+- Document local development and release-build commands.
+
+Acceptance:
+
+- a Windows release artifact builds and launches without a development server;
+- the application starts and remains usable offline;
+- characters and packs survive application restart and an upgrade test;
+- character, pack, and full-backup import/export work through native dialogs;
+- no private pack, character, reference file, or model is embedded in the
+  artifact; and
+- the web/PWA build and its automated tests continue to pass.
+
+## Slice 12: Tauri Android packaging
+
+Goal: package the same application as an Android APK after the Windows shell is
+stable.
+
+- Initialize the Tauri Android target and document required SDK/NDK tooling.
+- Configure a stable Android application ID, versioning, icons, and signing
+  workflow without committing signing secrets.
+- Verify responsive character-sheet and library behavior in Android WebView.
+- Adapt import/export to the Android document-picker/file-sharing workflow.
+- Keep IndexedDB/Dexie unless the following storage checkpoint approves a
+  change.
+
+Acceptance:
+
+- a release-capable APK builds and installs on at least one representative
+  physical device;
+- the application launches and performs its core workflows offline;
+- local data survives restart and an application upgrade test;
+- character, pack, and full-backup import/export work on-device;
+- uninstall/data-removal behavior is documented; and
+- Windows and web/PWA targets remain functional.
+
+## Architecture checkpoint D: Native storage decision
+
+Compare IndexedDB/Dexie on the tested Windows and Android packages against the
+actual content volume, search latency, backup behavior, upgrade behavior, and
+operational complexity.
+
+Continue with IndexedDB by default. Approve a separate SQLite-adapter slice only
+if measurements demonstrate a material benefit. Any SQLite work must retain the
+same repository contracts and versioned interchange formats and include a
+tested IndexedDB-to-SQLite migration path. PostgreSQL and hosted synchronization
+remain out of scope.
+
+The local knowledge assistant is a parked idea in `docs/RAG_IDEA.md`; it has no
+implementation slice or delivery commitment.
 
 ## Next session
 
