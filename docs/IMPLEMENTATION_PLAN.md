@@ -2,27 +2,29 @@
 
 Last updated: 2026-10-06
 
-This plan breaks implementation into small, verifiable work packages so routine
+This plan breaks implementation into small, verifiable slices so routine
 coding can be handed to a less intensive model. Each coding task should include
 only the relevant design-document sections and should end with tests and a short
 handoff note. Architecture review is reserved for the checkpoints marked below.
 
 ## Working method
 
-For each work package:
+For each slice:
 
-1. Start from a clean understanding of `docs/DESIGN.md` and the package goal.
+1. Start from a clean understanding of `docs/DESIGN.md` and the slice goal.
 2. Inspect existing changes and preserve unrelated user work.
 3. Implement only the stated scope.
-4. Run the package's verification commands.
+4. Run the slice's verification commands.
 5. Report changed files, tests, assumptions, and remaining risks.
-6. Do not begin the next package automatically when an architecture checkpoint
+6. When the slice is complete, update this plan with its completion status and
+   the next-session starting point.
+7. Do not begin the next slice automatically when an architecture checkpoint
    is listed.
 
 The spreadsheet is reference material, not a request to duplicate its grid.
 Repeated UI data must use dynamic collections.
 
-## Work package 0: Repository safeguards and references
+## Slice 0: Repository safeguards and references
 
 Goal: prepare the repository without changing application behavior.
 
@@ -37,7 +39,7 @@ Acceptance:
 - public documentation and directory markers do appear; and
 - no workbook content is copied into source code.
 
-## Work package 1: Vite and TypeScript migration — complete (2026-10-06)
+## Slice 1: Vite and TypeScript migration — complete (2026-10-06)
 
 Goal: replace the untouched Create React App tooling while retaining the same
 repository and React 19 application.
@@ -59,7 +61,7 @@ Completed verification: `npm run typecheck`, `npm run test`, and `npm run
 build` passed; the Vite development server was started and the application shell
 was confirmed in the browser.
 
-## Architecture checkpoint A: Canonical domain contracts
+## Architecture checkpoint A: Canonical domain contracts — complete (2026-10-06)
 
 Before feature coding, review and approve:
 
@@ -69,7 +71,21 @@ Before feature coding, review and approve:
 - source versus derived versus overridden values; and
 - multiclass level/scaling terminology.
 
-## Work package 2: Rules-engine foundation
+Approved decisions:
+
+- Support 2024 rules only. Future, explicit compatibility exceptions may cover
+  2014 spells or feats without a 2024 version; classes and subclasses remain
+  2024 only.
+- Store final ability scores and their origin (`standard-array`, `point-buy`,
+  or `custom`); retain per-level HP outcomes for fixed-average, rolled, or
+  custom HP gains.
+- Initially allow separate, reversible overrides for AC, maximum HP, speed,
+  spell attack bonus, and spell save DC.
+- Preserve play state during level-up. Long and short rest actions apply only
+  their declared recovery effects, while direct adjustments remain available.
+- Return traceable calculation explanations for all core derived values.
+
+## Slice 2: Rules-engine foundation — complete (2026-10-06)
 
 Goal: implement pure, UI-independent calculations.
 
@@ -86,7 +102,12 @@ Acceptance:
 - multiclass totals are tested; and
 - calculations return both a value and enough detail to explain it in the UI.
 
-## Work package 3: Minimal content fixture
+Completed verification: `npm run typecheck`, `npm run test`, and `npm run
+build` passed. The test suite includes table-driven proficiency coverage for
+levels 1–20, multiclass total/per-class level tests, saving throw and skill
+proficiency/expertise tests, modifier-trace tests, and manual-override tests.
+
+## Slice 3: Minimal content fixture — complete (2026-10-07)
 
 Goal: prove progression without importing the complete knowledge base.
 
@@ -102,7 +123,13 @@ Acceptance:
 - references resolve; and
 - no progression logic depends on display names.
 
-## Work package 4: Read-only dynamic character sheet
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. The minimal 2024 Wizard and Fighter fixture uses
+stable source-qualified IDs, validates through Zod at runtime, and includes
+cross-reference tests for duplicate or missing content and display-name
+independence.
+
+## Slice 4: Read-only dynamic character sheet
 
 Goal: render a representative character from typed data.
 
@@ -119,7 +146,7 @@ Acceptance:
 - a multiclass fixture renders correctly; and
 - keyboard and screen-reader labels exist for interactive-looking elements.
 
-## Work package 5: Editable play state
+## Slice 5: Editable play state
 
 Goal: support play-session interactions before persistence.
 
@@ -134,7 +161,7 @@ Acceptance:
 - removing an override restores the calculated result; and
 - component tests cover the main interactions.
 
-## Work package 6: IndexedDB persistence and backups
+## Slice 6: IndexedDB persistence and backups
 
 Goal: persist local data without a hosted service.
 
@@ -157,7 +184,7 @@ Review the proposed advancement diff format, multiclass prerequisites,
 class-entry choices, combined spell-slot strategy, and rollback behavior before
 implementing the workflow.
 
-## Work package 7: Level-up and multiclass workflow
+## Slice 7: Level-up and multiclass workflow
 
 Goal: add one level to an existing class or take level 1 in another class.
 
@@ -177,7 +204,7 @@ Acceptance:
 - spell selection remains associated with its granting class; and
 - canceling leaves the character unchanged.
 
-## Work package 8: Content repository and public packs
+## Slice 8: Content repository and public packs
 
 Goal: unify bundled and locally installed content behind one interface.
 
@@ -194,7 +221,7 @@ Acceptance:
 - application play remains independent of the live API; and
 - generated output is reproducible.
 
-## Work package 9: Private packs
+## Slice 9: Private packs
 
 Goal: install and use personally curated content locally.
 
@@ -211,7 +238,7 @@ Acceptance:
   character; and
 - private entities are not included in an ordinary public-pack export.
 
-## Work package 10: Offline PWA and friend handoff
+## Slice 10: Offline PWA and friend handoff
 
 Goal: make installation and testing simple without a hosted database.
 
@@ -234,5 +261,5 @@ native packaging. A hosted backend is not assumed.
 
 ## Next session
 
-Perform Architecture checkpoint A only. Review and approve the canonical domain
-contracts before beginning Work package 2.
+Begin Slice 4: Read-only dynamic character sheet. Render representative typed
+character data using the completed calculation and minimal-content fixtures.

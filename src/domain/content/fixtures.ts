@@ -1,0 +1,183 @@
+import { contentFixtureSchema } from './schemas';
+import type { ContentFixture } from './types';
+
+const srdSource = {
+  title: 'System Reference Document 5.2.1',
+  license: 'CC BY 4.0',
+  url: 'https://www.dndbeyond.com/srd',
+} as const;
+
+/**
+ * A deliberately small, hand-verified data set for exercising progression.
+ * It is not intended to be a complete class or spell implementation.
+ */
+export const minimalContentFixture: ContentFixture = {
+  features: [
+    {
+      id: 'srd-5.2.1:feature:wizard-spellcasting',
+      name: 'Spellcasting',
+      kind: 'feature',
+      ruleset: '5e-2024',
+      source: srdSource,
+      automation: 'reference',
+    },
+    {
+      id: 'srd-5.2.1:feature:wizard-arcane-recovery',
+      name: 'Arcane Recovery',
+      kind: 'feature',
+      ruleset: '5e-2024',
+      source: srdSource,
+      automation: 'tracked',
+      resourceId: 'srd-5.2.1:resource:wizard-arcane-recovery',
+    },
+    {
+      id: 'srd-5.2.1:feature:fighter-fighting-style',
+      name: 'Fighting Style',
+      kind: 'feature',
+      ruleset: '5e-2024',
+      source: srdSource,
+      automation: 'reference',
+    },
+    {
+      id: 'srd-5.2.1:feature:fighter-second-wind',
+      name: 'Second Wind',
+      kind: 'feature',
+      ruleset: '5e-2024',
+      source: srdSource,
+      automation: 'tracked',
+      resourceId: 'srd-5.2.1:resource:fighter-second-wind',
+    },
+  ],
+  resources: [
+    {
+      id: 'srd-5.2.1:resource:wizard-arcane-recovery',
+      name: 'Arcane Recovery uses',
+      kind: 'resource',
+      ruleset: '5e-2024',
+      source: srdSource,
+      maximum: 1,
+      recharge: 'long-rest',
+    },
+    {
+      id: 'srd-5.2.1:resource:fighter-second-wind',
+      name: 'Second Wind uses',
+      kind: 'resource',
+      ruleset: '5e-2024',
+      source: srdSource,
+      maximum: 1,
+      recharge: 'short-rest',
+    },
+  ],
+  spells: [
+    {
+      id: 'srd-5.2.1:spell:fire-bolt',
+      name: 'Fire Bolt',
+      kind: 'spell',
+      ruleset: '5e-2024',
+      source: srdSource,
+      level: 0,
+      scalingBasis: 'character-level',
+    },
+    {
+      id: 'srd-5.2.1:spell:magic-missile',
+      name: 'Magic Missile',
+      kind: 'spell',
+      ruleset: '5e-2024',
+      source: srdSource,
+      level: 1,
+    },
+  ],
+  classes: [
+    {
+      id: 'srd-5.2.1:class:wizard',
+      name: 'Wizard',
+      kind: 'class',
+      ruleset: '5e-2024',
+      source: srdSource,
+      hitDie: 6,
+      savingThrowAbilities: ['intelligence', 'wisdom'],
+      spellListIds: ['srd-5.2.1:spell:fire-bolt', 'srd-5.2.1:spell:magic-missile'],
+      advancement: [
+        { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-spellcasting' }] },
+        { level: 2, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-arcane-recovery' }] },
+        { level: 4, grants: [{ type: 'ability-score-improvement' }] },
+      ],
+    },
+    {
+      id: 'srd-5.2.1:class:fighter',
+      name: 'Fighter',
+      kind: 'class',
+      ruleset: '5e-2024',
+      source: srdSource,
+      hitDie: 10,
+      savingThrowAbilities: ['strength', 'constitution'],
+      spellListIds: [],
+      advancement: [
+        { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:fighter-fighting-style' }] },
+        {
+          level: 2,
+          grants: [
+            { type: 'feature', featureId: 'srd-5.2.1:feature:fighter-second-wind' },
+            { type: 'resource', resourceId: 'srd-5.2.1:resource:fighter-second-wind', amount: 1 },
+          ],
+        },
+        { level: 4, grants: [{ type: 'ability-score-improvement' }] },
+      ],
+    },
+  ],
+  subclasses: [],
+};
+
+export function validateContentFixture(fixture: ContentFixture): void {
+  contentFixtureSchema.parse(fixture);
+
+  const entities = [
+    ...fixture.classes,
+    ...fixture.subclasses,
+    ...fixture.features,
+    ...fixture.resources,
+    ...fixture.spells,
+  ];
+  const ids = new Set<string>();
+
+  for (const entity of entities) {
+    if (ids.has(entity.id)) {
+      throw new Error(`Duplicate content ID: ${entity.id}`);
+    }
+    ids.add(entity.id);
+  }
+
+  for (const feature of fixture.features) {
+    if (feature.resourceId && !ids.has(feature.resourceId)) {
+      throw new Error(`Feature ${feature.id} references missing resource ${feature.resourceId}`);
+    }
+  }
+
+  for (const subclass of fixture.subclasses) {
+    if (!ids.has(subclass.classId)) {
+      throw new Error(`Subclass ${subclass.id} references missing class ${subclass.classId}`);
+    }
+  }
+
+  for (const characterClass of [...fixture.classes, ...fixture.subclasses]) {
+    for (const grant of characterClass.advancement.flatMap((level) => level.grants)) {
+      const referenceId =
+        grant.type === 'feature'
+          ? grant.featureId
+          : grant.type === 'resource'
+            ? grant.resourceId
+            : undefined;
+      if (referenceId && !ids.has(referenceId)) {
+        throw new Error(`${characterClass.id} references missing content ${referenceId}`);
+      }
+    }
+  }
+
+  for (const characterClass of fixture.classes) {
+    for (const spellId of characterClass.spellListIds) {
+      if (!fixture.spells.some((spell) => spell.id === spellId)) {
+        throw new Error(`${characterClass.id} references missing spell ${spellId}`);
+      }
+    }
+  }
+}

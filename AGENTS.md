@@ -4,13 +4,20 @@ Before planning, implementing, or reviewing application changes, read:
 
 - `docs/DESIGN.md` for architecture, product constraints, data-model boundaries,
   and the intended technology stack.
-- `docs/IMPLEMENTATION_PLAN.md` for the current work-package scope and its
+- `docs/IMPLEMENTATION_PLAN.md` for the current slice scope and its
   acceptance criteria.
 
-Work one package at a time. Preserve unrelated user changes, keep private
-reference material and imports out of source code, run the package's stated
-verification commands, and report changed files, assumptions, risks, and test
-results. Stop at architecture checkpoints unless explicitly asked to continue.
+Work one slice at a time. When a slice is finished, update
+`docs/IMPLEMENTATION_PLAN.md` to mark it complete and set the next-session
+starting point before ending the work. Preserve unrelated user changes, keep
+private reference material and imports out of source code, run the slice's
+stated verification commands, and report changed files, assumptions, risks,
+and test results. Stop at architecture checkpoints unless explicitly asked to
+continue.
+
+Do not create commits automatically. Commit only when the user explicitly asks
+in the current prompt, and make at most that one requested commit; after it,
+assume further changes must remain uncommitted unless the user asks again.
 
 Treat the workbook as reference evidence rather than a fixed UI layout. Keep
 repeated UI sections dynamic and do not copy private book text into the app.

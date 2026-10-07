@@ -271,8 +271,9 @@ type Character = {
   schemaVersion: number;
   id: string;
   name: string;
-  ruleset: "5e-2014" | "5e-2024";
+  ruleset: "5e-2024";
   enabledContentPackIds: string[];
+  abilityScoreGeneration: "standard-array" | "point-buy" | "custom";
   abilityScores: Record<Ability, number>;
   classes: Array<{
     id: string;
@@ -310,7 +311,53 @@ initiative, armor class, maximum HP, spell statistics, and other calculated
 values. A manual override is explicit, visible, and reversible; it does not
 overwrite the underlying calculation.
 
-### 8.1 Character level and class level
+### 8.1 Approved character-contract decisions
+
+The initial application supports the 2024 ruleset only. It does not offer a
+general 2014/2024 ruleset switch or silently mix entities from both rulesets.
+An explicitly marked 2014 compatibility entity may later be made available only
+for a spell or feat with no 2024 version. Classes and subclasses remain 2024
+only. The compatibility entity retains its original source and ruleset metadata
+so that the exception is visible and auditable.
+
+Ability scores always store their final values. Character creation also records
+whether those values came from the standard array, point buy, or custom entry;
+the selected method is provenance for the creation workflow, not an alternate
+calculation of the stored scores.
+
+Maximum HP is derived from class progression and records the per-level choice or
+result needed to reproduce it (for example, fixed average, rolled result, or a
+custom adjustment). Level-up adds only the newly gained HP and other grants; it
+does not reconstruct or reset prior choices.
+
+Calculated values are read-only by default. The first supported manual override
+targets are armor class, maximum HP, speed, spell attack bonus, and spell save
+DC. An override stores a separate replacement value and reason/label; removing
+it immediately returns to the underlying calculation. The data model remains
+extensible for additional override targets after play testing.
+
+All core calculation results provide a final value plus a trace of contributing
+terms so the interface can expose an explanation, such as on hover or focus.
+The trace is an explanation of the calculation, never a second editable source
+of truth.
+
+### 8.2 Temporary play state and rests
+
+Permanent character choices remain separate from temporary play state. A
+level-up preserves current HP, temporary HP, used resources, used spell slots,
+death saves, and conditions unless a specific applied rule changes one of them.
+
+Rest actions are explicit player actions rather than consequences of level-up:
+
+- a long rest restores the state dictated by the applicable rules, including
+  resources and spell slots, and restores half the character's total hit dice;
+- a short rest applies only the resources whose declared recharge metadata says
+  they recover on a short rest, such as Pact Magic slots or Action Surge where
+  applicable; and
+- players can still directly adjust play state for healing, consumables, and
+  table rulings.
+
+### 8.3 Character level and class level
 
 The rules engine exposes both concepts explicitly:
 
