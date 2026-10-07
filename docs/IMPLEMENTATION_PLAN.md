@@ -1,6 +1,6 @@
 # D&D Companion Implementation Plan
 
-Last updated: 2026-10-06
+Last updated: 2026-10-07
 
 This plan breaks implementation into small, verifiable slices so routine
 coding can be handed to a less intensive model. Each coding task should include
@@ -155,7 +155,7 @@ Sheet/Character/Inventory tab panels; the character summary stays visible above
 the selected tab. The Character tab provides an appearance/portrait placeholder,
 backstory, and general notes; image persistence is deferred to Slice 6.
 
-## Slice 5: Editable play state
+## Slice 5: Editable play state — complete (2026-10-07)
 
 Goal: support play-session interactions before persistence.
 
@@ -169,6 +169,13 @@ Acceptance:
 - state changes never alter immutable content definitions;
 - removing an override restores the calculated result; and
 - component tests cover the main interactions.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. The representative sheet now manages an in-memory,
+separate play-state draft with accessible HP, inspiration, death-save,
+condition, and resource controls. Short and long rests use resource recharge
+metadata, while manual overrides remain explicit and reset to their calculated
+values without mutating the fixture or content definitions.
 
 ## Slice 6: IndexedDB persistence and backups
 
@@ -187,6 +194,36 @@ Acceptance:
 - migration tests pass; and
 - the app performs no character-data network requests.
 
+## Slice 6.25: UI design-system foundation
+
+Goal: establish a professional, accessible component and styling foundation
+before the application expands to multiple screens.
+
+- Add Tailwind CSS using the Vite integration.
+- Add and configure selected shadcn/ui primitives as owned source code.
+- Define semantic color, typography, spacing, radius, shadow, focus, and state
+  tokens following `docs/UI_DESIGN.md`.
+- Bundle any selected fonts and icons locally; do not add runtime CDN
+  dependencies.
+- Extract generic Button, form-control, Tabs, Dialog/AlertDialog, Tooltip,
+  Badge, Card, and Separator primitives only as they are needed.
+- Refactor the existing sheet incrementally so D&D-specific components retain
+  their meaning and behavior.
+- Split the monolithic character-sheet presentation into focused components
+  without moving domain logic into the UI layer.
+
+Acceptance:
+
+- the existing character-sheet workflows and automated tests still pass;
+- generic controls have consistent default, hover, focus, active, disabled,
+  and destructive states;
+- dialogs trap and restore focus and can be dismissed by keyboard where
+  appropriate;
+- tabs implement expected keyboard navigation;
+- semantic tokens, rather than repeated literal values, control the theme;
+- the production build has no font, icon, or component CDN requirement; and
+- `npm.cmd run typecheck`, `npm.cmd run test`, and `npm.cmd run build` pass.
+
 ## Slice 6.5: Character library and application navigation
 
 Goal: make the home screen the entry point for multiple locally stored
@@ -201,6 +238,9 @@ characters and future application features.
 - Add React Router only for the home and character-sheet routes required by
   this slice.
 - Show an empty-library state and a recent-character affordance.
+- Build new screens and actions from the Slice 6.25 tokens and primitives.
+- Include deliberate loading, empty, unknown-character, error, and destructive
+  confirmation states for manual UI review.
 
 Acceptance:
 
@@ -208,7 +248,27 @@ Acceptance:
   state;
 - direct navigation to a valid character ID loads its sheet, while an unknown
   ID is handled gracefully; and
-- deleting a character never removes unrelated characters or content packs.
+- deleting a character never removes unrelated characters or content packs;
+- the library and character sheet remain usable at the representative widths
+  in `docs/UI_DESIGN.md`; and
+- the UI product checkpoint can be exercised without fixture-only shortcuts.
+
+## Product checkpoint: UI foundation and navigation
+
+Stop before the level-up architecture checkpoint. The owner performs the full
+manual review in `docs/UI_DESIGN.md` and reports visual, responsive, keyboard,
+and usability feedback.
+
+- Classify reports as blocker, usability, polish, preference, or new product
+  scope.
+- Implement accepted UI fixes as a bounded review-adjustment pass.
+- Add regression tests for behavioral and accessibility defects where useful.
+- Record intentionally deferred items under the most relevant future slice.
+- Re-run typecheck, tests, build, and the affected manual scenarios.
+
+This checkpoint is complete only after blocker and serious accessibility issues
+are resolved and the owner explicitly approves proceeding. New domain features
+found during review do not expand the polish pass automatically.
 
 ## Architecture checkpoint B: Level-up transaction
 
@@ -297,14 +357,85 @@ Acceptance:
 - local characters remain local; and
 - a friend can install the app and import an explicitly shared backup or pack.
 
-## Architecture checkpoint C: Product expansion
+## Architecture checkpoint C: Native packaging readiness
 
-After the vertical slice is stable, decide whether to prioritize broader class
-coverage, richer feature automation, print layout, document extraction, or
-native packaging. A hosted backend is not assumed.
+After Slice 10 is stable, review the native plan in
+`docs/NATIVE_PACKAGING.md` before adding Tauri. Confirm:
+
+- PWA persistence and backup formats are stable and tested;
+- storage is accessed through repository interfaces rather than directly from
+  React components or domain code;
+- Windows package identity and Android application ID;
+- the minimum native file-dialog/filesystem capabilities required for
+  import/export;
+- release-signing and secret-backup responsibilities; and
+- a representative device list for Windows and Android testing.
+
+Do not introduce SQLite or native inference at this checkpoint.
+
+## Slice 11: Tauri Windows packaging
+
+Goal: package the existing offline application for Windows without changing its
+domain model or introducing a hosted service.
+
+- Add a Tauri 2 shell around the existing Vite production build.
+- Preserve the normal browser/PWA build as a supported target.
+- Configure a stable application identifier, version, icons, and Windows build
+  artifact.
+- Add only the native permissions required for explicit import/export dialogs.
+- Keep IndexedDB/Dexie as the first native persistence implementation.
+- Document local development and release-build commands.
+
+Acceptance:
+
+- a Windows release artifact builds and launches without a development server;
+- the application starts and remains usable offline;
+- characters and packs survive application restart and an upgrade test;
+- character, pack, and full-backup import/export work through native dialogs;
+- no private pack, character, reference file, or model is embedded in the
+  artifact; and
+- the web/PWA build and its automated tests continue to pass.
+
+## Slice 12: Tauri Android packaging
+
+Goal: package the same application as an Android APK after the Windows shell is
+stable.
+
+- Initialize the Tauri Android target and document required SDK/NDK tooling.
+- Configure a stable Android application ID, versioning, icons, and signing
+  workflow without committing signing secrets.
+- Verify responsive character-sheet and library behavior in Android WebView.
+- Adapt import/export to the Android document-picker/file-sharing workflow.
+- Keep IndexedDB/Dexie unless the following storage checkpoint approves a
+  change.
+
+Acceptance:
+
+- a release-capable APK builds and installs on at least one representative
+  physical device;
+- the application launches and performs its core workflows offline;
+- local data survives restart and an application upgrade test;
+- character, pack, and full-backup import/export work on-device;
+- uninstall/data-removal behavior is documented; and
+- Windows and web/PWA targets remain functional.
+
+## Architecture checkpoint D: Native storage decision
+
+Compare IndexedDB/Dexie on the tested Windows and Android packages against the
+actual content volume, search latency, backup behavior, upgrade behavior, and
+operational complexity.
+
+Continue with IndexedDB by default. Approve a separate SQLite-adapter slice only
+if measurements demonstrate a material benefit. Any SQLite work must retain the
+same repository contracts and versioned interchange formats and include a
+tested IndexedDB-to-SQLite migration path. PostgreSQL and hosted synchronization
+remain out of scope.
+
+The local knowledge assistant is a parked idea in `docs/RAG_IDEA.md`; it has no
+implementation slice or delivery commitment.
 
 ## Next session
 
-Begin Slice 5: Editable play state. Add play-session controls over the
-read-only sheet while keeping temporary state separate from character and
-content records.
+Begin Slice 6: IndexedDB persistence and backups. Persist character decisions
+and play state separately, then add versioned character import/export and
+migration coverage without introducing character-data network requests.

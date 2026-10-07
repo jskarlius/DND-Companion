@@ -125,6 +125,9 @@ export interface CharacterPlayState {
   readonly characterId: string;
   readonly currentHp: number;
   readonly temporaryHp: number;
+  /** Time-limited maximum-HP increases, initially used for the Aid spell. */
+  readonly temporaryMaximumHpBonus: number;
+  readonly inspiration: boolean;
   readonly usedResources: Readonly<Record<string, number>>;
   readonly usedSpellSlots: Readonly<Partial<Record<number, number>>>;
   readonly deathSaveSuccesses: number;

@@ -32,7 +32,7 @@ export interface CharacterSheetViewModel {
 }
 
 function titleCase(value: string): string {
-  return value.replace(/([A-Z])/g, ' $1').replace(/^./, (letter) => letter.toUpperCase());
+  return value.replaceAll('-', ' ').replace(/([A-Z])/g, ' $1').replace(/^./, (letter) => letter.toUpperCase());
 }
 
 function findRequired<T extends { readonly id: string }>(items: readonly T[], id: string): T {
