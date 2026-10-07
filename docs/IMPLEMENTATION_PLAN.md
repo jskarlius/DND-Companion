@@ -187,6 +187,29 @@ Acceptance:
 - migration tests pass; and
 - the app performs no character-data network requests.
 
+## Slice 6.5: Character library and application navigation
+
+Goal: make the home screen the entry point for multiple locally stored
+characters and future application features.
+
+- Add a home/library route that lists locally stored characters.
+- Open a character sheet by stable character ID rather than a hard-coded
+  fixture.
+- Provide create, duplicate, delete, import, and export entry points; the
+  creation workflow may begin with a minimal valid character before it gains
+  the full guided choice flow.
+- Add React Router only for the home and character-sheet routes required by
+  this slice.
+- Show an empty-library state and a recent-character affordance.
+
+Acceptance:
+
+- multiple characters can be opened independently and retain distinct play
+  state;
+- direct navigation to a valid character ID loads its sheet, while an unknown
+  ID is handled gracefully; and
+- deleting a character never removes unrelated characters or content packs.
+
 ## Architecture checkpoint B: Level-up transaction
 
 Review the proposed advancement diff format, multiclass prerequisites,
