@@ -204,7 +204,7 @@ persistence, export/delete/import restoration, and both migration paths. The
 app requests persistent browser storage where available and shows local backup
 guidance; no character-data network request is introduced.
 
-## Slice 6.25: UI design-system foundation
+## Slice 6.25: UI design-system foundation â€” complete (2026-10-08)
 
 Goal: establish a professional, accessible component and styling foundation
 before the application expands to multiple screens.
@@ -221,6 +221,9 @@ before the application expands to multiple screens.
   their meaning and behavior.
 - Split the monolithic character-sheet presentation into focused components
   without moving domain logic into the UI layer.
+- Make each character-sheet section independently collapsible with an
+  accessible disclosure control. Movable/reorderable widgets are explicitly
+  deferred to a future, separately scoped layout-customization slice.
 
 Acceptance:
 
@@ -233,6 +236,18 @@ Acceptance:
 - semantic tokens, rather than repeated literal values, control the theme;
 - the production build has no font, icon, or component CDN requirement; and
 - `npm.cmd run typecheck`, `npm.cmd run test`, and `npm.cmd run build` pass.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. Tailwind CSS now compiles through the Vite plugin,
+with semantic field-guide tokens derived from `docs/TECH_STACK_GUIDE.html` and
+no runtime CDN dependency. The project owns its generic Button, Checkbox,
+Tabs, Dialog, Tooltip, Badge, Card, and Separator source, with Radix providing
+dialog focus trapping/Escape dismissal and tab semantics. The sheet now uses
+the owned Dialog and Tabs primitives, has accessible collapsible sections,
+keyboard tab navigation, compact ability abbreviations, and a responsive
+field-guide visual layer with a persistent light/dark theme preference.
+Movable/reorderable widgets remain explicitly
+deferred to a future layout-customization slice.
 
 ## Slice 6.5: Character library and application navigation
 
@@ -446,6 +461,7 @@ implementation slice or delivery commitment.
 
 ## Next session
 
-Begin Slice 6.25: UI design-system foundation. Add the approved local Tailwind
-and shadcn/ui foundation, semantic design tokens, and incremental component
-extraction without changing domain behavior.
+Begin Slice 6.5: Character library and application navigation. Add the library
+and character routes, then introduce the tech-guide-inspired responsive
+application shell: Library is the primary navigation destination; the active
+character is contextual rather than a duplicate sidebar destination.

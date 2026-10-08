@@ -1,7 +1,52 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: system-ui, sans-serif;
+  --color-canvas: #f3eddf;
+  --color-surface: #fffaf0;
+  --color-surface-raised: #fffaf0;
+  --color-surface-2: #ece3d2;
+  --color-foreground: #24211e;
+  --color-muted-foreground: #665e54;
+  --color-primary: #236e55;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #9a5b12;
+  --color-border: #cfc2ad;
+  --color-destructive: #9d342b;
+  --radius-ui-sm: .25rem;
+  --radius-ui-md: .5rem;
+  --radius-ui-lg: .75rem;
+}
+
 :root {
-  color: #1d2838;
-  background: #f8f4ec;
-  font-family: system-ui, sans-serif;
+  color-scheme: light;
+  --canvas: #f3eddf;
+  --surface: #fffaf0;
+  --surface-raised: #fffaf0;
+  --surface-2: #ece3d2;
+  --foreground: #24211e;
+  --muted-foreground: #665e54;
+  --primary: #236e55;
+  --primary-foreground: #ffffff;
+  --accent: #9a5b12;
+  --accent-foreground: #fffaf0;
+  --border: #cfc2ad;
+  --input: #fffaf0;
+  --focus-ring: #236e55;
+  --destructive: #9d342b;
+  --warning: #9a5b12;
+  --success: #236e55;
+  --radius-sm: .25rem;
+  --radius-md: .5rem;
+  --radius-lg: .75rem;
+  --shadow-sm: 0 1px 2px rgb(28 39 31 / 8%);
+  --shadow-md: 0 8px 24px rgb(28 39 31 / 10%);
+  --font-display: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: system-ui, sans-serif;
+  color: var(--foreground);
+  background: var(--canvas);
+  font-family: var(--font-body);
   line-height: 1.5;
 }
 
@@ -10,3 +55,42 @@ body {
 }
 
 * { box-sizing: border-box; }
+
+button, input, textarea { font: inherit; }
+
+:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+html[data-theme='dark'] {
+  color-scheme: dark;
+  --canvas: #101315;
+  --surface: #171c1f;
+  --surface-raised: #171c1f;
+  --surface-2: #20272b;
+  --foreground: #f4eee2;
+  --muted-foreground: #b9b2a7;
+  --primary: #76b89b;
+  --primary-foreground: #101315;
+  --accent: #d79a43;
+  --accent-foreground: #101315;
+  --border: #394248;
+  --input: #101315;
+  --focus-ring: #76b89b;
+  --destructive: #d57567;
+  --warning: #d79a43;
+  --success: #76b89b;
+  --color-canvas: #101315;
+  --color-surface: #171c1f;
+  --color-surface-raised: #171c1f;
+  --color-surface-2: #20272b;
+  --color-foreground: #f4eee2;
+  --color-muted-foreground: #b9b2a7;
+  --color-primary: #76b89b;
+  --color-primary-foreground: #101315;
+  --color-accent: #d79a43;
+  --color-border: #394248;
+  --color-destructive: #d57567;
+}

@@ -1,10 +1,14 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { resolveManualOverride } from '../../domain/character/calculations';
 import { setCurrentHp, setResourceUses, setSpellSlotUses, setTemporaryHp, setTemporaryMaximumHpBonus, takeRest } from '../../domain/character/playState';
 import type { Character, CharacterPlayState, ManualOverride, ManualOverrideTarget } from '../../domain/character/types';
 import type { ContentFixture } from '../../domain/content/types';
 import type { CharacterSheetDetails } from './characterSheetFixture';
 import { buildCharacterSheetViewModel, titleCase } from './characterSheetViewModel';
+import { Button } from '../../components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../components/ui/dialog';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs';
+import { CollapsibleSection as Section } from './CollapsibleSection';
 import './CharacterSheet.css';
 
 interface CharacterSheetProps {
@@ -20,17 +24,16 @@ function signed(value: number): string {
   return value >= 0 ? `+${value}` : String(value);
 }
 
-function Section({ title, children, className }: { readonly title: string; readonly children: ReactNode; readonly className?: string }) {
-  const id = `section-${title.toLowerCase().replaceAll(' ', '-')}`;
-  return <section className={`sheet-section${className ? ` ${className}` : ''}`} aria-labelledby={id}><h2 id={id}>{title}</h2>{children}</section>;
+function abilityAbbreviation(ability: string): string {
+  return ability.slice(0, 3).toUpperCase();
 }
 
 function baseCalculation(value: number, label: string) {
   return { value, terms: [{ label, operation: 'base' as const, value }] };
 }
 
-function OverrideButton({ label, active, onClick }: { readonly label: string; readonly active: boolean; readonly onClick: () => void }) {
-  return <button type="button" className={`override-button${active ? ' override-active' : ''}`} aria-label={`Override ${label}`} title={`Override ${label}`} onClick={onClick}><span aria-hidden="true">⚙</span></button>;
+function OverrideButton({ label, active, onClick }: { readonly label: string; readonly active: boolean; readonly onClick: (trigger: HTMLButtonElement) => void }) {
+  return <button type="button" className={`override-button${active ? ' override-active' : ''}`} aria-label={`Override ${label}`} title={`Override ${label}`} onClick={(event) => onClick(event.currentTarget)}><span aria-hidden="true">⚙</span></button>;
 }
 
 function OverrideReason({ override }: { readonly override?: ManualOverride }) {
@@ -50,7 +53,7 @@ function OverrideDialog({
 }) {
   const [value, setValue] = useState(String(override?.value ?? calculatedValue));
   const [reason, setReason] = useState(override?.reason ?? '');
-  return <div className="dialog-backdrop" role="presentation"><section className="override-dialog" role="dialog" aria-modal="true" aria-labelledby="override-dialog-title"><header><h2 id="override-dialog-title">Override {label}</h2><button type="button" aria-label="Close override editor" onClick={onClose}>×</button></header><p>Calculated value: <strong>{calculatedValue}</strong></p><label>Override value<input type="number" aria-label={`${label} override value`} value={value} onChange={(event) => setValue(event.currentTarget.value)} /></label><label>Reason <span>(optional)</span><textarea aria-label={`${label} override reason`} value={reason} onChange={(event) => setReason(event.currentTarget.value)} /></label><footer>{override && <button type="button" className="remove-override" onClick={() => { onReset(target); onClose(); }}>Remove override</button>}<button type="button" onClick={onClose}>Cancel</button><button type="button" onClick={() => { const numericValue = Number(value); if (Number.isFinite(numericValue)) { onSave(target, { value: numericValue, reason: reason.trim() || undefined }); onClose(); } }}>Save override</button></footer></section></div>;
+  return <Dialog open onOpenChange={(open) => { if (!open) onClose(); }}><DialogContent className="override-dialog" onCloseAutoFocus={(event) => event.preventDefault()}><DialogTitle>Override {label}</DialogTitle><DialogDescription>Calculated value: <strong>{calculatedValue}</strong></DialogDescription><label>Override value<input type="number" aria-label={`${label} override value`} value={value} onChange={(event) => setValue(event.currentTarget.value)} /></label><label>Reason <span>(optional)</span><textarea aria-label={`${label} override reason`} value={reason} onChange={(event) => setReason(event.currentTarget.value)} /></label><footer>{override && <Button type="button" variant="destructive" className="mr-auto" onClick={() => { onReset(target); onClose(); }}>Remove override</Button>}<Button type="button" variant="secondary" onClick={onClose}>Cancel</Button><Button type="button" onClick={() => { const numericValue = Number(value); if (Number.isFinite(numericValue)) { onSave(target, { value: numericValue, reason: reason.trim() || undefined }); onClose(); } }}>Save override</Button></footer></DialogContent></Dialog>;
 }
 
 export function CharacterSheet({ character, playState, content, details, onCharacterChange, onPlayStateChange }: CharacterSheetProps) {
@@ -61,9 +64,11 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const [conditionName, setConditionName] = useState('');
   const [pendingRest, setPendingRest] = useState<'short' | 'long' | null>(null);
   const [editingOverride, setEditingOverride] = useState<ManualOverrideTarget | null>(null);
+  const lastOverrideTrigger = useRef<HTMLButtonElement | null>(null);
   const sheet = buildCharacterSheetViewModel(draftCharacter, sessionState, content, details);
   const { combat } = details;
   const [activeTab, setActiveTab] = useState<'sheet' | 'character' | 'inventory'>('sheet');
+  const tabs = ['sheet', 'character', 'inventory'] as const;
   const armorClass = resolveManualOverride(baseCalculation(combat.armorClass, 'Calculated armor class'), draftCharacter.manualOverrides, 'armorClass').value;
   const speed = resolveManualOverride(baseCalculation(combat.speed, 'Calculated speed'), draftCharacter.manualOverrides, 'speed').value;
   const baseMaximumHp = resolveManualOverride(baseCalculation(combat.maximumHp, 'Calculated maximum HP'), draftCharacter.manualOverrides, 'maximumHp').value;
@@ -88,6 +93,10 @@ export function CharacterSheet({ character, playState, content, details, onChara
     previousPlayState.current = playState;
     setSessionState(playState);
   }, [playState]);
+
+  useEffect(() => {
+    if (editingOverride === null) lastOverrideTrigger.current?.focus();
+  }, [editingOverride]);
 
   const changeOverride = (target: ManualOverrideTarget, override?: ManualOverride) => {
     setDraftCharacter((current) => {
@@ -125,29 +134,39 @@ export function CharacterSheet({ character, playState, content, details, onChara
       <section className="summary-grid" aria-label="Character summary">
         <div><span>Level</span><strong>{sheet.totalLevel}</strong></div>
         <div><span>Proficiency</span><strong>{signed(sheet.proficiencyBonus)}</strong></div>
-        <div><span>Armor Class <OverrideButton label="armor class" active={Boolean(draftCharacter.manualOverrides.armorClass)} onClick={() => setEditingOverride('armorClass')} /></span><strong>{armorClass}</strong><OverrideReason override={draftCharacter.manualOverrides.armorClass} /></div>
-        <div><span>Speed <OverrideButton label="speed" active={Boolean(draftCharacter.manualOverrides.speed)} onClick={() => setEditingOverride('speed')} /></span><strong>{speed} ft.</strong><OverrideReason override={draftCharacter.manualOverrides.speed} /></div>
+        <div><span>Armor Class <OverrideButton label="armor class" active={Boolean(draftCharacter.manualOverrides.armorClass)} onClick={(trigger) => { lastOverrideTrigger.current = trigger; setEditingOverride('armorClass'); }} /></span><strong>{armorClass}</strong><OverrideReason override={draftCharacter.manualOverrides.armorClass} /></div>
+        <div><span>Speed <OverrideButton label="speed" active={Boolean(draftCharacter.manualOverrides.speed)} onClick={(trigger) => { lastOverrideTrigger.current = trigger; setEditingOverride('speed'); }} /></span><strong>{speed} ft.</strong><OverrideReason override={draftCharacter.manualOverrides.speed} /></div>
         <div><span>Hit Dice</span><strong>{combat.hitDice}</strong></div>
       </section>
 
-      <div className="sheet-tabs" role="tablist" aria-label="Character sheet sections">
-        {(['sheet', 'character', 'inventory'] as const).map((tab) => (
-          <button key={tab} type="button" role="tab" id={`${tab}-tab`} aria-controls={`${tab}-panel`} aria-selected={activeTab === tab} className={activeTab === tab ? 'active-tab' : undefined} onClick={() => setActiveTab(tab)}>
+      <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as typeof activeTab)}>
+      <TabsList className="sheet-tabs" aria-label="Character sheet sections">
+        {tabs.map((tab, index) => (
+          <TabsTrigger key={tab} value={tab} className={activeTab === tab ? 'active-tab' : undefined} onKeyDown={(event) => {
+            const targetIndex = event.key === 'ArrowRight' ? (index + 1) % tabs.length
+              : event.key === 'ArrowLeft' ? (index + tabs.length - 1) % tabs.length
+                : event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 : undefined;
+            if (targetIndex === undefined) return;
+            event.preventDefault();
+            setActiveTab(tabs[targetIndex]);
+            const triggers = Array.from(event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>('[role="tab"]') ?? []);
+            triggers[targetIndex]?.focus();
+          }}>
             {titleCase(tab)}
-          </button>
+          </TabsTrigger>
         ))}
-      </div>
+      </TabsList>
 
-      {activeTab === 'sheet' && <div className="sheet-grid" role="tabpanel" id="sheet-panel" aria-labelledby="sheet-tab">
+      <TabsContent value="sheet" className="sheet-grid">
         <div className="sheet-column">
-          <Section title="Abilities"><dl className="ability-grid">{sheet.abilities.map(({ ability, score, modifier }) => <div key={ability}><dt>{titleCase(ability)}</dt><dd>{score}<small>{signed(modifier)}</small></dd></div>)}</dl></Section>
+          <Section title="Abilities"><dl className="ability-grid">{sheet.abilities.map(({ ability, score, modifier }) => <div key={ability}><dt aria-label={titleCase(ability)}><abbr title={titleCase(ability)}>{abilityAbbreviation(ability)}</abbr></dt><dd>{score}<small>{signed(modifier)}</small></dd></div>)}</dl></Section>
           <Section title="Saving throws"><ul className="check-list">{sheet.savingThrows.map(({ ability, value, proficient }) => <li key={ability}><span aria-label={`${titleCase(ability)} saving throw${proficient ? ', proficient' : ''}`} className={proficient ? 'proficient-marker' : 'marker'}>{proficient ? '\u25cf' : '\u25cb'}</span><b>{signed(value)}</b>{titleCase(ability)}</li>)}</ul></Section>
           <Section title="Skills"><ul className="check-list skill-list">{sheet.skills.map(({ skill, value, proficiency }) => <li key={skill}><span aria-label={`${titleCase(skill)}: ${proficiency}`} className={proficiency === 'none' ? 'marker' : 'proficient-marker'}>{proficiency === 'expertise' ? '\u25c6' : proficiency === 'proficient' ? '\u25cf' : '\u25cb'}</span><b>{signed(value)}</b>{titleCase(skill)}{proficiency === 'expertise' && <em>Expertise</em>}</li>)}</ul></Section>
         </div>
 
         <div className="sheet-column sheet-column-wide">
-          <Section title="Hit points" className="hit-points-section"><div className="hit-points"><label><span>Current</span><input type="number" aria-label="Current hit points" value={sessionState.currentHp} min="0" max={maximumHp} onChange={(event) => { const value = event.currentTarget.valueAsNumber; setSessionState((current) => setCurrentHp(current, Number.isFinite(value) ? value : 0, maximumHp)); }} /></label><div><span>Maximum <OverrideButton label="maximum HP" active={Boolean(draftCharacter.manualOverrides.maximumHp)} onClick={() => setEditingOverride('maximumHp')} /></span><strong>{maximumHp}</strong>{sessionState.temporaryMaximumHpBonus > 0 && <small>Includes Aid +{sessionState.temporaryMaximumHpBonus}</small>}<OverrideReason override={draftCharacter.manualOverrides.maximumHp} /></div><label><span>Temporary</span><input type="number" aria-label="Temporary hit points" value={sessionState.temporaryHp} min="0" onChange={(event) => { const value = event.currentTarget.valueAsNumber; setSessionState((current) => setTemporaryHp(current, Number.isFinite(value) ? value : 0)); }} /></label></div><label className="aid-control" title="Adding or removing Aid adjusts current HP by the same amount. Increase this by 5 for each spell-slot level above 2."><span>Aid</span><input type="number" aria-label="Aid maximum HP bonus" min="0" step="5" value={sessionState.temporaryMaximumHpBonus} onChange={(event) => { const value = event.currentTarget.valueAsNumber; const nextBonus = Number.isFinite(value) ? value : 0; setSessionState((current) => { const updated = setTemporaryMaximumHpBonus(current, nextBonus); return setCurrentHp(updated, current.currentHp + updated.temporaryMaximumHpBonus - current.temporaryMaximumHpBonus, baseMaximumHp + updated.temporaryMaximumHpBonus); }); }} /></label></Section>
-          <Section title="Play state"><div className="play-state-controls"><div className="play-state-primary"><label className="inspiration-control"><input type="checkbox" checked={sessionState.inspiration} onChange={(event) => { const inspiration = event.currentTarget.checked; setSessionState((current) => ({ ...current, inspiration })); }} /> Inspiration</label><fieldset className="death-saves"><legend>Death saves</legend><div className="death-save-row"><span>Success</span>{([0, 1, 2] as const).map((index) => <label key={`success-${index}`}><input className="death-save-success" type="checkbox" aria-label={`Death save success ${index + 1}`} checked={sessionState.deathSaveSuccesses > index} onChange={(event) => setDeathSave('deathSaveSuccesses', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div><div className="death-save-row"><span>Fails</span>{([0, 1, 2] as const).map((index) => <label key={`failure-${index}`}><input className="death-save-failure" type="checkbox" aria-label={`Death save failure ${index + 1}`} checked={sessionState.deathSaveFailures > index} onChange={(event) => setDeathSave('deathSaveFailures', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div></fieldset></div><div className="play-state-secondary"><form onSubmit={(event) => { event.preventDefault(); const condition = conditionName.trim(); if (condition && !sessionState.conditions.includes(condition)) setSessionState((current) => ({ ...current, conditions: [...current.conditions, condition] })); setConditionName(''); }}><label htmlFor="condition-name">Condition</label><input id="condition-name" value={conditionName} onChange={(event) => setConditionName(event.currentTarget.value)} /><button type="submit">Add</button></form><ul className="condition-list">{sessionState.conditions.map((condition) => <li key={condition}>{condition}<button type="button" aria-label={`Remove ${condition}`} onClick={() => setSessionState((current) => ({ ...current, conditions: current.conditions.filter((entry) => entry !== condition) }))}>Remove</button></li>)}</ul><div className="rest-actions"><button type="button" onClick={() => setPendingRest('short')}>Short rest</button><button type="button" onClick={() => setPendingRest('long')}>Long rest</button></div></div></div></Section>
+          <Section title="Hit points" className="hit-points-section"><div className="hit-points"><label><span>Current</span><input type="number" aria-label="Current hit points" value={sessionState.currentHp} min="0" max={maximumHp} onChange={(event) => { const value = event.currentTarget.valueAsNumber; setSessionState((current) => setCurrentHp(current, Number.isFinite(value) ? value : 0, maximumHp)); }} /></label><div className="maximum-hp-card"><span>Maximum <OverrideButton label="maximum HP" active={Boolean(draftCharacter.manualOverrides.maximumHp)} onClick={() => setEditingOverride('maximumHp')} /></span><strong>{maximumHp}</strong>{sessionState.temporaryMaximumHpBonus > 0 && <small>Includes Aid +{sessionState.temporaryMaximumHpBonus}</small>}<OverrideReason override={draftCharacter.manualOverrides.maximumHp} /><details className="max-hp-effects"><summary>Max HP effects</summary><label className="aid-control" title="Adding or removing Aid adjusts current HP by the same amount. Increase this by 5 for each spell-slot level above 2."><span>Aid bonus</span><input type="number" aria-label="Aid maximum HP bonus" min="0" step="5" value={sessionState.temporaryMaximumHpBonus} onChange={(event) => { const value = event.currentTarget.valueAsNumber; const nextBonus = Number.isFinite(value) ? value : 0; setSessionState((current) => { const updated = setTemporaryMaximumHpBonus(current, nextBonus); return setCurrentHp(updated, current.currentHp + updated.temporaryMaximumHpBonus - current.temporaryMaximumHpBonus, baseMaximumHp + updated.temporaryMaximumHpBonus); }); }} /></label></details></div><label><span>Temporary</span><input type="number" aria-label="Temporary hit points" value={sessionState.temporaryHp} min="0" onChange={(event) => { const value = event.currentTarget.valueAsNumber; setSessionState((current) => setTemporaryHp(current, Number.isFinite(value) ? value : 0)); }} /></label></div></Section>
+          <Section title="Play state"><div className="play-state-controls"><div className="play-state-cluster"><h3>Status</h3><label className="inspiration-control"><input type="checkbox" checked={sessionState.inspiration} onChange={(event) => { const inspiration = event.currentTarget.checked; setSessionState((current) => ({ ...current, inspiration })); }} /> Inspiration</label><form onSubmit={(event) => { event.preventDefault(); const condition = conditionName.trim(); if (condition && !sessionState.conditions.includes(condition)) setSessionState((current) => ({ ...current, conditions: [...current.conditions, condition] })); setConditionName(''); }}><label htmlFor="condition-name">Condition</label><input id="condition-name" value={conditionName} onChange={(event) => setConditionName(event.currentTarget.value)} /><button type="submit">Add</button></form><ul className="condition-list">{sessionState.conditions.map((condition) => <li key={condition}>{condition}<button type="button" aria-label={`Remove ${condition}`} onClick={() => setSessionState((current) => ({ ...current, conditions: current.conditions.filter((entry) => entry !== condition) }))}>Remove</button></li>)}</ul></div><fieldset className="death-saves"><legend>Death saves</legend><div className="death-save-row"><span>Success</span>{([0, 1, 2] as const).map((index) => <label key={`success-${index}`}><input className="death-save-success" type="checkbox" aria-label={`Death save success ${index + 1}`} checked={sessionState.deathSaveSuccesses > index} onChange={(event) => setDeathSave('deathSaveSuccesses', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div><div className="death-save-row"><span>Fails</span>{([0, 1, 2] as const).map((index) => <label key={`failure-${index}`}><input className="death-save-failure" type="checkbox" aria-label={`Death save failure ${index + 1}`} checked={sessionState.deathSaveFailures > index} onChange={(event) => setDeathSave('deathSaveFailures', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div></fieldset><div className="play-state-cluster rest-cluster"><h3>Rest</h3><p>Apply recovery only after the DM confirms a rest.</p><div className="rest-actions"><button type="button" onClick={() => setPendingRest('short')}>Short rest</button><button type="button" onClick={() => setPendingRest('long')}>Long rest</button></div></div></div></Section>
           <Section title="Attacks"><div className="table-wrap"><table><thead><tr><th>Name</th><th>Attack</th><th>Damage</th><th>Notes</th></tr></thead><tbody>{details.attacks.map((attack) => <tr key={attack.name}><td>{attack.name}</td><td>{signed(attack.attackBonus)}</td><td>{attack.damage}</td><td>{attack.notes ?? '-'}</td></tr>)}</tbody></table></div></Section>
           <Section title="Cantrips"><ul className="card-list">{sheet.cantrips.map((spell) => <li key={spell.id}><strong>{spell.name}</strong><span>{spell.scalingBasis ? `Scales by ${spell.scalingBasis.replace('-', ' ')}` : 'No scaling recorded'}</span></li>)}</ul></Section>
           <Section title="Spell slots"><ul className="card-list">{details.spellSlots.map(({ level, maximum }) => { const used = sessionState.usedSpellSlots[level] ?? 0; return <li key={level}><strong>Level {level}</strong><span>{maximum - used} / {maximum} remaining</span><div className="resource-actions"><button type="button" aria-label={`Use level ${level} spell slot`} disabled={used === maximum} onClick={() => setSessionState((current) => setSpellSlotUses(current, level, used + 1, maximum))}>Use slot</button><button type="button" className="resource-restore" aria-label={`Restore level ${level} spell slot`} disabled={used === 0} onClick={() => setSessionState((current) => setSpellSlotUses(current, level, used - 1, maximum))}>Restore slot</button></div></li>; })}</ul></Section>
@@ -159,16 +178,17 @@ export function CharacterSheet({ character, playState, content, details, onChara
           <Section title="Resources"><ul className="card-list">{sheet.resources.map(({ resource, used }) => <li key={resource.id}><strong>{resource.name}</strong><span>{resource.maximum - used} / {resource.maximum} remaining / {titleCase(resource.recharge)}</span><div className="resource-actions"><button type="button" aria-label={`Use ${resource.name}`} disabled={used === resource.maximum} onClick={() => setSessionState((current) => setResourceUses(current, resource, used + 1))}>Use</button><button type="button" className="resource-restore" aria-label={`Restore ${resource.name}`} disabled={used === 0} onClick={() => setSessionState((current) => setResourceUses(current, resource, used - 1))}>Restore use</button></div></li>)}</ul></Section>
           <Section title="Spellcasting"><dl className="spellcasting-values"><div><dt>Attack bonus <OverrideButton label="spell attack bonus" active={Boolean(draftCharacter.manualOverrides.spellAttackBonus)} onClick={() => setEditingOverride('spellAttackBonus')} /></dt><dd>{signed(resolveManualOverride(baseCalculation(combat.spellAttackBonus, 'Calculated spell attack bonus'), draftCharacter.manualOverrides, 'spellAttackBonus').value)}</dd><OverrideReason override={draftCharacter.manualOverrides.spellAttackBonus} /></div><div><dt>Save DC <OverrideButton label="spell save DC" active={Boolean(draftCharacter.manualOverrides.spellSaveDc)} onClick={() => setEditingOverride('spellSaveDc')} /></dt><dd>{resolveManualOverride(baseCalculation(combat.spellSaveDc, 'Calculated spell save DC'), draftCharacter.manualOverrides, 'spellSaveDc').value}</dd><OverrideReason override={draftCharacter.manualOverrides.spellSaveDc} /></div></dl></Section>
         </div>
-      </div>}
+      </TabsContent>
 
-      {activeTab === 'inventory' && <div className="tab-panel" role="tabpanel" id="inventory-panel" aria-labelledby="inventory-tab"><Section title="Inventory"><ul className="inventory-list">{character.inventory.map((entry) => <li key={entry.itemId}><strong>{details.inventory[entry.itemId] ?? entry.itemId}</strong><span>Quantity {entry.quantity}</span></li>)}</ul></Section></div>}
+      <TabsContent value="inventory" className="tab-panel"><Section title="Inventory"><ul className="inventory-list">{character.inventory.map((entry) => <li key={entry.itemId}><strong>{details.inventory[entry.itemId] ?? entry.itemId}</strong><span>Quantity {entry.quantity}</span></li>)}</ul></Section></TabsContent>
 
-      {activeTab === 'character' && <div className="tab-panel character-panel" role="tabpanel" id="character-panel" aria-labelledby="character-tab">
+      <TabsContent value="character" className="tab-panel character-panel">
         <Section title="Appearance"><div className="appearance-summary"><div className="portrait-placeholder" aria-label="Portrait placeholder for Ariel Thorne">{character.name.split(' ').map((name) => name[0]).join('')}</div><div><p><strong>Pronouns:</strong> {details.appearance.pronouns}</p><p>{details.appearance.description}</p></div></div></Section>
         <Section title="Backstory"><p className="backstory">{details.backstory}</p></Section>
         <Section title="Notes"><div className="notes-list">{details.notes.map((note) => <article key={note.title}><h3>{note.title}</h3><p>{note.content}</p></article>)}</div></Section>
-      </div>}
-      {pendingRest && <div className="dialog-backdrop" role="presentation"><section className="rest-dialog" role="dialog" aria-modal="true" aria-labelledby="rest-dialog-title"><h2 id="rest-dialog-title">Confirm {pendingRest} rest</h2><p>Has the DM confirmed this {pendingRest} rest?</p><div><button type="button" onClick={() => setPendingRest(null)}>Cancel</button><button type="button" onClick={() => { setSessionState((current) => takeRest(current, sheet.resources.map(({ resource }) => resource), pendingRest, maximumHp)); setPendingRest(null); }}>DM confirmed {pendingRest} rest</button></div></section></div>}
+      </TabsContent>
+      </Tabs>
+      {pendingRest && <Dialog open onOpenChange={(open) => { if (!open) setPendingRest(null); }}><DialogContent className="rest-dialog"><DialogTitle>Confirm {pendingRest} rest</DialogTitle><DialogDescription>Has the DM confirmed this {pendingRest} rest?</DialogDescription><div><Button type="button" variant="secondary" onClick={() => setPendingRest(null)}>Cancel</Button><Button type="button" onClick={() => { setSessionState((current) => takeRest(current, sheet.resources.map(({ resource }) => resource), pendingRest, maximumHp)); setPendingRest(null); }}>DM confirmed {pendingRest} rest</Button></div></DialogContent></Dialog>}
       {editingOverride && <OverrideDialog target={editingOverride} label={overrideDetails[editingOverride].label} calculatedValue={overrideDetails[editingOverride].calculatedValue} override={draftCharacter.manualOverrides[editingOverride]} onSave={changeOverride} onReset={(target) => changeOverride(target)} onClose={() => setEditingOverride(null)} />}
     </main>
   );
