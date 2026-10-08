@@ -254,7 +254,7 @@ html[data-theme='dark'] .inventory-list li { background: var(--surface-2); color
 .spell-level-group { min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0; overflow: hidden; background: var(--surface); }
 .spell-level-group > summary { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .65rem .75rem; cursor: pointer; list-style: none; }
 .spell-level-group > summary::-webkit-details-marker { display: none; }
-.spell-level-group > summary::after { content: '⌄'; color: var(--accent); font-weight: 700; }
+.spell-level-group > summary::after { content: '\2304'; color: var(--accent); font-weight: 700; }
 .spell-level-group:not([open]) > summary::after { transform: rotate(-90deg); }
 .spell-level-group ul, .spell-level-group .empty-spell-level { margin-inline: .5rem; margin-bottom: .5rem; }
 .spell-level-group li { grid-template-columns: auto minmax(0, 1fr); }

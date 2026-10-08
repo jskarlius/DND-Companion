@@ -42,6 +42,26 @@ test('loads a stored character from its stable URL', async () => {
   expect(await screen.findByRole('heading', { name: 'Ariel Thorne' })).toBeInTheDocument();
 });
 
+test('duplicates hit-dice state using the duplicate class-entry IDs', async () => {
+  const source = {
+    ...representativeCharacter,
+    classes: representativeCharacter.classes.map((entry, index) => ({ ...entry, id: `source:class-entry:${index}` })),
+  };
+  await database.characters.put(source);
+  await database.playState.put({ ...representativePlayState, characterId: source.id, usedHitDice: { 'source:class-entry:0': 1, 'source:class-entry:1': 2, orphan: 4 } });
+  render(<App />);
+
+  await userEvent.click(await screen.findByRole('button', { name: 'Duplicate' }));
+  await waitFor(async () => expect(await database.characters.count()).toBe(2));
+  const duplicate = (await database.characters.toArray()).find((character) => character.id !== source.id)!;
+  const duplicateState = await database.playState.get(duplicate.id);
+
+  expect(duplicateState?.usedHitDice).toEqual({
+    [duplicate.classes[0].id]: 1,
+    [duplicate.classes[1].id]: 2,
+  });
+});
+
 test('applies and remembers an explicitly selected dark theme', async () => {
   render(<App />);
 

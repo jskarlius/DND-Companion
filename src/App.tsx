@@ -97,7 +97,15 @@ function AppShell() {
       const playState = await characterRepository.loadPlayState(source.id);
       if (!playState) throw new Error('The selected character has no playable state to duplicate.');
       const id = createId();
-      await characterRepository.save({ ...source, id, name: `${source.name} copy`, classes: source.classes.map((entry, index) => ({ ...entry, id: `${id}:class-entry:${index}` })) }, { ...playState, characterId: id });
+      const classEntryIds = new Map(source.classes.map((entry, index) => [entry.id, `${id}:class-entry:${index}`]));
+      const classes = source.classes.map((entry) => ({ ...entry, id: classEntryIds.get(entry.id)! }));
+      const usedHitDice = Object.fromEntries(
+        Object.entries(playState.usedHitDice).flatMap(([classEntryId, used]) => {
+          const duplicatedId = classEntryIds.get(classEntryId);
+          return duplicatedId === undefined ? [] : [[duplicatedId, used]];
+        }),
+      );
+      await characterRepository.save({ ...source, id, name: `${source.name} copy`, classes }, { ...playState, characterId: id, usedHitDice });
       await refreshCharacters();
       rememberCharacter(id);
       navigate(`/characters/${encodeURIComponent(id)}`);

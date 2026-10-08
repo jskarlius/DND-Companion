@@ -232,6 +232,26 @@ test('groups spells by level with preparation, casting details, and compact slot
   expect(screen.getByLabelText('Prepare Magic Missile')).not.toBeChecked();
 });
 
+test('renders every entry in a long spell list', () => {
+  const extraSpells = Array.from({ length: 18 }, (_, index) => ({
+    ...minimalContentFixture.spells[1],
+    id: `test:spell:${index}`,
+    name: `Test spell ${index + 1}`,
+  }));
+  render(
+    <CharacterSheet
+      character={{ ...representativeCharacter, knownSpellIds: [representativeCharacter.knownSpellIds[0], ...extraSpells.map((spell) => spell.id)] }}
+      playState={representativePlayState}
+      content={{ ...minimalContentFixture, spells: [...minimalContentFixture.spells, ...extraSpells] }}
+      details={representativeCharacterSheetDetails}
+    />,
+  );
+
+  userEvent.click(screen.getByRole('tab', { name: 'Spells' }));
+  expect(screen.getByText('Known spells 18')).toBeInTheDocument();
+  expect(screen.getAllByText(/^Test spell /)).toHaveLength(18);
+});
+
 test('tracks hit dice by class entry and supports the optional 2014 recovery allocation', () => {
   renderSheet();
 
