@@ -37,6 +37,16 @@ export const resourceSchema = contentEntitySchema.extend({
 export const spellSchema = contentEntitySchema.extend({
   kind: z.literal('spell'),
   level: z.int().min(0).max(9),
+  castingTime: z.string().min(1).optional(),
+  range: z.string().min(1).optional(),
+  duration: z.string().min(1).optional(),
+  components: z.object({
+    verbal: z.boolean().optional(),
+    somatic: z.boolean().optional(),
+    material: z.string().min(1).optional(),
+  }).optional(),
+  concentration: z.boolean().optional(),
+  ritual: z.boolean().optional(),
   scalingBasis: z
     .enum(['character-level', 'class-level', 'ability-modifier', 'proficiency-bonus', 'fixed'])
     .optional(),
@@ -60,6 +70,11 @@ export const classSchema = contentEntitySchema.extend({
   savingThrowAbilities: z.array(abilitySchema).min(1),
   advancement: z.array(advancementLevelSchema),
   spellListIds: z.array(contentIdSchema),
+  spellcasting: z.object({
+    ability: abilitySchema,
+    slotKind: z.enum(['spell-slots', 'pact-magic']),
+    slotRecharge: z.enum(['short-rest', 'long-rest']),
+  }).optional(),
 });
 
 export const subclassSchema = contentEntitySchema.extend({

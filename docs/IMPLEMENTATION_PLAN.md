@@ -1,6 +1,6 @@
 # D&D Companion Implementation Plan
 
-Last updated: 2026-10-07
+Last updated: 2026-10-08
 
 This plan breaks implementation into small, verifiable slices so routine
 coding can be handed to a less intensive model. Each coding task should include
@@ -306,6 +306,37 @@ found during review do not expand the polish pass automatically.
 
 Review adjustment pass (2026-10-08):
 
+- **Correctness:** the headline Hit Dice display now derives every die group
+  from the character's current class entries. A newly created level-1 Wizard
+  therefore shows `1d6`, not the representative fixture's multiclass value.
+- **Collapsible sections:** Character and Inventory no longer retain an empty,
+  fixed-height card after their content is collapsed.
+- **Multiclass responsiveness:** class entries in the identity summary can
+  wrap across the full summary width, including four or more classes, without
+  forcing the species, background, or player fields off-screen.
+- **Spell density:** spells now group dynamically by level. Each group keeps
+  its slot total and used count compactly beside the level, lists its spells
+  beneath it with a persisted Prepared checkbox, and shows casting time/range
+  when the content record supplies them. Spell attack bonus and save DC appear
+  at the top of the same section. Full spell-description content remains a
+  future content-pack concern.
+- **Spellbook navigation:** a character now receives a dedicated Spells tab
+  only when one of their current classes declares Spellcasting or Pact Magic.
+  The tab uses independently collapsible level groups, a responsive three/two/
+  one-column layout, spellcasting ability, and compact casting metadata
+  (time, range, components, duration, concentration, and ritual). Cantrips
+  have no preparation control. The tab reports current cantrip, known-spell,
+  and prepared-spell counts; progression-derived permitted maxima are deferred
+  until the level-up workflow can calculate them accurately. Pact Magic is modeled as a distinct slot kind
+  with short-rest recovery metadata; its source-distinct slot calculation and
+  recovery remain part of the level-up transaction work rather than sharing
+  the current generic spell-slot counter.
+- **Play-state density:** the Conditions/status area now spans the wide row,
+  with compact Death Saves and unchanged rest actions beneath it. This prevents
+  the condition entry control from collapsing beside three narrow panels.
+- **Condition entry:** the Add action now sits beside the Condition label,
+  above a visible full-width input. Death Saves uses the same section-label and
+  body-text scale as Status and Rest.
 - **Polish/performance:** the character sheet and backup validators now load on
   demand. The initial production JavaScript chunk is 447.38 kB (145.45 kB
   gzip), with the sheet and validation code in smaller deferred chunks; Vite's
@@ -327,12 +358,21 @@ Review adjustment pass (2026-10-08):
   coarse-pointer targets receive additional height, and remaining focus/border
   colors use semantic theme tokens.
 
-Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (66 tests),
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (72 tests),
 and `npm.cmd run build` passed. The available browser-control runtime exposed no
 browser or native-app surface, so visual inspection at 1440 x 900, 1024 x 768,
 768 x 1024, and 390 x 844 remains an owner checkpoint. Do not mark this product
 checkpoint complete or proceed to Architecture checkpoint B until the owner
 performs that pass and explicitly approves continuing.
+
+Architecture review on 2026-10-08 classified representative-character details
+on normal routes and the absence of a credible long Wizard spell list as data-
+integration limitations rather than reasons to pull the complete content system
+forward. Their fixes are assigned to Slice 6.75, and long-spell-list verification
+is repeated in the post-level-up product checkpoint. The current checkpoint may
+record those explicit deferrals, but the class-entry-keyed duplication defect
+and any serious keyboard or accessibility issue remain in its bounded correction
+pass.
 
 ## Required follow-up: Hit-dice play state — complete (2026-10-08)
 
@@ -375,11 +415,53 @@ dropdown supports the explicit 2014 half-total table rule with player-selected
 allocation. IndexedDB version 3 and character-backup format version 2 migrate
 existing data with zero used dice and the 2024 default.
 
+## Slice 6.75: Advancement data integration
+
+Goal: establish a production-shaped data path for the character sheet and
+level-up workflow without pulling the complete public-content system forward.
+
+- Define the read-only content-repository contract required by sheet selectors
+  and advancement calculations, with the current bundled data as its first
+  implementation.
+- Pull and pin a license-verified SRD 5.2.1 Wizard subset for a deliberately
+  limited level range. Include class progression, spellcasting progression,
+  advancement grants, resources, and enough redistributable cantrips and
+  leveled spells to test preparation, known spells, slot use, and scaling.
+- Preserve the existing second-class progression for multiclass tests. Add a
+  minimal second-caster test fixture if Architecture checkpoint B requires it
+  for combined spell-slot verification.
+- Record source, license, attribution, ruleset, and upstream-version metadata
+  for every pulled record. Commit only the transformed, validated public
+  subset; runtime behavior must not depend on the live source.
+- Derive rules-facing sheet values from `Character`, `CharacterPlayState`,
+  rules functions, and repository content. Remove representative-character
+  details from normal persisted-character routes.
+- Render explicit empty or not-chosen states for narrative or rules data that a
+  character does not yet contain.
+- Correct duplication so every play-state map keyed by class-entry ID is
+  remapped consistently when new class-entry IDs are assigned.
+
+Acceptance:
+
+- a newly created character never displays identity, combat, spell, attack,
+  inventory, or narrative values borrowed from the representative character;
+- the same repository-backed Wizard data drives both the visible sheet and
+  advancement calculations;
+- the pinned Wizard subset validates deterministically and has complete public
+  provenance without a runtime network request;
+- the subset covers at least one subclass grant, one ability-score improvement,
+  the total-level 5 proficiency threshold, cantrip scaling, and multiple spell
+  levels;
+- duplicating a character preserves or deliberately resets all play state
+  without leaving class-entry-keyed orphan records; and
+- typecheck, tests, build, and the affected manual sheet scenarios pass.
+
 ## Architecture checkpoint B: Level-up transaction
 
-Review the proposed advancement diff format, multiclass prerequisites,
-class-entry choices, combined spell-slot strategy, and rollback behavior before
-implementing the workflow.
+After Slice 6.75, review the proposed advancement diff format, repository access
+boundary, multiclass prerequisites, class-entry choices, combined spell-slot
+strategy, spell choice ownership, derived-sheet updates, and rollback behavior
+before implementing the workflow.
 
 ## Slice 7: Level-up and multiclass workflow
 
@@ -401,12 +483,43 @@ Acceptance:
 - spell selection remains associated with its granting class; and
 - canceling leaves the character unchanged.
 
+## Product checkpoint: Advancement and integrated character flow
+
+Stop before Slice 8. Review the complete fixture-backed workflow as one product
+surface rather than reviewing the level-up wizard in isolation.
+
+- Create and reopen a Wizard whose sheet is derived from the pinned SRD subset.
+- Exercise single-class advancement across a subclass grant, ability-score
+  improvement, proficiency threshold, cantrip-scaling threshold, and multiple
+  spell levels.
+- Add the supported second class, verify multiclass prerequisites and grants,
+  and exercise combined spell-slot behavior when the approved strategy applies.
+- Confirm that the preview explains every permanent and derived change, cancel
+  leaves no changes, and commit applies all choices atomically.
+- Confirm that HP, temporary HP, resources, spell slots, Hit Point Dice, death
+  saves, conditions, overrides, and rest settings survive advancement unless a
+  displayed rule explicitly changes them.
+- Review prepared, known, and available spell counts, source-class ownership,
+  grouped spell levels, and a deliberately long spell list.
+- Re-run create, duplicate, reload, direct-link, export, delete, and import
+  scenarios after advancement.
+- Repeat the visual, 200 percent zoom, reduced-motion, touch-target, complete
+  keyboard, dialog-focus, and responsive checks at the representative widths in
+  `docs/UI_DESIGN.md`.
+
+This checkpoint is complete only after correctness blockers and serious
+accessibility issues are resolved, deferred scope is recorded, and the owner
+explicitly approves proceeding to the full content repository and public-pack
+work.
+
 ## Slice 8: Content repository and public packs
 
 Goal: unify bundled and locally installed content behind one interface.
 
-- Add Zod validation and pack manifests.
-- Load the small bundled fixture through the repository.
+- Extend the Slice 6.75 repository contract for installed packs and searchable
+  content without changing sheet or advancement consumers.
+- Extend Zod validation and pack manifests from the pinned bootstrap subset to
+  complete public packs.
 - Add source/ruleset filtering and reference resolution.
 - Define item entities and searchable repository queries for inventory.
 - Build an allowlisted Open5e v2 importer.
@@ -541,9 +654,15 @@ implementation slice or delivery commitment.
 
 ## Next session
 
-Finish the Product checkpoint: UI foundation and navigation. Perform the
-remaining visual review of the library and character sheet at 1440 x 900,
-1024 x 768, 768 x 1024, and 390 x 844, including 200 percent zoom and reduced
-motion. Include Hit Point Dice group tracking and both Long Rest recovery
-options in that review. Record owner approval before proceeding to Architecture
-checkpoint B.
+Finish the Product checkpoint: UI foundation and navigation. Resolve the review
+defect that leaves copied Hit Point Dice keyed to obsolete class-entry IDs.
+Complete the remaining exact-size, keyboard, reduced-motion, and assistive-
+technology review in `docs/UI_DESIGN.md`. Record representative-character data
+and credible long-spell-list coverage as explicit Slice 6.75/post-level-up
+deferrals, then record owner approval.
+
+After that approval, implement Slice 6.75 only. Establish the repository-backed
+data path, pull and validate the pinned public Wizard subset, and make the live
+sheet derive rules-facing values from the persisted character and repository.
+Stop at Architecture checkpoint B; do not begin the level-up workflow until its
+transaction and spell-progression decisions are approved.

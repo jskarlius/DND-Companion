@@ -1,7 +1,8 @@
 # D&D Companion UI Design and Review Guide
 
-Status: Direction approved; implementation pending  
-Last updated: 2026-10-07
+Status: Foundation implemented; product checkpoint in review
+
+Last updated: 2026-10-08
 
 ## 1. Purpose
 
@@ -151,6 +152,12 @@ Exercise these states and workflows:
 11. Traverse the complete visible workflow using only the keyboard.
 12. Verify browser zoom at 200 percent and reduced-motion behavior.
 
+The initial UI-foundation checkpoint may use the validated bootstrap fixture.
+If that fixture cannot credibly exercise a long spell collection, record that
+specific scenario as deferred to the post-level-up checkpoint after the pinned
+Wizard subset exists. This deferral does not waive responsive testing of the
+available spell groups or other long dynamic collections.
+
 Do not include private book text or other private reference material in shared
 screenshots or feedback artifacts.
 
@@ -180,3 +187,30 @@ The UI checkpoint is complete when:
 - accepted usability changes have been verified;
 - intentionally deferred feedback is recorded with a future slice; and
 - the owner approves continuing to the level-up architecture checkpoint.
+
+## 11. Post-level-up product checkpoint
+
+After the level-up and multiclass slice, repeat the applicable baseline matrix
+before expanding the application to complete public content packs. This second
+checkpoint validates the integrated product rather than only the level-up
+dialog.
+
+In addition to the baseline responsive and accessibility checks:
+
+1. Begin with a persisted Wizard backed by the pinned public SRD subset.
+2. Preview, cancel, and commit both single-class and multiclass advancement.
+3. Cross a subclass, ability-score-improvement, proficiency, cantrip-scaling,
+   and spell-level boundary represented by the bootstrap data.
+4. Confirm that the visible sheet changes agree exactly with the preview.
+5. Confirm that unrelated play state, manual overrides, and rest settings are
+   preserved.
+6. Exercise spell preparation and slot tracking with a deliberately long spell
+   list at desktop, tablet, mobile, and 200 percent zoom.
+7. Reload, open the stable URL, export, delete, import, and reopen the advanced
+   character.
+8. Traverse the full workflow by keyboard and verify disclosure, tab, dialog,
+   focus-restoration, validation, and error behavior.
+
+Record blocker, usability, polish, preference, and new-scope findings using the
+same feedback format as the first checkpoint. The owner must explicitly approve
+continuing to the full content-system slice.

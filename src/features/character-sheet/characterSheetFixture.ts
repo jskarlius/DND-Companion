@@ -17,9 +17,8 @@ export interface CharacterSheetDetails {
     readonly maximumHp: number;
     readonly spellAttackBonus: number;
     readonly spellSaveDc: number;
-    readonly hitDice: string;
   };
-  readonly spellSlots: readonly { readonly level: number; readonly maximum: number }[];
+  readonly spellSlots: readonly { readonly level: number; readonly maximum: number; readonly label?: string; readonly recharge?: 'short-rest' | 'long-rest' }[];
   readonly attacks: readonly {
     readonly name: string;
     readonly attackBonus: number;
@@ -125,9 +124,8 @@ export const representativeCharacterSheetDetails: CharacterSheetDetails = {
     maximumHp: 26,
     spellAttackBonus: 5,
     spellSaveDc: 13,
-    hitDice: '2d6 + 2d10',
   },
-  spellSlots: [{ level: 1, maximum: 3 }],
+  spellSlots: [{ level: 1, maximum: 3, label: 'Spell slots', recharge: 'long-rest' }],
   attacks: [
     { name: 'Quarterstaff', attackBonus: 2, damage: '1d6 bludgeoning', notes: 'Versatile (1d8)' },
     { name: 'Fire Bolt', attackBonus: 5, damage: '1d10 fire', notes: 'Character-level scaling' },
