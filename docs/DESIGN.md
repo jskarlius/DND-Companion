@@ -1,7 +1,7 @@
 # D&D Companion Design Document
 
 Status: Initial architecture approved for implementation  
-Last updated: 2026-10-07
+Last updated: 2026-10-08
 
 ## 1. Purpose
 
@@ -277,6 +277,36 @@ such an entry into a private pack through the manual editor. Character creation
 will resolve class and background starting-equipment choices into the same
 inventory collection; multiclassing does not silently re-grant starting
 equipment.
+
+### 7.2 Advancement bootstrap data
+
+Level-up development does not require the complete public content library, but
+it does require the character sheet and advancement workflow to consume the
+same production data contracts. Before implementing level-up, the application
+will place a small, pinned, license-verified SRD 5.2.1 subset behind the content
+repository read interface.
+
+The bootstrap subset includes the 2024 Wizard through a deliberately limited
+level range, its spellcasting progression, advancement grants, resources, and
+a representative selection of redistributable cantrips and leveled spells. It
+also retains a second-class progression for multiclass tests and may include a
+minimal second-caster test fixture when needed to verify combined spell-slot
+behavior. The data must be sufficient to exercise subclass timing, an
+ability-score improvement, the total-level proficiency threshold, spell
+selection by granting class, cantrip scaling, and prepared/known-spell limits.
+
+This subset is application data rather than a live API dependency. It records
+source, license, ruleset, and version metadata and is validated through the
+same repository boundary planned for full public packs. Pulling it forward
+does not pull forward the broad Open5e importer, content-library search,
+inventory queries, or complete SRD generation; those remain in the later
+content-system phase.
+
+Normal persisted-character routes never receive representative-character
+fixture details. Rules-facing sheet values are derived from the character,
+play state, rules functions, and repository content. Data not yet chosen or
+modeled is shown honestly as empty or not chosen instead of borrowing values
+from a demo character.
 
 ## 8. Character model
 
@@ -690,12 +720,19 @@ dnd-companion/
 
 ### Phase 4: Advancement and multiclassing
 
+- Put a pinned, license-verified 2024 Wizard subset and the existing second
+  class behind the content-repository read contract.
+- Replace live-route representative details with sheet values derived from the
+  persisted character, play state, rules functions, and repository content.
 - Model Wizard and a second class through a small range of levels.
 - Implement single-class and multiclass level-up previews, choices, and atomic
   commit.
 - Test total-level proficiency/cantrip scaling against class-level grants, ASIs,
   HP, and spell progression.
 - Verify that existing play state is preserved.
+- Perform a product checkpoint covering the integrated character sheet,
+  spellcasting, level-up, multiclassing, persistence, responsive behavior, and
+  keyboard operation before expanding to the full content system.
 
 ### Phase 5: Content system
 
