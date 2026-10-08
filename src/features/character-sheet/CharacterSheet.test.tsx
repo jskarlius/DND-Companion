@@ -26,9 +26,74 @@ test('renders all entries for the representative multiclass character', () => {
   renderSheet();
 
   expect(screen.getByText('Wizard 2 / Fighter 2')).toBeInTheDocument();
-  expect(screen.getAllByText('Fire Bolt')).toHaveLength(2);
+  expect(screen.getByText('Fire Bolt')).toBeInTheDocument();
   expect(screen.getByText('Second Wind uses')).toBeInTheDocument();
+  expect(screen.getByRole('tab', { name: 'Spells' })).toBeInTheDocument();
   expect(screen.getByRole('tab', { name: 'Inventory' })).toBeInTheDocument();
+});
+
+test('derives hit dice and class identity from each character instead of representative display data', () => {
+  const levelOneWizard = {
+    ...representativeCharacter,
+    id: 'demo:character:level-one-wizard',
+    classes: [{ ...representativeCharacter.classes[0], id: 'demo:class-entry:level-one-wizard', level: 1 }],
+  };
+
+  render(
+    <CharacterSheet
+      character={levelOneWizard}
+      playState={{ ...representativePlayState, characterId: levelOneWizard.id, usedHitDice: {} }}
+      content={minimalContentFixture}
+      details={representativeCharacterSheetDetails}
+    />,
+  );
+
+  expect(screen.getByText('Wizard 1')).toBeInTheDocument();
+  expect(screen.getByText('1d6')).toBeInTheDocument();
+  expect(screen.queryByText('2d6 + 2d10')).not.toBeInTheDocument();
+});
+
+test('renders every class entry in the identity summary', () => {
+  const fourClasses = {
+    ...representativeCharacter,
+    classes: [
+      { ...representativeCharacter.classes[0], id: 'class-entry:wizard-a', level: 1 },
+      { ...representativeCharacter.classes[1], id: 'class-entry:fighter-a', level: 1 },
+      { ...representativeCharacter.classes[0], id: 'class-entry:wizard-b', level: 1 },
+      { ...representativeCharacter.classes[1], id: 'class-entry:fighter-b', level: 1 },
+    ],
+  };
+
+  render(
+    <CharacterSheet
+      character={fourClasses}
+      playState={{ ...representativePlayState, usedHitDice: {} }}
+      content={minimalContentFixture}
+      details={representativeCharacterSheetDetails}
+    />,
+  );
+
+  expect(screen.getByText('Wizard 1 / Fighter 1 / Wizard 1 / Fighter 1')).toBeInTheDocument();
+});
+
+test('shows the Spells tab only when a current class has spellcasting data', () => {
+  const fighterOnly = {
+    ...representativeCharacter,
+    classes: [{ ...representativeCharacter.classes[1], id: 'class-entry:fighter-only', level: 2 }],
+    knownSpellIds: [],
+    preparedSpellIds: [],
+  };
+
+  render(
+    <CharacterSheet
+      character={fighterOnly}
+      playState={{ ...representativePlayState, usedHitDice: {} }}
+      content={minimalContentFixture}
+      details={representativeCharacterSheetDetails}
+    />,
+  );
+
+  expect(screen.queryByRole('tab', { name: 'Spells' })).not.toBeInTheDocument();
 });
 
 test('provides accessible labels for proficiency markers', () => {
@@ -63,8 +128,8 @@ test('supports expected keyboard navigation between tabs', () => {
   const sheetTab = screen.getByRole('tab', { name: 'Sheet' });
   sheetTab.focus();
   userEvent.keyboard('{ArrowRight}');
-  expect(screen.getByRole('tab', { name: 'Character' })).toHaveFocus();
-  expect(screen.getByRole('tabpanel', { name: 'Character' })).toBeInTheDocument();
+  expect(screen.getByRole('tab', { name: 'Spells' })).toHaveFocus();
+  expect(screen.getByRole('tabpanel', { name: 'Spells' })).toBeInTheDocument();
   userEvent.keyboard('{End}');
   expect(screen.getByRole('tab', { name: 'Inventory' })).toHaveFocus();
 });
@@ -143,9 +208,28 @@ test('requires DM confirmation for rests and tracks spell slots', () => {
   expect(screen.getByText('1 / 1 remaining / Short rest')).toBeInTheDocument();
   expect(screen.getByText('1 / 1 remaining / Long rest')).toBeInTheDocument();
 
-  expect(screen.getByText('2 / 3 remaining')).toBeInTheDocument();
+  userEvent.click(screen.getByRole('tab', { name: 'Spells' }));
+  expect(screen.getByText('3 total / 1 used')).toBeInTheDocument();
   userEvent.click(screen.getByRole('button', { name: 'Use level 1 spell slot' }));
-  expect(screen.getByText('1 / 3 remaining')).toBeInTheDocument();
+  expect(screen.getByText('3 total / 2 used')).toBeInTheDocument();
+});
+
+test('groups spells by level with preparation, casting details, and compact slot controls', () => {
+  renderSheet();
+
+  userEvent.click(screen.getByRole('tab', { name: 'Spells' }));
+
+  expect(screen.getByText('Cantrips 1')).toBeInTheDocument();
+  expect(screen.getByText('Known spells 1')).toBeInTheDocument();
+  expect(screen.getByText('Prepared 1')).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Cantrips' })).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Level 1' })).toBeInTheDocument();
+  expect(screen.getAllByText(/Action.*120 feet.*V, S.*Instantaneous/)).toHaveLength(2);
+  expect(screen.queryByLabelText('Prepare Fire Bolt')).not.toBeInTheDocument();
+  expect(screen.getByLabelText('Prepare Magic Missile')).toBeChecked();
+
+  userEvent.click(screen.getByLabelText('Prepare Magic Missile'));
+  expect(screen.getByLabelText('Prepare Magic Missile')).not.toBeChecked();
 });
 
 test('tracks hit dice by class entry and supports the optional 2014 recovery allocation', () => {

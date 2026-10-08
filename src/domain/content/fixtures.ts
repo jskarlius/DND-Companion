@@ -76,6 +76,10 @@ export const minimalContentFixture: ContentFixture = {
       ruleset: '5e-2024',
       source: srdSource,
       level: 0,
+      castingTime: 'Action',
+      range: '120 feet',
+      duration: 'Instantaneous',
+      components: { verbal: true, somatic: true },
       scalingBasis: 'character-level',
     },
     {
@@ -85,6 +89,10 @@ export const minimalContentFixture: ContentFixture = {
       ruleset: '5e-2024',
       source: srdSource,
       level: 1,
+      castingTime: 'Action',
+      range: '120 feet',
+      duration: 'Instantaneous',
+      components: { verbal: true, somatic: true },
     },
   ],
   classes: [
@@ -97,6 +105,7 @@ export const minimalContentFixture: ContentFixture = {
       hitDie: 6,
       savingThrowAbilities: ['intelligence', 'wisdom'],
       spellListIds: ['srd-5.2.1:spell:fire-bolt', 'srd-5.2.1:spell:magic-missile'],
+      spellcasting: { ability: 'intelligence', slotKind: 'spell-slots', slotRecharge: 'long-rest' },
       advancement: [
         { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-spellcasting' }] },
         { level: 2, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-arcane-recovery' }] },

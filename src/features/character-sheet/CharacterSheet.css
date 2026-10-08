@@ -2,10 +2,11 @@
 .sheet-header { display: flex; justify-content: space-between; gap: 2rem; padding-bottom: 1.5rem; border-bottom: 3px solid #566a4e; }
 .sheet-header h1 { margin: 0; font-family: Georgia, serif; font-size: clamp(2.25rem, 6vw, 4rem); line-height: 1; }
 .eyebrow { margin: 0 0 .45rem; color: #566a4e; font-size: .85rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.identity-list { display: grid; grid-template-columns: repeat(2, minmax(8rem, 1fr)); gap: .75rem 1.5rem; margin: 0; }
-.identity-list div { border-left: 2px solid #b8c8b0; padding-left: .7rem; }.identity-list dt, .summary-grid span { color: #57645a; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }.identity-list dd { margin: .1rem 0 0; font-weight: 600; }
+.sheet-header > * { min-width: 0; }
+.identity-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem 1.5rem; margin: 0; }
+.identity-list div { border-left: 2px solid #b8c8b0; padding-left: .7rem; }.identity-list dt, .summary-grid span { color: #57645a; font-size: .75rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }.identity-list dd { margin: .1rem 0 0; font-weight: 600; overflow-wrap: anywhere; }.identity-classes { grid-column: 1 / -1; }
 .summary-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; margin: 1.5rem 0; background: #b8c8b0; border: 1px solid #b8c8b0; }.summary-grid div { display: grid; gap: .25rem; padding: .75rem; background: #f8f5ed; }.summary-grid strong { font-size: 1.25rem; }
-.sheet-tabs { display: flex; gap: .25rem; margin: 0 0 1.25rem; border-bottom: 2px solid #b8c8b0; }.sheet-tabs button { padding: .65rem 1rem; border: 0; border-radius: .35rem .35rem 0 0; background: transparent; color: #41533c; font: inherit; font-weight: 700; cursor: pointer; }.sheet-tabs button:hover { background: #edf1e9; }.sheet-tabs button:focus-visible { outline: 3px solid #2d6a9f; outline-offset: -3px; }.sheet-tabs .active-tab, .sheet-tabs .active-tab:hover { background: #566a4e; color: #fff; }.tab-panel { min-height: 28rem; }.tab-panel .sheet-section { min-height: inherit; }.inventory-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .75rem; padding: 0; margin: 0; list-style: none; }.inventory-list li { min-height: 5rem; padding: 1rem; border-left: 4px solid #7a926c; background: #f4f6f0; }.inventory-list strong, .inventory-list span { display: block; }.inventory-list span { margin-top: .35rem; color: #57645a; }
+.sheet-tabs { display: flex; gap: .25rem; margin: 0 0 1.25rem; border-bottom: 2px solid #b8c8b0; }.sheet-tabs button { padding: .65rem 1rem; border: 0; border-radius: .35rem .35rem 0 0; background: transparent; color: #41533c; font: inherit; font-weight: 700; cursor: pointer; }.sheet-tabs button:hover { background: #edf1e9; }.sheet-tabs button:focus-visible { outline: 3px solid #2d6a9f; outline-offset: -3px; }.sheet-tabs .active-tab, .sheet-tabs .active-tab:hover { background: #566a4e; color: #fff; }.tab-panel, .tab-panel .sheet-section { min-height: 0; }.inventory-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .75rem; padding: 0; margin: 0; list-style: none; }.inventory-list li { min-height: 5rem; padding: 1rem; border-left: 4px solid #7a926c; background: #f4f6f0; }.inventory-list strong, .inventory-list span { display: block; }.inventory-list span { margin-top: .35rem; color: #57645a; }
 .character-panel { display: grid; gap: 1.25rem; }.appearance-summary { display: grid; grid-template-columns: 7rem minmax(0, 1fr); align-items: center; gap: 1.25rem; }.portrait-placeholder { display: grid; aspect-ratio: 1; place-items: center; border: 2px dashed #7a926c; border-radius: 50%; background: #edf1e9; color: #496140; font-family: Georgia, serif; font-size: 2rem; font-weight: 700; }.appearance-summary p, .backstory { margin: 0; }.appearance-summary p + p { margin-top: .6rem; }.backstory { max-width: 75ch; font-size: 1.05rem; line-height: 1.7; }
 .sheet-grid { display: grid; grid-template-columns: minmax(13rem, .8fr) minmax(20rem, 1.5fr) minmax(15rem, 1fr); gap: 1.25rem; }.sheet-column { display: grid; align-content: start; gap: 1.25rem; }.sheet-section { padding: 1rem; border: 1px solid #b8c8b0; background: #fffdf8; box-shadow: 0 2px 8px rgb(36 49 38 / 6%); }.sheet-section h2 { margin: 0 0 .85rem; font-family: Georgia, serif; font-size: 1.2rem; }
 .ability-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin: 0; }.ability-grid div { padding: .45rem; border-radius: .25rem; background: #edf1e9; text-align: center; }.ability-grid dt { font-size: .7rem; font-weight: 700; text-transform: uppercase; }.ability-grid dd { margin: .2rem 0 0; font-size: 1.15rem; font-weight: 700; }.ability-grid small { display: block; font-size: .8rem; font-weight: 600; }
@@ -230,6 +231,56 @@ html[data-theme='dark'] .inventory-list li { background: var(--surface-2); color
 .hit-points > div > span { display: flex; align-items: center; justify-content: center; gap: .25rem; }
 .spellcasting-values dt { display: flex; align-items: center; gap: .25rem; }
 .override-button { flex: 0 0 1.5rem; vertical-align: middle; transform: none; }
+
+.spell-level-groups { display: grid; gap: .75rem; margin-top: 1rem; }
+.spell-level-group { border-top: 1px solid var(--border); padding-top: .75rem; }
+.spell-level-group header { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.spell-level-group h3 { margin: 0; font-size: .9rem; }
+.spell-slot-tracker { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .35rem; font-size: .8rem; }
+.spell-slot-tracker span { color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
+.spell-slot-action { min-height: 2rem; padding: .25rem .45rem; font-size: .75rem; }
+.spell-level-group ul { display: grid; gap: .35rem; padding: 0; margin: .5rem 0 0; list-style: none; }
+.spell-level-group li { display: grid; grid-template-columns: auto minmax(8rem, 1fr) minmax(0, 1fr); align-items: center; gap: .5rem; padding: .45rem .5rem; background: var(--surface-2); }
+.spell-prepared { display: inline-flex; align-items: center; gap: .25rem; margin: 0; color: var(--muted-foreground); font-size: .72rem; font-weight: 700; text-transform: uppercase; }
+.spell-details { color: var(--muted-foreground); font-size: .8rem; }
+.empty-spell-level { margin: .5rem 0 0; color: var(--muted-foreground); font-size: .85rem; }
+@media (max-width: 620px) { .spell-level-group li { grid-template-columns: auto minmax(0, 1fr); }.spell-details { grid-column: 2; } }
+
+/* The spellbook is a focused play surface: level groups are dense, independent disclosures. */
+.spells-tab { min-width: 0; }
+.spells-tab .sheet-section { max-width: none; }
+.spells-tab .spellcasting-values { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.spell-level-groups { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; }
+.spell-level-group { min-width: 0; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 0; overflow: hidden; background: var(--surface); }
+.spell-level-group > summary { display: flex; align-items: center; justify-content: space-between; gap: .5rem; padding: .65rem .75rem; cursor: pointer; list-style: none; }
+.spell-level-group > summary::-webkit-details-marker { display: none; }
+.spell-level-group > summary::after { content: '⌄'; color: var(--accent); font-weight: 700; }
+.spell-level-group:not([open]) > summary::after { transform: rotate(-90deg); }
+.spell-level-group ul, .spell-level-group .empty-spell-level { margin-inline: .5rem; margin-bottom: .5rem; }
+.spell-level-group li { grid-template-columns: auto minmax(0, 1fr); }
+.spell-level-group .spell-details { grid-column: 1 / -1; padding-left: .15rem; }
+.cantrip-marker { color: var(--muted-foreground); font-size: .72rem; font-weight: 700; text-transform: uppercase; }
+.spell-count-summary { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: -.75rem 0 1rem; color: var(--muted-foreground); font-size: .85rem; }
+.spell-count-summary span { font-variant-numeric: tabular-nums; }
+
+/* Conditions get the broad working area; death saves remain compact without competing for it. */
+.play-state-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.play-state-controls > .play-state-cluster:first-child { grid-column: 1 / -1; }
+.play-state-controls form { grid-template-columns: auto minmax(0, 1fr) auto; }
+.play-state-controls form input { min-width: 0; }
+.condition-list { grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr)); }
+@media (max-width: 620px) { .spells-tab .spellcasting-values, .spell-level-groups { grid-template-columns: 1fr; }.play-state-controls { grid-template-columns: 1fr; }.play-state-controls > .play-state-cluster:first-child { grid-column: auto; } }
+
+/* Condition entry keeps a visible full-width field, with its action out of the typing path. */
+.play-state-controls form { grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; align-items: center; gap: .45rem; }
+.play-state-controls form label { grid-column: 1; grid-row: 1; }
+.play-state-controls form button { grid-column: 2; grid-row: 1; min-height: 2rem; padding: .25rem .65rem; }
+.play-state-controls form input { grid-column: 1 / -1; grid-row: 2; box-sizing: border-box; width: 100%; min-height: 2.5rem; padding: .45rem .6rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--input); color: var(--foreground); }
+.death-saves { display: grid; gap: .6rem; margin: 0; padding: .75rem; }
+.play-state-cluster h3 { margin: 0; padding: 0; color: var(--accent); font-size: .75rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.death-save-row { gap: .25rem; }
+.death-save-row > span { color: var(--foreground); font-size: .9rem; font-weight: 600; }
+.death-save-bonus { margin: auto 0 0; color: var(--muted-foreground); font-size: .78rem; line-height: 1.35; }
 
 /* Final theme hooks for legacy sheet details that still need semantic colors. */
 th, td { border-bottom-color: var(--border); }

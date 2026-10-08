@@ -45,6 +45,17 @@ export interface Resource extends ContentEntity {
 export interface Spell extends ContentEntity {
   readonly kind: 'spell';
   readonly level: number;
+  /** Compact casting detail for spell-list displays. */
+  readonly castingTime?: string;
+  readonly range?: string;
+  readonly duration?: string;
+  readonly components?: {
+    readonly verbal?: boolean;
+    readonly somatic?: boolean;
+    readonly material?: string;
+  };
+  readonly concentration?: boolean;
+  readonly ritual?: boolean;
   /** The rule that determines when this spell's effect scales, if it does. */
   readonly scalingBasis?: ScalingBasis;
 }
@@ -66,6 +77,12 @@ export interface Class extends ContentEntity {
   readonly savingThrowAbilities: readonly Ability[];
   readonly advancement: readonly AdvancementLevel[];
   readonly spellListIds: readonly ContentId[];
+  /** Present only for a class with Spellcasting or Pact Magic. */
+  readonly spellcasting?: {
+    readonly ability: Ability;
+    readonly slotKind: 'spell-slots' | 'pact-magic';
+    readonly slotRecharge: 'short-rest' | 'long-rest';
+  };
 }
 
 export interface Subclass extends ContentEntity {

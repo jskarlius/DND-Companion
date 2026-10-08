@@ -25,6 +25,7 @@ export interface CharacterSheetViewModel {
   readonly savingThrows: readonly { readonly ability: Ability; readonly value: number; readonly proficient: boolean }[];
   readonly skills: readonly { readonly skill: Skill; readonly value: number; readonly proficiency: string }[];
   readonly classes: readonly { readonly name: string; readonly level: number }[];
+  readonly spellcasting: readonly { readonly className: string; readonly ability: Ability; readonly slotKind: 'spell-slots' | 'pact-magic'; readonly slotRecharge: 'short-rest' | 'long-rest' }[];
   readonly hitDiceGroups: readonly { readonly classEntryId: string; readonly className: string; readonly die: number; readonly maximum: number; readonly used: number }[];
   readonly cantrips: readonly Spell[];
   readonly spells: readonly { readonly spell: Spell; readonly prepared: boolean }[];
@@ -92,6 +93,10 @@ export function buildCharacterSheetViewModel(
       name: findRequired(content.classes, classEntry.classId).name,
       level: classEntry.level,
     })),
+    spellcasting: character.classes.flatMap((classEntry) => {
+      const characterClass = findRequired(content.classes, classEntry.classId);
+      return characterClass.spellcasting ? [{ className: characterClass.name, ...characterClass.spellcasting }] : [];
+    }),
     hitDiceGroups: character.classes.map((classEntry) => {
       const characterClass = findRequired(content.classes, classEntry.classId);
       return {

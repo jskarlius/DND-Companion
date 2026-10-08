@@ -306,6 +306,37 @@ found during review do not expand the polish pass automatically.
 
 Review adjustment pass (2026-10-08):
 
+- **Correctness:** the headline Hit Dice display now derives every die group
+  from the character's current class entries. A newly created level-1 Wizard
+  therefore shows `1d6`, not the representative fixture's multiclass value.
+- **Collapsible sections:** Character and Inventory no longer retain an empty,
+  fixed-height card after their content is collapsed.
+- **Multiclass responsiveness:** class entries in the identity summary can
+  wrap across the full summary width, including four or more classes, without
+  forcing the species, background, or player fields off-screen.
+- **Spell density:** spells now group dynamically by level. Each group keeps
+  its slot total and used count compactly beside the level, lists its spells
+  beneath it with a persisted Prepared checkbox, and shows casting time/range
+  when the content record supplies them. Spell attack bonus and save DC appear
+  at the top of the same section. Full spell-description content remains a
+  future content-pack concern.
+- **Spellbook navigation:** a character now receives a dedicated Spells tab
+  only when one of their current classes declares Spellcasting or Pact Magic.
+  The tab uses independently collapsible level groups, a responsive three/two/
+  one-column layout, spellcasting ability, and compact casting metadata
+  (time, range, components, duration, concentration, and ritual). Cantrips
+  have no preparation control. The tab reports current cantrip, known-spell,
+  and prepared-spell counts; progression-derived permitted maxima are deferred
+  until the level-up workflow can calculate them accurately. Pact Magic is modeled as a distinct slot kind
+  with short-rest recovery metadata; its source-distinct slot calculation and
+  recovery remain part of the level-up transaction work rather than sharing
+  the current generic spell-slot counter.
+- **Play-state density:** the Conditions/status area now spans the wide row,
+  with compact Death Saves and unchanged rest actions beneath it. This prevents
+  the condition entry control from collapsing beside three narrow panels.
+- **Condition entry:** the Add action now sits beside the Condition label,
+  above a visible full-width input. Death Saves uses the same section-label and
+  body-text scale as Status and Rest.
 - **Polish/performance:** the character sheet and backup validators now load on
   demand. The initial production JavaScript chunk is 447.38 kB (145.45 kB
   gzip), with the sheet and validation code in smaller deferred chunks; Vite's
@@ -327,7 +358,7 @@ Review adjustment pass (2026-10-08):
   coarse-pointer targets receive additional height, and remaining focus/border
   colors use semantic theme tokens.
 
-Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (66 tests),
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (72 tests),
 and `npm.cmd run build` passed. The available browser-control runtime exposed no
 browser or native-app surface, so visual inspection at 1440 x 900, 1024 x 768,
 768 x 1024, and 390 x 844 remains an owner checkpoint. Do not mark this product
@@ -544,6 +575,14 @@ implementation slice or delivery commitment.
 Finish the Product checkpoint: UI foundation and navigation. Perform the
 remaining visual review of the library and character sheet at 1440 x 900,
 1024 x 768, 768 x 1024, and 390 x 844, including 200 percent zoom and reduced
-motion. Include Hit Point Dice group tracking and both Long Rest recovery
-options in that review. Record owner approval before proceeding to Architecture
-checkpoint B.
+motion. Recheck multi-class identity wrapping, collapsed Character/Inventory
+sections, the conditional Spells tab and grouped spell levels at a character
+with a long spell list, and the rebalanced Conditions/Death Saves controls.
+Death Saves now uses the same in-card heading treatment as Status and Rest and
+shows a neutral ``No applicable bonus recorded`` status; rule-derived bonuses
+such as equipment or aura effects remain deferred until their source and active
+context can be modelled. Spell descriptions remain a later SRD-content import
+concern; the current spell list intentionally stays a compact scanning layer.
+Include Hit Point Dice group tracking and both Long Rest recovery options in
+that review. Record owner approval before proceeding to Architecture checkpoint
+B.
