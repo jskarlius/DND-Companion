@@ -124,6 +124,12 @@ test('closes dialogs with Escape and restores focus to the initiating control', 
   userEvent.keyboard('{Escape}');
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   expect(overrideTrigger).toHaveFocus();
+
+  const maximumHpTrigger = screen.getByRole('button', { name: 'Override maximum HP' });
+  userEvent.click(maximumHpTrigger);
+  userEvent.keyboard('{Escape}');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(maximumHpTrigger).toHaveFocus();
 });
 
 test('requires DM confirmation for rests and tracks spell slots', () => {

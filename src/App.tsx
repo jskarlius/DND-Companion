@@ -1,19 +1,17 @@
-import { useEffect, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react';
+import { HashRouter, Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
-import { CharacterSheet } from './features/character-sheet/CharacterSheet';
-import {
-  representativeCharacter,
-  representativeCharacterSheetDetails,
-  representativePlayState,
-} from './features/character-sheet/characterSheetFixture';
-import { minimalContentFixture } from './domain/content/fixtures';
+import { CharacterLibrary } from './features/character-library/CharacterLibrary';
 import type { Character, CharacterPlayState } from './domain/character/types';
 import { CharacterRepository } from './storage/characterRepository';
 import { requestPersistentStorage, type PersistentStorageStatus } from './storage/persistentStorage';
 import { Button } from './components/ui/button';
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from './components/ui/dialog';
 import { Moon, Sun } from 'lucide-react';
 
 const characterRepository = new CharacterRepository();
+const RECENT_CHARACTER_KEY = 'dnd-companion-recent-character';
+const CharacterRoute = lazy(() => import('./features/character-sheet/CharacterRoute').then((module) => ({ default: module.CharacterRoute })));
 type Theme = 'light' | 'dark';
 
 function initialTheme(): Theme {
@@ -23,92 +21,126 @@ function initialTheme(): Theme {
 }
 
 function storageExplanation(status: PersistentStorageStatus | 'checking'): string {
-  if (status === 'granted') return 'Saved locally; persistent browser storage is enabled. Keep exports as backups.';
-  if (status === 'not-granted') return 'Saved locally, but the browser may clear storage under pressure. Export regular backups.';
-  if (status === 'not-supported') return 'Saved locally. This browser cannot request protected storage, so export regular backups.';
-  return 'Loading local character data…';
+  if (status === 'granted') return 'Saved locally; persistent browser storage is enabled.';
+  if (status === 'not-granted') return 'Saved locally, but the browser may clear storage under pressure.';
+  if (status === 'not-supported') return 'Saved locally. This browser cannot request protected storage.';
+  return 'Checking local storage…';
 }
 
-function App() {
-  const [character, setCharacter] = useState<Character>(representativeCharacter);
-  const [playState, setPlayState] = useState<CharacterPlayState>(representativePlayState);
+function createId(): string {
+  return `local:character:${crypto.randomUUID()}`;
+}
+
+function createMinimalCharacter(): { character: Character; playState: CharacterPlayState } {
+  const id = createId();
+  return {
+    character: {
+      schemaVersion: 1, id, name: 'New adventurer', ruleset: '5e-2024', enabledContentPackIds: ['srd-5.2.1'],
+      abilityScoreGeneration: 'custom',
+      abilityScores: { strength: 10, dexterity: 10, constitution: 10, intelligence: 10, wisdom: 10, charisma: 10 },
+      classes: [{ id: `${id}:class-entry:wizard`, classId: 'srd-5.2.1:class:wizard', level: 1, choices: {} }],
+      choices: {}, proficiencies: { savingThrowAbilities: ['intelligence', 'wisdom'], skills: {} }, knownSpellIds: [], preparedSpellIds: [], inventory: [], manualOverrides: {},
+    },
+    playState: { characterId: id, currentHp: 6, temporaryHp: 0, temporaryMaximumHpBonus: 0, inspiration: false, usedResources: {}, usedSpellSlots: {}, deathSaveSuccesses: 0, deathSaveFailures: 0, conditions: [] },
+  };
+}
+
+function downloadBackup(name: string, backup: unknown): void {
+  const file = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(file);
+  const download = document.createElement('a');
+  download.href = url;
+  download.download = `${name.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-') || 'character'}.dnd-character.json`;
+  download.click();
+  URL.revokeObjectURL(url);
+}
+
+function AppShell() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const importInput = useRef<HTMLInputElement>(null);
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [libraryStatus, setLibraryStatus] = useState<'loading' | 'ready' | 'error'>('loading');
   const [storageStatus, setStorageStatus] = useState<PersistentStorageStatus | 'checking'>('checking');
-  const [backupError, setBackupError] = useState<string>();
+  const [error, setError] = useState<string>();
   const [theme, setTheme] = useState<Theme>(initialTheme);
+  const [recentCharacterId, setRecentCharacterId] = useState<string | undefined>(() => window.localStorage.getItem(RECENT_CHARACTER_KEY) ?? undefined);
+  const [deleteCandidate, setDeleteCandidate] = useState<Character>();
+  const libraryLoadSequence = useRef(0);
 
-  useEffect(() => {
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem('dnd-companion-theme', theme);
-  }, [theme]);
-
-  useEffect(() => {
-    let active = true;
-    void (async () => {
-      try {
-        const [savedCharacter, savedPlayState, persistence] = await Promise.all([
-          characterRepository.loadCharacter(representativeCharacter.id),
-          characterRepository.loadPlayState(representativeCharacter.id),
-          requestPersistentStorage(),
-        ]);
-        if (!savedCharacter || !savedPlayState) await characterRepository.save(representativeCharacter, representativePlayState);
-        if (!active) return;
-        if (savedCharacter && savedPlayState) {
-          setCharacter(savedCharacter);
-          setPlayState(savedPlayState);
-        }
-        setStorageStatus(persistence);
-      } catch (error) {
-        if (active) setBackupError(error instanceof Error ? error.message : 'Local storage could not be opened.');
+  const refreshCharacters = useCallback(async () => {
+    const request = ++libraryLoadSequence.current;
+    try {
+      const savedCharacters = await characterRepository.listCharacters();
+      if (request === libraryLoadSequence.current) {
+        setCharacters(savedCharacters);
+        setLibraryStatus('ready');
       }
-    })();
-    return () => { active = false; };
+    } catch (cause) {
+      if (request === libraryLoadSequence.current) {
+        setLibraryStatus('error');
+        setError(cause instanceof Error ? cause.message : 'Local characters could not be loaded.');
+      }
+    }
   }, []);
 
-  const saveCharacter = (nextCharacter: Character) => {
-    setCharacter(nextCharacter);
-    void characterRepository.saveCharacter(nextCharacter).catch((error: unknown) => setBackupError(error instanceof Error ? error.message : 'Character changes could not be saved.'));
-  };
+  useEffect(() => { document.documentElement.dataset.theme = theme; window.localStorage.setItem('dnd-companion-theme', theme); }, [theme]);
+  useEffect(() => { void refreshCharacters(); void requestPersistentStorage().then(setStorageStatus).catch(() => setStorageStatus('not-supported')); }, []);
 
-  const savePlayState = (nextPlayState: CharacterPlayState) => {
-    setPlayState(nextPlayState);
-    void characterRepository.savePlayState(nextPlayState).catch((error: unknown) => setBackupError(error instanceof Error ? error.message : 'Play-state changes could not be saved.'));
+  const rememberCharacter = useCallback((id: string) => { setRecentCharacterId(id); window.localStorage.setItem(RECENT_CHARACTER_KEY, id); }, []);
+  const createCharacter = async () => {
+    try { const created = createMinimalCharacter(); await characterRepository.save(created.character, created.playState); await refreshCharacters(); rememberCharacter(created.character.id); navigate(`/characters/${encodeURIComponent(created.character.id)}`); }
+    catch (cause) { setError(cause instanceof Error ? cause.message : 'A character could not be created.'); }
   };
-
-  const exportBackup = async () => {
+  const duplicateCharacter = async (source: Character) => {
     try {
-      const backup = await characterRepository.exportCharacter(character.id);
-      const file = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(file);
-      const download = document.createElement('a');
-      download.href = url;
-      download.download = `${character.name.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-') || 'character'}.dnd-character.json`;
-      download.click();
-      URL.revokeObjectURL(url);
-    } catch (error) {
-      setBackupError(error instanceof Error ? error.message : 'Character backup could not be exported.');
-    }
+      const playState = await characterRepository.loadPlayState(source.id);
+      if (!playState) throw new Error('The selected character has no playable state to duplicate.');
+      const id = createId();
+      await characterRepository.save({ ...source, id, name: `${source.name} copy`, classes: source.classes.map((entry, index) => ({ ...entry, id: `${id}:class-entry:${index}` })) }, { ...playState, characterId: id });
+      await refreshCharacters();
+      rememberCharacter(id);
+      navigate(`/characters/${encodeURIComponent(id)}`);
+    } catch (cause) { setError(cause instanceof Error ? cause.message : 'The character could not be duplicated.'); }
   };
-
+  const exportCharacter = async (character: Character) => {
+    try { downloadBackup(character.name, await characterRepository.exportCharacter(character.id)); }
+    catch (cause) { setError(cause instanceof Error ? cause.message : 'The character backup could not be exported.'); }
+  };
   const importBackup = async (file: File | undefined) => {
     if (!file) return;
-    try {
-      const backup = await characterRepository.importCharacter(JSON.parse(await file.text()));
-      setCharacter(backup.character);
-      setPlayState(backup.playState);
-      setBackupError(undefined);
-    } catch (error) {
-      setBackupError(error instanceof Error ? error.message : 'Character backup could not be imported.');
-    }
+    try { const backup = await characterRepository.importCharacter(JSON.parse(await file.text())); await refreshCharacters(); rememberCharacter(backup.character.id); navigate(`/characters/${encodeURIComponent(backup.character.id)}`); }
+    catch (cause) { setError(cause instanceof Error ? cause.message : 'The character backup could not be imported.'); }
+    finally { if (importInput.current) importInput.current.value = ''; }
+  };
+  const deleteCharacter = async () => {
+    if (!deleteCandidate) return;
+    try { await characterRepository.deleteCharacter(deleteCandidate.id); if (recentCharacterId === deleteCandidate.id) { setRecentCharacterId(undefined); window.localStorage.removeItem(RECENT_CHARACTER_KEY); } setDeleteCandidate(undefined); await refreshCharacters(); navigate('/'); }
+    catch (cause) { setError(cause instanceof Error ? cause.message : 'The character could not be deleted.'); }
   };
 
   return <>
-    <aside className="storage-status" aria-label="Local storage and backups">
-      <p role="status">{storageExplanation(storageStatus)}</p>
-      <div><Button type="button" variant="secondary" aria-pressed={theme === 'dark'} onClick={() => setTheme((current) => current === 'light' ? 'dark' : 'light')}>{theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}{theme === 'light' ? 'Use dark theme' : 'Use light theme'}</Button><button type="button" onClick={() => void exportBackup()}>Export character backup</button><label>Import character backup<input type="file" accept="application/json,.json" onChange={(event) => void importBackup(event.currentTarget.files?.[0])} /></label></div>
-      {backupError && <p className="storage-error" role="alert">{backupError}</p>}
+    <div className="app-layout">
+    <aside className="app-sidebar">
+      <Link className="app-brand" to="/">D&amp;D Companion</Link>
+      <nav aria-label="Application"><Link className={location.pathname === '/' ? 'app-nav-active' : undefined} aria-current={location.pathname === '/' ? 'page' : undefined} to="/">Library</Link></nav>
+      <div className="app-sidebar-actions"><Button type="button" variant="secondary" onClick={() => importInput.current?.click()}>Import backup</Button><input ref={importInput} className="visually-hidden" type="file" accept="application/json,.json" aria-label="Import character backup" onChange={(event) => void importBackup(event.currentTarget.files?.[0])} /><Button type="button" variant="ghost" className="theme-toggle" aria-pressed={theme === 'dark'} onClick={() => setTheme((current) => current === 'light' ? 'dark' : 'light')}>{theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}<span className="visually-hidden">{theme === 'light' ? 'Use dark theme' : 'Use light theme'}</span></Button></div>
     </aside>
-    <CharacterSheet character={character} playState={playState} content={minimalContentFixture} details={representativeCharacterSheetDetails} onCharacterChange={saveCharacter} onPlayStateChange={savePlayState} />
+    <div className="app-content">
+      <aside className="storage-status" aria-label="Local storage and backups"><p role="status">{storageExplanation(storageStatus)} Keep exports as backups.</p>{error && <p className="storage-error" role="alert">{error}</p>}</aside>
+    <Routes>
+      <Route path="/" element={libraryStatus === 'loading'
+        ? <main className="route-message" aria-live="polite"><h1>Loading character library…</h1></main>
+        : libraryStatus === 'error'
+          ? <main className="route-message"><h1>Character library unavailable</h1><p>Local storage could not load your characters.</p><Button type="button" onClick={() => { setLibraryStatus('loading'); void refreshCharacters(); }}>Try again</Button></main>
+          : <CharacterLibrary characters={characters} recentCharacterId={recentCharacterId} onCreate={() => void createCharacter()} onDuplicate={(character) => void duplicateCharacter(character)} onExport={(character) => void exportCharacter(character)} onDelete={setDeleteCandidate} />} />
+      <Route path="/characters/:characterId" element={<Suspense fallback={<main className="route-message" aria-live="polite"><h1>Loading character…</h1></main>}><CharacterRoute onRemember={rememberCharacter} onStorageError={setError} /></Suspense>} />
+      <Route path="*" element={<main className="route-message"><h1>Page not found</h1><p>The requested page does not exist.</p><Button asChild><Link to="/">Return to library</Link></Button></main>} />
+    </Routes>
+    </div>
+    </div>
+    {deleteCandidate && <Dialog open onOpenChange={(open) => { if (!open) setDeleteCandidate(undefined); }}><DialogContent><DialogTitle>Delete {deleteCandidate.name}?</DialogTitle><DialogDescription>This permanently removes this character and its play state from this device. Other characters and content packs are not affected.</DialogDescription><div className="dialog-actions"><Button type="button" variant="secondary" onClick={() => setDeleteCandidate(undefined)}>Cancel</Button><Button type="button" variant="destructive" onClick={() => void deleteCharacter()}>Delete character</Button></div></DialogContent></Dialog>}
   </>;
 }
 
-export default App;
+export default function App() { return <HashRouter><AppShell /></HashRouter>; }

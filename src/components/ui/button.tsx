@@ -8,10 +8,10 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'border-primary bg-primary text-primary-foreground hover:bg-[#1f4559]',
-        secondary: 'border-border bg-surface text-foreground hover:bg-[#e8f0f4]',
-        destructive: 'border-destructive bg-destructive text-white hover:bg-[#8f1c13]',
-        ghost: 'border-transparent bg-transparent text-foreground hover:bg-[#e8f0f4]',
+        default: 'border-primary bg-primary text-primary-foreground hover:brightness-90',
+        secondary: 'border-border bg-surface text-foreground hover:bg-surface-2',
+        destructive: 'border-destructive bg-destructive text-primary-foreground hover:brightness-90',
+        ghost: 'border-transparent bg-transparent text-foreground hover:bg-surface-2',
       },
     },
     defaultVariants: { variant: 'default' },

@@ -1,0 +1,16 @@
+.library-page { max-width: 1120px; margin: 0 auto; padding: 2rem; }
+.library-heading { display: flex; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; }
+.library-heading h1 { margin: .15rem 0; font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem); }
+.library-heading p:not(.eyebrow) { max-width: 44rem; margin: 0; color: var(--muted-foreground); }
+.character-library-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr)); gap: 1rem; }
+.character-library-card { display: grid; gap: 1rem; padding: 1.25rem; }
+.character-library-card-header { display: flex; justify-content: space-between; gap: .75rem; }
+.character-library-card h2 { margin: 0; font: 700 1.35rem var(--font-display); }
+.character-library-card h2 a { color: inherit; }
+.character-library-class { min-height: 3rem; margin: 0; color: var(--muted-foreground); text-transform: capitalize; }
+.character-library-actions { display: flex; flex-wrap: wrap; gap: .5rem; }
+.recent-badge { align-self: start; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: .15rem .4rem; color: var(--accent); font-size: .75rem; font-weight: 700; }
+.library-empty { display: grid; justify-items: start; gap: 1rem; max-width: 40rem; padding: 2rem; }
+.library-empty h2, .library-empty p { margin: 0; }
+.library-empty p { color: var(--muted-foreground); }
+@media (max-width: 620px) { .library-page { padding: 1.25rem 1rem; } .library-heading { align-items: stretch; flex-direction: column; } .library-heading > .inline-flex { width: 100%; } }
