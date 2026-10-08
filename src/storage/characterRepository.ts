@@ -1,5 +1,5 @@
 import type { Character, CharacterPlayState } from '../domain/character/types';
-import { createCharacterExport, migrateCharacterExport, type CharacterExport } from './characterBackup';
+import type { CharacterExport } from './characterBackup';
 import { CompanionDatabase, database } from './database';
 
 /** The only persistence API application features need for this slice. */
@@ -8,6 +8,10 @@ export class CharacterRepository {
 
   async loadCharacter(id: string): Promise<Character | undefined> {
     return this.db.characters.get(id);
+  }
+
+  async listCharacters(): Promise<Character[]> {
+    return this.db.characters.toCollection().sortBy('name');
   }
 
   async loadPlayState(characterId: string): Promise<CharacterPlayState | undefined> {
@@ -33,10 +37,12 @@ export class CharacterRepository {
   async exportCharacter(id: string): Promise<CharacterExport> {
     const [character, playState] = await Promise.all([this.loadCharacter(id), this.loadPlayState(id)]);
     if (!character || !playState) throw new Error('The requested character is incomplete or does not exist.');
+    const { createCharacterExport } = await import('./characterBackup');
     return createCharacterExport(character, playState);
   }
 
   async importCharacter(input: unknown): Promise<CharacterExport> {
+    const { migrateCharacterExport } = await import('./characterBackup');
     const backup = migrateCharacterExport(input);
     await this.save(backup.character, backup.playState);
     return backup;

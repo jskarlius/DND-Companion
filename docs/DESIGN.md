@@ -289,6 +289,7 @@ type Character = {
   id: string;
   name: string;
   ruleset: "5e-2024";
+  longRestHitDiceRecovery: "2024-all" | "2014-half";
   enabledContentPackIds: string[];
   abilityScoreGeneration: "standard-array" | "point-buy" | "custom";
   abilityScores: Record<Ability, number>;
@@ -315,6 +316,7 @@ type CharacterPlayState = {
   characterId: string;
   currentHp: number;
   temporaryHp: number;
+  usedHitDice: Record<string, number>;
   usedResources: Record<string, number>;
   usedSpellSlots: Record<number, number>;
   deathSaveSuccesses: number;
@@ -367,12 +369,32 @@ death saves, and conditions unless a specific applied rule changes one of them.
 Rest actions are explicit player actions rather than consequences of level-up:
 
 - a long rest restores the state dictated by the applicable rules, including
-  resources and spell slots, and restores half the character's total hit dice;
+  resources and spell slots. Under the supported 2024 ruleset, it restores all
+  spent Hit Point Dice;
 - a short rest applies only the resources whose declared recharge metadata says
   they recover on a short rest, such as Pact Magic slots or Action Surge where
   applicable; and
 - players can still directly adjust play state for healing, consumables, and
   table rulings.
+
+Hit Point Dice are temporary play state, not a static character-sheet label.
+Each class entry contributes Hit Point Dice equal to its class level and of its
+class die type, so a multiclass character can have multiple independently
+tracked groups even when two classes share a die type. A newly created
+character starts with `usedHitDice` at zero for every class entry. The sheet
+renders one dynamic tracker per class entry, using the same compact
+adjustment/dropdown pattern as maximum-HP effects where appropriate. During a
+Short Rest, a player selects an available die from a group to spend; the app
+records the resulting number used and never permits it to exceed that class
+entry's level. A 2024 Long Rest resets every group's used count to zero.
+
+The application remains a 2024-ruleset application, but a character can opt
+into the 2014 half-total Hit Point Dice recovery rule as an explicit table-rule
+setting. This setting does not enable 2014 classes or other rules content. The
+default is `2024-all`; its Long Rest resets every group's used count to zero.
+For the `2014-half` option, the Long Rest confirmation flow permits the player
+to allocate up to `max(1, floor(total character level / 2))` recovered dice
+among the spent class-entry groups, without exceeding a group's used count.
 
 ### 8.3 Character level and class level
 

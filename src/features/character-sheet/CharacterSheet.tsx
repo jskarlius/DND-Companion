@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { resolveManualOverride } from '../../domain/character/calculations';
-import { setCurrentHp, setResourceUses, setSpellSlotUses, setTemporaryHp, setTemporaryMaximumHpBonus, takeRest } from '../../domain/character/playState';
+import { hitDiceRecoveryLimit, setCurrentHp, setResourceUses, setSpellSlotUses, setTemporaryHp, setTemporaryMaximumHpBonus, takeRest } from '../../domain/character/playState';
 import type { Character, CharacterPlayState, ManualOverride, ManualOverrideTarget } from '../../domain/character/types';
 import type { ContentFixture } from '../../domain/content/types';
 import type { CharacterSheetDetails } from './characterSheetFixture';
@@ -63,6 +63,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const previousPlayState = useRef(sessionState);
   const [conditionName, setConditionName] = useState('');
   const [pendingRest, setPendingRest] = useState<'short' | 'long' | null>(null);
+  const [pendingHitDice, setPendingHitDice] = useState<Record<string, number>>({});
   const [editingOverride, setEditingOverride] = useState<ManualOverrideTarget | null>(null);
   const lastOverrideTrigger = useRef<HTMLButtonElement | null>(null);
   const sheet = buildCharacterSheetViewModel(draftCharacter, sessionState, content, details);
@@ -73,6 +74,10 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const speed = resolveManualOverride(baseCalculation(combat.speed, 'Calculated speed'), draftCharacter.manualOverrides, 'speed').value;
   const baseMaximumHp = resolveManualOverride(baseCalculation(combat.maximumHp, 'Calculated maximum HP'), draftCharacter.manualOverrides, 'maximumHp').value;
   const maximumHp = baseMaximumHp + sessionState.temporaryMaximumHpBonus;
+  const hitDiceGroups = sheet.hitDiceGroups;
+  const hitDiceRecovery = draftCharacter.longRestHitDiceRecovery;
+  const hitDiceRecoveryLimitValue = hitDiceRecoveryLimit(hitDiceGroups.map(({ classEntryId, maximum }) => ({ classEntryId, maximum })), hitDiceRecovery);
+  const usedHitDice = hitDiceGroups.reduce((total, group) => total + group.used, 0);
 
   useEffect(() => {
     if (previousCharacter.current !== draftCharacter) onCharacterChange?.(draftCharacter);
@@ -95,7 +100,11 @@ export function CharacterSheet({ character, playState, content, details, onChara
   }, [playState]);
 
   useEffect(() => {
-    if (editingOverride === null) lastOverrideTrigger.current?.focus();
+    if (editingOverride !== null && document.activeElement instanceof HTMLButtonElement) {
+      lastOverrideTrigger.current = document.activeElement;
+    } else if (editingOverride === null) {
+      lastOverrideTrigger.current?.focus();
+    }
   }, [editingOverride]);
 
   const changeOverride = (target: ManualOverrideTarget, override?: ManualOverride) => {
@@ -119,6 +128,32 @@ export function CharacterSheet({ character, playState, content, details, onChara
     setSessionState((current) => ({ ...current, [kind]: checked ? Math.max(current[kind], index + 1) : Math.min(current[kind], index) }));
   };
 
+  useEffect(() => {
+    if (!pendingRest) return;
+    setPendingHitDice(pendingRest === 'short'
+      ? Object.fromEntries(hitDiceGroups.map((group) => [group.classEntryId, group.used]))
+      : {});
+  }, [pendingRest]);
+
+  const confirmRest = () => {
+    if (!pendingRest) return;
+    setSessionState((current) => {
+      const beforeRest = pendingRest === 'short'
+        ? { ...current, usedHitDice: { ...current.usedHitDice, ...pendingHitDice } }
+        : current;
+      return takeRest(
+        beforeRest,
+        sheet.resources.map(({ resource }) => resource),
+        pendingRest,
+        maximumHp,
+        hitDiceGroups.map(({ classEntryId, maximum }) => ({ classEntryId, maximum })),
+        hitDiceRecovery,
+        pendingHitDice,
+      );
+    });
+    setPendingRest(null);
+  };
+
   return (
     <main className="character-sheet">
       <header className="sheet-header">
@@ -136,7 +171,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
         <div><span>Proficiency</span><strong>{signed(sheet.proficiencyBonus)}</strong></div>
         <div><span>Armor Class <OverrideButton label="armor class" active={Boolean(draftCharacter.manualOverrides.armorClass)} onClick={(trigger) => { lastOverrideTrigger.current = trigger; setEditingOverride('armorClass'); }} /></span><strong>{armorClass}</strong><OverrideReason override={draftCharacter.manualOverrides.armorClass} /></div>
         <div><span>Speed <OverrideButton label="speed" active={Boolean(draftCharacter.manualOverrides.speed)} onClick={(trigger) => { lastOverrideTrigger.current = trigger; setEditingOverride('speed'); }} /></span><strong>{speed} ft.</strong><OverrideReason override={draftCharacter.manualOverrides.speed} /></div>
-        <div><span>Hit Dice</span><strong>{combat.hitDice}</strong></div>
+        <div className="hit-dice-summary"><span>Hit Dice</span><strong>{usedHitDice} / {sheet.totalLevel} used</strong><details className="max-hp-effects"><summary>{combat.hitDice}</summary><div className="hit-dice-groups">{hitDiceGroups.map((group) => <span key={group.classEntryId}>{group.className}: {group.used} / {group.maximum} d{group.die} used</span>)}</div><label className="aid-control"><span>Long-rest recovery</span><select aria-label="Long-rest hit-dice recovery" value={hitDiceRecovery} onChange={(event) => setDraftCharacter((current) => ({ ...current, longRestHitDiceRecovery: event.currentTarget.value as typeof current.longRestHitDiceRecovery }))}><option value="2024-all">2024: all spent dice</option><option value="2014-half">2014: half total dice</option></select></label></details></div>
       </section>
 
       <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as typeof activeTab)}>
@@ -166,7 +201,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
 
         <div className="sheet-column sheet-column-wide">
           <Section title="Hit points" className="hit-points-section"><div className="hit-points"><label><span>Current</span><input type="number" aria-label="Current hit points" value={sessionState.currentHp} min="0" max={maximumHp} onChange={(event) => { const value = event.currentTarget.valueAsNumber; setSessionState((current) => setCurrentHp(current, Number.isFinite(value) ? value : 0, maximumHp)); }} /></label><div className="maximum-hp-card"><span>Maximum <OverrideButton label="maximum HP" active={Boolean(draftCharacter.manualOverrides.maximumHp)} onClick={() => setEditingOverride('maximumHp')} /></span><strong>{maximumHp}</strong>{sessionState.temporaryMaximumHpBonus > 0 && <small>Includes Aid +{sessionState.temporaryMaximumHpBonus}</small>}<OverrideReason override={draftCharacter.manualOverrides.maximumHp} /><details className="max-hp-effects"><summary>Max HP effects</summary><label className="aid-control" title="Adding or removing Aid adjusts current HP by the same amount. Increase this by 5 for each spell-slot level above 2."><span>Aid bonus</span><input type="number" aria-label="Aid maximum HP bonus" min="0" step="5" value={sessionState.temporaryMaximumHpBonus} onChange={(event) => { const value = event.currentTarget.valueAsNumber; const nextBonus = Number.isFinite(value) ? value : 0; setSessionState((current) => { const updated = setTemporaryMaximumHpBonus(current, nextBonus); return setCurrentHp(updated, current.currentHp + updated.temporaryMaximumHpBonus - current.temporaryMaximumHpBonus, baseMaximumHp + updated.temporaryMaximumHpBonus); }); }} /></label></details></div><label><span>Temporary</span><input type="number" aria-label="Temporary hit points" value={sessionState.temporaryHp} min="0" onChange={(event) => { const value = event.currentTarget.valueAsNumber; setSessionState((current) => setTemporaryHp(current, Number.isFinite(value) ? value : 0)); }} /></label></div></Section>
-          <Section title="Play state"><div className="play-state-controls"><div className="play-state-cluster"><h3>Status</h3><label className="inspiration-control"><input type="checkbox" checked={sessionState.inspiration} onChange={(event) => { const inspiration = event.currentTarget.checked; setSessionState((current) => ({ ...current, inspiration })); }} /> Inspiration</label><form onSubmit={(event) => { event.preventDefault(); const condition = conditionName.trim(); if (condition && !sessionState.conditions.includes(condition)) setSessionState((current) => ({ ...current, conditions: [...current.conditions, condition] })); setConditionName(''); }}><label htmlFor="condition-name">Condition</label><input id="condition-name" value={conditionName} onChange={(event) => setConditionName(event.currentTarget.value)} /><button type="submit">Add</button></form><ul className="condition-list">{sessionState.conditions.map((condition) => <li key={condition}>{condition}<button type="button" aria-label={`Remove ${condition}`} onClick={() => setSessionState((current) => ({ ...current, conditions: current.conditions.filter((entry) => entry !== condition) }))}>Remove</button></li>)}</ul></div><fieldset className="death-saves"><legend>Death saves</legend><div className="death-save-row"><span>Success</span>{([0, 1, 2] as const).map((index) => <label key={`success-${index}`}><input className="death-save-success" type="checkbox" aria-label={`Death save success ${index + 1}`} checked={sessionState.deathSaveSuccesses > index} onChange={(event) => setDeathSave('deathSaveSuccesses', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div><div className="death-save-row"><span>Fails</span>{([0, 1, 2] as const).map((index) => <label key={`failure-${index}`}><input className="death-save-failure" type="checkbox" aria-label={`Death save failure ${index + 1}`} checked={sessionState.deathSaveFailures > index} onChange={(event) => setDeathSave('deathSaveFailures', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div></fieldset><div className="play-state-cluster rest-cluster"><h3>Rest</h3><p>Apply recovery only after the DM confirms a rest.</p><div className="rest-actions"><button type="button" onClick={() => setPendingRest('short')}>Short rest</button><button type="button" onClick={() => setPendingRest('long')}>Long rest</button></div></div></div></Section>
+          <Section title="Play state"><div className="play-state-controls"><div className="play-state-cluster"><h3>Status</h3><label className="inspiration-control"><input type="checkbox" checked={sessionState.inspiration} onChange={(event) => { const inspiration = event.currentTarget.checked; setSessionState((current) => ({ ...current, inspiration })); }} /> Inspiration</label><form onSubmit={(event) => { event.preventDefault(); const condition = conditionName.trim(); if (condition && !sessionState.conditions.includes(condition)) setSessionState((current) => ({ ...current, conditions: [...current.conditions, condition] })); setConditionName(''); }}><label htmlFor="condition-name">Condition</label><input id="condition-name" value={conditionName} onChange={(event) => setConditionName(event.currentTarget.value)} /><button type="submit">Add</button></form><ul className="condition-list">{sessionState.conditions.map((condition) => <li key={condition}>{condition}<button type="button" aria-label={`Remove ${condition}`} onClick={() => setSessionState((current) => ({ ...current, conditions: current.conditions.filter((entry) => entry !== condition) }))}>Remove</button></li>)}</ul></div><fieldset className="death-saves"><legend>Death saves</legend><div className="death-save-row"><span>Failure</span><div className="death-save-boxes">{([0, 1, 2] as const).map((index) => <label key={`failure-${index}`}><input className="death-save-failure" type="checkbox" aria-label={`Death save failure ${index + 1}`} checked={sessionState.deathSaveFailures > index} onChange={(event) => setDeathSave('deathSaveFailures', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div></div><div className="death-save-row"><span>Success</span><div className="death-save-boxes">{([0, 1, 2] as const).map((index) => <label key={`success-${index}`}><input className="death-save-success" type="checkbox" aria-label={`Death save success ${index + 1}`} checked={sessionState.deathSaveSuccesses > index} onChange={(event) => setDeathSave('deathSaveSuccesses', index, event.currentTarget.checked)} /><span aria-hidden="true">×</span></label>)}</div></div></fieldset><div className="play-state-cluster rest-cluster"><h3>Rest</h3><p>Apply recovery only after the DM confirms a rest.</p><div className="rest-actions"><button type="button" onClick={() => setPendingRest('short')}>Short rest</button><button type="button" onClick={() => setPendingRest('long')}>Long rest</button></div></div></div></Section>
           <Section title="Attacks"><div className="table-wrap"><table><thead><tr><th>Name</th><th>Attack</th><th>Damage</th><th>Notes</th></tr></thead><tbody>{details.attacks.map((attack) => <tr key={attack.name}><td>{attack.name}</td><td>{signed(attack.attackBonus)}</td><td>{attack.damage}</td><td>{attack.notes ?? '-'}</td></tr>)}</tbody></table></div></Section>
           <Section title="Cantrips"><ul className="card-list">{sheet.cantrips.map((spell) => <li key={spell.id}><strong>{spell.name}</strong><span>{spell.scalingBasis ? `Scales by ${spell.scalingBasis.replace('-', ' ')}` : 'No scaling recorded'}</span></li>)}</ul></Section>
           <Section title="Spell slots"><ul className="card-list">{details.spellSlots.map(({ level, maximum }) => { const used = sessionState.usedSpellSlots[level] ?? 0; return <li key={level}><strong>Level {level}</strong><span>{maximum - used} / {maximum} remaining</span><div className="resource-actions"><button type="button" aria-label={`Use level ${level} spell slot`} disabled={used === maximum} onClick={() => setSessionState((current) => setSpellSlotUses(current, level, used + 1, maximum))}>Use slot</button><button type="button" className="resource-restore" aria-label={`Restore level ${level} spell slot`} disabled={used === 0} onClick={() => setSessionState((current) => setSpellSlotUses(current, level, used - 1, maximum))}>Restore slot</button></div></li>; })}</ul></Section>
@@ -183,12 +218,12 @@ export function CharacterSheet({ character, playState, content, details, onChara
       <TabsContent value="inventory" className="tab-panel"><Section title="Inventory"><ul className="inventory-list">{character.inventory.map((entry) => <li key={entry.itemId}><strong>{details.inventory[entry.itemId] ?? entry.itemId}</strong><span>Quantity {entry.quantity}</span></li>)}</ul></Section></TabsContent>
 
       <TabsContent value="character" className="tab-panel character-panel">
-        <Section title="Appearance"><div className="appearance-summary"><div className="portrait-placeholder" aria-label="Portrait placeholder for Ariel Thorne">{character.name.split(' ').map((name) => name[0]).join('')}</div><div><p><strong>Pronouns:</strong> {details.appearance.pronouns}</p><p>{details.appearance.description}</p></div></div></Section>
+        <Section title="Appearance"><div className="appearance-summary"><div className="portrait-placeholder" aria-label={`Portrait placeholder for ${character.name}`}>{character.name.split(' ').map((name) => name[0]).join('')}</div><div><p><strong>Pronouns:</strong> {details.appearance.pronouns}</p><p>{details.appearance.description}</p></div></div></Section>
         <Section title="Backstory"><p className="backstory">{details.backstory}</p></Section>
         <Section title="Notes"><div className="notes-list">{details.notes.map((note) => <article key={note.title}><h3>{note.title}</h3><p>{note.content}</p></article>)}</div></Section>
       </TabsContent>
       </Tabs>
-      {pendingRest && <Dialog open onOpenChange={(open) => { if (!open) setPendingRest(null); }}><DialogContent className="rest-dialog"><DialogTitle>Confirm {pendingRest} rest</DialogTitle><DialogDescription>Has the DM confirmed this {pendingRest} rest?</DialogDescription><div><Button type="button" variant="secondary" onClick={() => setPendingRest(null)}>Cancel</Button><Button type="button" onClick={() => { setSessionState((current) => takeRest(current, sheet.resources.map(({ resource }) => resource), pendingRest, maximumHp)); setPendingRest(null); }}>DM confirmed {pendingRest} rest</Button></div></DialogContent></Dialog>}
+      {pendingRest && <Dialog open onOpenChange={(open) => { if (!open) setPendingRest(null); }}><DialogContent className="rest-dialog"><DialogTitle>Confirm {pendingRest} rest</DialogTitle><DialogDescription>Has the DM confirmed this {pendingRest} rest?</DialogDescription>{pendingRest === 'short' ? <div className="hit-dice-rest-controls"><p>Spend Hit Point Dice after the rest. Record healing manually after rolling.</p>{hitDiceGroups.map((group) => { const used = pendingHitDice[group.classEntryId] ?? group.used; return <div key={group.classEntryId}><span>{group.className} d{group.die}: {used} / {group.maximum} used</span><Button type="button" disabled={used === group.maximum} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: Math.min(group.maximum, (current[group.classEntryId] ?? group.used) + 1) }))}>Spend d{group.die}</Button><Button type="button" variant="secondary" disabled={used === 0} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: Math.max(0, (current[group.classEntryId] ?? group.used) - 1) }))}>Undo</Button></div>; })}</div> : hitDiceRecovery === '2014-half' ? <div className="hit-dice-rest-controls"><p>2014 table rule: restore up to {hitDiceRecoveryLimitValue} spent Hit Point Dice. Choose the groups to restore.</p>{hitDiceGroups.map((group) => { const restored = pendingHitDice[group.classEntryId] ?? 0; const alreadyAllocated = Object.values(pendingHitDice).reduce((total, value) => total + value, 0); return <div key={group.classEntryId}><span>{group.className} d{group.die}: {group.used} used, {restored} restoring</span><Button type="button" disabled={restored >= group.used || alreadyAllocated >= hitDiceRecoveryLimitValue} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: (current[group.classEntryId] ?? 0) + 1 }))}>Restore one</Button><Button type="button" variant="secondary" disabled={restored === 0} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: Math.max(0, (current[group.classEntryId] ?? 0) - 1) }))}>Undo</Button></div>; })}</div> : <p>2024 rules: this Long Rest restores all spent Hit Point Dice.</p>}<div><Button type="button" variant="secondary" onClick={() => setPendingRest(null)}>Cancel</Button><Button type="button" onClick={confirmRest}>DM confirmed {pendingRest} rest</Button></div></DialogContent></Dialog>}
       {editingOverride && <OverrideDialog target={editingOverride} label={overrideDetails[editingOverride].label} calculatedValue={overrideDetails[editingOverride].calculatedValue} override={draftCharacter.manualOverrides[editingOverride]} onSave={changeOverride} onReset={(target) => changeOverride(target)} onClose={() => setEditingOverride(null)} />}
     </main>
   );

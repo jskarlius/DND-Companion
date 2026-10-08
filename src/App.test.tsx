@@ -1,24 +1,51 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, expect, test } from 'vitest';
+import { afterEach, beforeEach, expect, test } from 'vitest';
 import App from './App';
+import { database } from './storage/database';
+import { representativeCharacter, representativePlayState } from './features/character-sheet/characterSheetFixture';
+
+beforeEach(async () => {
+  window.history.replaceState({}, '', '/');
+  window.location.hash = '';
+  window.localStorage.clear();
+  await Promise.all([database.characters.clear(), database.playState.clear()]);
+});
 
 afterEach(cleanup);
 
-test('renders the application shell', () => {
+test('shows an empty library and creates a locally stored character', async () => {
   render(<App />);
 
-  expect(
-    screen.getByRole('heading', { name: /ariel thorne/i }),
-  ).toBeInTheDocument();
+  expect(screen.getByRole('heading', { name: 'Loading character library…' })).toBeInTheDocument();
+  expect(await screen.findByRole('heading', { name: 'Start your party' })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: 'Create your first character' }));
+
+  await waitFor(async () => expect(await database.characters.count()).toBe(1));
+  expect(window.location.hash).toMatch(/^#\/characters\//);
 });
 
-test('applies and remembers an explicitly selected dark theme', () => {
-  window.localStorage.setItem('dnd-companion-theme', 'light');
+test('handles an unknown character URL gracefully', async () => {
+  window.location.hash = '#/characters/local%3Acharacter%3Amissing';
   render(<App />);
 
-  userEvent.click(screen.getByRole('button', { name: 'Use dark theme' }));
+  expect(await screen.findByRole('heading', { name: 'Character not found' })).toBeInTheDocument();
+  expect(screen.getByRole('link', { name: 'Return to library' })).toHaveAttribute('href', '#/');
+});
+
+test('loads a stored character from its stable URL', async () => {
+  await database.characters.put(representativeCharacter);
+  await database.playState.put(representativePlayState);
+  window.location.hash = `#/characters/${encodeURIComponent(representativeCharacter.id)}`;
+  render(<App />);
+
+  expect(await screen.findByRole('heading', { name: 'Ariel Thorne' })).toBeInTheDocument();
+});
+
+test('applies and remembers an explicitly selected dark theme', async () => {
+  render(<App />);
+
+  await userEvent.click(screen.getByRole('button', { name: 'Use dark theme' }));
   expect(document.documentElement).toHaveAttribute('data-theme', 'dark');
   expect(window.localStorage.getItem('dnd-companion-theme')).toBe('dark');
-  expect(screen.getByRole('button', { name: 'Use light theme' })).toBeInTheDocument();
 });

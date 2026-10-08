@@ -27,6 +27,19 @@ describe('CharacterRepository', () => {
     expect(await repository.loadPlayState(representativeCharacter.id)).toEqual(representativePlayState);
   });
 
+  test('lists only the characters stored locally', async () => {
+    const repository = createRepository();
+    const secondCharacter = { ...representativeCharacter, id: 'test:character:second', name: 'Bren' };
+    const secondPlayState = { ...representativePlayState, characterId: secondCharacter.id };
+    await repository.save(representativeCharacter, representativePlayState);
+    await repository.save(secondCharacter, secondPlayState);
+
+    expect((await repository.listCharacters()).map((character) => character.id)).toEqual([
+      representativeCharacter.id,
+      secondCharacter.id,
+    ]);
+  });
+
   test('retains saved data after the database is reopened', async () => {
     const name = `reload-${crypto.randomUUID()}`;
     const firstDatabase = new CompanionDatabase(name);
@@ -43,12 +56,17 @@ describe('CharacterRepository', () => {
 
   test('exports, deletes, and imports a character without losing its play state', async () => {
     const repository = createRepository();
+    const unrelatedCharacter = { ...representativeCharacter, id: 'test:character:unrelated', name: 'Unrelated' };
+    const unrelatedPlayState = { ...representativePlayState, characterId: unrelatedCharacter.id };
     await repository.save(representativeCharacter, representativePlayState);
+    await repository.save(unrelatedCharacter, unrelatedPlayState);
     const backup = await repository.exportCharacter(representativeCharacter.id);
 
     await repository.deleteCharacter(representativeCharacter.id);
     expect(await repository.loadCharacter(representativeCharacter.id)).toBeUndefined();
     expect(await repository.loadPlayState(representativeCharacter.id)).toBeUndefined();
+    expect(await repository.loadCharacter(unrelatedCharacter.id)).toEqual(unrelatedCharacter);
+    expect(await repository.loadPlayState(unrelatedCharacter.id)).toEqual(unrelatedPlayState);
 
     await repository.importCharacter(backup);
     expect(await repository.loadCharacter(representativeCharacter.id)).toEqual(representativeCharacter);
@@ -56,16 +74,18 @@ describe('CharacterRepository', () => {
   });
 });
 
-test('migrates a version 0 backup by adding the Aid maximum-HP field', () => {
+test('migrates a version 0 backup by adding missing play-state and rest-policy fields', () => {
   const backup = migrateCharacterExport({
     schemaVersion: 0,
     character: { ...representativeCharacter, schemaVersion: 0 },
     playState: (({ temporaryMaximumHpBonus: _removed, ...playState }) => playState)(representativePlayState),
   });
 
-  expect(backup.schemaVersion).toBe(1);
+  expect(backup.schemaVersion).toBe(2);
   expect(backup.character.schemaVersion).toBe(1);
   expect(backup.playState.temporaryMaximumHpBonus).toBe(0);
+  expect(backup.playState.usedHitDice).toEqual({});
+  expect(backup.character.longRestHitDiceRecovery).toBe('2024-all');
 });
 
 test('upgrades a version 1 database by adding the Aid maximum-HP field', async () => {

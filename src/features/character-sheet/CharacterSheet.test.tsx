@@ -124,6 +124,12 @@ test('closes dialogs with Escape and restores focus to the initiating control', 
   userEvent.keyboard('{Escape}');
   expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
   expect(overrideTrigger).toHaveFocus();
+
+  const maximumHpTrigger = screen.getByRole('button', { name: 'Override maximum HP' });
+  userEvent.click(maximumHpTrigger);
+  userEvent.keyboard('{Escape}');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(maximumHpTrigger).toHaveFocus();
 });
 
 test('requires DM confirmation for rests and tracks spell slots', () => {
@@ -140,6 +146,22 @@ test('requires DM confirmation for rests and tracks spell slots', () => {
   expect(screen.getByText('2 / 3 remaining')).toBeInTheDocument();
   userEvent.click(screen.getByRole('button', { name: 'Use level 1 spell slot' }));
   expect(screen.getByText('1 / 3 remaining')).toBeInTheDocument();
+});
+
+test('tracks hit dice by class entry and supports the optional 2014 recovery allocation', () => {
+  renderSheet();
+
+  userEvent.selectOptions(screen.getByLabelText('Long-rest hit-dice recovery'), '2014-half');
+  userEvent.click(screen.getByRole('button', { name: 'Short rest' }));
+  userEvent.click(screen.getByRole('button', { name: 'Spend d6' }));
+  userEvent.click(screen.getByRole('button', { name: 'DM confirmed short rest' }));
+  expect(screen.getByText('1 / 4 used')).toBeInTheDocument();
+
+  userEvent.click(screen.getByRole('button', { name: 'Long rest' }));
+  expect(screen.getByText('2014 table rule: restore up to 2 spent Hit Point Dice. Choose the groups to restore.')).toBeInTheDocument();
+  userEvent.click(screen.getAllByRole('button', { name: 'Restore one' }).find((button) => !button.hasAttribute('disabled'))!);
+  userEvent.click(screen.getByRole('button', { name: 'DM confirmed long rest' }));
+  expect(screen.getByText('0 / 4 used')).toBeInTheDocument();
 });
 
 test('adds an Aid maximum-HP bonus separately from the base maximum', () => {

@@ -249,7 +249,7 @@ field-guide visual layer with a persistent light/dark theme preference.
 Movable/reorderable widgets remain explicitly
 deferred to a future layout-customization slice.
 
-## Slice 6.5: Character library and application navigation
+## Slice 6.5: Character library and application navigation â€” complete (2026-10-08)
 
 Goal: make the home screen the entry point for multiple locally stored
 characters and future application features.
@@ -278,6 +278,15 @@ Acceptance:
   in `docs/UI_DESIGN.md`; and
 - the UI product checkpoint can be exercised without fixture-only shortcuts.
 
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test`, and
+`npm.cmd run build` passed. The home route now lists IndexedDB-backed
+characters, with empty, loading, missing-character, storage-error, and
+delete-confirmation states. Characters open by stable ID, and the library
+provides creation of a minimal valid character, duplicate, import, export, and
+delete actions. The responsive application shell uses a sidebar on wider
+screens and a compact navigation layout on narrow screens; the current
+character remains contextual rather than a duplicate navigation destination.
+
 ## Product checkpoint: UI foundation and navigation
 
 Stop before the level-up architecture checkpoint. The owner performs the full
@@ -294,6 +303,77 @@ and usability feedback.
 This checkpoint is complete only after blocker and serious accessibility issues
 are resolved and the owner explicitly approves proceeding. New domain features
 found during review do not expand the polish pass automatically.
+
+Review adjustment pass (2026-10-08):
+
+- **Polish/performance:** the character sheet and backup validators now load on
+  demand. The initial production JavaScript chunk is 447.38 kB (145.45 kB
+  gzip), with the sheet and validation code in smaller deferred chunks; Vite's
+  500 kB chunk warning no longer appears.
+- **Deployment usability:** routing now uses hash URLs so direct character links
+  work on static hosts without a provider-specific SPA fallback rule. A future
+  host may restore path-based URLs after its rewrite behavior is configured.
+- **Design-system acceptance:** Newsreader and Source Sans 3 variable fonts are
+  bundled locally with Latin and Latin Extended subsets. No runtime font CDN is
+  required.
+- **Usability:** the library has distinct loading and storage-error states
+  instead of briefly presenting the empty-library call to action while
+  IndexedDB is still loading.
+- **Responsive usability:** the navigation collapses by 820 px, and the sheet
+  switches away from its three-column layout by 1100 px so the 1024 px laptop
+  checkpoint does not overflow beside the desktop sidebar.
+- **Accessibility:** all manual-override dialogs restore focus to their actual
+  initiating control, the portrait placeholder names the current character,
+  coarse-pointer targets receive additional height, and remaining focus/border
+  colors use semantic theme tokens.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (66 tests),
+and `npm.cmd run build` passed. The available browser-control runtime exposed no
+browser or native-app surface, so visual inspection at 1440 x 900, 1024 x 768,
+768 x 1024, and 390 x 844 remains an owner checkpoint. Do not mark this product
+checkpoint complete or proceed to Architecture checkpoint B until the owner
+performs that pass and explicitly approves continuing.
+
+## Required follow-up: Hit-dice play state — complete (2026-10-08)
+
+Goal: close the omitted hit-dice tracking requirement before level-up work.
+
+The 2024 design requires a long rest to restore all spent Hit Point Dice, but
+the current sheet only displays a static hit-dice summary. This is a functional
+omission from Slice 5, not an intentional deferral.
+
+- Store spent hit dice separately in `CharacterPlayState`, preserving each
+  class entry's stable identity and die type for multiclass characters. New
+  characters start with zero used dice in every group.
+- Render a dynamic, accessible hit-dice tracker for every class entry, using
+  the maximum-HP-effect dropdown/adjustment pattern as its interaction model.
+  Each group shows its die type, total dice (the class-entry level), and used
+  dice; same-die groups remain separate.
+- During a short rest, let players spend only an available die from their
+  selected group. A character-level dropdown defaults to 2024 full recovery
+  and may select the 2014 half-total table rule; the latter requires the
+  player to allocate recovery between spent groups during Long Rest
+  confirmation.
+- Add IndexedDB and character-backup migrations plus validation for the new
+  play-state field.
+- Add unit and component tests for single-class and multiclass recovery.
+
+Acceptance:
+
+- a short-rest player can spend only an available hit die from the selected
+  class-entry group;
+- a long rest restores every spent die without over-restoring any class entry;
+  and
+- the state persists through reload, export, delete, and import.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (68 tests),
+and `npm.cmd run build` passed. `CharacterPlayState` now stores used dice by
+stable class-entry ID, and the sheet displays dynamic per-class groups. Short
+Rest confirmation supports dice spending; Long Rest defaults to restoring all
+spent dice under 2024 rules, while the persisted, exported per-character
+dropdown supports the explicit 2014 half-total table rule with player-selected
+allocation. IndexedDB version 3 and character-backup format version 2 migrate
+existing data with zero used dice and the 2024 default.
 
 ## Architecture checkpoint B: Level-up transaction
 
@@ -461,7 +541,9 @@ implementation slice or delivery commitment.
 
 ## Next session
 
-Begin Slice 6.5: Character library and application navigation. Add the library
-and character routes, then introduce the tech-guide-inspired responsive
-application shell: Library is the primary navigation destination; the active
-character is contextual rather than a duplicate sidebar destination.
+Finish the Product checkpoint: UI foundation and navigation. Perform the
+remaining visual review of the library and character sheet at 1440 x 900,
+1024 x 768, 768 x 1024, and 390 x 844, including 200 percent zoom and reduced
+motion. Include Hit Point Dice group tracking and both Long Rest recovery
+options in that review. Record owner approval before proceeding to Architecture
+checkpoint B.
