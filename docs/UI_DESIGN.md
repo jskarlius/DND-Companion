@@ -52,7 +52,9 @@ fantasy prop and not a generic administration dashboard.
 
 Exact color values, typefaces, density, and elevation remain provisional until
 the product checkpoint. They must be expressed through semantic tokens rather
-than repeated component-local values.
+than repeated component-local values. Both guide-aligned light and dark themes
+are supported; the initial choice follows the system preference and can be
+changed explicitly by the user.
 
 ## 4. Semantic design tokens
 

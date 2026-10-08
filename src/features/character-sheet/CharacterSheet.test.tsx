@@ -50,6 +50,38 @@ test('moves inventory and character information into their own accessible tab pa
   expect(screen.getByRole('heading', { name: 'Backstory' })).toBeInTheDocument();
 });
 
+test('uses compact ability abbreviations while retaining full accessible names', () => {
+  renderSheet();
+
+  expect(screen.getByText('STR')).toBeInTheDocument();
+  expect(screen.getByLabelText('Constitution')).toHaveTextContent('CON');
+});
+
+test('supports expected keyboard navigation between tabs', () => {
+  renderSheet();
+
+  const sheetTab = screen.getByRole('tab', { name: 'Sheet' });
+  sheetTab.focus();
+  userEvent.keyboard('{ArrowRight}');
+  expect(screen.getByRole('tab', { name: 'Character' })).toHaveFocus();
+  expect(screen.getByRole('tabpanel', { name: 'Character' })).toBeInTheDocument();
+  userEvent.keyboard('{End}');
+  expect(screen.getByRole('tab', { name: 'Inventory' })).toHaveFocus();
+});
+
+test('allows every character-sheet section to be collapsed and expanded by keyboard or pointer', () => {
+  renderSheet();
+
+  const skills = screen.getByRole('button', { name: 'Skills' });
+  expect(skills).toHaveAttribute('aria-expanded', 'true');
+  userEvent.click(skills);
+  expect(skills).toHaveAttribute('aria-expanded', 'false');
+  expect(screen.getByLabelText('Arcana: expertise')).not.toBeVisible();
+  userEvent.click(skills);
+  expect(skills).toHaveAttribute('aria-expanded', 'true');
+  expect(screen.getByLabelText('Arcana: expertise')).toBeInTheDocument();
+});
+
 test('edits session state with accessible controls without changing the fixture', () => {
   renderSheet();
 
@@ -81,6 +113,17 @@ test('applies and resets a manual override with a reason', () => {
   expect(screen.getByLabelText('Armor class override reason')).toHaveValue('Shield spell');
   userEvent.click(screen.getByRole('button', { name: 'Remove override' }));
   expect(screen.getByText('15')).toBeInTheDocument();
+});
+
+test('closes dialogs with Escape and restores focus to the initiating control', () => {
+  renderSheet();
+
+  const overrideTrigger = screen.getByRole('button', { name: 'Override armor class' });
+  userEvent.click(overrideTrigger);
+  expect(screen.getByRole('dialog')).toBeInTheDocument();
+  userEvent.keyboard('{Escape}');
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
+  expect(overrideTrigger).toHaveFocus();
 });
 
 test('requires DM confirmation for rests and tracks spell slots', () => {

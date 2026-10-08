@@ -19,5 +19,10 @@ Do not create commits automatically. Commit only when the user explicitly asks
 in the current prompt, and make at most that one requested commit; after it,
 assume further changes must remain uncommitted unless the user asks again.
 
+If a required dependency download or `npm install` fails or times out, stop and
+ask the owner to run the install manually. Do not retry the download, substitute
+another implementation, or continue the affected slice until the owner confirms
+the dependencies are available.
+
 Treat the workbook as reference evidence rather than a fixed UI layout. Keep
 repeated UI sections dynamic and do not copy private book text into the app.

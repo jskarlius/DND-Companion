@@ -10,8 +10,17 @@ import { minimalContentFixture } from './domain/content/fixtures';
 import type { Character, CharacterPlayState } from './domain/character/types';
 import { CharacterRepository } from './storage/characterRepository';
 import { requestPersistentStorage, type PersistentStorageStatus } from './storage/persistentStorage';
+import { Button } from './components/ui/button';
+import { Moon, Sun } from 'lucide-react';
 
 const characterRepository = new CharacterRepository();
+type Theme = 'light' | 'dark';
+
+function initialTheme(): Theme {
+  const storedTheme = window.localStorage.getItem('dnd-companion-theme');
+  if (storedTheme === 'light' || storedTheme === 'dark') return storedTheme;
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
 function storageExplanation(status: PersistentStorageStatus | 'checking'): string {
   if (status === 'granted') return 'Saved locally; persistent browser storage is enabled. Keep exports as backups.';
@@ -25,6 +34,12 @@ function App() {
   const [playState, setPlayState] = useState<CharacterPlayState>(representativePlayState);
   const [storageStatus, setStorageStatus] = useState<PersistentStorageStatus | 'checking'>('checking');
   const [backupError, setBackupError] = useState<string>();
+  const [theme, setTheme] = useState<Theme>(initialTheme);
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem('dnd-companion-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     let active = true;
@@ -89,7 +104,7 @@ function App() {
   return <>
     <aside className="storage-status" aria-label="Local storage and backups">
       <p role="status">{storageExplanation(storageStatus)}</p>
-      <div><button type="button" onClick={() => void exportBackup()}>Export character backup</button><label>Import character backup<input type="file" accept="application/json,.json" onChange={(event) => void importBackup(event.currentTarget.files?.[0])} /></label></div>
+      <div><Button type="button" variant="secondary" aria-pressed={theme === 'dark'} onClick={() => setTheme((current) => current === 'light' ? 'dark' : 'light')}>{theme === 'light' ? <Moon aria-hidden="true" /> : <Sun aria-hidden="true" />}{theme === 'light' ? 'Use dark theme' : 'Use light theme'}</Button><button type="button" onClick={() => void exportBackup()}>Export character backup</button><label>Import character backup<input type="file" accept="application/json,.json" onChange={(event) => void importBackup(event.currentTarget.files?.[0])} /></label></div>
       {backupError && <p className="storage-error" role="alert">{backupError}</p>}
     </aside>
     <CharacterSheet character={character} playState={playState} content={minimalContentFixture} details={representativeCharacterSheetDetails} onCharacterChange={saveCharacter} onPlayStateChange={savePlayState} />
