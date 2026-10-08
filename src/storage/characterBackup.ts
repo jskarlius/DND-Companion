@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { ABILITIES, MANUAL_OVERRIDE_TARGETS, SKILLS, type Character, type CharacterPlayState } from '../domain/character/types';
 
 /** The format of a character file is independent from whichever local database we use. */
-export const CHARACTER_EXPORT_SCHEMA_VERSION = 1;
+export const CHARACTER_EXPORT_SCHEMA_VERSION = 2;
 
 const choiceValueSchema = z.union([z.string(), z.array(z.string())]);
 const abilitySchema = z.enum(ABILITIES);
@@ -13,6 +13,7 @@ const characterFieldsSchema = z.object({
   id: z.string().min(1),
   name: z.string().min(1),
   ruleset: z.literal('5e-2024'),
+  longRestHitDiceRecovery: z.enum(['2024-all', '2014-half']),
   enabledContentPackIds: z.array(z.string()),
   abilityScoreGeneration: z.enum(['standard-array', 'point-buy', 'custom']),
   abilityScores: z.record(abilitySchema, z.number()),
@@ -41,6 +42,7 @@ export const characterPlayStateSchema = z.object({
   temporaryHp: z.number().min(0),
   temporaryMaximumHpBonus: z.number().min(0),
   inspiration: z.boolean(),
+  usedHitDice: z.record(z.string(), z.number().int().min(0)),
   usedResources: z.record(z.string(), z.number().int().min(0)),
   usedSpellSlots: z.record(z.string(), z.number().int().min(0)),
   deathSaveSuccesses: z.number().int().min(0).max(3),
@@ -62,12 +64,20 @@ export const characterExportSchema = z.object({
 
 export type CharacterExport = z.infer<typeof characterExportSchema>;
 
+const versionOneCharacterExportSchema = z.object({
+  format: z.literal('dnd-companion-character'),
+  schemaVersion: z.literal(1),
+  exportedAt: z.string().datetime(),
+  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true }).extend({ schemaVersion: z.literal(1) }),
+  playState: characterPlayStateSchema.omit({ usedHitDice: true }),
+});
+
 const legacyCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character').optional(),
   schemaVersion: z.literal(0).optional(),
   exportedAt: z.string().optional(),
-  character: characterFieldsSchema.extend({ schemaVersion: z.literal(0).optional() }),
-  playState: characterPlayStateSchema.omit({ temporaryMaximumHpBonus: true }),
+  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true }).extend({ schemaVersion: z.literal(0).optional() }),
+  playState: characterPlayStateSchema.omit({ temporaryMaximumHpBonus: true, usedHitDice: true }),
 });
 
 /**
@@ -78,14 +88,24 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
   const current = characterExportSchema.safeParse(input);
   if (current.success) return current.data;
 
+  const versionOne = versionOneCharacterExportSchema.safeParse(input);
+  if (versionOne.success) {
+    return characterExportSchema.parse({
+      ...versionOne.data,
+      schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
+      character: { ...versionOne.data.character, longRestHitDiceRecovery: '2024-all' },
+      playState: { ...versionOne.data.playState, usedHitDice: {} },
+    });
+  }
+
   const legacy = legacyCharacterExportSchema.safeParse(input);
   if (legacy.success) {
     return characterExportSchema.parse({
       format: 'dnd-companion-character',
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
       exportedAt: legacy.data.exportedAt ?? new Date(0).toISOString(),
-      character: { ...legacy.data.character, schemaVersion: 1 },
-      playState: { ...legacy.data.playState, temporaryMaximumHpBonus: 0 },
+      character: { ...legacy.data.character, schemaVersion: 1, longRestHitDiceRecovery: '2024-all' },
+      playState: { ...legacy.data.playState, temporaryMaximumHpBonus: 0, usedHitDice: {} },
     });
   }
 

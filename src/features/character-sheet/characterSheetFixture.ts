@@ -42,6 +42,7 @@ export const representativeCharacter: Character = {
   id: 'demo:character:ariel-thorne',
   name: 'Ariel Thorne',
   ruleset: '5e-2024',
+  longRestHitDiceRecovery: '2024-all',
   enabledContentPackIds: ['srd-5.2.1'],
   abilityScoreGeneration: 'standard-array',
   abilityScores: {
@@ -96,6 +97,7 @@ export const representativePlayState: CharacterPlayState = {
   temporaryHp: 0,
   temporaryMaximumHpBonus: 0,
   inspiration: false,
+  usedHitDice: {},
   usedResources: {
     'srd-5.2.1:resource:wizard-arcane-recovery': 0,
     'srd-5.2.1:resource:fighter-second-wind': 1,

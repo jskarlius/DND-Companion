@@ -334,29 +334,46 @@ browser or native-app surface, so visual inspection at 1440 x 900, 1024 x 768,
 checkpoint complete or proceed to Architecture checkpoint B until the owner
 performs that pass and explicitly approves continuing.
 
-## Required follow-up: Hit-dice play state
+## Required follow-up: Hit-dice play state — complete (2026-10-08)
 
 Goal: close the omitted hit-dice tracking requirement before level-up work.
 
-The design requires a long rest to restore half the character's total hit dice,
-but the current sheet only displays a static hit-dice summary. This is a
-functional omission from Slice 5, not an intentional deferral.
+The 2024 design requires a long rest to restore all spent Hit Point Dice, but
+the current sheet only displays a static hit-dice summary. This is a functional
+omission from Slice 5, not an intentional deferral.
 
 - Store spent hit dice separately in `CharacterPlayState`, preserving each
-  class entry's die type for multiclass characters.
-- Let players spend and restore hit dice with accessible controls during play.
-- Make long rest restore `floor(total character level / 2)` spent dice without
-  exceeding the total available for each class entry.
+  class entry's stable identity and die type for multiclass characters. New
+  characters start with zero used dice in every group.
+- Render a dynamic, accessible hit-dice tracker for every class entry, using
+  the maximum-HP-effect dropdown/adjustment pattern as its interaction model.
+  Each group shows its die type, total dice (the class-entry level), and used
+  dice; same-die groups remain separate.
+- During a short rest, let players spend only an available die from their
+  selected group. A character-level dropdown defaults to 2024 full recovery
+  and may select the 2014 half-total table rule; the latter requires the
+  player to allocate recovery between spent groups during Long Rest
+  confirmation.
 - Add IndexedDB and character-backup migrations plus validation for the new
   play-state field.
 - Add unit and component tests for single-class and multiclass recovery.
 
 Acceptance:
 
-- a short-rest player can spend only an available hit die of the selected type;
-- a long rest restores the correct total number without over-restoring any
-  class entry; and
+- a short-rest player can spend only an available hit die from the selected
+  class-entry group;
+- a long rest restores every spent die without over-restoring any class entry;
+  and
 - the state persists through reload, export, delete, and import.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (68 tests),
+and `npm.cmd run build` passed. `CharacterPlayState` now stores used dice by
+stable class-entry ID, and the sheet displays dynamic per-class groups. Short
+Rest confirmation supports dice spending; Long Rest defaults to restoring all
+spent dice under 2024 rules, while the persisted, exported per-character
+dropdown supports the explicit 2014 half-total table rule with player-selected
+allocation. IndexedDB version 3 and character-backup format version 2 migrate
+existing data with zero used dice and the 2024 default.
 
 ## Architecture checkpoint B: Level-up transaction
 
@@ -527,5 +544,6 @@ implementation slice or delivery commitment.
 Finish the Product checkpoint: UI foundation and navigation. Perform the
 remaining visual review of the library and character sheet at 1440 x 900,
 1024 x 768, 768 x 1024, and 390 x 844, including 200 percent zoom and reduced
-motion. Record owner approval, then implement the required hit-dice play-state
-follow-up before proceeding to Architecture checkpoint B.
+motion. Include Hit Point Dice group tracking and both Long Rest recovery
+options in that review. Record owner approval before proceeding to Architecture
+checkpoint B.

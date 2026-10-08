@@ -45,6 +45,20 @@ export class CompanionDatabase extends Dexie {
         if (playState.temporaryMaximumHpBonus === undefined) playState.temporaryMaximumHpBonus = 0;
       });
     });
+    this.version(3).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: { longRestHitDiceRecovery?: string }) => {
+        if (character.longRestHitDiceRecovery === undefined) character.longRestHitDiceRecovery = '2024-all';
+      });
+      await transaction.table('playState').toCollection().modify((playState: { usedHitDice?: Record<string, number> }) => {
+        if (playState.usedHitDice === undefined) playState.usedHitDice = {};
+      });
+    });
   }
 }
 

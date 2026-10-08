@@ -56,6 +56,7 @@ export const SKILL_ABILITIES: Readonly<Record<Skill, Ability>> = {
 export type AbilityScores = Readonly<Record<Ability, number>>;
 
 export type AbilityScoreGeneration = 'standard-array' | 'point-buy' | 'custom';
+export type LongRestHitDiceRecovery = '2024-all' | '2014-half';
 
 export type ChoiceValue = string | readonly string[];
 
@@ -102,6 +103,8 @@ export interface Character {
   readonly id: string;
   readonly name: string;
   readonly ruleset: '5e-2024';
+  /** A table-rule choice; this does not change the character's ruleset. */
+  readonly longRestHitDiceRecovery: LongRestHitDiceRecovery;
   readonly enabledContentPackIds: readonly string[];
   readonly abilityScoreGeneration: AbilityScoreGeneration;
   readonly abilityScores: AbilityScores;
@@ -128,6 +131,8 @@ export interface CharacterPlayState {
   /** Time-limited maximum-HP increases, initially used for the Aid spell. */
   readonly temporaryMaximumHpBonus: number;
   readonly inspiration: boolean;
+  /** Used dice, keyed by stable class-entry ID. */
+  readonly usedHitDice: Readonly<Record<string, number>>;
   readonly usedResources: Readonly<Record<string, number>>;
   readonly usedSpellSlots: Readonly<Partial<Record<number, number>>>;
   readonly deathSaveSuccesses: number;

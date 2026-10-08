@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { resolveManualOverride } from '../../domain/character/calculations';
-import { setCurrentHp, setResourceUses, setSpellSlotUses, setTemporaryHp, setTemporaryMaximumHpBonus, takeRest } from '../../domain/character/playState';
+import { hitDiceRecoveryLimit, setCurrentHp, setResourceUses, setSpellSlotUses, setTemporaryHp, setTemporaryMaximumHpBonus, takeRest } from '../../domain/character/playState';
 import type { Character, CharacterPlayState, ManualOverride, ManualOverrideTarget } from '../../domain/character/types';
 import type { ContentFixture } from '../../domain/content/types';
 import type { CharacterSheetDetails } from './characterSheetFixture';
@@ -63,6 +63,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const previousPlayState = useRef(sessionState);
   const [conditionName, setConditionName] = useState('');
   const [pendingRest, setPendingRest] = useState<'short' | 'long' | null>(null);
+  const [pendingHitDice, setPendingHitDice] = useState<Record<string, number>>({});
   const [editingOverride, setEditingOverride] = useState<ManualOverrideTarget | null>(null);
   const lastOverrideTrigger = useRef<HTMLButtonElement | null>(null);
   const sheet = buildCharacterSheetViewModel(draftCharacter, sessionState, content, details);
@@ -73,6 +74,10 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const speed = resolveManualOverride(baseCalculation(combat.speed, 'Calculated speed'), draftCharacter.manualOverrides, 'speed').value;
   const baseMaximumHp = resolveManualOverride(baseCalculation(combat.maximumHp, 'Calculated maximum HP'), draftCharacter.manualOverrides, 'maximumHp').value;
   const maximumHp = baseMaximumHp + sessionState.temporaryMaximumHpBonus;
+  const hitDiceGroups = sheet.hitDiceGroups;
+  const hitDiceRecovery = draftCharacter.longRestHitDiceRecovery;
+  const hitDiceRecoveryLimitValue = hitDiceRecoveryLimit(hitDiceGroups.map(({ classEntryId, maximum }) => ({ classEntryId, maximum })), hitDiceRecovery);
+  const usedHitDice = hitDiceGroups.reduce((total, group) => total + group.used, 0);
 
   useEffect(() => {
     if (previousCharacter.current !== draftCharacter) onCharacterChange?.(draftCharacter);
@@ -123,6 +128,32 @@ export function CharacterSheet({ character, playState, content, details, onChara
     setSessionState((current) => ({ ...current, [kind]: checked ? Math.max(current[kind], index + 1) : Math.min(current[kind], index) }));
   };
 
+  useEffect(() => {
+    if (!pendingRest) return;
+    setPendingHitDice(pendingRest === 'short'
+      ? Object.fromEntries(hitDiceGroups.map((group) => [group.classEntryId, group.used]))
+      : {});
+  }, [pendingRest]);
+
+  const confirmRest = () => {
+    if (!pendingRest) return;
+    setSessionState((current) => {
+      const beforeRest = pendingRest === 'short'
+        ? { ...current, usedHitDice: { ...current.usedHitDice, ...pendingHitDice } }
+        : current;
+      return takeRest(
+        beforeRest,
+        sheet.resources.map(({ resource }) => resource),
+        pendingRest,
+        maximumHp,
+        hitDiceGroups.map(({ classEntryId, maximum }) => ({ classEntryId, maximum })),
+        hitDiceRecovery,
+        pendingHitDice,
+      );
+    });
+    setPendingRest(null);
+  };
+
   return (
     <main className="character-sheet">
       <header className="sheet-header">
@@ -140,7 +171,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
         <div><span>Proficiency</span><strong>{signed(sheet.proficiencyBonus)}</strong></div>
         <div><span>Armor Class <OverrideButton label="armor class" active={Boolean(draftCharacter.manualOverrides.armorClass)} onClick={(trigger) => { lastOverrideTrigger.current = trigger; setEditingOverride('armorClass'); }} /></span><strong>{armorClass}</strong><OverrideReason override={draftCharacter.manualOverrides.armorClass} /></div>
         <div><span>Speed <OverrideButton label="speed" active={Boolean(draftCharacter.manualOverrides.speed)} onClick={(trigger) => { lastOverrideTrigger.current = trigger; setEditingOverride('speed'); }} /></span><strong>{speed} ft.</strong><OverrideReason override={draftCharacter.manualOverrides.speed} /></div>
-        <div><span>Hit Dice</span><strong>{combat.hitDice}</strong></div>
+        <div className="hit-dice-summary"><span>Hit Dice</span><strong>{usedHitDice} / {sheet.totalLevel} used</strong><details className="max-hp-effects"><summary>{combat.hitDice}</summary><div className="hit-dice-groups">{hitDiceGroups.map((group) => <span key={group.classEntryId}>{group.className}: {group.used} / {group.maximum} d{group.die} used</span>)}</div><label className="aid-control"><span>Long-rest recovery</span><select aria-label="Long-rest hit-dice recovery" value={hitDiceRecovery} onChange={(event) => setDraftCharacter((current) => ({ ...current, longRestHitDiceRecovery: event.currentTarget.value as typeof current.longRestHitDiceRecovery }))}><option value="2024-all">2024: all spent dice</option><option value="2014-half">2014: half total dice</option></select></label></details></div>
       </section>
 
       <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as typeof activeTab)}>
@@ -192,7 +223,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
         <Section title="Notes"><div className="notes-list">{details.notes.map((note) => <article key={note.title}><h3>{note.title}</h3><p>{note.content}</p></article>)}</div></Section>
       </TabsContent>
       </Tabs>
-      {pendingRest && <Dialog open onOpenChange={(open) => { if (!open) setPendingRest(null); }}><DialogContent className="rest-dialog"><DialogTitle>Confirm {pendingRest} rest</DialogTitle><DialogDescription>Has the DM confirmed this {pendingRest} rest?</DialogDescription><div><Button type="button" variant="secondary" onClick={() => setPendingRest(null)}>Cancel</Button><Button type="button" onClick={() => { setSessionState((current) => takeRest(current, sheet.resources.map(({ resource }) => resource), pendingRest, maximumHp)); setPendingRest(null); }}>DM confirmed {pendingRest} rest</Button></div></DialogContent></Dialog>}
+      {pendingRest && <Dialog open onOpenChange={(open) => { if (!open) setPendingRest(null); }}><DialogContent className="rest-dialog"><DialogTitle>Confirm {pendingRest} rest</DialogTitle><DialogDescription>Has the DM confirmed this {pendingRest} rest?</DialogDescription>{pendingRest === 'short' ? <div className="hit-dice-rest-controls"><p>Spend Hit Point Dice after the rest. Record healing manually after rolling.</p>{hitDiceGroups.map((group) => { const used = pendingHitDice[group.classEntryId] ?? group.used; return <div key={group.classEntryId}><span>{group.className} d{group.die}: {used} / {group.maximum} used</span><Button type="button" disabled={used === group.maximum} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: Math.min(group.maximum, (current[group.classEntryId] ?? group.used) + 1) }))}>Spend d{group.die}</Button><Button type="button" variant="secondary" disabled={used === 0} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: Math.max(0, (current[group.classEntryId] ?? group.used) - 1) }))}>Undo</Button></div>; })}</div> : hitDiceRecovery === '2014-half' ? <div className="hit-dice-rest-controls"><p>2014 table rule: restore up to {hitDiceRecoveryLimitValue} spent Hit Point Dice. Choose the groups to restore.</p>{hitDiceGroups.map((group) => { const restored = pendingHitDice[group.classEntryId] ?? 0; const alreadyAllocated = Object.values(pendingHitDice).reduce((total, value) => total + value, 0); return <div key={group.classEntryId}><span>{group.className} d{group.die}: {group.used} used, {restored} restoring</span><Button type="button" disabled={restored >= group.used || alreadyAllocated >= hitDiceRecoveryLimitValue} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: (current[group.classEntryId] ?? 0) + 1 }))}>Restore one</Button><Button type="button" variant="secondary" disabled={restored === 0} onClick={() => setPendingHitDice((current) => ({ ...current, [group.classEntryId]: Math.max(0, (current[group.classEntryId] ?? 0) - 1) }))}>Undo</Button></div>; })}</div> : <p>2024 rules: this Long Rest restores all spent Hit Point Dice.</p>}<div><Button type="button" variant="secondary" onClick={() => setPendingRest(null)}>Cancel</Button><Button type="button" onClick={confirmRest}>DM confirmed {pendingRest} rest</Button></div></DialogContent></Dialog>}
       {editingOverride && <OverrideDialog target={editingOverride} label={overrideDetails[editingOverride].label} calculatedValue={overrideDetails[editingOverride].calculatedValue} override={draftCharacter.manualOverrides[editingOverride]} onSave={changeOverride} onReset={(target) => changeOverride(target)} onClose={() => setEditingOverride(null)} />}
     </main>
   );

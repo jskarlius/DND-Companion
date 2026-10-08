@@ -35,13 +35,13 @@ function createMinimalCharacter(): { character: Character; playState: CharacterP
   const id = createId();
   return {
     character: {
-      schemaVersion: 1, id, name: 'New adventurer', ruleset: '5e-2024', enabledContentPackIds: ['srd-5.2.1'],
+      schemaVersion: 1, id, name: 'New adventurer', ruleset: '5e-2024', longRestHitDiceRecovery: '2024-all', enabledContentPackIds: ['srd-5.2.1'],
       abilityScoreGeneration: 'custom',
       abilityScores: { strength: 10, dexterity: 10, constitution: 10, intelligence: 10, wisdom: 10, charisma: 10 },
       classes: [{ id: `${id}:class-entry:wizard`, classId: 'srd-5.2.1:class:wizard', level: 1, choices: {} }],
       choices: {}, proficiencies: { savingThrowAbilities: ['intelligence', 'wisdom'], skills: {} }, knownSpellIds: [], preparedSpellIds: [], inventory: [], manualOverrides: {},
     },
-    playState: { characterId: id, currentHp: 6, temporaryHp: 0, temporaryMaximumHpBonus: 0, inspiration: false, usedResources: {}, usedSpellSlots: {}, deathSaveSuccesses: 0, deathSaveFailures: 0, conditions: [] },
+    playState: { characterId: id, currentHp: 6, temporaryHp: 0, temporaryMaximumHpBonus: 0, inspiration: false, usedHitDice: {}, usedResources: {}, usedSpellSlots: {}, deathSaveSuccesses: 0, deathSaveFailures: 0, conditions: [] },
   };
 }
 

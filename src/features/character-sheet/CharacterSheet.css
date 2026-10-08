@@ -79,6 +79,13 @@
 .max-hp-effects .aid-control { display: grid; grid-template-columns: minmax(0, 1fr) 3.25rem; align-items: center; gap: .35rem; margin: 0; padding: 0; border: 0; background: transparent; color: var(--foreground); }
 .max-hp-effects .aid-control span { color: var(--muted-foreground); font-size: .7rem; text-align: left; }
 .max-hp-effects .aid-control input { width: 100%; padding: .25rem; font-size: .9rem; text-align: center; }
+.max-hp-effects .aid-control select { width: 100%; min-width: 0; padding: .25rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--foreground); font: inherit; }
+.hit-dice-groups { display: grid; gap: .2rem; margin: .35rem 0; color: var(--foreground); }
+.hit-dice-rest-controls { display: grid; gap: .5rem; margin: .5rem 0; }
+.hit-dice-rest-controls p { margin: 0; }
+.hit-dice-rest-controls > div { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: .35rem; align-items: center; }
+.hit-dice-rest-controls span { font-size: .85rem; }
+@media (max-width: 520px) { .hit-dice-rest-controls > div { grid-template-columns: 1fr 1fr; }.hit-dice-rest-controls span { grid-column: 1 / -1; } }
 
 /* Play state groups actions by intent: status, death saves, then rests. */
 .play-state-controls { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: stretch; gap: .75rem; }

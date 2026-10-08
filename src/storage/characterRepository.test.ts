@@ -74,16 +74,18 @@ describe('CharacterRepository', () => {
   });
 });
 
-test('migrates a version 0 backup by adding the Aid maximum-HP field', () => {
+test('migrates a version 0 backup by adding missing play-state and rest-policy fields', () => {
   const backup = migrateCharacterExport({
     schemaVersion: 0,
     character: { ...representativeCharacter, schemaVersion: 0 },
     playState: (({ temporaryMaximumHpBonus: _removed, ...playState }) => playState)(representativePlayState),
   });
 
-  expect(backup.schemaVersion).toBe(1);
+  expect(backup.schemaVersion).toBe(2);
   expect(backup.character.schemaVersion).toBe(1);
   expect(backup.playState.temporaryMaximumHpBonus).toBe(0);
+  expect(backup.playState.usedHitDice).toEqual({});
+  expect(backup.character.longRestHitDiceRecovery).toBe('2024-all');
 });
 
 test('upgrades a version 1 database by adding the Aid maximum-HP field', async () => {

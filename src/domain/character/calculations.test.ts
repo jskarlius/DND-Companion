@@ -41,6 +41,7 @@ const multiclassCharacter: Character = {
   id: 'character-1',
   name: 'Test Character',
   ruleset: '5e-2024',
+  longRestHitDiceRecovery: '2024-all',
   enabledContentPackIds: [],
   abilityScoreGeneration: 'custom',
   abilityScores,

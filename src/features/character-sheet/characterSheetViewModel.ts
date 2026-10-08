@@ -25,6 +25,7 @@ export interface CharacterSheetViewModel {
   readonly savingThrows: readonly { readonly ability: Ability; readonly value: number; readonly proficient: boolean }[];
   readonly skills: readonly { readonly skill: Skill; readonly value: number; readonly proficiency: string }[];
   readonly classes: readonly { readonly name: string; readonly level: number }[];
+  readonly hitDiceGroups: readonly { readonly classEntryId: string; readonly className: string; readonly die: number; readonly maximum: number; readonly used: number }[];
   readonly cantrips: readonly Spell[];
   readonly spells: readonly { readonly spell: Spell; readonly prepared: boolean }[];
   readonly features: readonly Feature[];
@@ -91,6 +92,16 @@ export function buildCharacterSheetViewModel(
       name: findRequired(content.classes, classEntry.classId).name,
       level: classEntry.level,
     })),
+    hitDiceGroups: character.classes.map((classEntry) => {
+      const characterClass = findRequired(content.classes, classEntry.classId);
+      return {
+        classEntryId: classEntry.id,
+        className: characterClass.name,
+        die: characterClass.hitDie,
+        maximum: classEntry.level,
+        used: Math.min(Math.max(playState.usedHitDice[classEntry.id] ?? 0, 0), classEntry.level),
+      };
+    }),
     cantrips: knownSpells.filter((spell) => spell.level === 0),
     spells: knownSpells
       .filter((spell) => spell.level > 0)
