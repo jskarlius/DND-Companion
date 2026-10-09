@@ -26,6 +26,8 @@ export interface CharacterSheetViewModel {
   readonly skills: readonly { readonly skill: Skill; readonly value: number; readonly proficiency: string }[];
   readonly classes: readonly { readonly name: string; readonly level: number }[];
   readonly spellcasting: readonly { readonly className: string; readonly ability: Ability; readonly slotKind: 'spell-slots' | 'pact-magic'; readonly slotRecharge: 'short-rest' | 'long-rest' }[];
+  readonly spellSlots: readonly { readonly level: number; readonly maximum: number; readonly label: string; readonly recharge: 'short-rest' | 'long-rest' }[];
+  readonly spellLimits?: { readonly cantripsKnown: number; readonly preparedSpells: number };
   readonly hitDiceGroups: readonly { readonly classEntryId: string; readonly className: string; readonly die: number; readonly maximum: number; readonly used: number }[];
   readonly cantrips: readonly Spell[];
   readonly spells: readonly { readonly spell: Spell; readonly prepared: boolean }[];
@@ -68,6 +70,16 @@ export function buildCharacterSheetViewModel(
   for (const feature of features) if (feature.resourceId) resourceIds.add(feature.resourceId);
 
   const knownSpells = character.knownSpellIds.map((id) => findRequired(content.spells, id));
+  const spellcastingProgression = character.classes.flatMap((classEntry) => {
+    const characterClass = findRequired(content.classes, classEntry.classId);
+    const spellcasting = characterClass.spellcasting;
+    if (!spellcasting || spellcasting.slotKind !== 'spell-slots') return [];
+    return spellcasting.progression.filter((entry) => entry.level === classEntry.level).map((entry) => ({ entry, spellcasting }));
+  });
+  const slotMaximums = new Map<number, number>();
+  for (const { entry } of spellcastingProgression) for (const [level, maximum] of Object.entries(entry.slots)) {
+    slotMaximums.set(Number(level), (slotMaximums.get(Number(level)) ?? 0) + maximum);
+  }
 
   return {
     character,
@@ -97,6 +109,8 @@ export function buildCharacterSheetViewModel(
       const characterClass = findRequired(content.classes, classEntry.classId);
       return characterClass.spellcasting ? [{ className: characterClass.name, ...characterClass.spellcasting }] : [];
     }),
+    spellSlots: [...slotMaximums].sort(([left], [right]) => left - right).map(([level, maximum]) => ({ level, maximum, label: 'Spell slots', recharge: 'long-rest' })),
+    spellLimits: spellcastingProgression.length === 1 ? { cantripsKnown: spellcastingProgression[0].entry.cantripsKnown, preparedSpells: spellcastingProgression[0].entry.preparedSpells } : undefined,
     hitDiceGroups: character.classes.map((classEntry) => {
       const characterClass = findRequired(content.classes, classEntry.classId);
       return {

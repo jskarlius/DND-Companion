@@ -219,9 +219,9 @@ test('groups spells by level with preparation, casting details, and compact slot
 
   userEvent.click(screen.getByRole('tab', { name: 'Spells' }));
 
-  expect(screen.getByText('Cantrips 1')).toBeInTheDocument();
+  expect(screen.getByText('Cantrips 1 / 3')).toBeInTheDocument();
   expect(screen.getByText('Known spells 1')).toBeInTheDocument();
-  expect(screen.getByText('Prepared 1')).toBeInTheDocument();
+  expect(screen.getByText('Prepared 1 / 5')).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Cantrips' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Level 1' })).toBeInTheDocument();
   expect(screen.getAllByText(/Action.*120 feet.*V, S.*Instantaneous/)).toHaveLength(2);

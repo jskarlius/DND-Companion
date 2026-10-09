@@ -231,6 +231,38 @@ Core entity categories include:
 - resources and recharge rules; and
 - choices and advancement grants.
 
+### 7.3 Canonical knowledge-base structure
+
+Public and private packs use separate, validated entity collections rather
+than a single document dump. Every entity has a stable source-qualified ID;
+relationships are represented by IDs, never display names or duplicated rule
+text.
+
+```text
+content-pack manifest
+├── classes       → advancement, spellcasting, feature and spell references
+├── subclasses    → parent-class and feature references
+├── features      → automation tier and optional resource reference
+├── spells        → description, higher-level text, casting and reference metadata
+├── feats         → category, prerequisites, benefits, automation tier
+├── species / backgrounds
+├── equipment / items
+├── resources
+└── choices
+```
+
+For example, a character's spellbook retains spell IDs, a class progression
+retains feature or choice IDs, and a selected feat retains a feat ID. This
+permits packs to be independently validated, replaced, imported, or removed
+without copying rule text into character records.
+
+Spell descriptions are reference content, not damage automation. A spell may
+record its description, higher-level text, damage, attack, and saving-throw
+metadata for display, while automated resolution remains separately declared
+and out of scope until a supported rule is modeled. Long descriptions must not
+be hover-only: desktop hover/focus may offer a preview, but click/tap opens an
+accessible detail surface that works with keyboards and touch devices.
+
 Class and subclass progression is declarative:
 
 ```ts

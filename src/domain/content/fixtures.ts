@@ -12,6 +12,15 @@ const srdSource = {
  * It is not intended to be a complete class or spell implementation.
  */
 export const minimalContentFixture: ContentFixture = {
+  manifest: {
+    schemaVersion: 1,
+    id: 'srd-5.2.1',
+    name: 'SRD 5.2.1 bootstrap fixture',
+    version: 'fixture',
+    ruleset: '5e-2024',
+    distribution: 'public',
+    source: srdSource,
+  },
   features: [
     {
       id: 'srd-5.2.1:feature:wizard-spellcasting',
@@ -95,6 +104,19 @@ export const minimalContentFixture: ContentFixture = {
       components: { verbal: true, somatic: true },
     },
   ],
+  feats: [
+    {
+      id: 'srd-5.2.1:feat:ability-score-improvement',
+      name: 'Ability Score Improvement',
+      kind: 'feat',
+      ruleset: '5e-2024',
+      source: srdSource,
+      category: 'General',
+      prerequisite: 'Level 4+',
+      benefits: ['Increase one ability score by 2, or increase two ability scores by 1.'],
+      automation: 'reference',
+    },
+  ],
   classes: [
     {
       id: 'srd-5.2.1:class:wizard',
@@ -105,7 +127,16 @@ export const minimalContentFixture: ContentFixture = {
       hitDie: 6,
       savingThrowAbilities: ['intelligence', 'wisdom'],
       spellListIds: ['srd-5.2.1:spell:fire-bolt', 'srd-5.2.1:spell:magic-missile'],
-      spellcasting: { ability: 'intelligence', slotKind: 'spell-slots', slotRecharge: 'long-rest' },
+      spellcasting: {
+        ability: 'intelligence', slotKind: 'spell-slots', slotRecharge: 'long-rest',
+        progression: [
+          { level: 1, cantripsKnown: 3, preparedSpells: 4, slots: { 1: 2 } },
+          { level: 2, cantripsKnown: 3, preparedSpells: 5, slots: { 1: 3 } },
+          { level: 3, cantripsKnown: 3, preparedSpells: 6, slots: { 1: 4, 2: 2 } },
+          { level: 4, cantripsKnown: 4, preparedSpells: 7, slots: { 1: 4, 2: 3 } },
+          { level: 5, cantripsKnown: 4, preparedSpells: 9, slots: { 1: 4, 2: 3, 3: 2 } },
+        ],
+      },
       advancement: [
         { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-spellcasting' }] },
         { level: 2, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-arcane-recovery' }] },
@@ -146,6 +177,7 @@ export function validateContentFixture(fixture: ContentFixture): void {
     ...fixture.features,
     ...fixture.resources,
     ...fixture.spells,
+    ...fixture.feats,
   ];
   const ids = new Set<string>();
 

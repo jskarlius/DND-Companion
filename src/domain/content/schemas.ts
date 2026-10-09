@@ -19,6 +19,8 @@ const contentEntitySchema = z.object({
     title: z.string().min(1),
     license: z.string().min(1),
     url: z.url().optional(),
+    upstreamVersion: z.string().min(1).optional(),
+    attribution: z.string().min(1).optional(),
   }),
 });
 
@@ -47,9 +49,21 @@ export const spellSchema = contentEntitySchema.extend({
   }).optional(),
   concentration: z.boolean().optional(),
   ritual: z.boolean().optional(),
+  description: z.string().min(1).optional(),
+  higherLevelDescription: z.string().min(1).optional(),
+  damage: z.string().min(1).optional(),
+  damageTypes: z.array(z.string().min(1)).optional(),
   scalingBasis: z
     .enum(['character-level', 'class-level', 'ability-modifier', 'proficiency-bonus', 'fixed'])
     .optional(),
+});
+
+export const featSchema = contentEntitySchema.extend({
+  kind: z.literal('feat'),
+  category: z.string().min(1),
+  prerequisite: z.string().min(1).optional(),
+  benefits: z.array(z.string().min(1)),
+  automation: z.enum(['reference', 'tracked', 'automated']),
 });
 
 export const advancementGrantSchema = z.discriminatedUnion('type', [
@@ -74,6 +88,12 @@ export const classSchema = contentEntitySchema.extend({
     ability: abilitySchema,
     slotKind: z.enum(['spell-slots', 'pact-magic']),
     slotRecharge: z.enum(['short-rest', 'long-rest']),
+    progression: z.array(z.object({
+      level: z.int().min(1).max(20),
+      cantripsKnown: z.int().min(0),
+      preparedSpells: z.int().min(0),
+      slots: z.record(z.string(), z.int().min(0)),
+    })),
   }).optional(),
 });
 
@@ -84,9 +104,19 @@ export const subclassSchema = contentEntitySchema.extend({
 });
 
 export const contentFixtureSchema = z.object({
+  manifest: z.object({
+    schemaVersion: z.int().positive(),
+    id: contentIdSchema,
+    name: z.string().min(1),
+    version: z.string().min(1),
+    ruleset: rulesetSchema,
+    distribution: z.enum(['public', 'private']),
+    source: contentEntitySchema.shape.source,
+  }),
   classes: z.array(classSchema),
   subclasses: z.array(subclassSchema),
   features: z.array(featureSchema),
   resources: z.array(resourceSchema),
   spells: z.array(spellSchema),
+  feats: z.array(featSchema),
 });

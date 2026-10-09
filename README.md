@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# D&D Companion
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A private, local-first React companion for creating and playing 2024 D&D
+characters. Characters and temporary play state stay in the browser's
+IndexedDB; public rules data is generated into versioned JSON packs and bundled
+with the application.
 
-## Available Scripts
+## Development
 
-In the project directory, you can run:
+```powershell
+npm.cmd run dev
+npm.cmd run typecheck
+npm.cmd run test
+npm.cmd run build
+```
 
-### `npm start`
+## Content bootstrap
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+The current Slice 6.75 bootstrap pack provides Wizard, Evoker, spell, feat,
+and representative multiclass data. It is generated only when deliberately
+requested; the running application makes no Open5e request.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```powershell
+npm.cmd run content:bootstrap
+```
 
-### `npm test`
+See [content/README.md](content/README.md) for pack storage and provenance, and
+[scripts/import-content/README.md](scripts/import-content/README.md) for the
+importer workflow.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Documentation
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `docs/DESIGN.md` — product architecture and data-model boundaries
+- `docs/IMPLEMENTATION_PLAN.md` — completed slices and current checkpoint
+- `docs/UI_DESIGN.md` — UI review requirements

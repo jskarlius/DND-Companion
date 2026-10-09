@@ -1,0 +1,3646 @@
+{
+  "manifest": {
+    "schemaVersion": 1,
+    "id": "srd-5.2.1",
+    "name": "Open5e SRD 2024 Wizard bootstrap",
+    "version": "2026-10-09",
+    "ruleset": "5e-2024",
+    "distribution": "public",
+    "source": {
+      "title": "System Reference Document 5.2",
+      "license": "CC BY 4.0",
+      "url": "https://www.dndbeyond.com/srd",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+    }
+  },
+  "classes": [
+    {
+      "id": "srd-5.2.1:class:wizard",
+      "name": "Wizard",
+      "kind": "class",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "hitDie": 6,
+      "savingThrowAbilities": [
+        "intelligence",
+        "wisdom"
+      ],
+      "spellListIds": [
+        "srd-5.2.1:spell:acid-splash",
+        "srd-5.2.1:spell:chill-touch",
+        "srd-5.2.1:spell:dancing-lights",
+        "srd-5.2.1:spell:elementalism",
+        "srd-5.2.1:spell:fire-bolt",
+        "srd-5.2.1:spell:light",
+        "srd-5.2.1:spell:mage-hand",
+        "srd-5.2.1:spell:mending",
+        "srd-5.2.1:spell:message",
+        "srd-5.2.1:spell:minor-illusion",
+        "srd-5.2.1:spell:poison-spray",
+        "srd-5.2.1:spell:prestidigitation",
+        "srd-5.2.1:spell:ray-of-frost",
+        "srd-5.2.1:spell:shocking-grasp",
+        "srd-5.2.1:spell:true-strike",
+        "srd-5.2.1:spell:alarm",
+        "srd-5.2.1:spell:burning-hands",
+        "srd-5.2.1:spell:charm-person",
+        "srd-5.2.1:spell:chromatic-orb",
+        "srd-5.2.1:spell:color-spray",
+        "srd-5.2.1:spell:comprehend-languages",
+        "srd-5.2.1:spell:detect-magic",
+        "srd-5.2.1:spell:disguise-self",
+        "srd-5.2.1:spell:expeditious-retreat",
+        "srd-5.2.1:spell:false-life",
+        "srd-5.2.1:spell:feather-fall",
+        "srd-5.2.1:spell:find-familiar",
+        "srd-5.2.1:spell:floating-disk",
+        "srd-5.2.1:spell:fog-cloud",
+        "srd-5.2.1:spell:grease",
+        "srd-5.2.1:spell:hideous-laughter",
+        "srd-5.2.1:spell:ice-knife",
+        "srd-5.2.1:spell:identify",
+        "srd-5.2.1:spell:illusory-script",
+        "srd-5.2.1:spell:jump",
+        "srd-5.2.1:spell:longstrider",
+        "srd-5.2.1:spell:mage-armor",
+        "srd-5.2.1:spell:magic-missile",
+        "srd-5.2.1:spell:protection-from-evil-and-good",
+        "srd-5.2.1:spell:ray-of-sickness",
+        "srd-5.2.1:spell:shield",
+        "srd-5.2.1:spell:silent-image",
+        "srd-5.2.1:spell:sleep",
+        "srd-5.2.1:spell:thunderwave",
+        "srd-5.2.1:spell:unseen-servant",
+        "srd-5.2.1:spell:acid-arrow",
+        "srd-5.2.1:spell:alter-self",
+        "srd-5.2.1:spell:arcane-lock",
+        "srd-5.2.1:spell:arcanists-magic-aura",
+        "srd-5.2.1:spell:augury",
+        "srd-5.2.1:spell:blindnessdeafness",
+        "srd-5.2.1:spell:blur",
+        "srd-5.2.1:spell:continual-flame",
+        "srd-5.2.1:spell:darkness",
+        "srd-5.2.1:spell:darkvision",
+        "srd-5.2.1:spell:detect-thoughts",
+        "srd-5.2.1:spell:dragons-breath",
+        "srd-5.2.1:spell:enhance-ability",
+        "srd-5.2.1:spell:enlargereduce",
+        "srd-5.2.1:spell:flaming-sphere",
+        "srd-5.2.1:spell:gentle-repose",
+        "srd-5.2.1:spell:gust-of-wind",
+        "srd-5.2.1:spell:hold-person",
+        "srd-5.2.1:spell:invisibility",
+        "srd-5.2.1:spell:knock",
+        "srd-5.2.1:spell:levitate",
+        "srd-5.2.1:spell:locate-object",
+        "srd-5.2.1:spell:magic-mouth",
+        "srd-5.2.1:spell:magic-weapon",
+        "srd-5.2.1:spell:mind-spike",
+        "srd-5.2.1:spell:mirror-image",
+        "srd-5.2.1:spell:misty-step",
+        "srd-5.2.1:spell:phantasmal-force",
+        "srd-5.2.1:spell:ray-of-enfeeblement",
+        "srd-5.2.1:spell:rope-trick",
+        "srd-5.2.1:spell:scorching-ray",
+        "srd-5.2.1:spell:see-invisibility",
+        "srd-5.2.1:spell:shatter",
+        "srd-5.2.1:spell:spider-climb",
+        "srd-5.2.1:spell:suggestion",
+        "srd-5.2.1:spell:web",
+        "srd-5.2.1:spell:animate-dead",
+        "srd-5.2.1:spell:bestow-curse",
+        "srd-5.2.1:spell:blink",
+        "srd-5.2.1:spell:clairvoyance",
+        "srd-5.2.1:spell:counterspell",
+        "srd-5.2.1:spell:dispel-magic",
+        "srd-5.2.1:spell:fear",
+        "srd-5.2.1:spell:fireball",
+        "srd-5.2.1:spell:fly",
+        "srd-5.2.1:spell:gaseous-form",
+        "srd-5.2.1:spell:glyph-of-warding",
+        "srd-5.2.1:spell:haste",
+        "srd-5.2.1:spell:hypnotic-pattern",
+        "srd-5.2.1:spell:lightning-bolt",
+        "srd-5.2.1:spell:magic-circle",
+        "srd-5.2.1:spell:major-image",
+        "srd-5.2.1:spell:nondetection",
+        "srd-5.2.1:spell:phantom-steed",
+        "srd-5.2.1:spell:protection-from-energy",
+        "srd-5.2.1:spell:remove-curse",
+        "srd-5.2.1:spell:sending",
+        "srd-5.2.1:spell:sleet-storm",
+        "srd-5.2.1:spell:slow",
+        "srd-5.2.1:spell:speak-with-dead",
+        "srd-5.2.1:spell:stinking-cloud",
+        "srd-5.2.1:spell:tiny-hut",
+        "srd-5.2.1:spell:tongues",
+        "srd-5.2.1:spell:vampiric-touch",
+        "srd-5.2.1:spell:water-breathing"
+      ],
+      "spellcasting": {
+        "ability": "intelligence",
+        "slotKind": "spell-slots",
+        "slotRecharge": "long-rest",
+        "progression": [
+          {
+            "level": 1,
+            "cantripsKnown": 3,
+            "preparedSpells": 4,
+            "slots": {
+              "1": 2
+            }
+          },
+          {
+            "level": 2,
+            "cantripsKnown": 3,
+            "preparedSpells": 5,
+            "slots": {
+              "1": 3
+            }
+          },
+          {
+            "level": 3,
+            "cantripsKnown": 3,
+            "preparedSpells": 6,
+            "slots": {
+              "1": 4,
+              "2": 2
+            }
+          },
+          {
+            "level": 4,
+            "cantripsKnown": 4,
+            "preparedSpells": 7,
+            "slots": {
+              "1": 4,
+              "2": 3
+            }
+          },
+          {
+            "level": 5,
+            "cantripsKnown": 4,
+            "preparedSpells": 9,
+            "slots": {
+              "1": 4,
+              "2": 3,
+              "3": 2
+            }
+          }
+        ]
+      },
+      "advancement": [
+        {
+          "level": 1,
+          "grants": [
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-arcane-recovery"
+            },
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-ritual-adept"
+            },
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-spellcasting"
+            }
+          ]
+        },
+        {
+          "level": 2,
+          "grants": [
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-scholar"
+            }
+          ]
+        },
+        {
+          "level": 3,
+          "grants": [
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-wizard-subclass"
+            }
+          ]
+        },
+        {
+          "level": 4,
+          "grants": [
+            {
+              "type": "ability-score-improvement"
+            }
+          ]
+        },
+        {
+          "level": 5,
+          "grants": [
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-memorize-spell"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "subclasses": [
+    {
+      "id": "srd-5.2.1:subclass:evoker",
+      "name": "Evoker",
+      "kind": "subclass",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "classId": "srd-5.2.1:class:wizard",
+      "advancement": [
+        {
+          "level": 3,
+          "grants": [
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-evoker-evocation-savant"
+            },
+            {
+              "type": "feature",
+              "featureId": "srd-5.2.1:feature:wizard-evoker-potent-cantrip"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "features": [
+    {
+      "id": "srd-5.2.1:feature:wizard-arcane-recovery",
+      "name": "Arcane Recovery",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "tracked",
+      "resourceId": "srd-5.2.1:resource:wizard-arcane-recovery"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-ritual-adept",
+      "name": "Ritual Adept",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-spellcasting",
+      "name": "Spellcasting",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-scholar",
+      "name": "Scholar",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-wizard-subclass",
+      "name": "Wizard Subclass",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-memorize-spell",
+      "name": "Memorize Spell",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-evoker-empowered-evocation",
+      "name": "Empowered Evocation",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-evoker-evocation-savant",
+      "name": "Evocation Savant",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-evoker-overchannel",
+      "name": "Overchannel",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-evoker-potent-cantrip",
+      "name": "Potent Cantrip",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feature:wizard-evoker-sculpt-spells",
+      "name": "Sculpt Spells",
+      "kind": "feature",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "automation": "reference"
+    }
+  ],
+  "resources": [
+    {
+      "id": "srd-5.2.1:resource:wizard-arcane-recovery",
+      "name": "Arcane Recovery uses",
+      "kind": "resource",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "maximum": 1,
+      "recharge": "long-rest"
+    }
+  ],
+  "spells": [
+    {
+      "id": "srd-5.2.1:spell:acid-splash",
+      "name": "Acid Splash",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You create an acidic bubble at a point within range, where it explodes in a 5-foot-radius Sphere. Each creature in that Sphere must succeed on a Dexterity saving throw or take 1d6 Acid damage.",
+      "higherLevelDescription": "The damage increases by 1d6 when you reach levels 5 (2d6), 11 (3d6), and 17 (4d6).",
+      "damage": "1d6",
+      "damageTypes": [
+        "acid"
+      ],
+      "scalingBasis": "character-level"
+    },
+    {
+      "id": "srd-5.2.1:spell:chill-touch",
+      "name": "Chill Touch",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Channeling the chill of the grave, make a melee spell attack against a target within reach. On a hit, the target takes 1d10 Necrotic damage, and it can't regain Hit Points until the end of your next turn.",
+      "higherLevelDescription": "The damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).",
+      "damage": "1d10",
+      "damageTypes": [
+        "necrotic"
+      ],
+      "scalingBasis": "character-level"
+    },
+    {
+      "id": "srd-5.2.1:spell:dancing-lights",
+      "name": "Dancing Lights",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of phosphorus"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create up to four torch-size lights within range, making them appear as torches, lanterns, or glowing orbs that hover for the duration. Alternatively, you combine the four lights into one glowing Medium form that is vaguely humanlike. Whichever form you choose, each light sheds Dim Light in a 10 foot radius. As a Bonus Action, you can move the lights up to 60 feet to a space within range. A light must be within 20 feet of another light created by this spell, and a light vanishes if it exceeds the spell's range."
+    },
+    {
+      "id": "srd-5.2.1:spell:elementalism",
+      "name": "Elementalism",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You exert control over the elements, creating one of the following effects within range.\n\n***Beckon Air.*** You create a breeze strong enough to ripple cloth, stir dust, rustle leaves, and close open doors and shutters, all in a 5-foot Cube. Doors and shutters being held open by someone or something aren't affected.\n\n***Beckon Earth.*** You create a thin shroud of dust or sand that covers surfaces in a 5-foot-square area, or you cause a single word to appear in your handwriting in a patch of dirt or sand.\n\n***Beckon Fire.*** You create a thin cloud of harmless embers and colored, scented smoke in a 5-foot Cube. You choose the color and scent, and the embers can light candles, torches, or lamps in that area. The smoke's scent lingers for 1 minute.\n\n***Beckon Water.*** You create a spray of cool mist that lightly dampens creatures and objects in a 5-foot Cube. Alternatively, you create 1 cup of clean water either in an open container or on a surface, and the water evaporates in 1 minute.\n\n***Sculpt Element.*** You cause dirt, sand, fire, smoke, mist, or water that can fit in a 1-foot Cube to assume a crude shape (such as that of a creature) for 1 hour."
+    },
+    {
+      "id": "srd-5.2.1:spell:fire-bolt",
+      "name": "Fire Bolt",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You hurl a mote of fire at a creature or an object within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 Fire damage. A flammable object hit by this spell starts burning if it isn't being worn or carried.",
+      "higherLevelDescription": "The damage increases by 1d10 when you reach levels 5 (2d10), 11 (3d10), and 17 (4d10).",
+      "damage": "1d10",
+      "damageTypes": [
+        "fire"
+      ],
+      "scalingBasis": "character-level"
+    },
+    {
+      "id": "srd-5.2.1:spell:light",
+      "name": "Light",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "material": "a firefly or phosphorescent moss"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You touch one Large or smaller object that isn't being worn or carried by someone else. Until the spell ends, the object sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. The light can be colored as you like. Covering the object with something opaque blocks the light. The spell ends if you cast it again."
+    },
+    {
+      "id": "srd-5.2.1:spell:mage-hand",
+      "name": "Mage Hand",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A spectral, floating hand appears at a point you choose within range. The hand lasts for the duration. The hand vanishes if it is ever more than 30 feet away from you or if you cast this spell again. When you cast the spell, you can use the hand to manipulate an object, open an unlocked door or container, stow or retrieve an item from an open container, or pour the contents out of a vial. As a Magic action on your later turns, you can control the hand thus again. As part of that action, you can move the hand up to 30 feet. The hand can't attack, activate magic items, or carry more than 10 pounds."
+    },
+    {
+      "id": "srd-5.2.1:spell:mending",
+      "name": "Mending",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "1minute",
+      "range": "Touch",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "two lodestones"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "This spell repairs a single break or tear in an object you touch, such as a broken chain link, two halves of a broken key, a torn cloak, or a leaking wineskin. As long as the break or tear is no larger than 1 foot in any dimension, you mend it, leaving no trace of the former damage. This spell can physically repair a magic item, but it can't restore magic to such an object."
+    },
+    {
+      "id": "srd-5.2.1:spell:message",
+      "name": "Message",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "1 Round",
+      "components": {
+        "somatic": true,
+        "material": "a copper wire"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You point toward a creature within range and whisper a message. The target (and only the target) hears the message and can reply in a whisper that only you can hear. You can cast this spell through solid objects if you are familiar with the target and know it is beyond the barrier. Magical silence; 1 foot of stone, metal, or wood; or a thin sheet of lead blocks the spell."
+    },
+    {
+      "id": "srd-5.2.1:spell:minor-illusion",
+      "name": "Minor Illusion",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "1 Minute",
+      "components": {
+        "somatic": true,
+        "material": "a bit of fleece"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You create a sound or an image of an object within range that lasts for the duration. See the descriptions below for the effects of each. The illusion ends if you cast this spell again. If a creature takes a Study action to examine the sound or image, the creature can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the illusion becomes faint to the creature.\n\n**_Sound._** If you create a sound, its volume can range from a whisper to a scream. It can be your voice, someone else's voice, a lion's roar, a beating of drums, or any other sound you choose. The sound continues unabated throughout the duration, or you can make discrete sounds at different times before the spell ends.\n\n**_Image._** If you create an image of an object—such as a chair, muddy footprints, or a small chest—it must be no larger than a 5-foot Cube. The image can't create sound, light, smell, or any other sensory effect. Physical interaction with the image reveals it to be an illusion, since things can pass through it."
+    },
+    {
+      "id": "srd-5.2.1:spell:poison-spray",
+      "name": "Poison Spray",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You spray toxic mist at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d12 Poison damage.",
+      "higherLevelDescription": "The damage increases by 1d12 when you reach levels 5 (2d12), 11 (3d12), and 17 (4d12).",
+      "damage": "1d12",
+      "damageTypes": [
+        "poison"
+      ],
+      "scalingBasis": "character-level"
+    },
+    {
+      "id": "srd-5.2.1:spell:prestidigitation",
+      "name": "Prestidigitation",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "10 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You create a magical effect within range. Choose the effect from the options below. If you cast this spell multiple times, you can have up to three of its non-instantaneous effects active at a time.\n\n**_Sensory Effect._** You create an instantaneous, harmless sensory effect, such as a shower of sparks, a puff of wind, faint musical notes, or an odd odor.\n\n**_Fire Play._** You instantaneously light or snuff out a candle, a torch, or a small campfire.\n\n**_Clean or Soil._** You instantaneously clean or soil an object no larger than 1 cubic foot.\n\n**_Minor Sensation._** You chill, warm, or flavor up to 1 cubic foot of nonliving material for 1 hour.\n\n**_Magic Mark._** You make a color, a small mark, or a symbol appear on an object or a surface for 1 hour.\n\n**_Minor Creation._** You create a nonmagical trinket or an illusory image that can fit in your hand. It lasts until the end of your next turn. A trinket can deal no damage and has no monetary worth."
+    },
+    {
+      "id": "srd-5.2.1:spell:ray-of-frost",
+      "name": "Ray of Frost",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A frigid beam of blue-white light streaks toward a creature within range. Make a ranged spell attack against the target. On a hit, it takes 1d8 Cold damage, and its Speed is reduced by 10 feet until the start of your next turn.",
+      "higherLevelDescription": "The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
+      "damage": "1d8",
+      "damageTypes": [
+        "cold"
+      ],
+      "scalingBasis": "character-level"
+    },
+    {
+      "id": "srd-5.2.1:spell:shocking-grasp",
+      "name": "Shocking Grasp",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Lightning springs from you to a creature that you try to touch. Make a melee spell attack against the target. On a hit, the target takes 1d8 Lightning damage, and it can't make Opportunity Attacks until the start of its next turn.",
+      "higherLevelDescription": "The damage increases by 1d8 when you reach levels 5 (2d8), 11 (3d8), and 17 (4d8).",
+      "damage": "1d8",
+      "damageTypes": [
+        "lightning"
+      ],
+      "scalingBasis": "character-level"
+    },
+    {
+      "id": "srd-5.2.1:spell:true-strike",
+      "name": "True Strike",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 0,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "somatic": true,
+        "material": "a weapon with which you have proficiency and that is worth 1+ CP"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Guided by a flash of magical insight, you make one attack with the weapon used in the spell's casting. The attack uses your spellcasting ability for the attack and damage rolls instead of using Strength or Dexterity. If the attack deals damage, it can be Radiant damage or the weapon's normal damage type (your choice).",
+      "higherLevelDescription": "Whether you deal Radiant damage or the weapon's normal damage type, the attack deals extra Radiant damage when you reach levels 5 (1d6), 11 (2d6), and 17 (3d6).",
+      "damageTypes": [
+        "radiant"
+      ],
+      "scalingBasis": "character-level"
+    },
+    {
+      "id": "srd-5.2.1:spell:alarm",
+      "name": "Alarm",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "1minute",
+      "range": "30 feet",
+      "duration": "8 Hours",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bell and silver wire"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "You set an alarm against intrusion. Choose a door, a window, or an area within range that is no larger than a 20-foot Cube. Until the spell ends, an alarm alerts you whenever a creature touches or enters the warded area. When you cast the spell, you can designate creatures that won't set off the alarm. You also choose whether the alarm is audible or mental:\n\n**Audible Alarm.** The alarm produces the sound of a handbell for 10 seconds within 60 feet of the warded area.\n\n**Mental Alarm.** You are alerted by a mental ping if you are within 1 mile of the warded area. This ping awakens you if you're asleep."
+    },
+    {
+      "id": "srd-5.2.1:spell:burning-hands",
+      "name": "Burning Hands",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A thin sheet of flames shoots forth from you. Each creature in a 15-foot Cone makes a Dexterity saving throw, taking 3d6 Fire damage on a failed save or half as much damage on a successful one. Flammable objects in the Cone that aren't being worn or carried start burning.",
+      "higherLevelDescription": "The damage increases by 1d6 for each spell slot level above 1.",
+      "damage": "3d6",
+      "damageTypes": [
+        "fire"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:charm-person",
+      "name": "Charm Person",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "One Humanoid you can see within range makes a Wisdom saving throw. It does so with Advantage if you or your allies are fighting it. On a failed save, the target has the Charmed condition until the spell ends or until you or your allies damage it. The Charmed creature is Friendly to you. When the spell ends, the target knows it was Charmed by you.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 1."
+    },
+    {
+      "id": "srd-5.2.1:spell:chromatic-orb",
+      "name": "Chromatic Orb",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "90 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a diamond worth 50+ GP"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You hurl an orb of energy at a target within range. Choose Acid, Cold, Fire, Lightning, Poison, or Thunder for the type of orb you create, and then make a ranged spell attack against the target. On a hit, the target takes 3d8 damage of the chosen type. If you roll the same number on two or more of the d8s, the orb leaps to a different target of your choice within 30 feet of the target. Make an attack roll against the new target, and make a new damage roll. The orb can't leap again unless you cast the spell with a level 2+ spell slot.",
+      "higherLevelDescription": "The damage increases by 1d8 for each spell slot level above 1. The orb can leap a maximum number of times equal to the level of the slot expended, and a creature can be targeted only once by each casting of this spell.",
+      "damage": "3d8"
+    },
+    {
+      "id": "srd-5.2.1:spell:color-spray",
+      "name": "Color Spray",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pinch of colorful sand"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You launch a dazzling array of flashing, colorful light. Each creature in a 15-foot Cone originating from you must succeed on a Constitution saving throw or have the Blinded condition until the end of your next turn."
+    },
+    {
+      "id": "srd-5.2.1:spell:comprehend-languages",
+      "name": "Comprehend Languages",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pinch of soot and salt"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "For the duration, you understand the literal meaning of any language that you hear or see signed. You also understand any written language that you see, but you must be touching the surface on which the words are written. It takes about 1 minute to read one page of text. This spell doesn't decode symbols or secret messages."
+    },
+    {
+      "id": "srd-5.2.1:spell:detect-magic",
+      "name": "Detect Magic",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": true,
+      "description": "For the duration, you sense the presence of magical effects within 30 feet of yourself. If you sense such effects, you can take the Magic action to see a faint aura around any visible creature or object in the area that bears the magic, and if an effect was created by a spell, you learn the spell's school of magic. The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead."
+    },
+    {
+      "id": "srd-5.2.1:spell:disguise-self",
+      "name": "Disguise Self",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You make yourself—including your clothing, armor, weapons, and other belongings on your person look different until the spell ends. You can seem 1 foot shorter or taller and can appear heavier or lighter. You must adopt a form that has the same basic arrangement of limbs as you have. Otherwise, the extent of the illusion is up to you. The changes wrought by this spell fail to hold up to physical inspection. For example, if you use this spell to add a hat to your outfit, objects pass through the hat, and anyone who touches it would feel nothing. To discern that you are disguised, a creature must take the Study action to inspect your appearance and succeed on an Intelligence (Investigation) check against your spell save DC."
+    },
+    {
+      "id": "srd-5.2.1:spell:expeditious-retreat",
+      "name": "Expeditious Retreat",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Bonus-Action",
+      "range": "Self",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You take the Dash action, and until the spell ends, you can take that action again as a Bonus Action."
+    },
+    {
+      "id": "srd-5.2.1:spell:false-life",
+      "name": "False Life",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a drop of alcohol"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You gain 2d4 + 4 Temporary Hit Points.",
+      "higherLevelDescription": "You gain 5 additional Temporary Hit Points for each spell slot level above 1.",
+      "damage": "2d4 + 4"
+    },
+    {
+      "id": "srd-5.2.1:spell:feather-fall",
+      "name": "Feather Fall",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Reaction",
+      "range": "60 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "material": "a small feather or piece of down"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Choose up to five falling creatures within range. A falling creature's rate of descent slows to 60 feet per round until the spell ends. If a creature lands before the spell ends, the creature takes no damage from the fall, and the spell ends for that creature."
+    },
+    {
+      "id": "srd-5.2.1:spell:find-familiar",
+      "name": "Find Familiar",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "1hour",
+      "range": "10 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "burning incense worth 10+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "You gain the service of a familiar, a spirit that takes an animal form you choose: Bat, Cat, Frog, Hawk, Lizard, Octopus, Owl, Rat, Raven, Spider, Weasel, or another Beast that has a Challenge Rating of 0. Appearing in an unoccupied space within range, the familiar has the statistics of the chosen form (see \"Monsters\"), though it is a Celestial, Fey, or Fiend (your choice) instead of a Beast. Your familiar acts independently of you, but it obeys your commands.\n\n**_Telepathic Connection._** While your familiar is within 100 feet of you, you can communicate with it telepathically. Additionally, as a Bonus Action, you can see through the familiar's eyes and hear what it hears until the start of your next turn, gaining the benefits of any special senses it has.\n\nFinally, when you cast a spell with a range of touch, your familiar can deliver the touch. Your familiar must be within 100 feet of you, and it must take a Reaction to deliver the touch when you cast the spell.\n\n**_Combat._** The familiar is an ally to you and your allies. It rolls its own Initiative and acts on its own turn. A familiar can't attack, but it can take other actions as normal.\n\n**_Disappearance of the Familiar._** When the familiar drops to 0 Hit Points, it disappears. It reappears after you cast this spell again. As a Magic action, you can temporarily dismiss the familiar to a pocket dimension. Alternatively, you can dismiss it forever. As a Magic action while it is temporarily dismissed, you can cause it to reappear in an unoccupied space within 30 feet of you. Whenever the familiar drops to 0 Hit Points or disappears into the pocket dimension, it leaves behind in its space anything it was wearing or carrying.\n\n**_One Familiar Only._** You can't have more than one familiar at a time. If you cast this spell while you have a familiar, you instead cause it to adopt a new eligible form."
+    },
+    {
+      "id": "srd-5.2.1:spell:floating-disk",
+      "name": "Floating Disk",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a drop of mercury"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "This spell creates a circular, horizontal plane of force, 3 feet in diameter and 1 inch thick, that floats 3 feet above the ground in an unoccupied space of your choice that you can see within range. The disk remains for the duration and can hold up to 500 pounds. If more weight is placed on it, the spell ends, and everything on the disk falls to the ground. The disk is immobile while you are within 20 feet of it. If you move more than 20 feet away from it, the disk follows you so that it remains within 20 feet of you. It can move across uneven terrain, up or down stairs, slopes and the like, but it can't cross an elevation change of 10 feet or more. For example, the disk can't move across a 10-foot-deep pit, nor could it leave such a pit if it was created at the bottom. If you move more than 100 feet from the disk (typically because it can't move around an obstacle to follow you), the spell ends."
+    },
+    {
+      "id": "srd-5.2.1:spell:fog-cloud",
+      "name": "Fog Cloud",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create a 20-foot-radius Sphere of fog centered on a point within range. The Sphere is Heavily Obscured. It lasts for the duration or until a strong wind (such as one created by Gust of Wind) disperses it.",
+      "higherLevelDescription": "The fog's radius increases by 20 feet for each spell slot level above 1."
+    },
+    {
+      "id": "srd-5.2.1:spell:grease",
+      "name": "Grease",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of pork rind or butter"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Nonflammable grease covers the ground in a 10 foot square centered on a point within range and turns it into Difficult Terrain for the duration. When the grease appears, each creature standing in its area must succeed on a Dexterity saving throw or have the Prone condition. A creature that enters the area or ends its turn there must also succeed on that save or fall Prone."
+    },
+    {
+      "id": "srd-5.2.1:spell:hideous-laughter",
+      "name": "Hideous Laughter",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a tart and a feather"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "One creature of your choice that you can see within range makes a Wisdom saving throw. On a failed save, it has the Prone and Incapacitated conditions for the duration. During that time, it laughs uncontrollably if it's capable of laughter, and it can't end the Prone condition on itself. At the end of each of its turns and each time it takes damage, it makes another Wisdom saving throw. The target has Advantage on the save if the save is triggered by damage. On a successful save, the spell ends.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 1."
+    },
+    {
+      "id": "srd-5.2.1:spell:ice-knife",
+      "name": "Ice Knife",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "somatic": true,
+        "material": "a drop of water or a piece of ice"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You create a shard of ice and fling it at one creature within range. Make a ranged spell attack against the target. On a hit, the target takes 1d10 Piercing damage. Hit or miss, the shard then explodes. The target and each creature within 5 feet of it must succeed on a Dexterity saving throw or take 2d6 Cold damage.",
+      "higherLevelDescription": "The Cold damage increases by 1d6 for each spell slot level above 1.",
+      "damage": "1d10",
+      "damageTypes": [
+        "piercing",
+        "cold"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:identify",
+      "name": "Identify",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "1minute",
+      "range": "Touch",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pearl worth 100+ GP"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "You touch an object throughout the spell's casting. If the object is a magic item or some other magical object, you learn its properties and how to use them, whether it requires Attunement, and how many charges it has, if any. You learn whether any ongoing spells are affecting the item and what they are. If the item was created by a spell, you learn that spell's name. If you instead touch a creature throughout the casting, you learn which ongoing spells, if any, are currently affecting it."
+    },
+    {
+      "id": "srd-5.2.1:spell:illusory-script",
+      "name": "Illusory Script",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "1minute",
+      "range": "Touch",
+      "duration": "10 Days",
+      "components": {
+        "somatic": true,
+        "material": "ink worth 10+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "You write on parchment, paper, or another suitable material and imbue it with an illusion that lasts for the duration. To you and any creatures you designate when you cast the spell, the writing appears normal, seems to be written in your hand, and conveys whatever meaning you intended when you wrote the text. To all others, the writing appears as if it were written in an unknown or magical script that is unintelligible. Alternatively, the illusion can alter the meaning, handwriting, and language of the text, though the language must be one you know. If the spell is dispelled, the original script and the illusion both disappear. A creature that has Truesight can read the hidden message."
+    },
+    {
+      "id": "srd-5.2.1:spell:jump",
+      "name": "Jump",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Bonus-Action",
+      "range": "Touch",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "Material component"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You touch a willing creature. Once on each of its turns until the spell ends, that creature can jump up to 30 feet by spending 10 feet of movement.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 1."
+    },
+    {
+      "id": "srd-5.2.1:spell:longstrider",
+      "name": "Longstrider",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pinch of dirt"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You touch a creature. The target's Speed increases by 10 feet until the spell ends.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 1."
+    },
+    {
+      "id": "srd-5.2.1:spell:mage-armor",
+      "name": "Mage Armor",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "8 Hours",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a piece of cured leather"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You touch a willing creature who isn't wearing armor. Until the spell ends, the target's base AC becomes 13 plus its Dexterity modifier. The spell ends early if the target dons armor."
+    },
+    {
+      "id": "srd-5.2.1:spell:magic-missile",
+      "name": "Magic Missile",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You create three glowing darts of magical force. Each dart strikes a creature of your choice that you can see within range. A dart deals 1d4 + 1 Force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.",
+      "higherLevelDescription": "The spell creates one more dart for each spell slot level above 1.",
+      "damage": "1d4 + 1",
+      "damageTypes": [
+        "force"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:protection-from-evil-and-good",
+      "name": "Protection from Evil and Good",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a flask of Holy Water worth 25+ GP, which the spell consumes"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Until the spell ends, one willing creature you touch is protected against creatures that are Aberrations, Celestials, Elementals, Fey, Fiends, or Undead. The protection grants several benefits. Creatures of those types have Disadvantage on attack rolls against the target. The target also can't be possessed by or gain the Charmed or Frightened conditions from them. If the target is already possessed, Charmed, or Frightened by such a creature, the target has Advantage on any new saving throw against the relevant effect."
+    },
+    {
+      "id": "srd-5.2.1:spell:ray-of-sickness",
+      "name": "Ray of Sickness",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You shoot a greenish ray at a creature within range. Make a ranged spell attack against the target. On a hit, the target takes 2d8 Poison damage and has the Poisoned condition until the end of your next turn.",
+      "higherLevelDescription": "The damage increases by 1d8 for each spell slot level above 1.",
+      "damage": "2d8",
+      "damageTypes": [
+        "poison"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:shield",
+      "name": "Shield",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Reaction",
+      "range": "Self",
+      "duration": "1 Round",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "An imperceptible barrier of magical force protects you. Until the start of your next turn, you have a +5 bonus to AC, including against the triggering attack, and you take no damage from Magic Missile."
+    },
+    {
+      "id": "srd-5.2.1:spell:silent-image",
+      "name": "Silent Image",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of fleece"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 15-foot Cube. The image appears at a spot within range and lasts for the duration. The image is purely visual; it isn't accompanied by sound, smell, or other sensory effects. As a Magic action, you can cause the image to move to any spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Physical interaction with the image reveals it to be an illusion, since things can pass through it. A creature that takes a Study action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image."
+    },
+    {
+      "id": "srd-5.2.1:spell:sleep",
+      "name": "Sleep",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pinch of sand or rose petals"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Each creature of your choice in a 5-foot-radius Sphere centered on a point within range must succeed on a Wisdom saving throw or have the Incapacitated condition until the end of its next turn, at which point it must repeat the save. If the target fails the second save, the target has the Unconscious condition for the duration. The spell ends on a target if it takes damage or someone within 5 feet of it takes an action to shake it out of the spell's effect. Creatures that don't sleep, such as elves, or that have Immunity to the Exhaustion condition automatically succeed on saves against this spell."
+    },
+    {
+      "id": "srd-5.2.1:spell:thunderwave",
+      "name": "Thunderwave",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You unleash a wave of thunderous energy. Each creature in a 15-foot Cube originating from you makes a Constitution saving throw. On a failed save, a creature takes 2d8 Thunder damage and is pushed 10 feet away from you. On a successful save, a creature takes half as much damage only.\n\nIn addition, unsecured objects that are entirely within the Cube are pushed 10 feet away from you, and a thunderous boom is audible within 300 feet.",
+      "higherLevelDescription": "The damage increases by 1d8 for each spell slot level above 1.",
+      "damage": "2d8",
+      "damageTypes": [
+        "thunder"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:unseen-servant",
+      "name": "Unseen Servant",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 1,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of string and of wood"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "This spell creates an Invisible, mindless, shapeless, Medium force that performs simple tasks at your command until the spell ends. The servant springs into existence in an unoccupied space on the ground within range. It has AC 10, 1 Hit Point, and a Strength of 2, and it can't attack. If it drops to 0 Hit Points, the spell ends. Once on each of your turns as a Bonus Action, you can mentally command the servant to move up to 15 feet and interact with an object. The servant can perform simple tasks that a human could do, such as fetching things, cleaning, mending, folding clothes, lighting fires, serving food, and pouring drinks. Once you give the command, the servant performs the task to the best of its ability until it completes the task, then waits for your next command. If you command the servant to perform a task that would move it more than 60 feet away from you, the spell ends."
+    },
+    {
+      "id": "srd-5.2.1:spell:acid-arrow",
+      "name": "Acid Arrow",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "90 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "powdered rhubarb leaf"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A shimmering green arrow streaks toward a target within range and bursts in a spray of acid. Make a ranged spell attack against the target. On a hit, the target takes 4d4 Acid damage and 2d4 Acid damage at the end of its next turn. On a miss, the arrow splashes the target with acid for half as much of the initial damage only.",
+      "higherLevelDescription": "The damage (both initial and later) increases by 1d4 for each spell slot level above 2.",
+      "damage": "4d4",
+      "damageTypes": [
+        "acid"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:alter-self",
+      "name": "Alter Self",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You alter your physical form. Choose one of the following options. Its effects last for the duration, during which you can take a Magic action to replace the option you chose with a different one. _Aquatic Adaptation._ You sprout gills and grow webs between your fingers. You can breathe underwater and gain a Swim Speed equal to your Speed. _Change Appearance._ You alter your appearance. You decide what you look like, including your height, weight, facial features, sound of your voice, hair length, coloration, and other distinguishing characteristics. You can make yourself appear as a member of another species, though none of your statistics change. You can't appear as a creature of a different size, and your basic shape stays the same; if you're bipedal, you can't use this spell to become quadrupedal, for instance. For the duration, you can take a Magic action to change your appearance in this way again. _Natural Weapons._ You grow claws (Slashing), fangs (Piercing), horns (Piercing), or hooves (Bludgeoning). When you use your Unarmed Strike to deal damage with that new growth, it deals 1d6 damage of the type in parentheses instead of dealing the normal damage for your Unarmed Strike, and you use your spellcasting ability modifier for the attack and damage rolls rather than using Strength.",
+      "damage": "1d6"
+    },
+    {
+      "id": "srd-5.2.1:spell:arcane-lock",
+      "name": "Arcane Lock",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "Until Dispelled",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "gold dust worth 25+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You touch a closed door, window, gate, container, or hatch and magically lock it for the duration. This lock can't be unlocked by any nonmagical means. You and any creatures you designate when you cast the spell can open and close the object despite the lock. You can also set a password that, when spoken within 5 feet of the object, unlocks it for 1 minute."
+    },
+    {
+      "id": "srd-5.2.1:spell:arcanists-magic-aura",
+      "name": "Arcanist's Magic Aura",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "24 Hours",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a small square of silk"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "With a touch, you place an illusion on a willing creature or an object that isn't being worn or carried. A creature gains the Mask effect below, and an object gains the False Aura effect below. The effect lasts for the duration. If you cast the spell on the same target every day for 30 days, the illusion lasts until dispelled.\n\n**Mask (Creature).** Choose a creature type other than the target's actual type. Spells and other magical effects treat the target as if it were a creature of the chosen type.\n\n**False Aura (Object).** You change the way the target appears to spells and magical effects that detect magical auras, such as Detect Magic. You can make a nonmagical object appear magical, make a magic item appear nonmagical, or change the object's aura so that it appears to belong to a school of magic you choose."
+    },
+    {
+      "id": "srd-5.2.1:spell:augury",
+      "name": "Augury",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "1minute",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "specially marked sticks, bones, cards, or other divinatory tokens worth 25+ GP"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "You receive an omen from an otherworldly entity about the results of a course of action that you plan to take within the next 30 minutes. The GM chooses the omen from the Omens table. Table: Omens | Omen | For Results That Will Be … | |--------------|----------------------------| | Weal | Good | | Woe | Bad | | Weal and woe | Good and bad | | Indifference | Neither good nor bad | The spell doesn't account for circumstances, such as other spells, that might change the results. If you cast the spell more than once before finishing a Long Rest, there is a cumulative 25 percent chance for each casting after the first that you get no answer."
+    },
+    {
+      "id": "srd-5.2.1:spell:blindnessdeafness",
+      "name": "Blindness/Deafness",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "One creature that you can see within range must succeed on a Constitution saving throw, or it has the Blinded or Deafened condition (your choice) for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 2."
+    },
+    {
+      "id": "srd-5.2.1:spell:blur",
+      "name": "Blur",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Your body becomes blurred. For the duration, any creature has Disadvantage on attack rolls against you. An attacker is immune to this effect if it perceives you with Blindsight or Truesight."
+    },
+    {
+      "id": "srd-5.2.1:spell:continual-flame",
+      "name": "Continual Flame",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "Until Dispelled",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "ruby dust worth 50+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A flame springs from an object that you touch. The effect casts Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. It looks like a regular flame, but it creates no heat and consumes no fuel. The flame can be covered or hidden but not smothered or quenched."
+    },
+    {
+      "id": "srd-5.2.1:spell:darkness",
+      "name": "Darkness",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "material": "bat fur and a piece of coal"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "For the duration, magical Darkness spreads from a point within range and fills a 15-foot-radius Sphere. Darkvision can't see through it, and nonmagical light can't illuminate it. Alternatively, you cast the spell on an object that isn't being worn or carried, causing the Darkness to fill a 15-foot Emanation originating from that object. Covering that object with something opaque, such as a bowl or helm, blocks the Darkness. If any of this spell's area overlaps with an area of Bright Light or Dim Light created by a spell of level 2 or lower, that other spell is dispelled."
+    },
+    {
+      "id": "srd-5.2.1:spell:darkvision",
+      "name": "Darkvision",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "8 Hours",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a dried carrot"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "For the duration, a willing creature you touch has Darkvision with a range of 150 feet."
+    },
+    {
+      "id": "srd-5.2.1:spell:detect-thoughts",
+      "name": "Detect Thoughts",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "1 Copper Piece"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You activate one of the effects below. Until the spell ends, you can activate either effect as a Magic action on your later turns.\n\n***Sense Thoughts.*** You sense the presence of thoughts within 30 feet of yourself that belong to creatures that know languages or are telepathic. You don't read the thoughts, but you know that a thinking creature is present. The spell is blocked by 1 foot of stone, dirt, or wood; 1 inch of metal; or a thin sheet of lead.\n\n**Read Thoughts.** Target one creature you can see within 30 feet of yourself or one creature within 30 feet of yourself that you detected with the Sense Thoughts option. You learn what is most on the target's mind right now. If the target doesn't know any languages and isn't telepathic, you learn nothing.\n\nAs a Magic action on your next turn, you can try to probe deeper into the target's mind. If you probe deeper, the target makes a Wisdom saving throw. On a failed save, you discern the target's reasoning, emotions, and something that looms large in its mind (such as a worry, love, or hate). On a successful save, the spell ends. Either way, the target knows that you are probing into its mind, and until you shift your attention away from the target's mind, the target can take an action on its turn to make an Intelligence (Arcana) check against your spell save DC, ending the spell on a success."
+    },
+    {
+      "id": "srd-5.2.1:spell:dragons-breath",
+      "name": "Dragon's Breath",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Bonus-Action",
+      "range": "Touch",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a hot pepper"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You touch one willing creature, and choose Acid, Cold, Fire, Lightning, or Poison. Until the spell ends, the target can take a Magic action to exhale a 15-foot Cone. Each creature in that area makes a Dexterity saving throw, taking 3d6 damage of the chosen type on a failed save or half as much damage on a successful one.",
+      "higherLevelDescription": "The damage increases by 1d6 for each spell slot level above 2.",
+      "damage": "3d6"
+    },
+    {
+      "id": "srd-5.2.1:spell:enhance-ability",
+      "name": "Enhance Ability",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "fur or a feather"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You touch a creature and choose Strength, Dexterity, Intelligence, Wisdom, or Charisma. For the duration, the target has Advantage on ability checks using the chosen ability.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 2. You can choose a different ability for each target."
+    },
+    {
+      "id": "srd-5.2.1:spell:enlargereduce",
+      "name": "Enlarge/Reduce",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pinch of powdered iron"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "For the duration, the spell enlarges or reduces a creature or an object you can see within range (see the chosen effect below). A targeted object must be neither worn nor carried. If the target is an unwilling creature, it can make a Constitution saving throw. On a successful save, the spell has no effect. Everything that a targeted creature is wearing and carrying changes size with it. Any item it drops returns to normal size at once. A thrown weapon or piece of ammunition returns to normal size immediately after it hits or misses a target.\n\n**_Enlarge._** The target's size increases by one category—from Medium to Large, for example. The target also has Advantage on Strength checks and Strength saving throws. The target's attacks with its enlarged weapons or Unarmed Strikes deal an extra 1d4 damage on a hit.\n\n**_Reduce._** The target's size decreases by one category—from Medium to Small, for example. The target also has Disadvantage on Strength checks and Strength saving throws. The target's attacks with its reduced weapons or Unarmed Strikes deal 1d4 less damage on a hit (this can't reduce the damage below 1)."
+    },
+    {
+      "id": "srd-5.2.1:spell:flaming-sphere",
+      "name": "Flaming Sphere",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a ball of wax"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create a 5-foot-diameter sphere of fire in an unoccupied space on the ground within range. It lasts for the duration. Any creature that ends its turn within 5 feet of the sphere makes a Dexterity saving throw, taking 2d6 Fire damage on a failed save or half as much damage on a successful one. As a Bonus Action, you can move the sphere up to 30 feet, rolling it along the ground. If you move the sphere into a creature's space, that creature makes the save against the sphere, and the sphere stops moving for the turn. When you move the sphere, you can direct it over barriers up to 5 feet tall and jump it across pits up to 10 feet wide. Flammable objects that aren't being worn or carried start burning if touched by the sphere, and it sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet.",
+      "higherLevelDescription": "The damage increases by 1d6 for each spell slot level above 2.",
+      "damage": "2d6",
+      "damageTypes": [
+        "fire"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:gentle-repose",
+      "name": "Gentle Repose",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "10 Days",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "2 Copper Pieces, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "You touch a corpse or other remains. For the duration, the target is protected from decay and can't become Undead. The spell also effectively extends the time limit on raising the target from the dead, since days spent under the influence of this spell don't count against the time limit of spells such as Raise Dead."
+    },
+    {
+      "id": "srd-5.2.1:spell:gust-of-wind",
+      "name": "Gust of Wind",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a legume seed"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "A Line of strong wind 60 feet long and 10 feet wide blasts from you in a direction you choose for the duration. Each creature in the Line must succeed on a Strength saving throw or be pushed 15 feet away from you in a direction following the Line. A creature that ends its turn in the Line must make the same save. Any creature in the Line must spend 2 feet of movement for every 1 foot it moves when moving closer to you. The gust disperses gas or vapor, and it extinguishes candles and similar unprotected flames in the area. It causes protected flames, such as those of lanterns, to dance wildly and has a 50 percent chance to extinguish them. As a Bonus Action on your later turns, you can change the direction in which the Line blasts from you."
+    },
+    {
+      "id": "srd-5.2.1:spell:hold-person",
+      "name": "Hold Person",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a straight piece of iron"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Choose a Humanoid that you can see within range. The target must succeed on a Wisdom saving throw or have the Paralyzed condition for the duration. At the end of each of its turns, the target repeats the save, ending the spell on itself on a success.",
+      "higherLevelDescription": "You can target one additional Humanoid for each spell slot level above 2."
+    },
+    {
+      "id": "srd-5.2.1:spell:invisibility",
+      "name": "Invisibility",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "an eyelash in gum arabic"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "A creature you touch has the Invisible condition until the spell ends. The spell ends early immediately after the target makes an attack roll, deals damage, or casts a spell.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 2."
+    },
+    {
+      "id": "srd-5.2.1:spell:knock",
+      "name": "Knock",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A target that is held shut by a mundane lock or that is stuck or barred becomes unlocked, unstuck, or unbarred. If the object has multiple locks, only one of them is unlocked. If the target is held shut by Arcane Lock, that spell is suppressed for 10 minutes, during which time the target can be opened and closed. When you cast the spell, a loud knock, audible up to 300 feet away, emanates from the target."
+    },
+    {
+      "id": "srd-5.2.1:spell:levitate",
+      "name": "Levitate",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a metal spring"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "One creature or loose object of your choice that you can see within range rises vertically up to 20 feet and remains suspended there for the duration. The spell can levitate an object that weighs up to 500 pounds. An unwilling creature that succeeds on a Constitution saving throw is unaffected. The target can move only by pushing or pulling against a fixed object or surface within reach (such as a wall or a ceiling), which allows it to move as if it were climbing. You can change the target's altitude by up to 20 feet in either direction on your turn. If you are the target, you can move up or down as part of your move. Otherwise, you can take a Magic action to move the target, which must remain within the spell's range. When the spell ends, the target floats gently to the ground if it is still aloft."
+    },
+    {
+      "id": "srd-5.2.1:spell:locate-object",
+      "name": "Locate Object",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a forked twig"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Describe or name an object that is familiar to you. You sense the direction to the object's location if that object is within 1,000 feet of you. If the object is in motion, you know the direction of its movement. The spell can locate a specific object known to you if you have seen it up close—within 30 feet—at least once. Alternatively, the spell can locate the nearest object of a particular kind, such as a certain kind of apparel, jewelry, furniture, tool, or weapon. This spell can't locate an object if any thickness of lead blocks a direct path between you and the object."
+    },
+    {
+      "id": "srd-5.2.1:spell:magic-mouth",
+      "name": "Magic Mouth",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "1minute",
+      "range": "30 feet",
+      "duration": "Until Dispelled",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "jade dust worth 10+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "You implant a message within an object in range—a message that is uttered when a trigger condition is met. Choose an object that you can see and that isn't being worn or carried by another creature. Then speak the message, which must be 25 words or fewer, though it can be delivered over as long as 10 minutes. Finally, determine the circumstance that will trigger the spell to deliver your message. When that trigger occurs, a magical mouth appears on the object and recites the message in your voice and at the same volume you spoke. If the object you chose has a mouth or something that looks like a mouth (for example, the mouth of a statue), the magical mouth appears there, so the words appear to come from the object's mouth. When you cast this spell, you can have the spell end after it delivers its message, or it can remain and repeat its message whenever the trigger occurs. The trigger can be as general or as detailed as you like, though it must be based on visual or audible conditions that occur within 30 feet of the object. For example, you could instruct the mouth to speak when any creature moves within 30 feet of the object or when a silver bell rings within 30 feet of it."
+    },
+    {
+      "id": "srd-5.2.1:spell:magic-weapon",
+      "name": "Magic Weapon",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Bonus-Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You touch a nonmagical weapon. Until the spell ends, that weapon becomes a magic weapon with a +1 bonus to attack rolls and damage rolls. The spell ends early if you cast it again.",
+      "higherLevelDescription": "The bonus increases to +2 with a level 3–5 spell slot. The bonus increases to +3 with a level 6+ spell slot."
+    },
+    {
+      "id": "srd-5.2.1:spell:mind-spike",
+      "name": "Mind Spike",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "1 Hour",
+      "components": {
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You drive a spike of psionic energy into the mind of one creature you can see within range. The target makes a Wisdom saving throw, taking 3d8 Psychic damage on a failed save or half as much damage on a successful one. On a failed save, you also always know the target's location until the spell ends, but only while the two of you are on the same plane of existence. While you have this knowledge, the target can't become hidden from you, and if it has the Invisible condition, it gains no benefit from that condition against you.",
+      "higherLevelDescription": "The damage increases by 1d8 for each spell slot level above 2.",
+      "damage": "3d8",
+      "damageTypes": [
+        "psychic"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:mirror-image",
+      "name": "Mirror Image",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Three illusory duplicates of yourself appear in your space. Until the spell ends, the duplicates move with you and mimic your actions, shifting position so it's impossible to track which image is real. Each time a creature hits you with an attack roll during the spell's duration, roll a d6 for each of your remaining duplicates. If any of the d6s rolls a 3 or higher, one of the duplicates is hit instead of you, and the duplicate is destroyed. The duplicates otherwise ignore all other damage and effects. The spell ends when all three duplicates are destroyed. A creature is unaffected by this spell if it has the Blinded condition, Blindsight, or Truesight."
+    },
+    {
+      "id": "srd-5.2.1:spell:misty-step",
+      "name": "Misty Step",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Bonus-Action",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Briefly surrounded by silvery mist, you teleport up to 30 feet to an unoccupied space you can see."
+    },
+    {
+      "id": "srd-5.2.1:spell:phantasmal-force",
+      "name": "Phantasmal Force",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of fleece"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You attempt to craft an illusion in the mind of a creature you can see within range. The target makes an Intelligence saving throw. On a failed save, you create a phantasmal object, creature, or other phenomenon that is no larger than a 10-foot Cube and that is perceivable only to the target for the duration. The phantasm includes sound, temperature, and other stimuli. The target can take a Study action to examine the phantasm with an Intelligence (Investigation) check against your spell save DC. If the check succeeds, the target realizes that the phantasm is an illusion, and the spell ends. While affected by the spell, the target treats the phantasm as if it were real and rationalizes any illogical outcomes from interacting with it. For example, if the target steps through a phantasmal bridge and survives the fall, it believes the bridge exists and something else caused it to fall. An affected target can even take damage from the illusion if the phantasm represents a dangerous creature or hazard. On each of your turns, such a phantasm can deal 2d8 Psychic damage to the target if it is in the phantasm's area or within 5 feet of the phantasm. The target perceives the damage as a type appropriate to the illusion.",
+      "damage": "2d8",
+      "damageTypes": [
+        "psychic"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:ray-of-enfeeblement",
+      "name": "Ray of Enfeeblement",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "A beam of enervating energy shoots from you toward a creature within range. The target must make a Constitution saving throw. On a successful save, the target has Disadvantage on the next attack roll it makes until the start of your next turn. On a failed save, the target has Disadvantage on Strength-based D20 Tests for the duration. During that time, it also subtracts 1d8 from all its damage rolls. The target repeats the save at the end of each of its turns, ending the spell on a success.",
+      "damage": "1d8"
+    },
+    {
+      "id": "srd-5.2.1:spell:rope-trick",
+      "name": "Rope Trick",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a segment of rope"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You touch a rope. One end of it hovers upward until the rope hangs perpendicular to the ground or the rope reaches a ceiling. At the rope's upper end, an Invisible 3-foot-by-5-foot portal opens to an extradimensional space that lasts until the spell ends. That space can be reached by climbing the rope, which can be pulled into or dropped out of it. The space can hold up to eight Medium or smaller creatures. Attacks, spells, and other effects can't pass into or out of the space, but creatures inside it can see through the portal. Anything inside the space drops out when the spell ends."
+    },
+    {
+      "id": "srd-5.2.1:spell:scorching-ray",
+      "name": "Scorching Ray",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You hurl three fiery rays. You can hurl them at one target within range or at several. Make a ranged spell attack for each ray. On a hit, the target takes 2d6 Fire damage.",
+      "higherLevelDescription": "You create one additional ray for each spell slot level above 2.",
+      "damage": "2d6",
+      "damageTypes": [
+        "fire"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:see-invisibility",
+      "name": "See Invisibility",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pinch of talc"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "For the duration, you see creatures and objects that have the Invisible condition as if they were visible, and you can see into the Ethereal Plane. Creatures and objects there appear ghostly."
+    },
+    {
+      "id": "srd-5.2.1:spell:shatter",
+      "name": "Shatter",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a chip of mica"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A loud noise erupts from a point of your choice within range. Each creature in a 10-foot-radius Sphere centered there makes a Constitution saving throw, taking 3d8 Thunder damage on a failed save or half as much damage on a successful one. A Construct has Disadvantage on the save. A nonmagical object that isn't being worn or carried also takes the damage if it's in the spell's area.",
+      "higherLevelDescription": "The damage increases by 1d8 for each spell slot level above 2.",
+      "damage": "3d8",
+      "damageTypes": [
+        "thunder"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:spider-climb",
+      "name": "Spider Climb",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a drop of bitumen and a spider"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Until the spell ends, one willing creature you touch gains the ability to move up, down, and across vertical surfaces and along ceilings, while leaving its hands free. The target also gains a Climb Speed equal to its Speed.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 2."
+    },
+    {
+      "id": "srd-5.2.1:spell:suggestion",
+      "name": "Suggestion",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "8 Hours",
+      "components": {
+        "verbal": true,
+        "material": "a drop of honey"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You suggest a course of activity—described in no more than 25 words—to one creature you can see within range that can hear and understand you. The suggestion must sound achievable and not involve anything that would obviously deal damage to the target or its allies. For example, you could say, \"Fetch the key to the cult's treasure vault, and give the key to me.\" Or you could say, \"Stop fighting, leave this library peacefully, and don't return.\" The target must succeed on a Wisdom saving throw or have the Charmed condition for the duration or until you or your allies deal damage to the target. The Charmed target pursues the suggestion to the best of its ability. The suggested activity can continue for the entire duration, but if the suggested activity can be completed in a shorter time, the spell ends for the target upon completing it."
+    },
+    {
+      "id": "srd-5.2.1:spell:web",
+      "name": "Web",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 2,
+      "castingTime": "Action",
+      "range": "60 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of spiderweb"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You conjure a mass of sticky webbing at a point within range. The webs fill a 20-foot Cube there for the duration. The webs are Difficult Terrain, and the area within them is Lightly Obscured. If the webs aren't anchored between two solid masses (such as walls or trees) or layered across a floor, wall, or ceiling, the web collapses on itself, and the spell ends at the start of your next turn. Webs layered over a flat surface have a depth of 5 feet. The first time a creature enters the webs on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Restrained condition while in the webs or until it breaks free. A creature Restrained by the webs can take an action to make a Strength (Athletics) check against your spell save DC. If it succeeds, it is no longer Restrained. The webs are flammable. Any 5-foot Cube of webs exposed to fire burns away in 1 round, dealing 2d4 Fire damage to any creature that starts its turn in the fire.",
+      "damage": "2d4",
+      "damageTypes": [
+        "fire"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:animate-dead",
+      "name": "Animate Dead",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "1minute",
+      "range": "10 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a drop of blood, a piece of flesh, and a pinch of bone dust"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Choose a pile of bones or a corpse of a Medium or Small Humanoid within range. The target becomes an Undead creature: a Skeleton if you chose bones or a Zombie if you chose a corpse (see \"Monsters\" for the stat blocks). On each of your turns, you can take a Bonus Action to mentally command any creature you made with this spell if the creature is within 60 feet of you (if you control multiple creatures, you can command any of them at the same time, issuing the same command to each one). You decide what action the creature will take and where it will move on its next turn, or you can issue a general command, such as to guard a chamber or corridor. If you issue no commands, the creature takes the Dodge action and moves only to avoid harm. Once given an order, the creature continues to follow it until its task is complete. The creature is under your control for 24 hours, after which it stops obeying any command you've given it. To maintain control of the creature for another 24 hours, you must cast this spell on the creature again before the current 24-hour period ends. This use of the spell reasserts your control over up to four creatures you have animated with this spell rather than animating a new creature.",
+      "higherLevelDescription": "You animate or reassert control over two additional Undead creatures for each spell slot level above 3. Each of the creatures must come from a different corpse or pile of bones."
+    },
+    {
+      "id": "srd-5.2.1:spell:bestow-curse",
+      "name": "Bestow Curse",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You touch a creature, which must succeed on a Wisdom saving throw or become cursed for the duration. Until the curse ends, the target suffers one of the following effects of your choice: - Choose one ability. The target has Disadvantage on ability checks and saving throws made with that ability. - The target has Disadvantage on attack rolls against you. - In combat, the target must succeed on a Wisdom saving throw at the start of each of its turns or be forced to take the Dodge action on that turn. - If you deal damage to the target with an attack roll or a spell, the target takes an extra 1d8 Necrotic damage.",
+      "higherLevelDescription": "If you cast this spell using a level 4 spell slot, you can maintain Concentration on it for up to 10 minutes. If you use a level 5+ spell slot, the spell doesn't require Concentration, and the duration becomes 8 hours (level 5–6 slot) or 24 hours (level 7–8 slot). If you use a level 9 spell slot, the spell lasts until dispelled.",
+      "damage": "1d8",
+      "damageTypes": [
+        "necrotic"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:blink",
+      "name": "Blink",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Roll 1d6 at the end of each of your turns for the duration. On a roll of 4–6, you vanish from your current plane of existence and appear in the Ethereal Plane (the spell ends instantly if you are already on that plane). While on the Ethereal Plane, you can perceive the plane you left, which is cast in shades of gray, but you can't see anything there more than 60 feet away. You can affect and be affected only by other creatures on the Ethereal Plane, and creatures on the other plane can't perceive you unless they have a special ability that lets them perceive things on the Ethereal Plane. You return to the other plane at the start of your next turn and when the spell ends if you are on the Ethereal Plane. You return to an unoccupied space of your choice that you can see within 10 feet of the space you left. If no unoccupied space is available within that range, you appear in the nearest unoccupied space.",
+      "damage": "1d6"
+    },
+    {
+      "id": "srd-5.2.1:spell:clairvoyance",
+      "name": "Clairvoyance",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "1minute",
+      "range": "1 mile",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a focus worth 100+ GP, either a jeweled horn for hearing or a glass eye for seeing"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create an Invisible sensor within range in a location familiar to you (a place you have visited or seen before) or in an obvious location that is unfamiliar to you (such as behind a door, around a corner, or in a grove of trees). The intangible, invulnerable sensor remains in place for the duration. When you cast the spell, choose seeing or hearing. You can use the chosen sense through the sensor as if you were in its space. As a Bonus Action, you can switch between seeing and hearing. A creature that sees the sensor (such as a creature benefiting from See Invisibility or Truesight) sees a luminous orb about the size of your fist."
+    },
+    {
+      "id": "srd-5.2.1:spell:counterspell",
+      "name": "Counterspell",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Reaction",
+      "range": "60 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You attempt to interrupt a creature in the process of casting a spell. The creature makes a Constitution saving throw. On a failed save, the spell dissipates with no effect, and the action, Bonus Action, or Reaction used to cast it is wasted. If that spell was cast with a spell slot, the slot isn't expended."
+    },
+    {
+      "id": "srd-5.2.1:spell:dispel-magic",
+      "name": "Dispel Magic",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "Choose one creature, object, or magical effect within range. Any ongoing spell of level 3 or lower on the target ends. For each ongoing spell of level 4 or higher on the target, make an ability check using your spellcasting ability (DC 10 plus that spell's level). On a successful check, the spell ends.",
+      "higherLevelDescription": "You automatically end a spell on the target if the spell's level is equal to or less than the level of the spell slot you use."
+    },
+    {
+      "id": "srd-5.2.1:spell:fear",
+      "name": "Fear",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a white feather"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Each creature in a 30-foot Cone must succeed on a Wisdom saving throw or drop whatever it is holding and have the Frightened condition for the duration. A Frightened creature takes the Dash action and moves away from you by the safest route on each of its turns unless there is nowhere to move. If the creature ends its turn in a space where it doesn't have line of sight to you, the creature makes a Wisdom saving throw. On a successful save, the spell ends on that creature."
+    },
+    {
+      "id": "srd-5.2.1:spell:fireball",
+      "name": "Fireball",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "150 feet",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a ball of bat guano and sulfur"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A bright streak flashes from you to a point you choose within range and then blossoms with a low roar into a fiery explosion. Each creature in a 20-foot-radius Sphere centered on that point makes a Dexterity saving throw, taking 8d6 Fire damage on a failed save or half as much damage on a successful one. Flammable objects in the area that aren't being worn or carried start burning.",
+      "higherLevelDescription": "The damage increases by 1d6 for each spell slot level above 3.",
+      "damage": "8d6",
+      "damageTypes": [
+        "fire"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:fly",
+      "name": "Fly",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a feather"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You touch a willing creature. For the duration, the target gains a Fly Speed of 60 feet and can hover. When the spell ends, the target falls if it is still aloft unless it can stop the fall.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 3."
+    },
+    {
+      "id": "srd-5.2.1:spell:gaseous-form",
+      "name": "Gaseous Form",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of gauze"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "A willing creature you touch shape-shifts, along with everything it's wearing and carrying, into a misty cloud for the duration. The spell ends on the target if it drops to 0 Hit Points or if it takes a Magic action to end the spell on itself. While in this form, the target's only method of movement is a Fly Speed of 10 feet, and it can hover. The target can enter and occupy the space of another creature. The target has Resistance to Bludgeoning, Piercing, and Slashing damage; it has Immunity to the Prone condition; and it has Advantage on Strength, Dexterity, and Constitution saving throws. The target can pass through narrow openings, but it treats liquids as though they were solid surfaces. The target can't talk or manipulate objects, and any objects it was carrying or holding can't be dropped, used, or otherwise interacted with. Finally, the target can't attack or cast spells.",
+      "higherLevelDescription": "You can target one additional creature for each spell slot level above 3.",
+      "damageTypes": [
+        "slashing"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:glyph-of-warding",
+      "name": "Glyph of Warding",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "1hour",
+      "range": "Touch",
+      "duration": "Until Dispelled Or Triggered",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "powdered diamond worth 200+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You inscribe a glyph that later unleashes a magical effect. You inscribe it either on a surface (such as a table or a section of floor) or within an object that can be closed (such as a book or chest) to conceal the glyph. The glyph can cover an area no larger than 10 feet in diameter. If the surface or object is moved more than 10 feet from where you cast this spell, the glyph is broken, and the spell ends without being triggered.\n\nThe glyph is nearly imperceptible and requires a successful Wisdom (Perception) check against your spell save DC to notice.\n\nWhen you inscribe the glyph, you set its trigger and choose whether it's an explosive rune or a spell glyph, as explained below.\n\n**_Set the Trigger._** You decide what triggers the glyph when you cast the spell. For glyphs inscribed on a surface, common triggers include touching or stepping on the glyph, removing another object covering it, or approaching within a certain distance of it. For glyphs inscribed within an object, common triggers include opening that object or seeing the glyph. Once a glyph is triggered, this spell ends.\n\nYou can refine the trigger so that only creatures of certain types activate it (for example, the glyph could be set to affect Aberrations). You can also set conditions for creatures that don't trigger the glyph, such as those who say a certain password.\n\n**_Explosive Rune._** When triggered, the glyph erupts with magical energy in a 20-foot-radius Sphere centered on the glyph. Each creature in the area makes a Dexterity saving throw. A creature takes 5d8 Acid, Cold, Fire, Lightning, or Thunder damage (your choice when you create the glyph) on a failed save or half as much damage on a successful one.\n\n**_Spell Glyph._** You can store a prepared spell of level 3 or lower in the glyph by casting it as part of creating the glyph. The spell must target a single creature or an area. The spell being stored has no immediate effect when cast in this way.\n\nWhen the glyph is triggered, the stored spell takes effect. If the spell has a target, it targets the creature that triggered the glyph. If the spell affects an area, the area is centered on that creature. If the spell summons Hostile creatures or creates harmful objects or traps, they appear as close as possible to the intruder and attack it. If the spell requires Concentration, it lasts until the end of its full duration.",
+      "higherLevelDescription": "The damage of an explosive rune increases by 1d8 for each spell slot level above 3. If you create a spell glyph, you can store any spell of up to the same level as the spell slot you use for the Glyph of Warding."
+    },
+    {
+      "id": "srd-5.2.1:spell:haste",
+      "name": "Haste",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a shaving of licorice root"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Choose a willing creature that you can see within range. Until the spell ends, the target's Speed is doubled, it gains a +2 bonus to Armor Class, it has Advantage on Dexterity saving throws, and it gains an additional action on each of its turns. That action can be used to take only the Attack (one attack only), Dash, Disengage, Hide, or Utilize action. When the spell ends, the target is Incapacitated and has a Speed of 0 until the end of its next turn, as a wave of lethargy washes over it."
+    },
+    {
+      "id": "srd-5.2.1:spell:hypnotic-pattern",
+      "name": "Hypnotic Pattern",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "1 Minute",
+      "components": {
+        "somatic": true,
+        "material": "a pinch of confetti"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create a twisting pattern of colors in a 30-foot Cube within range. The pattern appears for a moment and vanishes. Each creature in the area who can see the pattern must succeed on a Wisdom saving throw or have the Charmed condition for the duration. While Charmed, the creature has the Incapacitated condition and a Speed of 0. The spell ends for an affected creature if it takes any damage or if someone else uses an action to shake the creature out of its stupor."
+    },
+    {
+      "id": "srd-5.2.1:spell:lightning-bolt",
+      "name": "Lightning Bolt",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of fur and a crystal rod"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "A stroke of lightning forming a 100-foot-long, 5-foot-wide Line blasts out from you in a direction you choose. Each creature in the Line makes a Dexterity saving throw, taking 8d6 Lightning damage on a failed save or half as much damage on a successful one.",
+      "higherLevelDescription": "The damage increases by 1d6 for each spell slot level above 3.",
+      "damage": "8d6",
+      "damageTypes": [
+        "lightning"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:magic-circle",
+      "name": "Magic Circle",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "1minute",
+      "range": "10 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "salt and powdered silver worth 100+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You create a 10-foot-radius, 20-foot-tall Cylinder of magical energy centered on a point on the ground that you can see within range. Glowing runes appear wherever the Cylinder intersects with the floor or other surface. Choose one or more of the following types of creatures: Celestials, Elementals, Fey, Fiends, or Undead. The circle affects a creature of the chosen type in the following ways:\n\n- The creature can't willingly enter the Cylinder by nonmagical means. If the creature tries to use teleportation or interplanar travel to do so, it must first succeed on a Charisma saving throw.\n- The creature has Disadvantage on attack rolls against targets within the Cylinder.\n- Targets within the Cylinder can't be possessed by or gain the Charmed or Frightened condition from the creature. Each time you cast this spell, you can cause its magic to operate in the reverse direction, preventing a creature of the specified type from leaving the Cylinder and protecting targets outside it.",
+      "higherLevelDescription": "The duration increases by 1 hour for each spell slot level above 3."
+    },
+    {
+      "id": "srd-5.2.1:spell:major-image",
+      "name": "Major Image",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a bit of fleece"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create the image of an object, a creature, or some other visible phenomenon that is no larger than a 20-foot Cube. The image appears at a spot that you can see within range and lasts for the duration. It seems real, including sounds, smells, and temperature appropriate to the thing depicted, but it can't deal damage or cause conditions. If you are within range of the illusion, you can take a Magic action to cause the image to move to any other spot within range. As the image changes location, you can alter its appearance so that its movements appear natural for the image. For example, if you create an image of a creature and move it, you can alter the image so that it appears to be walking. Similarly, you can cause the illusion to make different sounds at different times, even making it carry on a conversation, for example. Physical interaction with the image reveals it to be an illusion, for things can pass through it. A creature that takes a Study action to examine the image can determine that it is an illusion with a successful Intelligence (Investigation) check against your spell save DC. If a creature discerns the illusion for what it is, the creature can see through the image, and its other sensory qualities become faint to the creature.",
+      "higherLevelDescription": "The spell lasts until dispelled, without requiring Concentration, if cast with a level 4+ spell slot."
+    },
+    {
+      "id": "srd-5.2.1:spell:nondetection",
+      "name": "Nondetection",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "8 Hours",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a pinch of diamond dust worth 25+ GP, which the spell consumes"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "For the duration, you hide a target that you touch from Divination spells. The target can be a willing creature, or it can be a place or an object no larger than 10 feet in any dimension. The target can't be targeted by any Divination spell or perceived through magical scrying sensors."
+    },
+    {
+      "id": "srd-5.2.1:spell:phantom-steed",
+      "name": "Phantom Steed",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "1minute",
+      "range": "30 feet",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "A Large, quasi-real, horselike creature appears on the ground in an unoccupied space of your choice within range. You decide the creature's appearance, and it is equipped with a saddle, bit, and bridle. Any of the equipment created by the spell vanishes in a puff of smoke if it is carried more than 10 feet away from the steed. For the duration, you or a creature you choose can ride the steed. The steed uses the Riding Horse stat block (see \"Monsters\"), except it has a Speed of 100 feet and can travel 13 miles in an hour. When the spell ends, the steed gradually fades, giving the rider 1 minute to dismount. The spell ends early if the steed takes any damage."
+    },
+    {
+      "id": "srd-5.2.1:spell:protection-from-energy",
+      "name": "Protection from Energy",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "For the duration, the willing creature you touch has Resistance to one damage type of your choice: Acid, Cold, Fire, Lightning, or Thunder."
+    },
+    {
+      "id": "srd-5.2.1:spell:remove-curse",
+      "name": "Remove Curse",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "At your touch, all curses affecting one creature or object end. If the object is a cursed magic item, its curse remains, but the spell breaks its owner's Attunement to the object so it can be removed or discarded."
+    },
+    {
+      "id": "srd-5.2.1:spell:sending",
+      "name": "Sending",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Unlimited",
+      "duration": "Instantaneous",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a copper wire"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You send a short message of 25 words or fewer to a creature you have met or a creature described to you by someone who has met it. The target hears the message in its mind, recognizes you as the sender if it knows you, and can answer in a like manner immediately. The spell enables targets to understand the meaning of your message. You can send the message across any distance and even to other planes of existence, but if the target is on a different plane than you, there is a 5 percent chance that the message doesn't arrive. You know if the delivery fails. Upon receiving your message, a creature can block your ability to reach it again with this spell for 8 hours. If you try to send another message during that time, you learn that you are blocked, and the spell fails."
+    },
+    {
+      "id": "srd-5.2.1:spell:sleet-storm",
+      "name": "Sleet Storm",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "150 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a miniature umbrella"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "Until the spell ends, sleet falls in a 40-foot-tall, 20-foot-radius Cylinder centered on a point you choose within range. The area is Heavily Obscured, and exposed flames in the area are doused. Ground in the Cylinder is Difficult Terrain. When a creature enters the Cylinder for the first time on a turn or starts its turn there, it must succeed on a Dexterity saving throw or have the Prone condition and lose Concentration."
+    },
+    {
+      "id": "srd-5.2.1:spell:slow",
+      "name": "Slow",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "120 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a drop of molasses"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You alter time around up to six creatures of your choice in a 40-foot Cube within range. Each target must succeed on a Wisdom saving throw or be affected by this spell for the duration. An affected target's Speed is halved, it takes a −2 penalty to AC and Dexterity saving throws, and it can't take Reactions. On its turns, it can take either an action or a Bonus Action, not both, and it can make only one attack if it takes the Attack action. If it casts a spell with a Somatic component, there is a 25 percent chance the spell fails as a result of the target making the spell's gestures too slowly. An affected target repeats the save at the end of each of its turns, ending the spell on itself on a success."
+    },
+    {
+      "id": "srd-5.2.1:spell:speak-with-dead",
+      "name": "Speak with Dead",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "10 feet",
+      "duration": "10 Minutes",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "burning incense"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "You grant the semblance of life to a corpse of your choice within range, allowing it to answer questions you pose. The corpse must have a mouth, and this spell fails if the deceased creature was Undead when it died. The spell also fails if the corpse was the target of this spell within the past 10 days. Until the spell ends, you can ask the corpse up to five questions. The corpse knows only what it knew in life, including the languages it knew. Answers are usually brief, cryptic, or repetitive, and the corpse is under no compulsion to offer a truthful answer if you are antagonistic toward it or it recognizes you as an enemy. This spell doesn't return the creature's soul to its body, only its animating spirit. Thus, the corpse can't learn new information, doesn't comprehend anything that has happened since it died, and can't speculate about future events."
+    },
+    {
+      "id": "srd-5.2.1:spell:stinking-cloud",
+      "name": "Stinking Cloud",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "90 feet",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a rotten egg"
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "You create a 20-foot-radius Sphere of yellow, nauseating gas centered on a point within range. The cloud is Heavily Obscured. The cloud lingers in the air for the duration or until a strong wind (such as the one created by Gust of Wind) disperses it. Each creature that starts its turn in the Sphere must succeed on a Constitution saving throw or have the Poisoned condition until the end of the current turn. While Poisoned in this way, the creature can't take an action or a Bonus Action."
+    },
+    {
+      "id": "srd-5.2.1:spell:tiny-hut",
+      "name": "Tiny Hut",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "1minute",
+      "range": "Self",
+      "duration": "8 Hours",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a crystal bead"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "A 10-foot Emanation springs into existence around you and remains stationary for the duration. The spell fails when you cast it if the Emanation isn't big enough to fully encapsulate all creatures in its area. Creatures and objects within the Emanation when you cast the spell can move through it freely. All other creatures and objects are barred from passing through it. Spells of level 3 or lower can't be cast through it, and the effects of such spells can't extend into it. The atmosphere inside the Emanation is comfortable and dry, regardless of the weather outside. Until the spell ends, you can command the interior to have Dim Light or Darkness (no action required). The Emanation is opaque from the outside and of any color you choose, but it's transparent from the inside. The spell ends early if you leave the Emanation or if you cast it again."
+    },
+    {
+      "id": "srd-5.2.1:spell:tongues",
+      "name": "Tongues",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Touch",
+      "duration": "1 Hour",
+      "components": {
+        "verbal": true,
+        "material": "a miniature ziggurat"
+      },
+      "concentration": false,
+      "ritual": false,
+      "description": "This spell grants the creature you touch the ability to understand any spoken or signed language that it hears or sees. Moreover, when the target communicates by speaking or signing, any creature that knows at least one language can understand it if that creature can hear the speech or see the signing."
+    },
+    {
+      "id": "srd-5.2.1:spell:vampiric-touch",
+      "name": "Vampiric Touch",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "Self",
+      "duration": "1 Minute",
+      "components": {
+        "verbal": true,
+        "somatic": true
+      },
+      "concentration": true,
+      "ritual": false,
+      "description": "The touch of your shadow-wreathed hand can siphon life force from others to heal your wounds. Make a melee spell attack against one creature within reach. On a hit, the target takes 3d6 Necrotic damage, and you regain Hit Points equal to half the amount of Necrotic damage dealt. Until the spell ends, you can make the attack again on each of your turns as a Magic action, targeting the same creature or a different one.",
+      "higherLevelDescription": "The damage increases by 1d6 for each spell slot level above 3.",
+      "damage": "3d6",
+      "damageTypes": [
+        "necrotic"
+      ]
+    },
+    {
+      "id": "srd-5.2.1:spell:water-breathing",
+      "name": "Water Breathing",
+      "kind": "spell",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "level": 3,
+      "castingTime": "Action",
+      "range": "30 feet",
+      "duration": "24 Hours",
+      "components": {
+        "verbal": true,
+        "somatic": true,
+        "material": "a short reed"
+      },
+      "concentration": false,
+      "ritual": true,
+      "description": "This spell grants up to ten willing creatures of your choice within range the ability to breathe underwater until the spell ends. Affected creatures also retain their normal mode of respiration."
+    }
+  ],
+  "feats": [
+    {
+      "id": "srd-5.2.1:feat:ability-score-improvement",
+      "name": "Ability Score Improvement",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "General",
+      "prerequisite": "Level 4+",
+      "benefits": [
+        "Increase one ability score of your choice by 2, or increase two ability scores of your choice by 1. This feat can't increase an ability score above 20.",
+        "You can take this feat more than once."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:alert",
+      "name": "Alert",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Origin",
+      "benefits": [
+        "When you roll Initiative, you can add your Proficiency Bonus to the roll.",
+        "Immediately after you roll Initiative, you can swap your Initiative with the Initiative of one willing ally in the same combat. You can't make this swap if you or the ally has the Incapacitated condition."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:archery",
+      "name": "Archery",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Fighting Style",
+      "prerequisite": "Fighting Style Feature",
+      "benefits": [
+        "You gain a +2 bonus to attack rolls you make with Ranged weapons."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:boon-of-combat-prowess",
+      "name": "Boon of Combat Prowess",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Epic Boon",
+      "prerequisite": "Level 19+",
+      "benefits": [
+        "Increase one ability score of your choice by 1, to a maximum of 30.",
+        "When you miss with an attack roll, you can hit instead. Once you use this benefit, you can't use it again until the start of your next turn."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:boon-of-dimensional-travel",
+      "name": "Boon of Dimensional Travel",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Epic Boon",
+      "prerequisite": "Level 19+",
+      "benefits": [
+        "Increase one ability score of your choice by 1, to a maximum of 30.",
+        "Immediately after you take the Attack action or the Magic action, you can teleport up to 30 feet to an unoccupied space you can see."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:boon-of-fate",
+      "name": "Boon of Fate",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Epic Boon",
+      "prerequisite": "Level 19+",
+      "benefits": [
+        "Increase one ability score of your choice by 1, to a maximum of 30.",
+        "When you or another creature within 60 feet of you succeeds on or fails a D20 Test, you can roll 2d4 and apply the total rolled as a bonus or penalty to the d20 roll. Once you use this benefit, you can't use it again until you roll Initiative or finish a Short or Long Rest."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:boon-of-irresistible-offense",
+      "name": "Boon of Irresistible Offense",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Epic Boon",
+      "prerequisite": "Level 19+",
+      "benefits": [
+        "Increase one ability score of your choice by 1, to a maximum of 30.",
+        "The Bludgeoning, Piercing, and Slashing damage you deal always ignores Resistance.",
+        "When you roll a 20 on the d20 for an attack roll, you can deal extra damage to the target equal to the ability score increased by this feat. The extra damage's type is the same as the attack's type."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:boon-of-spell-recall",
+      "name": "Boon of Spell Recall",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Epic Boon",
+      "prerequisite": "Level 19+, Spellcasting Feature",
+      "benefits": [
+        "Increase one ability score of your choice by 1, to a maximum of 30.",
+        "Whenever you cast a spell with a level 1–4 spell slot, roll 1d4. If the number you roll is the same as the slot's level, the slot isn't expended."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:boon-of-the-night-spirit",
+      "name": "Boon of the Night Spirit",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Epic Boon",
+      "prerequisite": "Level 19+",
+      "benefits": [
+        "Increase one ability score of your choice by 1, to a maximum of 30.",
+        "While within Dim Light or Darkness, you can give yourself the Invisible condition as a Bonus Action. The condition ends on you immediately after you take an action, a Bonus Action, or a Reaction.",
+        "While within Dim Light or Darkness, you have Resistance to all damage except Psychic and Radiant."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:boon-of-truesight",
+      "name": "Boon of Truesight",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Epic Boon",
+      "prerequisite": "Level 19+",
+      "benefits": [
+        "Increase one ability score of your choice by 1, to a maximum of 30.",
+        "You have Truesight with a range of 60 feet."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:defense",
+      "name": "Defense",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Fighting Style",
+      "prerequisite": "Fighting Style Feature",
+      "benefits": [
+        "While you're wearing Light, Medium, or Heavy armor, you gain a +1 bonus to Armor Class."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:grappler",
+      "name": "Grappler",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "General",
+      "prerequisite": "Level 4+, Strength or Dexterity 13+",
+      "benefits": [
+        "Increase your Strength or Dexterity score by 1, to a maximum of 20.",
+        "When you hit a creature with an Unarmed Strike as part of the Attack action on your turn, you can use both the Damage and the Grapple option. You can use this benefit only once per turn.",
+        "You have Advantage on attack rolls against a creature Grappled by you.",
+        "You don't have to spend extra movement to move a creature Grappled by you if the creature is your size or smaller."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:great-weapon-fighting",
+      "name": "Great Weapon Fighting",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Fighting Style",
+      "prerequisite": "Fighting Style Feature",
+      "benefits": [
+        "When you roll damage for an attack you make with a Melee weapon that you are holding with two hands, you can treat any 1 or 2 on a damage die as a 3. The weapon must have the Two-Handed or Versatile property to gain this benefit."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:magic-initiate",
+      "name": "Magic Initiate",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Origin",
+      "benefits": [
+        "You learn two cantrips of your choice from the Cleric, Druid, or Wizard spell list. Intelligence, Wisdom, or Charisma is your spellcasting ability for this feat's spells (choose when you select this feat).",
+        "Choose a level 1 spell from the same list you selected for this feat's cantrips. You always have that spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have.",
+        "Whenever you gain a new level, you can replace one of the spells you chose for this feat with a different spell of the same level from the chosen spell list.",
+        "You can take this feat more than once, but you must choose a different spell list each time."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:savage-attacker",
+      "name": "Savage Attacker",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Origin",
+      "benefits": [
+        "You've trained to deal particularly damaging strikes. Once per turn when you hit a target with a weapon, you can roll the weapon's damage dice twice and use either roll against the target."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:skilled",
+      "name": "Skilled",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Origin",
+      "benefits": [
+        "You gain proficiency in any combination of three skills or tools of your choice.",
+        "You can take this feat more than once."
+      ],
+      "automation": "reference"
+    },
+    {
+      "id": "srd-5.2.1:feat:two-weapon-fighting",
+      "name": "Two-Weapon Fighting",
+      "kind": "feat",
+      "ruleset": "5e-2024",
+      "source": {
+        "title": "System Reference Document 5.2",
+        "license": "CC BY 4.0",
+        "url": "https://www.dndbeyond.com/srd",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "attribution": "This work includes material from the System Reference Document 5.2 by Wizards of the Coast LLC, available at https://www.dndbeyond.com/srd, licensed under CC BY 4.0."
+      },
+      "category": "Fighting Style",
+      "prerequisite": "Fighting Style Feature",
+      "benefits": [
+        "When you make an extra attack as a result of using a weapon that has the Light property, you can add your ability modifier to the damage of that attack if you aren't already adding it to the damage."
+      ],
+      "automation": "reference"
+    }
+  ]
+}
