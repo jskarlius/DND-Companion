@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 import type { Character, CharacterPlayState } from '../../domain/character/types';
-import { minimalContentFixture } from '../../domain/content/fixtures';
+import { bundledContentRepository } from '../../domain/content/repository';
 import { CharacterRepository } from '../../storage/characterRepository';
 import { CharacterSheet } from './CharacterSheet';
-import { representativeCharacterSheetDetails } from './characterSheetFixture';
+import { createUnchosenCharacterSheetDetails } from './characterSheetFixture';
 
 const characterRepository = new CharacterRepository();
 
@@ -59,8 +59,8 @@ export function CharacterRoute({ onRemember, onStorageError }: CharacterRoutePro
   return <CharacterSheet
     character={character}
     playState={playState}
-    content={minimalContentFixture}
-    details={representativeCharacterSheetDetails}
+    content={bundledContentRepository.getFixture()}
+    details={createUnchosenCharacterSheetDetails(character, bundledContentRepository.getFixture())}
     onCharacterChange={(next) => {
       setCharacter(next);
       void characterRepository.saveCharacter(next)

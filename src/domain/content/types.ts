@@ -21,6 +21,9 @@ export interface ContentSource {
   readonly title: string;
   readonly license: string;
   readonly url?: string;
+  /** Exact source version or upstream document key; never inferred from an ID. */
+  readonly upstreamVersion?: string;
+  readonly attribution?: string;
 }
 
 export interface ContentEntity {
@@ -56,8 +59,22 @@ export interface Spell extends ContentEntity {
   };
   readonly concentration?: boolean;
   readonly ritual?: boolean;
+  /** Reference text only; the application does not resolve spell effects. */
+  readonly description?: string;
+  readonly higherLevelDescription?: string;
+  readonly damage?: string;
+  readonly damageTypes?: readonly string[];
   /** The rule that determines when this spell's effect scales, if it does. */
   readonly scalingBasis?: ScalingBasis;
+}
+
+/** A selectable rules entity. Mechanical automation remains deliberately opt-in. */
+export interface Feat extends ContentEntity {
+  readonly kind: 'feat';
+  readonly category: string;
+  readonly prerequisite?: string;
+  readonly benefits: readonly string[];
+  readonly automation: AutomationTier;
 }
 
 export type AdvancementGrant =
@@ -82,7 +99,15 @@ export interface Class extends ContentEntity {
     readonly ability: Ability;
     readonly slotKind: 'spell-slots' | 'pact-magic';
     readonly slotRecharge: 'short-rest' | 'long-rest';
+    readonly progression: readonly SpellcastingProgression[];
   };
+}
+
+export interface SpellcastingProgression {
+  readonly level: number;
+  readonly cantripsKnown: number;
+  readonly preparedSpells: number;
+  readonly slots: Readonly<Record<number, number>>;
 }
 
 export interface Subclass extends ContentEntity {
@@ -92,9 +117,21 @@ export interface Subclass extends ContentEntity {
 }
 
 export interface ContentFixture {
+  readonly manifest: ContentPackManifest;
   readonly classes: readonly Class[];
   readonly subclasses: readonly Subclass[];
   readonly features: readonly Feature[];
   readonly resources: readonly Resource[];
   readonly spells: readonly Spell[];
+  readonly feats: readonly Feat[];
+}
+
+export interface ContentPackManifest {
+  readonly schemaVersion: number;
+  readonly id: string;
+  readonly name: string;
+  readonly version: string;
+  readonly ruleset: Ruleset;
+  readonly distribution: 'public' | 'private';
+  readonly source: ContentSource;
 }

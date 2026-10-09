@@ -1,4 +1,6 @@
 import type { Character, CharacterPlayState } from '../../domain/character/types';
+import { getAbilityModifier, getCharacterLevel, getProficiencyBonus } from '../../domain/character/calculations';
+import type { ContentFixture } from '../../domain/content/types';
 
 export interface CharacterSheetDetails {
   readonly identity: {
@@ -30,6 +32,44 @@ export interface CharacterSheetDetails {
     readonly title: string;
     readonly content: string;
   }[];
+}
+
+/**
+ * Normal persisted characters receive only their own data. Until character
+ * creation models a field, the sheet says so instead of borrowing fixture data.
+ */
+export function createUnchosenCharacterSheetDetails(character: Character, content: ContentFixture): CharacterSheetDetails {
+  const totalLevel = getCharacterLevel(character.classes).value;
+  const constitutionModifier = getAbilityModifier(character.abilityScores.constitution).value;
+  const dexterityModifier = getAbilityModifier(character.abilityScores.dexterity).value;
+  const hitPointBase = character.classes.reduce((total, entry) => {
+    const characterClass = content.classes.find((candidate) => candidate.id === entry.classId);
+    if (!characterClass) return total;
+    return total + characterClass.hitDie + Math.max(entry.level - 1, 0) * Math.ceil(characterClass.hitDie / 2);
+  }, 0);
+  const spellcaster = character.classes
+    .map((entry) => content.classes.find((candidate) => candidate.id === entry.classId))
+    .find((candidate) => candidate?.spellcasting);
+  const spellAbility = spellcaster?.spellcasting?.ability;
+  const spellModifier = spellAbility ? getAbilityModifier(character.abilityScores[spellAbility]).value : 0;
+  const proficiency = getProficiencyBonus(totalLevel).value;
+
+  return {
+    identity: { species: 'Not chosen', background: 'Not chosen', playerName: 'Not chosen' },
+    appearance: { pronouns: 'Not chosen', description: 'Not chosen' },
+    backstory: '',
+    combat: {
+      armorClass: 10 + dexterityModifier,
+      speed: 0,
+      maximumHp: Math.max(hitPointBase + constitutionModifier * totalLevel, 1),
+      spellAttackBonus: spellAbility ? spellModifier + proficiency : 0,
+      spellSaveDc: spellAbility ? 8 + spellModifier + proficiency : 0,
+    },
+    spellSlots: [],
+    attacks: [],
+    inventory: {},
+    notes: [],
+  };
 }
 
 /**

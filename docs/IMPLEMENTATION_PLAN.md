@@ -415,7 +415,7 @@ dropdown supports the explicit 2014 half-total table rule with player-selected
 allocation. IndexedDB version 3 and character-backup format version 2 migrate
 existing data with zero used dice and the 2024 default.
 
-## Slice 6.75: Advancement data integration
+## Slice 6.75: Advancement data integration — complete (2026-10-09)
 
 Goal: establish a production-shaped data path for the character sheet and
 level-up workflow without pulling the complete public-content system forward.
@@ -654,15 +654,23 @@ implementation slice or delivery commitment.
 
 ## Next session
 
-Finish the Product checkpoint: UI foundation and navigation. Resolve the review
-defect that leaves copied Hit Point Dice keyed to obsolete class-entry IDs.
-Complete the remaining exact-size, keyboard, reduced-motion, and assistive-
-technology review in `docs/UI_DESIGN.md`. Record representative-character data
-and credible long-spell-list coverage as explicit Slice 6.75/post-level-up
-deferrals, then record owner approval.
+Slice 6.75 is complete (2026-10-09). It introduced a read-only bundled content
+repository and deterministic Open5e bootstrap importer; generated 110 Wizard
+spells (levels 0-3), 17 reference-tier feats, and the Evoker subclass; added
+spell descriptions/higher-level reference text; and added declarative Wizard
+cantrip, prepared-spell, and slot progression. The live sheet derives these
+values from persisted character data and the repository, rather than from the
+representative character. Fighter remains a deliberately minimal multiclass
+fixture. The pack validates IDs and references, and copied Hit Dice remain
+remapped by class-entry ID.
 
-After that approval, implement Slice 6.75 only. Establish the repository-backed
-data path, pull and validate the pinned public Wizard subset, and make the live
-sheet derive rules-facing values from the persisted character and repository.
-Stop at Architecture checkpoint B; do not begin the level-up workflow until its
-transaction and spell-progression decisions are approved.
+The generated manifest preserves Open5e's exact upstream source label
+("System Reference Document 5.2", document key `srd-2024`). Reconcile it to
+the official SRD 5.2.1 document before claiming verified 5.2.1 provenance.
+This is a provenance-review follow-up, not a runtime dependency.
+
+Next: Architecture checkpoint B. Review and approve the advancement-diff
+format, repository access boundary, multiclass prerequisites, class-entry and
+subclass choices, combined spell-slot strategy, spell-choice ownership,
+derived-sheet updates, and rollback behavior. Do not implement the level-up
+workflow until this checkpoint is approved.
