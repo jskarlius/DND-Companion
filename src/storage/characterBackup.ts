@@ -1,8 +1,9 @@
 import { z } from 'zod';
 import { ABILITIES, MANUAL_OVERRIDE_TARGETS, SKILLS, type Character, type CharacterPlayState } from '../domain/character/types';
+import { migrateDevelopmentContentIds } from '../domain/content/contentIdMigration';
 
 /** The format of a character file is independent from whichever local database we use. */
-export const CHARACTER_EXPORT_SCHEMA_VERSION = 3;
+export const CHARACTER_EXPORT_SCHEMA_VERSION = 4;
 
 const choiceValueSchema = z.union([z.string(), z.array(z.string())]);
 const abilitySchema = z.enum(ABILITIES);
@@ -34,6 +35,7 @@ const characterFieldsSchema = z.object({
   spellSelections: z.array(z.object({
     classEntryId: z.string().min(1), spellId: z.string().min(1), acquiredAtClassLevel: z.number().int().min(1), prepared: z.boolean(),
   })),
+  preparedSpells: z.array(z.object({ classEntryId: z.string().min(1), spellId: z.string().min(1) })),
   hitPointGains: z.array(z.object({
     classEntryId: z.string().min(1), classLevel: z.number().int().min(1), method: z.enum(['fixed', 'rolled', 'custom']), hitPoints: z.number().int().min(0),
   })),
@@ -78,6 +80,12 @@ const versionTwoCharacterExportSchema = z.object({
   playState: characterPlayStateSchema,
 });
 
+const versionThreeCharacterExportSchema = z.object({
+  format: z.literal('dnd-companion-character'), schemaVersion: z.literal(3), exportedAt: z.string().datetime(),
+  character: characterFieldsSchema.omit({ preparedSpells: true }).extend({ schemaVersion: z.literal(1) }),
+  playState: characterPlayStateSchema,
+});
+
 const versionOneCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character'), schemaVersion: z.literal(1), exportedAt: z.string().datetime(),
   character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true, spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(1) }),
@@ -98,9 +106,16 @@ const legacyCharacterExportSchema = z.object({
  */
 export function migrateCharacterExport(input: unknown): CharacterExport {
   const current = characterExportSchema.safeParse(input);
-  if (current.success) return current.data;
+  if (current.success) return migrateDevelopmentReferences(current.data);
 
   const versionTwo = versionTwoCharacterExportSchema.safeParse(input);
+  const versionThree = versionThreeCharacterExportSchema.safeParse(input);
+  if (versionThree.success) return migrateDevelopmentReferences(characterExportSchema.parse({
+    ...versionThree.data,
+    schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
+    character: { ...versionThree.data.character, preparedSpells: legacyPreparedSpells(versionThree.data.character) },
+  }));
+
   if (versionTwo.success) return characterExportSchema.parse({
     ...versionTwo.data,
     schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
@@ -109,23 +124,23 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
 
   const versionOne = versionOneCharacterExportSchema.safeParse(input);
   if (versionOne.success) {
-    return characterExportSchema.parse({
+    return migrateDevelopmentReferences(characterExportSchema.parse({
       ...versionOne.data,
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
       character: { ...versionOne.data.character, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(versionOne.data.character) },
       playState: { ...versionOne.data.playState, usedHitDice: {} },
-    });
+    }));
   }
 
   const legacy = legacyCharacterExportSchema.safeParse(input);
   if (legacy.success) {
-    return characterExportSchema.parse({
+    return migrateDevelopmentReferences(characterExportSchema.parse({
       format: 'dnd-companion-character',
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
       exportedAt: legacy.data.exportedAt ?? new Date(0).toISOString(),
       character: { ...legacy.data.character, schemaVersion: 1, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(legacy.data.character) },
       playState: { ...legacy.data.playState, temporaryMaximumHpBonus: 0, usedHitDice: {} },
-    });
+    }));
   }
 
   throw new Error(`This character backup is not supported: ${current.error.issues[0]?.message ?? 'unknown format'}`);
@@ -139,15 +154,28 @@ function legacyAdvancementFields(character: { classes: readonly { id: string; cl
     // Historical files do not say how prior HP was chosen. Keep this empty so
     // the sheet retains its legacy derived total; only future levels record a choice.
     hitPointGains: [],
+    preparedSpells: spellOwner ? character.preparedSpellIds.map((spellId) => ({ classEntryId: spellOwner.id, spellId })) : [],
   };
 }
 
+function legacyPreparedSpells(character: { classes: readonly { id: string; classId: string }[]; preparedSpellIds: readonly string[]; spellSelections: readonly { classEntryId: string; spellId: string; prepared: boolean }[] }) {
+  const selected = character.spellSelections.filter((selection) => selection.prepared).map(({ classEntryId, spellId }) => ({ classEntryId, spellId }));
+  const owner = character.classes.filter((entry) => entry.classId.endsWith(':class:wizard'));
+  const legacy = owner.length === 1 ? character.preparedSpellIds.map((spellId) => ({ classEntryId: owner[0]!.id, spellId })) : [];
+  return [...new Map([...selected, ...legacy].map((entry) => [`${entry.classEntryId}:${entry.spellId}`, entry])).values()];
+}
+
 export function createCharacterExport(character: Character, playState: CharacterPlayState): CharacterExport {
-  return characterExportSchema.parse({
+    return migrateDevelopmentReferences(characterExportSchema.parse({
     format: 'dnd-companion-character',
     schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
     exportedAt: new Date().toISOString(),
     character,
     playState,
-  });
+    }));
+}
+
+function migrateDevelopmentReferences(backup: CharacterExport): CharacterExport {
+  const migrated = migrateDevelopmentContentIds(backup.character, backup.playState);
+  return characterExportSchema.parse({ ...backup, ...migrated });
 }

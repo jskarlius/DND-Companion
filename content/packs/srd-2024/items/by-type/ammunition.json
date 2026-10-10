@@ -1,0 +1,251 @@
+{
+  "items": [
+    {
+      "id": "srd-2024:item:arrows-20",
+      "kind": "item",
+      "name": "Arrows (20)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "ammunition",
+          "name": "Ammunition"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Ammunition for weapons that use arrows. Comes in a pack of 20. Typically stored in a quiver.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_arrows-20",
+        "name": "Arrows (20)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:bolts-20",
+      "kind": "item",
+      "name": "Bolts (20)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "ammunition",
+          "name": "Ammunition"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Ammunition for weapons that use bolts. Comes in a pack of 20. Typically stored in a case.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_bolts-20",
+        "name": "Bolts (20)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.500",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:bullets-firearm-10",
+      "kind": "item",
+      "name": "Bullets, Firearm (10)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "ammunition",
+          "name": "Ammunition"
+        },
+        "cost": "3.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Ammunition for weapons that use bullets, firearm. Comes in a pack of 10. Typically stored in a pouch.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_bullets-firearm-10",
+        "name": "Bullets, Firearm (10)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:bullets-sling-20",
+      "kind": "item",
+      "name": "Bullets, Sling (20)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "ammunition",
+          "name": "Ammunition"
+        },
+        "cost": "0.04",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Ammunition for weapons that use bullets, sling. Comes in a pack of 20. Typically stored in a pouch.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_bullets-sling-20",
+        "name": "Bullets, Sling (20)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.500",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:needles-50",
+      "kind": "item",
+      "name": "Needles (50)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "ammunition",
+          "name": "Ammunition"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Ammunition for weapons that use needles. Comes in a pack of 50. Typically stored in a pouch.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_needles-50",
+        "name": "Needles (50)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "item-type-module",
+  "schemaVersion": 1
+}

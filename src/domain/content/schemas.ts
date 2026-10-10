@@ -2,6 +2,9 @@ import { z } from 'zod';
 
 const contentIdSchema = z.string().min(1);
 const rulesetSchema = z.literal('5e-2024');
+const packEntityKindSchema = z.enum([
+  'class', 'subclass', 'species', 'background', 'feature', 'choice', 'resource', 'spell', 'feat', 'item',
+]);
 const abilitySchema = z.enum([
   'strength',
   'dexterity',
@@ -98,7 +101,7 @@ export const classSchema = contentEntitySchema.extend({
     ability: abilitySchema,
     slotKind: z.enum(['spell-slots', 'pact-magic']),
     slotRecharge: z.enum(['short-rest', 'long-rest']),
-    selectionMode: z.enum(['known-and-prepared', 'prepared-from-list']).default('known-and-prepared'),
+    selectionMode: z.enum(['known-and-prepared', 'prepared-from-list', 'level-up-list']).default('known-and-prepared'),
     multiclassContribution: z.enum(['full', 'half-round-up', 'half-round-down', 'third-round-down', 'none']).default('full'),
     progression: z.array(z.object({
       level: z.int().min(1).max(20),
@@ -133,4 +136,55 @@ export const contentFixtureSchema = z.object({
   resources: z.array(resourceSchema),
   spells: z.array(spellSchema),
   feats: z.array(featSchema),
+});
+
+export const contentPackManifestSchema = z.object({
+  schemaVersion: z.int().positive(),
+  id: contentIdSchema,
+  name: z.string().min(1),
+  version: z.string().min(1),
+  ruleset: rulesetSchema,
+  distribution: z.enum(['public', 'private']),
+  source: contentEntitySchema.shape.source,
+  modules: z.array(z.object({
+    path: z.string().min(1).refine((path) => !path.startsWith('/') && !path.includes('..'), 'must be a relative module path'),
+    kinds: z.array(packEntityKindSchema).min(1),
+    // Zod treats enum-keyed records as exhaustive. Manifest counts are sparse
+    // because each module contains only a few kinds.
+    counts: z.record(z.string(), z.int().positive()).refine(
+      (counts) => Object.keys(counts).every((kind) => packEntityKindSchema.safeParse(kind).success),
+      'may only contain known entity kinds',
+    ),
+    sha256: z.string().regex(/^[a-f0-9]{64}$/),
+  })).min(1),
+  report: z.object({
+    path: z.string().min(1),
+    sha256: z.string().regex(/^[a-f0-9]{64}$/),
+  }),
+});
+
+export const packEntitySchema = contentEntitySchema.extend({
+  kind: packEntityKindSchema,
+  reference: z.unknown().optional(),
+  ownerId: contentIdSchema.optional(),
+  featureIds: z.array(contentIdSchema).optional(),
+  parentClassId: contentIdSchema.optional(),
+  spellListClassIds: z.array(contentIdSchema).refine(
+    (ids) => new Set(ids).size === ids.length,
+    'must not repeat class IDs',
+  ).optional(),
+}).passthrough().superRefine((entity, context) => {
+  if (entity.kind === 'spell' && entity.spellListClassIds === undefined) {
+    context.addIssue({ code: 'custom', path: ['spellListClassIds'], message: 'is required for spell entities' });
+  }
+});
+
+export const contentPackModuleSchema = z.object({
+  schemaVersion: z.int().positive(),
+  moduleKind: z.string().min(1),
+}).catchall(z.unknown());
+
+export const contentPackSchema = z.object({
+  manifest: contentPackManifestSchema,
+  modules: z.array(contentPackModuleSchema).min(1),
 });

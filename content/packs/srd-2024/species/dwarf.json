@@ -1,0 +1,246 @@
+{
+  "choices": [],
+  "features": [
+    {
+      "id": "srd-2024:feature:dwarf-trait-1",
+      "kind": "feature",
+      "name": "Size",
+      "ownerId": "srd-2024:species:dwarf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Medium (about 4–5 feet tall) ",
+        "key": "srd-2024_dwarf_trait-1",
+        "name": "Size",
+        "order": 1,
+        "type": "SIZE"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:dwarf-trait-2",
+      "kind": "feature",
+      "name": "Speed",
+      "ownerId": "srd-2024:species:dwarf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "30 feet",
+        "key": "srd-2024_dwarf_trait-2",
+        "name": "Speed",
+        "order": 2,
+        "type": "SPEED"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:dwarf-trait-3",
+      "kind": "feature",
+      "name": "Darkvision",
+      "ownerId": "srd-2024:species:dwarf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have Darkvision with a range of 120 feet.",
+        "key": "srd-2024_dwarf_trait-3",
+        "name": "Darkvision",
+        "order": 3,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:dwarf-trait-4",
+      "kind": "feature",
+      "name": "Dwarven Resilience",
+      "ownerId": "srd-2024:species:dwarf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have Resistance to Poison damage. You also have Advantage on saving throws you make to avoid or end the Poisoned condition.",
+        "key": "srd-2024_dwarf_trait-4",
+        "name": "Dwarven Resilience",
+        "order": 4,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:dwarf-trait-5",
+      "kind": "feature",
+      "name": "Dwarven Toughness",
+      "ownerId": "srd-2024:species:dwarf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Your Hit Point maximum increases by 1, and it increases by 1 again whenever you gain a level.",
+        "key": "srd-2024_dwarf_trait-5",
+        "name": "Dwarven Toughness",
+        "order": 5,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:dwarf-trait-6",
+      "kind": "feature",
+      "name": "Stonecunning",
+      "ownerId": "srd-2024:species:dwarf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Bonus Action, you gain Tremorsense with a range of 60 feet for 10 minutes. You must be on a stone surface or touching a stone surface to use this Tremorsense. The stone can be natural or worked.\n\nYou can use this Bonus Action a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.",
+        "key": "srd-2024_dwarf_trait-6",
+        "name": "Stonecunning",
+        "order": 6,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "species-module",
+  "resources": [],
+  "schemaVersion": 1,
+  "species": {
+    "id": "srd-2024:species:dwarf",
+    "kind": "species",
+    "name": "Dwarf",
+    "reference": {
+      "crossreferences": {
+        "to": []
+      },
+      "desc": "",
+      "document": {
+        "display_name": "5e 2024 Rules",
+        "gamesystem": {
+          "key": "5e-2024",
+          "name": "5th Edition 2024"
+        },
+        "key": "srd-2024",
+        "name": "System Reference Document 5.2",
+        "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+        "publisher": {
+          "key": "wizards-of-the-coast",
+          "name": "Wizards of the Coast"
+        },
+        "type": "SOURCE"
+      },
+      "is_subspecies": false,
+      "key": "srd-2024_dwarf",
+      "name": "Dwarf",
+      "subspecies_of": null,
+      "traits": [
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Medium (about 4–5 feet tall) ",
+          "name": "Size",
+          "order": 1,
+          "type": "SIZE"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "30 feet",
+          "name": "Speed",
+          "order": 2,
+          "type": "SPEED"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have Darkvision with a range of 120 feet.",
+          "name": "Darkvision",
+          "order": 3,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have Resistance to Poison damage. You also have Advantage on saving throws you make to avoid or end the Poisoned condition.",
+          "name": "Dwarven Resilience",
+          "order": 4,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Your Hit Point maximum increases by 1, and it increases by 1 again whenever you gain a level.",
+          "name": "Dwarven Toughness",
+          "order": 5,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "As a Bonus Action, you gain Tremorsense with a range of 60 feet for 10 minutes. You must be on a stone surface or touching a stone surface to use this Tremorsense. The stone can be natural or worked.\n\nYou can use this Bonus Action a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest.",
+          "name": "Stonecunning",
+          "order": 6,
+          "type": null
+        }
+      ]
+    },
+    "ruleset": "5e-2024",
+    "source": {
+      "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+      "license": "CC BY 4.0",
+      "title": "System Reference Document 5.2",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    }
+  }
+}

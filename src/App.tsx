@@ -35,11 +35,11 @@ function createMinimalCharacter(): { character: Character; playState: CharacterP
   const id = createId();
   return {
     character: {
-      schemaVersion: 1, id, name: 'New adventurer', ruleset: '5e-2024', longRestHitDiceRecovery: '2024-all', enabledContentPackIds: ['srd-5.2.1'],
+      schemaVersion: 1, id, name: 'New adventurer', ruleset: '5e-2024', longRestHitDiceRecovery: '2024-all', enabledContentPackIds: ['srd-2024'],
       abilityScoreGeneration: 'custom',
       abilityScores: { strength: 10, dexterity: 10, constitution: 10, intelligence: 10, wisdom: 10, charisma: 10 },
-      classes: [{ id: `${id}:class-entry:wizard`, classId: 'srd-5.2.1:class:wizard', level: 1, choices: {} }],
-      choices: {}, proficiencies: { savingThrowAbilities: ['intelligence', 'wisdom'], skills: {} }, knownSpellIds: [], preparedSpellIds: [], spellSelections: [], hitPointGains: [{ classEntryId: `${id}:class-entry:wizard`, classLevel: 1, method: 'fixed', hitPoints: 6 }], inventory: [], manualOverrides: {},
+      classes: [{ id: `${id}:class-entry:wizard`, classId: 'srd-2024:class:wizard', level: 1, choices: {} }],
+      choices: {}, proficiencies: { savingThrowAbilities: ['intelligence', 'wisdom'], skills: {} }, knownSpellIds: [], preparedSpellIds: [], spellSelections: [], preparedSpells: [], hitPointGains: [{ classEntryId: `${id}:class-entry:wizard`, classLevel: 1, method: 'fixed', hitPoints: 6 }], inventory: [], manualOverrides: {},
     },
     playState: { characterId: id, currentHp: 6, temporaryHp: 0, temporaryMaximumHpBonus: 0, inspiration: false, usedHitDice: {}, usedResources: {}, usedSpellSlots: {}, deathSaveSuccesses: 0, deathSaveFailures: 0, conditions: [] },
   };
@@ -142,7 +142,7 @@ function AppShell() {
         : libraryStatus === 'error'
           ? <main className="route-message"><h1>Character library unavailable</h1><p>Local storage could not load your characters.</p><Button type="button" onClick={() => { setLibraryStatus('loading'); void refreshCharacters(); }}>Try again</Button></main>
           : <CharacterLibrary characters={characters} recentCharacterId={recentCharacterId} onCreate={() => void createCharacter()} onDuplicate={(character) => void duplicateCharacter(character)} onExport={(character) => void exportCharacter(character)} onDelete={setDeleteCandidate} />} />
-      <Route path="/characters/:characterId" element={<Suspense fallback={<main className="route-message" aria-live="polite"><h1>Loading character…</h1></main>}><CharacterRoute onRemember={rememberCharacter} onStorageError={setError} /></Suspense>} />
+      <Route path="/characters/:characterId" element={<Suspense fallback={<main className="route-message" aria-live="polite"><h1>Loading character…</h1></main>}><CharacterRoute onRemember={rememberCharacter} onStorageError={setError} onAdvancementCommitted={() => { void refreshCharacters(); }} /></Suspense>} />
       <Route path="*" element={<main className="route-message"><h1>Page not found</h1><p>The requested page does not exist.</p><Button asChild><Link to="/">Return to library</Link></Button></main>} />
     </Routes>
     </div>

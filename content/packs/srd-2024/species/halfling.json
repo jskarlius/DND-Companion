@@ -1,0 +1,246 @@
+{
+  "choices": [],
+  "features": [
+    {
+      "id": "srd-2024:feature:halfling-trait-1",
+      "kind": "feature",
+      "name": "Size",
+      "ownerId": "srd-2024:species:halfling",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Small (about 2–3 feet tall) ",
+        "key": "srd-2024_halfling_trait-1",
+        "name": "Size",
+        "order": 1,
+        "type": "SIZE"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:halfling-trait-2",
+      "kind": "feature",
+      "name": "Speed",
+      "ownerId": "srd-2024:species:halfling",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "30 feet",
+        "key": "srd-2024_halfling_trait-2",
+        "name": "Speed",
+        "order": 2,
+        "type": "SPEED"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:halfling-trait-3",
+      "kind": "feature",
+      "name": "Brave",
+      "ownerId": "srd-2024:species:halfling",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have Advantage on saving throws you make to avoid or end the Frightened condition.",
+        "key": "srd-2024_halfling_trait-3",
+        "name": "Brave",
+        "order": 3,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:halfling-trait-4",
+      "kind": "feature",
+      "name": "Halfling Nimbleness",
+      "ownerId": "srd-2024:species:halfling",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You can move through the space of any creature that is a size larger than you, but you can't stop in the same space.",
+        "key": "srd-2024_halfling_trait-4",
+        "name": "Halfling Nimbleness",
+        "order": 4,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:halfling-trait-5",
+      "kind": "feature",
+      "name": "Luck",
+      "ownerId": "srd-2024:species:halfling",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When you roll a 1 on the d20 of a D20 Test, you can reroll the die, and you must use the new roll.",
+        "key": "srd-2024_halfling_trait-5",
+        "name": "Luck",
+        "order": 5,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:halfling-trait-6",
+      "kind": "feature",
+      "name": "Naturally Stealthy",
+      "ownerId": "srd-2024:species:halfling",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You can take the Hide action even when you are obscured only by a creature that is at least one size larger than you.",
+        "key": "srd-2024_halfling_trait-6",
+        "name": "Naturally Stealthy",
+        "order": 6,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "species-module",
+  "resources": [],
+  "schemaVersion": 1,
+  "species": {
+    "id": "srd-2024:species:halfling",
+    "kind": "species",
+    "name": "Halfling",
+    "reference": {
+      "crossreferences": {
+        "to": []
+      },
+      "desc": "",
+      "document": {
+        "display_name": "5e 2024 Rules",
+        "gamesystem": {
+          "key": "5e-2024",
+          "name": "5th Edition 2024"
+        },
+        "key": "srd-2024",
+        "name": "System Reference Document 5.2",
+        "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+        "publisher": {
+          "key": "wizards-of-the-coast",
+          "name": "Wizards of the Coast"
+        },
+        "type": "SOURCE"
+      },
+      "is_subspecies": false,
+      "key": "srd-2024_halfling",
+      "name": "Halfling",
+      "subspecies_of": null,
+      "traits": [
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Small (about 2–3 feet tall) ",
+          "name": "Size",
+          "order": 1,
+          "type": "SIZE"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "30 feet",
+          "name": "Speed",
+          "order": 2,
+          "type": "SPEED"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have Advantage on saving throws you make to avoid or end the Frightened condition.",
+          "name": "Brave",
+          "order": 3,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You can move through the space of any creature that is a size larger than you, but you can't stop in the same space.",
+          "name": "Halfling Nimbleness",
+          "order": 4,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "When you roll a 1 on the d20 of a D20 Test, you can reroll the die, and you must use the new roll.",
+          "name": "Luck",
+          "order": 5,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You can take the Hide action even when you are obscured only by a creature that is at least one size larger than you.",
+          "name": "Naturally Stealthy",
+          "order": 6,
+          "type": null
+        }
+      ]
+    },
+    "ruleset": "5e-2024",
+    "source": {
+      "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+      "license": "CC BY 4.0",
+      "title": "System Reference Document 5.2",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    }
+  }
+}

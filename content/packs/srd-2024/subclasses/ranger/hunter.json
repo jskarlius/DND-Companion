@@ -1,0 +1,211 @@
+{
+  "choices": [],
+  "equipmentPackages": [],
+  "features": [
+    {
+      "id": "srd-2024:feature:ranger-hunter-defensive-tactics",
+      "kind": "feature",
+      "name": "Defensive Tactics",
+      "ownerId": "srd-2024:subclass:hunter",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "data_for_class_table": [],
+        "desc": "You gain one of the following feature options of your choice. Whenever you finish a Short or Long Rest, you can replace the chosen option with the other one.\n\n**Escape the Horde.** Opportunity Attacks have Disadvantage against you.\n\n**Multiattack Defense.** When a creature hits you with an attack roll, that creature has Disadvantage on all other attack rolls against you this turn.",
+        "feature_type": "CLASS_LEVEL_FEATURE",
+        "gained_at": [
+          {
+            "detail": null,
+            "level": 7
+          }
+        ],
+        "key": "srd-2024_ranger_hunter_defensive-tactics",
+        "name": "Defensive Tactics"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:ranger-hunter-hunters-lore",
+      "kind": "feature",
+      "name": "Hunter's Lore",
+      "ownerId": "srd-2024:subclass:hunter",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "data_for_class_table": [],
+        "desc": "You can call on the forces of nature to reveal certain strengths and weaknesses of your prey. While a creature is marked by your *Hunter's Mark*, you know whether that creature has any Immunities, Resistances, or Vulnerabilities, and if the creature has any, you know what they are.",
+        "feature_type": "CLASS_LEVEL_FEATURE",
+        "gained_at": [
+          {
+            "detail": null,
+            "level": 3
+          }
+        ],
+        "key": "srd-2024_ranger_hunter_hunters-lore",
+        "name": "Hunter's Lore"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:ranger-hunter-hunters-prey",
+      "kind": "feature",
+      "name": "Hunter's Prey",
+      "ownerId": "srd-2024:subclass:hunter",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "data_for_class_table": [],
+        "desc": "You gain one of the following feature options of your choice. Whenever you finish a Short or Long Rest, you can replace the chosen option with the other one.\n\n**Colossus Slayer.** Your tenacity can wear down even the most resilient foes. When you hit a creature with a weapon, the weapon deals an extra 1d8 damage to the target if it's missing any of its Hit Points. You can deal this extra damage only once per turn.\n\n**Horde Breaker.** Once on each of your turns when you make an attack with a weapon, you can make another attack with the same weapon against a different creature that is within 5 feet of the original target, that is within the weapon's range, and that you haven't attacked this turn.",
+        "feature_type": "CLASS_LEVEL_FEATURE",
+        "gained_at": [
+          {
+            "detail": null,
+            "level": 3
+          }
+        ],
+        "key": "srd-2024_ranger_hunter_hunters-prey",
+        "name": "Hunter's Prey"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:ranger-hunter-superior-hunters-defense",
+      "kind": "feature",
+      "name": "Superior Hunter's Defense",
+      "ownerId": "srd-2024:subclass:hunter",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "data_for_class_table": [],
+        "desc": "When you take damage, you can take a Reaction to give yourself Resistance to that damage and any other damage of the same type until the end of the current turn.",
+        "feature_type": "CLASS_LEVEL_FEATURE",
+        "gained_at": [
+          {
+            "detail": null,
+            "level": 15
+          }
+        ],
+        "key": "srd-2024_ranger_hunter_superior-hunters-defense",
+        "name": "Superior Hunter's Defense"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:ranger-hunter-superior-hunters-prey",
+      "kind": "feature",
+      "name": "Superior Hunter's Prey",
+      "ownerId": "srd-2024:subclass:hunter",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "data_for_class_table": [],
+        "desc": "Once per turn when you deal damage to a creature marked by your *Hunter's Mark*, you can also deal that spell's extra damage to a different creature that you can see within 30 feet of the first creature.",
+        "feature_type": "CLASS_LEVEL_FEATURE",
+        "gained_at": [
+          {
+            "detail": null,
+            "level": 11
+          }
+        ],
+        "key": "srd-2024_ranger_hunter_superior-hunters-prey",
+        "name": "Superior Hunter's Prey"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "subclass-module",
+  "resources": [],
+  "schemaVersion": 1,
+  "subclass": {
+    "featureIds": [
+      "srd-2024:feature:ranger-hunter-defensive-tactics",
+      "srd-2024:feature:ranger-hunter-hunters-lore",
+      "srd-2024:feature:ranger-hunter-hunters-prey",
+      "srd-2024:feature:ranger-hunter-superior-hunters-defense",
+      "srd-2024:feature:ranger-hunter-superior-hunters-prey"
+    ],
+    "id": "srd-2024:subclass:hunter",
+    "kind": "subclass",
+    "name": "Hunter",
+    "parentClassId": "srd-2024:class:ranger",
+    "reference": {
+      "caster_type": "NONE",
+      "crossreferences": {
+        "to": []
+      },
+      "desc": "*Protect Nature and People from Destruction*\n\nYou stalk prey in the wilds and elsewhere, using your abilities as a Hunter to protect nature and people everywhere from forces that would destroy them.",
+      "document": {
+        "display_name": "5e 2024 Rules",
+        "gamesystem": {
+          "key": "5e-2024",
+          "name": "5th Edition 2024"
+        },
+        "key": "srd-2024",
+        "name": "System Reference Document 5.2",
+        "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+        "publisher": {
+          "key": "wizards-of-the-coast",
+          "name": "Wizards of the Coast"
+        },
+        "type": "SOURCE"
+      },
+      "hit_dice": null,
+      "key": "srd-2024_hunter",
+      "name": "Hunter",
+      "primary_abilities": [],
+      "saving_throws": [],
+      "subclass_of": {
+        "key": "srd-2024_ranger",
+        "name": "Ranger"
+      }
+    },
+    "ruleset": "5e-2024",
+    "source": {
+      "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+      "license": "CC BY 4.0",
+      "title": "System Reference Document 5.2",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    }
+  }
+}

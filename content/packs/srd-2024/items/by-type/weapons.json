@@ -1,0 +1,3558 @@
+{
+  "items": [
+    {
+      "id": "srd-2024:item:acid",
+      "kind": "item",
+      "name": "Acid",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When you take the Attack action, you can replace one of your attacks with throwing a vial of Acid. Target one creature or object you can see within 20 feet of yourself. The target must succeed on a Dexterity saving throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or take 2d6 Acid damage.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_acid",
+        "name": "Acid",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:alchemists-fire",
+      "kind": "item",
+      "name": "Alchemist's Fire",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When you take the Attack action, you can replace one of your attacks with throwing a flask of Alchemist's Fire. Target one creature or object you can see within 20 feet of yourself. The target must succeed on a Dexterity saving throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or take 1d4 Fire damage and start burning (see \"Rules Glossary\").",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_alchemists-fire",
+        "name": "Alchemist's Fire",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:battleaxe",
+      "kind": "item",
+      "name": "Battleaxe",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A battleaxe.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_battleaxe",
+        "name": "Battleaxe",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_battleaxe",
+          "name": "Battleaxe",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can force the creature to make a Constitution saving throw (DC 8 plus the ability modifier used to make the attack roll and your Proficiency Bonus). On a failed save, the creature has the Prone condition.",
+                "name": "Topple",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "1d10",
+              "property": {
+                "desc": "A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.",
+                "name": "Versatile",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:blowgun",
+      "kind": "item",
+      "name": "Blowgun",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A blowgun.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_blowgun",
+        "name": "Blowgun",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_blowgun",
+          "name": "Blowgun",
+          "properties": [
+            {
+              "detail": "Range 25/100; Needle",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You can fire only one piece of ammunition from a Loading weapon when you use an action, a Bonus Action, or a Reaction to fire it, regardless of the number of attacks you can normally make.",
+                "name": "Loading",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:club",
+      "kind": "item",
+      "name": "Club",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.10",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A club.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_club",
+        "name": "Club",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d4",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_club",
+          "name": "Club",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.",
+                "name": "Slow",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:dagger",
+      "kind": "item",
+      "name": "Dagger",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A dagger.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_dagger",
+        "name": "Dagger",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d4",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_dagger",
+          "name": "Dagger",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
+                "name": "Finesse",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. You can make this extra attack only once per turn.",
+                "name": "Nick",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "Range 20/60",
+              "property": {
+                "desc": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.",
+                "name": "Thrown",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:dart",
+      "kind": "item",
+      "name": "Dart",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.05",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A dart.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_dart",
+        "name": "Dart",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d4",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_dart",
+          "name": "Dart",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
+                "name": "Finesse",
+                "type": null
+              }
+            },
+            {
+              "detail": "Range 20/60",
+              "property": {
+                "desc": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.",
+                "name": "Thrown",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:flail",
+      "kind": "item",
+      "name": "Flail",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A flail.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_flail",
+        "name": "Flail",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_flail",
+          "name": "Flail",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.",
+                "name": "Sap",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:glaive",
+      "kind": "item",
+      "name": "Glaive",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "20.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A glaive.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_glaive",
+        "name": "Glaive",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d10",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_glaive",
+          "name": "Glaive",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If your attack roll with this weapon misses a creature, you can deal damage to that creature equal to the ability modifier you used to make the attack roll. This damage is the same type dealt by the weapon, and the damage can be increased only by increasing the ability modifier.",
+                "name": "Graze",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Reach weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for Opportunity Attacks with it.",
+                "name": "Reach",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "6.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:greataxe",
+      "kind": "item",
+      "name": "Greataxe",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "30.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A greataxe.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_greataxe",
+        "name": "Greataxe",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d12",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_greataxe",
+          "name": "Greataxe",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with a melee attack roll using this weapon, you can make a melee attack roll with the weapon against a second creature within 5 feet of the first that is also within your reach. On a hit, the second creature takes the weapon's damage, but don't add your ability modifier to that damage unless that modifier is negative. You can make this extra attack only once per turn.",
+                "name": "Cleave",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "7.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:greatclub",
+      "kind": "item",
+      "name": "Greatclub",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.20",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A greatclub.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_greatclub",
+        "name": "Greatclub",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_greatclub",
+          "name": "Greatclub",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can push the creature up to 10 feet straight away from yourself if it is Large or smaller.",
+                "name": "Push",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "10.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:greatsword",
+      "kind": "item",
+      "name": "Greatsword",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A greatsword.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_greatsword",
+        "name": "Greatsword",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "2d6",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_greatsword",
+          "name": "Greatsword",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If your attack roll with this weapon misses a creature, you can deal damage to that creature equal to the ability modifier you used to make the attack roll. This damage is the same type dealt by the weapon, and the damage can be increased only by increasing the ability modifier.",
+                "name": "Graze",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "6.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:halberd",
+      "kind": "item",
+      "name": "Halberd",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "20.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A halberd.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_halberd",
+        "name": "Halberd",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d10",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_halberd",
+          "name": "Halberd",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with a melee attack roll using this weapon, you can make a melee attack roll with the weapon against a second creature within 5 feet of the first that is also within your reach. On a hit, the second creature takes the weapon's damage, but don't add your ability modifier to that damage unless that modifier is negative. You can make this extra attack only once per turn.",
+                "name": "Cleave",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Reach weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for Opportunity Attacks with it.",
+                "name": "Reach",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "6.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:hand-crossbow",
+      "kind": "item",
+      "name": "Hand Crossbow",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "75.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A hand crossbow.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_hand-crossbow",
+        "name": "Hand Crossbow",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_hand-crossbow",
+          "name": "Hand Crossbow",
+          "properties": [
+            {
+              "detail": "Range 30/120; Bolt",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You can fire only one piece of ammunition from a Loading weapon when you use an action, a Bonus Action, or a Reaction to fire it, regardless of the number of attacks you can normally make.",
+                "name": "Loading",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:handaxe",
+      "kind": "item",
+      "name": "Handaxe",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A handaxe.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_handaxe",
+        "name": "Handaxe",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_handaxe",
+          "name": "Handaxe",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": "Range 20/60",
+              "property": {
+                "desc": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.",
+                "name": "Thrown",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:heavy-crossbow",
+      "kind": "item",
+      "name": "Heavy Crossbow",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A heavy crossbow.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_heavy-crossbow",
+        "name": "Heavy Crossbow",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d10",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_heavy-crossbow",
+          "name": "Heavy Crossbow",
+          "properties": [
+            {
+              "detail": "Range 100/400; Bolt",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You can fire only one piece of ammunition from a Loading weapon when you use an action, a Bonus Action, or a Reaction to fire it, regardless of the number of attacks you can normally make.",
+                "name": "Loading",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can push the creature up to 10 feet straight away from yourself if it is Large or smaller.",
+                "name": "Push",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "18.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:holy-water",
+      "kind": "item",
+      "name": "Holy Water",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When you take the Attack action, you can replace one of your attacks with throwing a flask of Holy Water. Target one creature you can see within 20 feet of yourself. The target must succeed on a Dexterity saving throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or take 2d8 Radiant damage if it is a Fiend or an Undead.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_holy-water",
+        "name": "Holy Water",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:javelin",
+      "kind": "item",
+      "name": "Javelin",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.50",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A javelin.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_javelin",
+        "name": "Javelin",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_javelin",
+          "name": "Javelin",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.",
+                "name": "Slow",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "Range 30/120",
+              "property": {
+                "desc": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.",
+                "name": "Thrown",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:lance",
+      "kind": "item",
+      "name": "Lance",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A lance.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_lance",
+        "name": "Lance",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d10",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_lance",
+          "name": "Lance",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Reach weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for Opportunity Attacks with it.",
+                "name": "Reach",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can force the creature to make a Constitution saving throw (DC 8 plus the ability modifier used to make the attack roll and your Proficiency Bonus). On a failed save, the creature has the Prone condition.",
+                "name": "Topple",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "unless mounted",
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "6.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:light-crossbow",
+      "kind": "item",
+      "name": "Light Crossbow",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A light crossbow.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_light-crossbow",
+        "name": "Light Crossbow",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_light-crossbow",
+          "name": "Light Crossbow",
+          "properties": [
+            {
+              "detail": "Range 80/320; Bolt",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You can fire only one piece of ammunition from a Loading weapon when you use an action, a Bonus Action, or a Reaction to fire it, regardless of the number of attacks you can normally make.",
+                "name": "Loading",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.",
+                "name": "Slow",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:light-hammer",
+      "kind": "item",
+      "name": "Light Hammer",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A light hammer.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_light-hammer",
+        "name": "Light Hammer",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d4",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_light-hammer",
+          "name": "Light Hammer",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. You can make this extra attack only once per turn.",
+                "name": "Nick",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "Range 20/60",
+              "property": {
+                "desc": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.",
+                "name": "Thrown",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:longbow",
+      "kind": "item",
+      "name": "Longbow",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A longbow.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_longbow",
+        "name": "Longbow",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_longbow",
+          "name": "Longbow",
+          "properties": [
+            {
+              "detail": "Range 150/600; Arrow",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.",
+                "name": "Slow",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:longsword",
+      "kind": "item",
+      "name": "Longsword",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "15.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A longsword.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_longsword",
+        "name": "Longsword",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_longsword",
+          "name": "Longsword",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.",
+                "name": "Sap",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "1d10",
+              "property": {
+                "desc": "A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.",
+                "name": "Versatile",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:mace",
+      "kind": "item",
+      "name": "Mace",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A mace.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_mace",
+        "name": "Mace",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_mace",
+          "name": "Mace",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.",
+                "name": "Sap",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:maul",
+      "kind": "item",
+      "name": "Maul",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A maul.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_maul",
+        "name": "Maul",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "2d6",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_maul",
+          "name": "Maul",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can force the creature to make a Constitution saving throw (DC 8 plus the ability modifier used to make the attack roll and your Proficiency Bonus). On a failed save, the creature has the Prone condition.",
+                "name": "Topple",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "10.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:morningstar",
+      "kind": "item",
+      "name": "Morningstar",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "15.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A morningstar.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_morningstar",
+        "name": "Morningstar",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_morningstar",
+          "name": "Morningstar",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.",
+                "name": "Sap",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:musket",
+      "kind": "item",
+      "name": "Musket",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "500.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A musket.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_musket",
+        "name": "Musket",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d12",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_musket",
+          "name": "Musket",
+          "properties": [
+            {
+              "detail": "Range 40/120; Bullet",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You can fire only one piece of ammunition from a Loading weapon when you use an action, a Bonus Action, or a Reaction to fire it, regardless of the number of attacks you can normally make.",
+                "name": "Loading",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.",
+                "name": "Slow",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "10.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:net",
+      "kind": "item",
+      "name": "Net",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When you take the Attack action, you can replace one of your attacks with throwing a Net. Target a creature you can see within 15 feet of yourself. The target must succeed on a Dexterity saving throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or have the Restrained condition until it escapes. The target succeeds automatically if it is Huge or larger. To escape, the target or a creature within 5 feet of it must take an action to make a DC 10 Strength (Athletics) check, freeing the Restrained creature on a success. Destroying the Net (AC 10; 5 HP; Immunity to Bludgeoning, Poison, and Psychic damage) also frees the target, ending the effect.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_net",
+        "name": "Net",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:oil",
+      "kind": "item",
+      "name": "Oil",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.10",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You can douse a creature, object, or space with Oil or use it as fuel, as detailed below. Dousing a Creature or an Object. When you take the Attack action, you can replace one of your attacks with throwing an Oil flask. Target one creature or object within 20 feet of yourself. The target must succeed on a Dexterity saving throw (DC 8 plus your Dexterity modifier and Proficiency Bonus) or be covered in oil. If the target takes Fire damage before the oil dries (after 1 minute), the target takes an extra 5 Fire damage from burning oil. Dousing a Space. You can take the Utilize action to pour an Oil flask on level ground to cover a 5-foot-square area within 5 feet of yourself. If lit, the oil burns until the end of the turn 2 rounds from when the oil was lit (or 12 seconds) and deals 5 Fire damage to any creature that enters the area or ends its turn there. A creature can take this damage only once per turn. Fuel. Oil serves as fuel for Lamps and Lanterns. Once lit, a flask of Oil burns for 6 hours in a Lamp or Lantern. That duration doesn't need to be consecutive; you can extinguish the burning Oil (as a Utilize action) and rekindle it again until it has burned for a total of 6 hours.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_oil",
+        "name": "Oil",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:pike",
+      "kind": "item",
+      "name": "Pike",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A pike.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_pike",
+        "name": "Pike",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d10",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_pike",
+          "name": "Pike",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "You have Disadvantage on attack rolls with a Heavy weapon if it's a Melee weapon and your Strength score isn't at least 13 or if it's a Ranged weapon and your Dexterity score isn't at least 13.",
+                "name": "Heavy",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can push the creature up to 10 feet straight away from yourself if it is Large or smaller.",
+                "name": "Push",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Reach weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for Opportunity Attacks with it.",
+                "name": "Reach",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "18.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:pistol",
+      "kind": "item",
+      "name": "Pistol",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "250.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A pistol.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_pistol",
+        "name": "Pistol",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d10",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_pistol",
+          "name": "Pistol",
+          "properties": [
+            {
+              "detail": "Range 30/90; Bullet",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "You can fire only one piece of ammunition from a Loading weapon when you use an action, a Bonus Action, or a Reaction to fire it, regardless of the number of attacks you can normally make.",
+                "name": "Loading",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:quarterstaff",
+      "kind": "item",
+      "name": "Quarterstaff",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.20",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A quarterstaff.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_quarterstaff",
+        "name": "Quarterstaff",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_quarterstaff",
+          "name": "Quarterstaff",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can force the creature to make a Constitution saving throw (DC 8 plus the ability modifier used to make the attack roll and your Proficiency Bonus). On a failed save, the creature has the Prone condition.",
+                "name": "Topple",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "1d8",
+              "property": {
+                "desc": "A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.",
+                "name": "Versatile",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:rapier",
+      "kind": "item",
+      "name": "Rapier",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A rapier.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_rapier",
+        "name": "Rapier",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_rapier",
+          "name": "Rapier",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
+                "name": "Finesse",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:scimitar",
+      "kind": "item",
+      "name": "Scimitar",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A scimitar.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_scimitar",
+        "name": "Scimitar",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_scimitar",
+          "name": "Scimitar",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
+                "name": "Finesse",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. You can make this extra attack only once per turn.",
+                "name": "Nick",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:shortbow",
+      "kind": "item",
+      "name": "Shortbow",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A shortbow.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_shortbow",
+        "name": "Shortbow",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_shortbow",
+          "name": "Shortbow",
+          "properties": [
+            {
+              "detail": "Range 80/320; Arrow",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Two-Handed weapon requires two hands when you attack with it.",
+                "name": "Two-Handed",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:shortsword",
+      "kind": "item",
+      "name": "Shortsword",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A shortsword.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_shortsword",
+        "name": "Shortsword",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_shortsword",
+          "name": "Shortsword",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
+                "name": "Finesse",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to the creature, you have Advantage on your next attack roll against that creature before the end of your next turn.",
+                "name": "Vex",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:sickle",
+      "kind": "item",
+      "name": "Sickle",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A sickle.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_sickle",
+        "name": "Sickle",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d4",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_sickle",
+          "name": "Sickle",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you take the Attack action on your turn and attack with a Light weapon, you can make one extra attack as a Bonus Action later on the same turn. That extra attack must be made with a different Light weapon, and you don't add your ability modifier to the extra attack's damage unless that modifier is negative.",
+                "name": "Light",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. You can make this extra attack only once per turn.",
+                "name": "Nick",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:sling",
+      "kind": "item",
+      "name": "Sling",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.10",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A sling.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_sling",
+        "name": "Sling",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d4",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_sling",
+          "name": "Sling",
+          "properties": [
+            {
+              "detail": "Range 30/120; Bullet",
+              "property": {
+                "desc": "You can use a weapon that has the Ammunition property to make a ranged attack only if you have ammunition to fire from it. The type of ammunition required is specified with the weapon's range. Each attack expends one piece of ammunition. Drawing the ammunition is part of the attack (you need a free hand to load a one-handed weapon). After a fight, you can spend 1 minute to recover half the ammunition (round down) you used in the fight; the rest is lost.",
+                "name": "Ammunition",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.",
+                "name": "Slow",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:spear",
+      "kind": "item",
+      "name": "Spear",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A spear.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_spear",
+        "name": "Spear",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d6",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": false,
+          "is_simple": true,
+          "key": "srd-2024_spear",
+          "name": "Spear",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.",
+                "name": "Sap",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "Range 20/60",
+              "property": {
+                "desc": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.",
+                "name": "Thrown",
+                "type": null
+              }
+            },
+            {
+              "detail": "1d8",
+              "property": {
+                "desc": "A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.",
+                "name": "Versatile",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:torch",
+      "kind": "item",
+      "name": "Torch",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "0.01",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Torch burns for 1 hour, casting Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. When you take the Attack action, you can attack with the Torch, using it as a Simple Melee weapon. On a hit, the target takes 1 Fire damage.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_torch",
+        "name": "Torch",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:trident",
+      "kind": "item",
+      "name": "Trident",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A trident.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_trident",
+        "name": "Trident",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_trident",
+          "name": "Trident",
+          "properties": [
+            {
+              "detail": "Range 20/60",
+              "property": {
+                "desc": "If a weapon has the Thrown property, you can throw the weapon to make a ranged attack, and you can draw that weapon as part of the attack. If the weapon is a Melee weapon, use the same ability modifier for the attack and damage rolls that you use for a melee attack with that weapon.",
+                "name": "Thrown",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can force the creature to make a Constitution saving throw (DC 8 plus the ability modifier used to make the attack roll and your Proficiency Bonus). On a failed save, the creature has the Prone condition.",
+                "name": "Topple",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "1d10",
+              "property": {
+                "desc": "A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.",
+                "name": "Versatile",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:war-pick",
+      "kind": "item",
+      "name": "War Pick",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A war pick.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_war-pick",
+        "name": "War Pick",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "piercing",
+            "name": "Piercing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_war-pick",
+          "name": "War Pick",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, that creature has Disadvantage on its next attack roll before the start of your next turn.",
+                "name": "Sap",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "1d10",
+              "property": {
+                "desc": "A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.",
+                "name": "Versatile",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:warhammer",
+      "kind": "item",
+      "name": "Warhammer",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "15.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A warhammer.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_warhammer",
+        "name": "Warhammer",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d8",
+          "damage_type": {
+            "key": "bludgeoning",
+            "name": "Bludgeoning"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_warhammer",
+          "name": "Warhammer",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon, you can push the creature up to 10 feet straight away from yourself if it is Large or smaller.",
+                "name": "Push",
+                "type": "Mastery"
+              }
+            },
+            {
+              "detail": "1d10",
+              "property": {
+                "desc": "A Versatile weapon can be used with one or two hands. A damage value in parentheses appears with the property. The weapon deals that damage when used with two hands to make a melee attack.",
+                "name": "Versatile",
+                "type": null
+              }
+            }
+          ]
+        },
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:whip",
+      "kind": "item",
+      "name": "Whip",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "weapon",
+          "name": "Weapon"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A whip.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_whip",
+        "name": "Whip",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": {
+          "damage_dice": "1d4",
+          "damage_type": {
+            "key": "slashing",
+            "name": "Slashing"
+          },
+          "distance_unit": "feet",
+          "is_improvised": false,
+          "is_martial": true,
+          "is_simple": false,
+          "key": "srd-2024_whip",
+          "name": "Whip",
+          "properties": [
+            {
+              "detail": null,
+              "property": {
+                "desc": "When making an attack with a Finesse weapon, use your choice of your Strength or Dexterity modifier for the attack and damage rolls. You must use the same modifier for both rolls.",
+                "name": "Finesse",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "A Reach weapon adds 5 feet to your reach when you attack with it, as well as when determining your reach for Opportunity Attacks with it.",
+                "name": "Reach",
+                "type": null
+              }
+            },
+            {
+              "detail": null,
+              "property": {
+                "desc": "If you hit a creature with this weapon and deal damage to it, you can reduce its Speed by 10 feet until the start of your next turn. If the creature is hit more than once by weapons that have this property, the Speed reduction doesn't exceed 10 feet.",
+                "name": "Slow",
+                "type": "Mastery"
+              }
+            }
+          ]
+        },
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "item-type-module",
+  "schemaVersion": 1
+}

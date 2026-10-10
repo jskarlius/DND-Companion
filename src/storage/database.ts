@@ -1,5 +1,6 @@
 import Dexie, { type EntityTable } from 'dexie';
 import type { Character, CharacterPlayState } from '../domain/character/types';
+import { migrateDevelopmentContentIds } from '../domain/content/contentIdMigration';
 
 export interface StoredContentPack {
   readonly id: string;
@@ -80,6 +81,51 @@ export class CompanionDatabase extends Dexie {
             : [];
         }
         if (character.hitPointGains === undefined) character.hitPointGains = [];
+      });
+    });
+    this.version(5).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      const characters = transaction.table('characters');
+      const playState = transaction.table('playState');
+      const [storedCharacters, storedPlayState] = await Promise.all([
+        characters.toArray() as Promise<Character[]>,
+        playState.toArray() as Promise<CharacterPlayState[]>,
+      ]);
+      const stateByCharacterId = new Map(storedPlayState.map((state) => [state.characterId, state]));
+      for (const character of storedCharacters) {
+        const state = stateByCharacterId.get(character.id);
+        if (!state) continue;
+        const migrated = migrateDevelopmentContentIds(character, state);
+        await characters.put(migrated.character);
+        await playState.put(migrated.playState);
+      }
+    });
+    this.version(6).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        classes?: { id: string; classId: string }[];
+        preparedSpells?: unknown[];
+        preparedSpellIds?: string[];
+        spellSelections?: { classEntryId: string; spellId: string; prepared?: boolean }[];
+      }) => {
+        if (character.preparedSpells !== undefined) return;
+        const selected = (character.spellSelections ?? []).filter((selection) => selection.prepared)
+          .map(({ classEntryId, spellId }) => ({ classEntryId, spellId }));
+        const owner = character.classes?.filter((entry) => entry.classId.endsWith(':class:wizard'));
+        const legacy = owner?.length === 1
+          ? (character.preparedSpellIds ?? []).map((spellId) => ({ classEntryId: owner[0]!.id, spellId }))
+          : [];
+        character.preparedSpells = [...new Map([...selected, ...legacy].map((entry) => [`${entry.classEntryId}:${entry.spellId}`, entry])).values()];
       });
     });
   }

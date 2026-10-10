@@ -1,0 +1,773 @@
+{
+  "items": [
+    {
+      "id": "srd-2024:item:breastplate",
+      "kind": "item",
+      "name": "Breastplate",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 14,
+          "ac_cap_dexmod": 2,
+          "ac_display": "14 + Dex modifier (max 2)",
+          "category": "medium",
+          "grants_stealth_disadvantage": false,
+          "key": "srd-2024_breastplate",
+          "name": "Breastplate",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "400.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A breastplate.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_breastplate",
+        "name": "Breastplate",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "20.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:chain-mail",
+      "kind": "item",
+      "name": "Chain Mail",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": false,
+          "ac_base": 16,
+          "ac_cap_dexmod": null,
+          "ac_display": "16",
+          "category": "heavy",
+          "grants_stealth_disadvantage": true,
+          "key": "srd-2024_chain-mail",
+          "name": "Chain Mail",
+          "strength_score_required": 13
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "75.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A chain mail.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_chain-mail",
+        "name": "Chain Mail",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "55.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:chain-shirt",
+      "kind": "item",
+      "name": "Chain Shirt",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 13,
+          "ac_cap_dexmod": 2,
+          "ac_display": "13 + Dex modifier (max 2)",
+          "category": "medium",
+          "grants_stealth_disadvantage": false,
+          "key": "srd-2024_chain-shirt",
+          "name": "Chain Shirt",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A chain shirt.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_chain-shirt",
+        "name": "Chain Shirt",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "20.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:half-plate-armor",
+      "kind": "item",
+      "name": "Half Plate Armor",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 15,
+          "ac_cap_dexmod": 2,
+          "ac_display": "15 + Dex modifier (max 2)",
+          "category": "medium",
+          "grants_stealth_disadvantage": true,
+          "key": "srd-2024_half-plate-armor",
+          "name": "Half Plate Armor",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "750.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A half plate armor.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_half-plate-armor",
+        "name": "Half Plate Armor",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "40.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:hide-armor",
+      "kind": "item",
+      "name": "Hide Armor",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 12,
+          "ac_cap_dexmod": 2,
+          "ac_display": "12 + Dex modifier (max 2)",
+          "category": "medium",
+          "grants_stealth_disadvantage": false,
+          "key": "srd-2024_hide-armor",
+          "name": "Hide Armor",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A hide armor.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_hide-armor",
+        "name": "Hide Armor",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "12.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:leather-armor",
+      "kind": "item",
+      "name": "Leather Armor",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 11,
+          "ac_cap_dexmod": null,
+          "ac_display": "11 + Dex modifier",
+          "category": "light",
+          "grants_stealth_disadvantage": false,
+          "key": "srd-2024_leather-armor",
+          "name": "Leather Armor",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A leather armor.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_leather-armor",
+        "name": "Leather Armor",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "10.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:padded-armor",
+      "kind": "item",
+      "name": "Padded Armor",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 11,
+          "ac_cap_dexmod": null,
+          "ac_display": "11 + Dex modifier",
+          "category": "light",
+          "grants_stealth_disadvantage": true,
+          "key": "srd-2024_padded-armor",
+          "name": "Padded Armor",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A padded armor.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_padded-armor",
+        "name": "Padded Armor",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "8.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:plate-armor",
+      "kind": "item",
+      "name": "Plate Armor",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": false,
+          "ac_base": 18,
+          "ac_cap_dexmod": null,
+          "ac_display": "18",
+          "category": "heavy",
+          "grants_stealth_disadvantage": true,
+          "key": "srd-2024_plate-armor",
+          "name": "Plate Armor",
+          "strength_score_required": 15
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "1500.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A plate armor.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_plate-armor",
+        "name": "Plate Armor",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "65.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:ring-mail",
+      "kind": "item",
+      "name": "Ring Mail",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": false,
+          "ac_base": 14,
+          "ac_cap_dexmod": null,
+          "ac_display": "14",
+          "category": "heavy",
+          "grants_stealth_disadvantage": true,
+          "key": "srd-2024_ring-mail",
+          "name": "Ring Mail",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "30.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A ring mail.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_ring-mail",
+        "name": "Ring Mail",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "40.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:scale-mail",
+      "kind": "item",
+      "name": "Scale Mail",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 14,
+          "ac_cap_dexmod": 2,
+          "ac_display": "14 + Dex modifier (max 2)",
+          "category": "medium",
+          "grants_stealth_disadvantage": true,
+          "key": "srd-2024_scale-mail",
+          "name": "Scale Mail",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A scale mail.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_scale-mail",
+        "name": "Scale Mail",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "45.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:shield",
+      "kind": "item",
+      "name": "Shield",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": false,
+          "ac_base": 2,
+          "ac_cap_dexmod": null,
+          "ac_display": "2",
+          "category": "heavy",
+          "grants_stealth_disadvantage": false,
+          "key": "srd-2024_shield",
+          "name": "Shield",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A shield.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_shield",
+        "name": "Shield",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "6.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:splint-armor",
+      "kind": "item",
+      "name": "Splint Armor",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": false,
+          "ac_base": 17,
+          "ac_cap_dexmod": null,
+          "ac_display": "17",
+          "category": "heavy",
+          "grants_stealth_disadvantage": true,
+          "key": "srd-2024_splint-armor",
+          "name": "Splint Armor",
+          "strength_score_required": 15
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "200.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A splint armor.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_splint-armor",
+        "name": "Splint Armor",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "60.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:studded-leather-armor",
+      "kind": "item",
+      "name": "Studded Leather Armor",
+      "reference": {
+        "armor": {
+          "ac_add_dexmod": true,
+          "ac_base": 12,
+          "ac_cap_dexmod": null,
+          "ac_display": "12 + Dex modifier",
+          "category": "light",
+          "grants_stealth_disadvantage": false,
+          "key": "srd-2024_studded-leather-armor",
+          "name": "Studded Leather Armor",
+          "strength_score_required": null
+        },
+        "category": {
+          "key": "armor",
+          "name": "Armor"
+        },
+        "cost": "45.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A studded leather armor.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_studded-leather-armor",
+        "name": "Studded Leather Armor",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "13.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "item-type-module",
+  "schemaVersion": 1
+}

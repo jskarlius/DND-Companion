@@ -240,11 +240,17 @@ html[data-theme='dark'] .inventory-list li { background: var(--surface-2); color
 .spell-slot-tracker span { color: var(--muted-foreground); font-variant-numeric: tabular-nums; }
 .spell-slot-action { min-height: 2rem; padding: .25rem .45rem; font-size: .75rem; }
 .spell-level-group ul { display: grid; gap: .35rem; padding: 0; margin: .5rem 0 0; list-style: none; }
-.spell-level-group li { display: grid; grid-template-columns: auto minmax(8rem, 1fr) minmax(0, 1fr); align-items: center; gap: .5rem; padding: .45rem .5rem; background: var(--surface-2); }
-.spell-prepared { display: inline-flex; align-items: center; gap: .25rem; margin: 0; color: var(--muted-foreground); font-size: .72rem; font-weight: 700; text-transform: uppercase; }
+.spell-level-group li { min-width: 0; }
+.spell-prepared { position: absolute; inset: .5rem .6rem auto auto; display: grid; justify-items: center; gap: .2rem; margin: 0; color: var(--muted-foreground); font-size: .68rem; font-weight: 700; line-height: 1; text-align: center; text-transform: uppercase; }
+.spell-prepared input { inline-size: 1.2rem; block-size: 1.2rem; margin: 0; accent-color: var(--primary); }
 .spell-details { color: var(--muted-foreground); font-size: .8rem; }
+.spell-card { position: relative; min-height: 2.55rem; border-radius: var(--radius-sm); background: var(--surface-2); }
+.spell-card-details { display: grid; gap: .3rem; width: 100%; min-height: 2.55rem; padding: .7rem .85rem; border: 0; border-radius: inherit; background: transparent; color: var(--foreground); font: inherit; text-align: left; cursor: pointer; }
+.spell-card-preparable .spell-card-details { padding-right: 5.1rem; }
+.spell-card-details:hover, .spell-card-details:focus-visible { background: var(--surface); outline: 2px solid var(--focus-ring); outline-offset: 1px; }
+.spell-card-details strong { white-space: normal; }
 .empty-spell-level { margin: .5rem 0 0; color: var(--muted-foreground); font-size: .85rem; }
-@media (max-width: 620px) { .spell-level-group li { grid-template-columns: auto minmax(0, 1fr); }.spell-details { grid-column: 2; } }
+@media (max-width: 620px) { .spell-card-details { gap: .2rem; }.spell-level-group li { align-items: start; } }
 
 /* The spellbook is a focused play surface: level groups are dense, independent disclosures. */
 .spells-tab { min-width: 0; }
@@ -257,11 +263,15 @@ html[data-theme='dark'] .inventory-list li { background: var(--surface-2); color
 .spell-level-group > summary::after { content: '\2304'; color: var(--accent); font-weight: 700; }
 .spell-level-group:not([open]) > summary::after { transform: rotate(-90deg); }
 .spell-level-group ul, .spell-level-group .empty-spell-level { margin-inline: .5rem; margin-bottom: .5rem; }
-.spell-level-group li { grid-template-columns: auto minmax(0, 1fr); }
-.spell-level-group .spell-details { grid-column: 1 / -1; padding-left: .15rem; }
+.spell-level-group .spell-details { padding-left: .15rem; }
 .cantrip-marker { color: var(--muted-foreground); font-size: .72rem; font-weight: 700; text-transform: uppercase; }
 .spell-count-summary { display: flex; flex-wrap: wrap; gap: .5rem 1rem; margin: -.75rem 0 1rem; color: var(--muted-foreground); font-size: .85rem; }
 .spell-count-summary span { font-variant-numeric: tabular-nums; }
+.spell-caster-tabs { display: flex; flex-wrap: wrap; gap: .35rem; margin: 1rem 0; }
+.spell-caster-tabs button { min-height: 2.25rem; padding: .35rem .7rem; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-2); color: var(--muted-foreground); font: inherit; font-size: .85rem; font-weight: 700; cursor: pointer; }
+.spell-caster-tabs button[aria-selected='true'] { border-color: var(--primary); background: var(--primary); color: var(--primary-foreground); }
+.spell-caster-tabs button:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.spell-source { color: var(--muted-foreground); font-size: .75rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
 
 /* Conditions get the broad working area; death saves remain compact without competing for it. */
 .play-state-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -294,12 +304,32 @@ th, td { border-bottom-color: var(--border); }
 @media (pointer: coarse) { .inspiration-control { min-height: 2.75rem; } }
 
 /* Level-up uses an uncluttered field stack so a label never competes with its control. */
-.level-up-dialog { width: min(100% - 2rem, 32rem); display: grid; gap: 1rem; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border); background: var(--surface); color: var(--foreground); }
+.level-up-dialog { width: min(100% - 2rem, 42rem); display: grid; gap: 1rem; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border); background: var(--surface); color: var(--foreground); }
 .level-up-dialog > p { margin: -.35rem 0 0; color: var(--muted-foreground); }
 .level-up-dialog .level-up-field { display: grid; gap: .35rem; color: var(--foreground); font-size: .92rem; font-weight: 700; }
 .level-up-dialog .level-up-field > span { color: var(--muted-foreground); font-size: .78rem; font-weight: 700; letter-spacing: .02em; }
 .level-up-spell-choices { display: grid; gap: .65rem; margin: 0; padding: .85rem; border: 1px solid var(--border); border-left: 3px solid var(--primary); background: var(--surface-2); }
 .level-up-spell-choices legend { padding: 0 .3rem; color: var(--foreground); font-size: .85rem; font-weight: 700; }
+.hit-die-control { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: .65rem; }
+.hit-die-control button { min-height: 2.6rem; white-space: nowrap; }
+.spell-choice-picker { position: relative; }
+.spell-choice-menu { position: relative; display: grid; gap: .6rem; margin-top: -.1rem; padding: .55rem; border: 1px solid var(--border); border-left: 3px solid var(--primary); background: var(--surface-raised); box-shadow: 0 .45rem 1.2rem color-mix(in srgb, var(--foreground) 12%, transparent); }
+.spell-level-tabs { display: flex; gap: .35rem; overflow-x: auto; padding-bottom: .1rem; }
+.spell-level-tabs button { flex: 0 0 auto; min-height: 2rem; padding: .25rem .5rem; border: 1px solid var(--border); border-radius: 999px; background: var(--input); color: var(--muted-foreground); font: inherit; font-size: .78rem; font-weight: 700; cursor: pointer; }
+.spell-level-tabs button[aria-selected='true'] { border-color: var(--primary); background: var(--primary); color: var(--primary-foreground); }
+.spell-level-tabs button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 1px; }
+.spell-choice-menu ul { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .35rem; max-height: 13rem; margin: 0; padding: 0; overflow: auto; list-style: none; }
+.spell-choice-menu [role='option'] { display: flex; justify-content: space-between; width: 100%; min-height: 2.4rem; padding: .4rem .55rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--input); color: var(--foreground); font: inherit; font-size: .85rem; font-weight: 650; text-align: left; cursor: pointer; }
+.spell-choice-menu [role='option']:hover, .spell-choice-menu [role='option']:focus-visible { border-color: var(--primary); background: var(--surface-2); outline: 2px solid var(--focus-ring); outline-offset: 1px; }
+.spell-choice-menu [role='option'] small { align-self: center; color: var(--muted-foreground); font-weight: 600; }
+.spell-choice-menu > p { margin: 0; color: var(--muted-foreground); font-size: .88rem; }
+.spell-choice-preview { display: grid; grid-template-rows: 1.25rem 3.8rem auto; gap: .35rem; min-height: 7.8rem; padding: .55rem .65rem; border-top: 1px solid var(--border); color: var(--foreground); }
+.spell-choice-preview p { display: -webkit-box; margin: 0; overflow: hidden; color: var(--muted-foreground); font-size: .86rem; line-height: 1.45; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
+.spell-choice-preview button { justify-self: start; }
+.spell-detail-dialog { width: min(100% - 2rem, 42rem); max-height: min(82dvh, 44rem); overflow: auto; color: var(--foreground); }
+.spell-detail-dialog > p, .spell-detail-dialog section > p { white-space: pre-wrap; line-height: 1.6; }
+.spell-detail-dialog section { border-top: 1px solid var(--border); padding-top: .8rem; }
+.spell-detail-dialog section h3 { margin: 0 0 .35rem; font-family: var(--font-display); font-size: 1.05rem; }
 .level-up-dialog select, .level-up-dialog input, .max-hp-effects .aid-control select { width: 100%; min-height: 2.6rem; padding: .45rem .65rem; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--input); color: var(--foreground); font: inherit; font-weight: 600; }
 .level-up-dialog select { appearance: auto; }
 .level-up-dialog option { background: var(--surface); color: var(--foreground); }
@@ -318,6 +348,7 @@ th, td { border-bottom-color: var(--border); }
 html[data-theme='dark'] .hit-dice-summary .max-hp-effects { border-color: var(--border); background: var(--surface); }
 html[data-theme='dark'] .hit-dice-summary .max-hp-effects .aid-control select { background: var(--input); color: var(--foreground); }
 @media (max-width: 520px) { .level-up-dialog footer > * { flex: 1 1 10rem; } }
+@media (max-width: 520px) { .hit-die-control { grid-template-columns: 1fr; } .spell-choice-menu ul { grid-template-columns: 1fr; } }
 
 /* Ability scores are source values, edited together so their provenance stays clear. */
 .ability-section-actions { display: flex; justify-content: flex-end; margin-bottom: .65rem; }

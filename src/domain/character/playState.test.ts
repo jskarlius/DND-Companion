@@ -6,7 +6,7 @@ import type { CharacterPlayState } from './types';
 const state: CharacterPlayState = {
   characterId: 'demo:character:test', currentHp: 3, temporaryHp: 4, temporaryMaximumHpBonus: 0, inspiration: true,
   usedHitDice: { wizard: 2, fighter: 2 },
-  usedResources: { 'srd-5.2.1:resource:wizard-arcane-recovery': 1, 'srd-5.2.1:resource:fighter-second-wind': 1 },
+  usedResources: { 'srd-2024:resource:wizard-arcane-recovery': 1, 'srd-2024:resource:fighter-second-wind': 1 },
   usedSpellSlots: { 1: 1 }, deathSaveSuccesses: 2, deathSaveFailures: 1, conditions: ['Poisoned'],
 };
 const [arcaneRecovery, secondWind] = minimalContentFixture.resources;

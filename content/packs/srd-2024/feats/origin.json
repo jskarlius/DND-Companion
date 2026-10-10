@@ -1,0 +1,197 @@
+{
+  "feats": [
+    {
+      "id": "srd-2024:feat:alert",
+      "kind": "feat",
+      "name": "Alert",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "When you roll Initiative, you can add your Proficiency Bonus to the roll."
+          },
+          {
+            "desc": "Immediately after you roll Initiative, you can swap your Initiative with the Initiative of one willing ally in the same combat. You can't make this swap if you or the ally has the Incapacitated condition."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You gain the following benefits.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": false,
+        "key": "srd-2024_alert",
+        "name": "Alert",
+        "prerequisite": "",
+        "type": "Origin"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feat:magic-initiate",
+      "kind": "feat",
+      "name": "Magic Initiate",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "You learn two cantrips of your choice from the Cleric, Druid, or Wizard spell list. Intelligence, Wisdom, or Charisma is your spellcasting ability for this feat's spells (choose when you select this feat)."
+          },
+          {
+            "desc": "Choose a level 1 spell from the same list you selected for this feat's cantrips. You always have that spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have."
+          },
+          {
+            "desc": "Whenever you gain a new level, you can replace one of the spells you chose for this feat with a different spell of the same level from the chosen spell list."
+          },
+          {
+            "desc": "You can take this feat more than once, but you must choose a different spell list each time."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You gain the following benefits.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": false,
+        "key": "srd-2024_magic-initiate",
+        "name": "Magic Initiate",
+        "prerequisite": "",
+        "type": "Origin"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feat:savage-attacker",
+      "kind": "feat",
+      "name": "Savage Attacker",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "You've trained to deal particularly damaging strikes. Once per turn when you hit a target with a weapon, you can roll the weapon's damage dice twice and use either roll against the target."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": false,
+        "key": "srd-2024_savage-attacker",
+        "name": "Savage Attacker",
+        "prerequisite": "",
+        "type": "Origin"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feat:skilled",
+      "kind": "feat",
+      "name": "Skilled",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "You gain proficiency in any combination of three skills or tools of your choice."
+          },
+          {
+            "desc": "You can take this feat more than once."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": false,
+        "key": "srd-2024_skilled",
+        "name": "Skilled",
+        "prerequisite": "",
+        "type": "Origin"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "feat-category-module",
+  "schemaVersion": 1
+}

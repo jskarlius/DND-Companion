@@ -81,7 +81,7 @@ test('migrates a version 0 backup by adding missing play-state and rest-policy f
     playState: (({ temporaryMaximumHpBonus: _removed, ...playState }) => playState)(representativePlayState),
   });
 
-  expect(backup.schemaVersion).toBe(3);
+  expect(backup.schemaVersion).toBe(4);
   expect(backup.character.schemaVersion).toBe(1);
   expect(backup.playState.temporaryMaximumHpBonus).toBe(0);
   expect(backup.playState.usedHitDice).toEqual({});
@@ -123,4 +123,30 @@ test('upgrades a version 3 database with class-owned spells and empty HP history
   const upgraded = await new CharacterRepository(upgradedDatabase).loadCharacter(representativeCharacter.id);
   expect(upgraded?.spellSelections).toEqual(representativeCharacter.spellSelections);
   expect(upgraded?.hitPointGains).toEqual([]);
+});
+
+test('upgrades version 4 development references to the canonical SRD namespace', async () => {
+  const name = `content-namespace-${crypto.randomUUID()}`;
+  const legacyDatabase = new Dexie(name);
+  legacyDatabase.version(4).stores({
+    characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+  });
+  await legacyDatabase.open();
+  const legacyCharacter = {
+    ...representativeCharacter,
+    enabledContentPackIds: ['srd-5.2.1'],
+    classes: representativeCharacter.classes.map((entry) => ({ ...entry, classId: entry.classId.replace('srd-2024', 'srd-5.2.1') })),
+    spellSelections: representativeCharacter.spellSelections.map((entry) => ({ ...entry, spellId: entry.spellId.replace('srd-2024', 'srd-5.2.1') })),
+  };
+  await legacyDatabase.table('characters').put(legacyCharacter);
+  await legacyDatabase.table('playState').put({ ...representativePlayState, usedResources: { 'srd-5.2.1:resource:wizard-arcane-recovery': 1 } });
+  legacyDatabase.close();
+
+  const upgradedDatabase = new CompanionDatabase(name);
+  databases.push(upgradedDatabase);
+  const repository = new CharacterRepository(upgradedDatabase);
+  const [character, playState] = await Promise.all([repository.loadCharacter(representativeCharacter.id), repository.loadPlayState(representativeCharacter.id)]);
+  expect(character?.classes[0]?.classId).toBe('srd-2024:class:wizard');
+  expect(character?.enabledContentPackIds).toEqual(['srd-2024']);
+  expect(playState?.usedResources).toEqual({ 'srd-2024:resource:wizard-arcane-recovery': 1 });
 });

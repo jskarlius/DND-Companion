@@ -31,7 +31,9 @@ Characters and play state
       (IndexedDB)
 ```
 
-Slice 8 will extend the same repository to combine this bundled data with
+Slice 8 will replace this bootstrap layout with the structured
+`packs/srd-2024/` module directory, then extend the same repository to combine
+that bundled data with
 installed public and private packs stored in IndexedDB. Consumers should not
 need to know which backing store supplied an entity.
 

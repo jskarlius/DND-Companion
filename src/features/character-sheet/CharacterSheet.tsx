@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '../../components/ui/ta
 import { CollapsibleSection as Section } from './CollapsibleSection';
 import { LevelUpDialog } from './LevelUpDialog';
 import { AbilityScoreDialog } from './AbilityScoreDialog';
+import { SpellTab } from './SpellTab';
 import './CharacterSheet.css';
 
 interface CharacterSheetProps {
@@ -76,6 +77,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const [pendingRest, setPendingRest] = useState<'short' | 'long' | null>(null);
   const [pendingHitDice, setPendingHitDice] = useState<Record<string, number>>({});
   const [editingOverride, setEditingOverride] = useState<ManualOverrideTarget | null>(null);
+  const [detailSpellId, setDetailSpellId] = useState<string>();
   const lastOverrideTrigger = useRef<HTMLButtonElement | null>(null);
   const sheet = buildCharacterSheetViewModel(draftCharacter, sessionState, content, details);
   const { combat } = details;
@@ -92,11 +94,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const hitDiceRecoveryLimitValue = hitDiceRecoveryLimit(hitDiceGroups.map(({ classEntryId, maximum }) => ({ classEntryId, maximum })), hitDiceRecovery);
   const usedHitDice = hitDiceGroups.reduce((total, group) => total + group.used, 0);
   const hitDiceSummary = hitDiceGroups.map((group) => `${group.maximum}d${group.die}`).join(' + ');
-  const spellLevels = [...new Set([
-    ...sheet.spellSlots.map(({ level }) => level),
-    ...sheet.spells.map(({ spell }) => spell.level),
-    ...sheet.cantrips.map(() => 0),
-  ])].sort((left, right) => left - right);
+  const detailSpell = detailSpellId ? content.spells.find((spell) => spell.id === detailSpellId) : undefined;
 
   useEffect(() => {
     if (previousCharacter.current !== draftCharacter) onCharacterChange?.(draftCharacter);
@@ -147,18 +145,15 @@ export function CharacterSheet({ character, playState, content, details, onChara
     setSessionState((current) => ({ ...current, [kind]: checked ? Math.max(current[kind], index + 1) : Math.min(current[kind], index) }));
   };
 
-  const setSpellPrepared = (spellId: string, prepared: boolean) => {
+  const setSpellPrepared = (classEntryId: string, spellId: string, prepared: boolean) => {
     setDraftCharacter((current) => ({
       ...current,
-      spellSelections: (() => {
-        const classEntryId = current.classes.find((entry) => content.classes.find((candidate) => candidate.id === entry.classId)?.spellListIds.includes(spellId))?.id ?? '';
-        const selection = current.spellSelections.find((entry) => entry.spellId === spellId && entry.classEntryId === classEntryId);
-        if (selection) return current.spellSelections.map((entry) => entry === selection ? { ...entry, prepared } : entry);
-        return prepared ? [...current.spellSelections, { spellId, classEntryId, acquiredAtClassLevel: current.classes.find((entry) => entry.id === classEntryId)?.level ?? 1, prepared: true }] : current.spellSelections;
+      preparedSpells: (() => {
+        if (content.classes.find((entry) => entry.id === current.classes.find((entry) => entry.id === classEntryId)?.classId)?.spellcasting?.selectionMode === 'level-up-list') return current.preparedSpells;
+        return prepared
+          ? current.preparedSpells.some((entry) => entry.classEntryId === classEntryId && entry.spellId === spellId) ? current.preparedSpells : [...current.preparedSpells, { classEntryId, spellId }]
+          : current.preparedSpells.filter((entry) => entry.classEntryId !== classEntryId || entry.spellId !== spellId);
       })(),
-      preparedSpellIds: prepared
-        ? current.preparedSpellIds.includes(spellId) ? current.preparedSpellIds : [...current.preparedSpellIds, spellId]
-        : current.preparedSpellIds.filter((id) => id !== spellId),
     }));
   };
 
@@ -191,7 +186,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
   return (
     <main className="character-sheet">
       <header className="sheet-header">
-        <div><p className="eyebrow">{character.ruleset.replace('e-', 'th edition ')}</p><h1>{character.name}</h1>{onAdvancementCommit && <LevelUpDialog character={draftCharacter} playState={sessionState} content={content} onCommit={onAdvancementCommit} />}</div>
+        <div><p className="eyebrow">{character.ruleset.replace('e-', 'th edition ')}</p><h1>{character.name}</h1>{onAdvancementCommit && <LevelUpDialog character={draftCharacter} playState={sessionState} content={content} onCommit={async (nextCharacter, nextPlayState) => { await onAdvancementCommit(nextCharacter, nextPlayState); setDraftCharacter(nextCharacter); setSessionState(nextPlayState); }} />}</div>
         <dl className="identity-list">
           <div className="identity-classes"><dt>Classes</dt><dd>{sheet.classes.map((entry) => `${entry.name} ${entry.level}`).join(' / ')}</dd></div>
           <div><dt>Species</dt><dd>{details.identity.species}</dd></div>
@@ -226,8 +221,6 @@ export function CharacterSheet({ character, playState, content, details, onChara
         ))}
       </TabsList>
 
-      {activeTab === 'spells' && <p className="spell-count-summary"><span>Cantrips {sheet.cantrips.length}{sheet.spellLimits && ` / ${sheet.spellLimits.cantripsKnown}`}</span><span>Known spells {sheet.spells.length}</span><span>Prepared {sheet.spells.filter(({ prepared }) => prepared).length}{sheet.spellLimits && ` / ${sheet.spellLimits.preparedSpells}`}</span></p>}
-
       <TabsContent value="sheet" className="sheet-grid">
         <div className="sheet-column">
           <Section title="Abilities"><div className="ability-section-actions"><AbilityScoreDialog scores={draftCharacter.abilityScores} generation={draftCharacter.abilityScoreGeneration} onSave={(abilityScores, abilityScoreGeneration) => setDraftCharacter((current) => ({ ...current, abilityScores, abilityScoreGeneration }))} /></div><dl className="ability-grid">{sheet.abilities.map(({ ability, score, modifier }) => <div key={ability}><dt aria-label={titleCase(ability)}><abbr title={titleCase(ability)}>{abilityAbbreviation(ability)}</abbr></dt><dd>{score}<small>{signed(modifier)}</small></dd></div>)}</dl></Section>
@@ -247,8 +240,15 @@ export function CharacterSheet({ character, playState, content, details, onChara
         </div>
       </TabsContent>
 
-      {sheet.spellcasting.length > 0 && <TabsContent value="spells" className="spells-tab"><Section title="Spells" className="spells-section"><dl className="spellcasting-values"><div><dt>Attack bonus <OverrideButton label="spell attack bonus" active={Boolean(draftCharacter.manualOverrides.spellAttackBonus)} onClick={() => setEditingOverride('spellAttackBonus')} /></dt><dd>{signed(resolveManualOverride(baseCalculation(combat.spellAttackBonus, 'Calculated spell attack bonus'), draftCharacter.manualOverrides, 'spellAttackBonus').value)}</dd><OverrideReason override={draftCharacter.manualOverrides.spellAttackBonus} /></div><div><dt>Save DC <OverrideButton label="spell save DC" active={Boolean(draftCharacter.manualOverrides.spellSaveDc)} onClick={() => setEditingOverride('spellSaveDc')} /></dt><dd>{resolveManualOverride(baseCalculation(combat.spellSaveDc, 'Calculated spell save DC'), draftCharacter.manualOverrides, 'spellSaveDc').value}</dd><OverrideReason override={draftCharacter.manualOverrides.spellSaveDc} /></div><div><dt>Spellcasting ability</dt><dd>{sheet.spellcasting.map(({ className, ability }) => `${className}: ${titleCase(ability)}`).join(' / ')}</dd></div></dl><div className="spell-level-groups">{spellLevels.map((level) => { const slot = sheet.spellSlots.find((entry) => entry.level === level); const used = slot ? sessionState.usedSpellSlots[level] ?? 0 : 0; const spells = level === 0 ? sheet.cantrips.map((spell) => ({ spell, prepared: false })) : sheet.spells.filter(({ spell }) => spell.level === level); return <details className="spell-level-group" key={level} open><summary><h3>{level === 0 ? 'Cantrips' : `Level ${level}`}</h3>{slot && <span className="spell-slot-tracker" aria-label={`${slot.label}, level ${level}`}><span>{slot.maximum} total / {used} used</span><Button type="button" variant="secondary" className="spell-slot-action" aria-label={`Restore level ${level} spell slot`} disabled={used === 0} onClick={(event) => { event.preventDefault(); setSessionState((current) => setSpellSlotUses(current, level, used - 1, slot.maximum)); }}>Restore</Button><Button type="button" className="spell-slot-action" aria-label={`Use level ${level} spell slot`} disabled={used === slot.maximum} onClick={(event) => { event.preventDefault(); setSessionState((current) => setSpellSlotUses(current, level, used + 1, slot.maximum)); }}>Spend</Button></span>}</summary>{spells.length > 0 ? <ul>{spells.map(({ spell, prepared }) => { const components = [spell.components?.verbal ? 'V' : undefined, spell.components?.somatic ? 'S' : undefined, spell.components?.material ? `M (${spell.components.material})` : undefined].filter(Boolean).join(', '); const spellDetails = [spell.castingTime, spell.range, components || undefined, spell.duration, spell.concentration ? 'Concentration' : undefined, spell.ritual ? 'Ritual' : undefined, spell.scalingBasis ? `Scales by ${spell.scalingBasis.replace('-', ' ')}` : undefined].filter(Boolean).join(' \u00b7 '); return <li key={spell.id}>{spell.level === 0 ? <span className="cantrip-marker" aria-label="Cantrip">Cantrip</span> : <label className="spell-prepared"><input type="checkbox" aria-label={`Prepare ${spell.name}`} checked={prepared} onChange={(event) => setSpellPrepared(spell.id, event.currentTarget.checked)} /><span aria-hidden="true">Prepared</span></label>}<strong>{spell.name}</strong>{spellDetails && <span className="spell-details">{spellDetails}</span>}{spell.description && <details className="spell-reference"><summary>View description</summary><p>{spell.description}</p>{spell.higherLevelDescription && <p><strong>At higher levels.</strong> {spell.higherLevelDescription}</p>}</details>}</li>; })}</ul> : <p className="empty-spell-level">No spells recorded.</p>}</details>; })}</div></Section></TabsContent>}
+      {sheet.spellcasting.length > 0 && <TabsContent value="spells" className="spells-tab"><SpellTab
+        sheet={sheet}
+        playState={sessionState}
+        onPreparedChange={setSpellPrepared}
+        onSpellSlotChange={(level, used, maximum) => setSessionState((current) => setSpellSlotUses(current, level, used, maximum))}
+        onShowDetails={setDetailSpellId}
+      /></TabsContent>}
 
+      <Dialog open={Boolean(detailSpell)} onOpenChange={(nextOpen) => { if (!nextOpen) setDetailSpellId(undefined); }}><DialogContent className="spell-detail-dialog"><DialogTitle>{detailSpell?.name}</DialogTitle><DialogDescription>Level {detailSpell?.level} spell{detailSpell?.castingTime ? ` Â· ${detailSpell.castingTime}` : ''}{detailSpell?.range ? ` Â· ${detailSpell.range}` : ''}</DialogDescription>{detailSpell?.description ? <p>{detailSpell.description}</p> : <p>No description is available for this spell.</p>}{detailSpell?.higherLevelDescription && <section><h3>At higher levels</h3><p>{detailSpell.higherLevelDescription}</p></section>}</DialogContent></Dialog>
       <TabsContent value="inventory" className="tab-panel"><Section title="Inventory"><ul className="inventory-list">{character.inventory.map((entry) => <li key={entry.itemId}><strong>{inventoryLabel(entry.itemId, details.inventory)}</strong><span>Quantity {entry.quantity}</span></li>)}</ul></Section></TabsContent>
 
       <TabsContent value="character" className="tab-panel character-panel">

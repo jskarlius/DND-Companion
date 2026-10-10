@@ -75,9 +75,38 @@ choosing one exclusively.
 
 ### 4.1 Distributable content
 
-Curated SRD content packs are versioned JSON files shipped with the application.
-They are read-only inputs and can be cached for offline use. Packs are separated
-by ruleset and version, for example `srd-5.1` and `srd-5.2.1`.
+Curated SRD content packs are versioned, structured JSON directories shipped
+with the application. They are read-only inputs and can be cached for offline
+use. A pack is a logical unit; its entity categories remain separate files so
+they are practical to regenerate, review, and maintain. For example:
+
+```text
+content/packs/srd-2024/
+  manifest.json
+  import-report.json
+  classes/<class>.json
+  subclasses/<class>/<subclass>.json
+  species/<species>.json
+  backgrounds/<background>.json
+  spells/level-0.json ... level-9.json
+  feats/origin.json | general.json | epic-boon.json | other.json
+  items/by-type/<item-type>.json
+```
+
+Class, subclass, species, and background modules colocate their owned features,
+choices, resources, and equipment packages with the owning entity. The manifest
+records the pack schema, provenance, expected entity counts, and a deterministic
+hash for every module file. The pack loader validates each file, flattens owned
+records into lookup indexes, and exposes their combined read-only view through
+the content repository.
+Packs are separated by ruleset and source namespace, for example `srd-2024`.
+The exact upstream label and provenance remain manifest metadata; durable IDs
+must not claim an unreconciled source release.
+
+For browser import/export, the same logical pack may be represented as one
+versioned JSON file containing its manifest and modules. The bundled directory
+form and portable file form must round-trip without changing entity IDs or
+content.
 
 The application loads these packs into its content repository. An installation
 may avoid duplicating immutable records in IndexedDB if querying the static pack
@@ -236,7 +265,10 @@ Core entity categories include:
 Public and private packs use separate, validated entity collections rather
 than a single document dump. Every entity has a stable source-qualified ID;
 relationships are represented by IDs, never display names or duplicated rule
-text.
+text. The repository composes the bundled public pack with enabled installed
+packs, validates the enabled graph, and builds in-memory lookup indexes. A
+duplicate ID, broken cross-pack reference, or ruleset conflict is an actionable
+error; it never silently shadows another entity or falls back by name.
 
 ```text
 content-pack manifest
@@ -250,6 +282,10 @@ content-pack manifest
 ├── resources
 └── choices       → named class/subclass selection options and their stable IDs
 ```
+
+Spell-list membership is owned by each spell as a list of class IDs, rather
+than by copying spell IDs onto each class. This lets an installed pack add a
+spell to an existing class list without replacing the class entity.
 
 For example, a character's spellbook retains spell IDs, a class progression
 retains feature or choice IDs, and a selected feat retains a feat ID. This
@@ -290,8 +326,17 @@ with a Bladesong use tracker. Conditional statistics can be automated later
 without redesigning the subclass record.
 
 New private spells are normal spell entities associated with both their private
-source and the relevant Wizard spell list. Installing or removing the pack
-changes what can be selected without altering the base SRD Wizard record.
+source and the relevant Wizard spell-list class ID. Installing or removing the
+pack changes what can be selected without altering the base SRD Wizard record.
+
+Features and feats may declare a deliberately small set of structured,
+reviewed mechanical effects. These effects are not a general rules scripting
+language. Initial supported effects include permanent maximum-HP modifiers with
+a fixed, class-level, or total-character-level basis. Maximum HP is derived
+from class Hit Die history, Constitution by total character level, permanent
+content effects (such as an applicable feat or species trait), and temporary
+play-state effects. Every term carries its source ID and label in the
+calculation trace.
 
 ### 7.1 Inventory interaction
 
@@ -716,8 +761,9 @@ SQLite is adopted later.
 ```text
 dnd-companion/
 |-- content/
-|   |-- srd-5.1/
-|   `-- srd-5.2.1/
+|   |-- generated/            # Legacy Slice 6.75 bootstrap data
+|   `-- packs/
+|       `-- srd-2024/         # Generated, module-oriented public SRD pack
 |-- docs/
 |   |-- DESIGN.md
 |   |-- IMPLEMENTATION_PLAN.md

@@ -610,7 +610,7 @@ character” action creates a minimal Wizard 1 bootstrap record. It is not a
 usable or representative character-creation workflow and must not be used as
 the acceptance path for level-1 play.
 
-## Architecture checkpoint: Level 0 to level 1 character creation
+## Architecture checkpoint: Level 0 to level 1 character creation — approved, amended (2026-10-10)
 
 Before beginning more content work, review and approve the creation contract
 and its initial supported content scope. The workflow must collect choices in a
@@ -619,12 +619,34 @@ draft and save one valid character plus play state only after review.
 - Define the source-of-truth references and choices for starting class, ability
   scores, species, background, skills/proficiencies, equipment, spells,
   cantrips, and initial HP.
-- Decide the small, license-verified public bootstrap scope needed to exercise
-  those choices without borrowing values from the representative fixture.
+- Use a reviewed, deterministic full public SRD pack generated through the
+  Slice 8 repository/import pipeline rather than a new hand-curated creation
+  bootstrap subset. The application remains offline at runtime; Open5e is a
+  deliberate, allowlisted build-time ingestion source only.
+- Model maximum HP as separate, traceable terms: class Hit Die history,
+  Constitution by total character level, permanent content-derived effects,
+  and temporary play-state effects. Feats and species traits such as Tough and
+  Dwarven Toughness must use structured permanent maximum-HP effects rather
+  than being folded into an HP gain.
 - Specify which grants are automated, tracked, or explicit manual choices;
   unsupported grants must be shown as unavailable rather than guessed.
 - Define validation, cancel/review behavior, and tests for a complete level-1
   Wizard and at least one other supported starting class.
+- Replace the current two-mode spell-selection contract before creation work:
+  persist a class-entry-owned spell collection separately from its prepared
+  state, with an explicit class casting model. Wizard creation must collect a
+  six-spell level-1 spellbook and an independently editable daily prepared
+  subset; Druid and Paladin creation must collect a daily prepared subset from
+  their eligible class list without inventing a known-spell collection; and
+  Bard creation must collect its level-up-selected spell list, which is not a
+  daily preparation list. Preserve the source class entry, acquisition level,
+  and replacement history needed to validate later advancement. Migrate current
+  `spellSelections` and legacy known/prepared arrays without losing references.
+- Apply the same model to level-up: Wizard gains add to the spellbook and never
+  overwrite daily preparations; daily preparers adjust their prepared subset at
+  the permitted time; and Bard selections follow its level-up replacement rule.
+  Spell selection controls must expose eligible spell-level tabs while keeping
+  search, keyboard operation, and the accessible full-description dialog.
 - Confirm the creation result can be duplicated, reloaded, exported, imported,
   and advanced without fixture-only data or orphaned class-entry references.
 
@@ -632,25 +654,80 @@ Do not replace this checkpoint with incremental sheet controls. The approved
 creation flow is the level 0 to level 1 transaction; ordinary level-up begins
 only after that initial character exists.
 
-## Slice 8: Content repository and public packs
+### Spell-state and sheet follow-up (2026-10-10)
+
+- Completed the separate, class-entry-owned prepared-spell migration (IndexedDB
+  v6 and backup v4), retaining spell ownership independently from daily
+  preparation state and migrating existing persisted data without dropping
+  references.
+- The sheet now presents spellcasting classes through an All view plus
+  per-caster tabs. Each spell identifies its source class; daily-preparation
+  controls appear only for caster models that can change preparations. Bard and
+  Sorcerer-style level-up spell lists show their selected spell total instead.
+- Spell attack bonuses and save DCs are derived per casting class. When a
+  multiclass character uses more than one spellcasting ability, the sheet shows
+  separately labeled class values rather than presenting the first caster's
+  statistics as a shared value.
+- Next session starting point: owner-review the level-0-to-level-1 creation
+  contract against the full public pack, then begin that transaction workflow;
+  do not add further sheet-only first-level controls.
+
+## Slice 8: Content repository and public packs — next
 
 Goal: unify bundled and locally installed content behind one interface.
 
-- Extend the Slice 6.75 repository contract for installed packs and searchable
-  content without changing sheet or advancement consumers.
+- Replace the fixture-shaped bundled-content contract with a `ContentPack`
+  contract. A bundled pack is a structured directory of deterministic modules:
+  one module per class, subclass, species, and background; spells grouped by
+  level; feats grouped by category; and items grouped by explicit item type.
+  Owner modules colocate their features, choices, resources, and equipment
+  packages. The manifest hashes/counts every module and the import report
+  records categories the source cannot structure safely. Its portable
+  import/export representation may be one JSON file with the identical modules.
+- Build a composed repository that validates enabled bundled and installed
+  packs, indexes entities by ID, rejects duplicate IDs/ruleset conflicts, and
+  reports broken cross-pack references. Consumers query this repository rather
+  than bundled JSON or pack arrays.
+- Normalize spell-list membership onto spells as class IDs so an installed
+  pack can add a spell to a base class's list without rewriting that class.
 - Extend Zod validation and pack manifests from the pinned bootstrap subset to
-  complete public packs.
+  complete public packs, including species, backgrounds, items, equipment
+  packages, and reviewed structured mechanical effects.
 - Add source/ruleset filtering and reference resolution.
 - Define item entities and searchable repository queries for inventory.
-- Build an allowlisted Open5e v2 importer.
-- Generate deterministic SRD packs after reviewing attribution output.
+- Replace the bootstrap script with an allowlisted Open5e v2 full-SRD importer
+  that emits the structured category files and a deterministic review report.
+  It must stop on malformed or unrepresentable required relationships and must
+  never run at application startup.
+- Reconcile Open5e's upstream label to the official SRD document before
+  claiming verified 5.2.1 provenance. Use `srd-2024` as the durable canonical
+  namespace until that review is complete, with a migration for development
+  character references that use the old namespace.
 
 Acceptance:
 
 - malformed packs fail with actionable errors;
 - duplicate IDs and broken references are reported;
 - application play remains independent of the live API; and
-- generated output is reproducible.
+- generated module output, manifest hashes, and report are reproducible.
+
+Initial implementation progress (2026-10-10):
+
+- Replaced the Wizard-only bootstrap generator with a deterministic,
+  allowlisted full-SRD reference-pack generator. It writes 62 owner-oriented
+  modules, a manifest with per-module hashes/counts, and an import report.
+- Added an offline verifier for module hashes, provenance, duplicate IDs,
+  ownership links, class/subclass feature links, and aggregate counts. A second
+  generation produced identical hashes.
+- The source exposes no structured magic-item or rarity field, so item modules
+  are grouped only by explicit item type; the import report records this limit.
+- This is reference data only. The production `ContentPack` schemas, repository
+  composition/indexes, structured parsers, and migration from the legacy
+  bootstrap pack remain in this slice.
+- Normalized spell-list membership is now stored on every spell as class IDs,
+  validated by both the runtime composition boundary and the offline verifier.
+  The generated snapshot no longer infers that relationship from Open5e's
+  opaque reference payload at runtime.
 
 ## Product checkpoint: Full public-pack integration and manual testing
 
@@ -804,6 +881,25 @@ The advancement product checkpoint surfaced and resolved its bounded sheet and
 level-up corrections. It also established that a minimal Wizard fixture cannot
 stand in for character creation.
 
-Next: hold the **Level 0 to level 1 character creation architecture checkpoint**
-above. Define the initial creation contract and supported public bootstrap data
-before implementing creation or beginning Slice 8.
+The owner approved the amended creation checkpoint: build the full public SRD
+content foundation before implementing character creation. Bundled packs use
+owner-oriented JSON modules behind one composed repository; portable pack
+import/export may use one equivalent JSON file. Maximum HP will trace base
+class gains, Constitution, permanent content effects, and temporary effects
+separately.
+
+Slice 8 is in progress. The deterministic reference-pack generator, module
+verifier, production loader, composition/indexes, and application adapter are
+in place. The app now derives its gameplay-facing data from the bundled full
+pack, with spell-to-class list membership normalized and validated on spell
+records rather than inferred from the Open5e reference payload.
+
+Provenance review (2026-10-10): the official SRD page identifies the current
+download as SRD v5.2.1, while the pinned Open5e records identify their source
+only as “System Reference Document 5.2.” The records are therefore retained as
+that exact upstream label under the durable `srd-2024` namespace; the project
+does not claim they are verified v5.2.1 data.
+
+Next: complete the owner-led Slice 8 pack review, then begin the approved
+level-0-to-level-1 creation work with the separate spell-collection/prepared
+state migration. Do not add incremental first-level controls to the sheet.

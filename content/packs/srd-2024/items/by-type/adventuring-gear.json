@@ -1,0 +1,3142 @@
+{
+  "items": [
+    {
+      "id": "srd-2024:item:ball-bearings",
+      "kind": "item",
+      "name": "Ball Bearings",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Utilize action, you can spill Ball Bearings from their pouch. They spread to cover a level, 10-footsquare area within 10 feet of yourself. A creature that enters this area for the first time on a turn must succeed on a DC 10 Dexterity saving throw or have the Prone condition. It takes 10 minutes to recover the Ball Bearings.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_ball-bearings",
+        "name": "Ball Bearings",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:barrel",
+      "kind": "item",
+      "name": "Barrel",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Barrel holds up to 40 gallons of liquid or up to 4 cubic feet of dry goods.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_barrel",
+        "name": "Barrel",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "70.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:basket",
+      "kind": "item",
+      "name": "Basket",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.40",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Basket holds up to 40 pounds within 2 cubic feet.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_basket",
+        "name": "Basket",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:bedroll",
+      "kind": "item",
+      "name": "Bedroll",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Bedroll sleeps one Small or Medium creature. While in a Bedroll, you automatically succeed on saving throws against extreme cold (see \"Gameplay Toolbox\").",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_bedroll",
+        "name": "Bedroll",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "7.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:bell",
+      "kind": "item",
+      "name": "Bell",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When rung as a Utilize action, a Bell produces a sound that can be heard up to 60 feet away.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_bell",
+        "name": "Bell",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:blanket",
+      "kind": "item",
+      "name": "Blanket",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.50",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "While wrapped in a blanket, you have Advantage on saving throws against extreme cold (see \"Gameplay Toolbox\").",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_blanket",
+        "name": "Blanket",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "3.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:block-and-tackle",
+      "kind": "item",
+      "name": "Block and Tackle",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Block and Tackle allows you to hoist up to four times the weight you can normally lift.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_block-and-tackle",
+        "name": "Block and Tackle",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:book",
+      "kind": "item",
+      "name": "Book",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Book contains fiction or nonfiction. If you consult an accurate nonfiction Book about its topic, you gain a +5 bonus to Intelligence (Arcana, History, Nature, or Religion) checks you make about that topic.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_book",
+        "name": "Book",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:bottle-glass",
+      "kind": "item",
+      "name": "Bottle, Glass",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Glass Bottle holds up to 1 0.5 pints.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_bottle-glass",
+        "name": "Bottle, Glass",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:bucket",
+      "kind": "item",
+      "name": "Bucket",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.05",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Bucket holds up to half a cubic foot of contents.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_bucket",
+        "name": "Bucket",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:caltrops",
+      "kind": "item",
+      "name": "Caltrops",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Utilize action, you can spread Caltrops from their bag to cover a 5-foot-square area within 5 feet of yourself. A creature that enters this area for the first time on a turn must succeed on a DC 15 Dexterity saving throw or take 1 Piercing damage and have its Speed reduced to 0 until the start of its next turn. It takes 10 minutes to recover the Caltrops.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_caltrops",
+        "name": "Caltrops",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:candle",
+      "kind": "item",
+      "name": "Candle",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.01",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "For 1 hour, a lit Candle sheds Bright Light in a 5-foot radius and Dim Light for an additional 5 feet.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_candle",
+        "name": "Candle",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:case-crossbow-bolt",
+      "kind": "item",
+      "name": "Case, Crossbow Bolt",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Crossbow Bolt Case holds up to 20 Bolts.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_case-crossbow-bolt",
+        "name": "Case, Crossbow Bolt",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:chain",
+      "kind": "item",
+      "name": "Chain",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Utilize action, you can wrap a Chain around an unwilling creature within 5 feet of yourself that has the Grappled, Incapacitated, or Restrained condition if you succeed on a DC 13 Strength (Athletics) check. If the creature's legs are bound, the creature has the Restrained condition until it escapes. Escaping the Chain requires the creature to make a successful DC 18 Dexterity (Acrobatics) check as an action. Bursting the Chain requires a successful DC 20 Strength (Athletics) check as an action.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_chain",
+        "name": "Chain",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "10.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:chest",
+      "kind": "item",
+      "name": "Chest",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Chest holds up to 12 cubic feet of contents.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_chest",
+        "name": "Chest",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "25.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:clothes-fine",
+      "kind": "item",
+      "name": "Clothes, Fine",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "15.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Fine Clothes are made of expensive fabrics and adorned with expertly crafted details. Some events and locations admit only people wearing these clothes.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_clothes-fine",
+        "name": "Clothes, Fine",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "6.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:clothes-travelers",
+      "kind": "item",
+      "name": "Clothes, Traveler's",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Traveler's Clothes are resilient garments designed for travel in various environments.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_clothes-travelers",
+        "name": "Clothes, Traveler's",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:component-pouch",
+      "kind": "item",
+      "name": "Component Pouch",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "25.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Component Pouch is watertight and filled with compartments that hold all the free Material components of your spells.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_component-pouch",
+        "name": "Component Pouch",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:costume",
+      "kind": "item",
+      "name": "Costume",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "While wearing a Costume, you have Advantage on any ability check you make to impersonate the person or type of person it represents.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_costume",
+        "name": "Costume",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:crowbar",
+      "kind": "item",
+      "name": "Crowbar",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Using a Crowbar gives you Advantage on Strength checks where the Crowbar's leverage can be applied.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_crowbar",
+        "name": "Crowbar",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:feed-per-day",
+      "kind": "item",
+      "name": "Feed (per day)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.05",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Daily feed for a mount.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_feed-per-day",
+        "name": "Feed (per day)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "10.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:flask",
+      "kind": "item",
+      "name": "Flask",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.02",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Flask holds up to 1 pint.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_flask",
+        "name": "Flask",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:grappling-hook",
+      "kind": "item",
+      "name": "Grappling Hook",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Utilize action, you can throw the Grappling Hook at a railing, a ledge, or another catch within 50 feet of yourself, and the hook catches on if you succeed on a DC 13 Dexterity (Acrobatics) check. If you tied a Rope to the hook, you can then climb it.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_grappling-hook",
+        "name": "Grappling Hook",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:holy-symbol-amulet",
+      "kind": "item",
+      "name": "Holy Symbol, Amulet)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Holy Symbol Amulet is bejeweled or painted to channel divine magic. A Cleric or Paladin can use it as a Spellcasting Focus. It can be worn around the neck or held in hand.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_holy-symbol-amulet",
+        "name": "Holy Symbol, Amulet)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:holy-symbol-emblem",
+      "kind": "item",
+      "name": "Holy Symbol, Emblem)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Holy Symbol Emblem is bejeweled or painted to channel divine magic. A Cleric or Paladin can use it as a Spellcasting Focus. It must be borne on fabric (such as a tabard or banner) or a Shield.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_holy-symbol-emblem",
+        "name": "Holy Symbol, Emblem)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:holy-symbol-reliquary",
+      "kind": "item",
+      "name": "Holy Symbol, Reliquary",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Holy Symbol Reliquary is bejeweled or painted to channel divine magic. A Cleric or Paladin can use it as a Spellcasting Focus. It must be held in hand.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_holy-symbol-reliquary",
+        "name": "Holy Symbol, Reliquary",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:hunting-trap",
+      "kind": "item",
+      "name": "Hunting Trap",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Utilize action, you can set a Hunting Trap, which is a sawtooth steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground. A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 Piercing damage and have its Speed reduced to 0 until the start of its next turn. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of the chain (typically 3 feet). A creature can use its action to make a DC 13 Strength (Athletics) check, freeing itself or another creature within its reach on a success. Each failed check deals 1 Piercing damage to the trapped creature.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_hunting-trap",
+        "name": "Hunting Trap",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "25.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:ink",
+      "kind": "item",
+      "name": "Ink",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Ink comes in a 1-ounce bottle, which provides enough ink to write about 500 pages.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_ink",
+        "name": "Ink",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:ink-pen",
+      "kind": "item",
+      "name": "Ink Pen",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.02",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Using Ink, an Ink Pen is used to write or draw.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_ink-pen",
+        "name": "Ink Pen",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:jug",
+      "kind": "item",
+      "name": "Jug",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.02",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Jug holds up to 1 gallon.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_jug",
+        "name": "Jug",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:ladder",
+      "kind": "item",
+      "name": "Ladder",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.10",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Ladder is 10 feet tall. You must climb to move up or down it.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_ladder",
+        "name": "Ladder",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "25.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:lamp",
+      "kind": "item",
+      "name": "Lamp",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.50",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Lamp burns Oil as fuel to cast Bright Light in a 15 foot radius and Dim Light for an additional 30 feet.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_lamp",
+        "name": "Lamp",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:lantern-bullseye",
+      "kind": "item",
+      "name": "Lantern, Bullseye",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Bullseye Lantern burns Oil as fuel to cast Bright Light in a 60-foot Cone and Dim Light for an additional 60 feet.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_lantern-bullseye",
+        "name": "Lantern, Bullseye",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:lantern-hooded",
+      "kind": "item",
+      "name": "Lantern, Hooded",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Hooded Lantern burns Oil as fuel to cast Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. As a Bonus Action, you can lower the hood, reducing the light to Dim Light in a 5-foot radius, or raise it again.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_lantern-hooded",
+        "name": "Lantern, Hooded",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:lock",
+      "kind": "item",
+      "name": "Lock",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Lock comes with a key. Without the key, a creature can use Thieves' Tools to pick this Lock with a successful DC 15 Dexterity (Sleight of Hand) check.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_lock",
+        "name": "Lock",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:magnifying-glass",
+      "kind": "item",
+      "name": "Magnifying Glass",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "100.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Magnifying Glass grants Advantage on any ability check made to appraise or inspect a highly detailed item. Lighting a fire with a Magnifying Glass requires light as bright as sunlight to focus, tinder to ignite, and about 5 minutes for the fire to ignite.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_magnifying-glass",
+        "name": "Magnifying Glass",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:manacles",
+      "kind": "item",
+      "name": "Manacles",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Utilize action, you can use Manacles to bind an unwilling Small or Medium creature within 5 feet of yourself that has the Grappled, Incapacitated, or Restrained condition if you succeed on a DC 13 Dexterity (Sleight of Hand) check. While bound, a creature has Disadvantage on attack rolls, and the creature is Restrained if the Manacles are attached to a chain or hook that is fixed in place. Escaping the Manacles requires a successful DC 20 Dexterity (Sleight of Hand) check as an action. Bursting them requires a successful DC 25 Strength (Athletics) check as an action. Each set of Manacles comes with a key. Without the key, a creature can use Thieves' Tools to pick the Manacles' lock with a successful DC 15 Dexterity (Sleight of Hand) check.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_manacles",
+        "name": "Manacles",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "6.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:map",
+      "kind": "item",
+      "name": "Map",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "If you consult an accurate Map, you gain a +5 bonus to Wisdom (Survival) checks you make to find your way in the place represented on it.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_map",
+        "name": "Map",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:mirror",
+      "kind": "item",
+      "name": "Mirror",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A handheld steel Mirror is useful for personal cosmetics but also for peeking around corners and reflecting light as a signal.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_mirror",
+        "name": "Mirror",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.500",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:paper",
+      "kind": "item",
+      "name": "Paper",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.20",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "One sheet of Paper can hold about 250 handwritten words.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_paper",
+        "name": "Paper",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:parchment",
+      "kind": "item",
+      "name": "Parchment",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.10",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "One sheet of Parchment can hold about 250 handwritten words.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_parchment",
+        "name": "Parchment",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:perfume",
+      "kind": "item",
+      "name": "Perfume",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "5.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Perfume comes in a 4-ounce vial. For 1 hour after applying Perfume to yourself, you have Advantage on Charisma (Persuasion) checks made to influence an Indifferent Humanoid within 5 feet of yourself.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_perfume",
+        "name": "Perfume",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:poison-basic",
+      "kind": "item",
+      "name": "Poison, Basic",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "100.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Bonus Action, you can use a vial of Basic Poison to coat one weapon or up to three pieces of ammunition. A creature that takes Piercing or Slashing damage from the poisoned weapon or ammunition takes an extra 1d4 Poison damage. Once applied, the poison retains potency for 1 minute or until its damage is dealt, whichever comes first.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_poison-basic",
+        "name": "Poison, Basic",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:pole",
+      "kind": "item",
+      "name": "Pole",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.05",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Pole is 10 feet long. You can use it to touch something up to 10 feet away. If you must make a Strength (Athletics) check as part of a High or Long Jump, you can use the Pole to vault, giving yourself Advantage on the check.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_pole",
+        "name": "Pole",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "7.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:pot-iron",
+      "kind": "item",
+      "name": "Pot, Iron",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "An Iron Pot holds up to 1 gallon.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_pot-iron",
+        "name": "Pot, Iron",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "10.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:pouch",
+      "kind": "item",
+      "name": "Pouch",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.50",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Pouch holds up to 6 pounds within one-fifth of a cubic foot.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_pouch",
+        "name": "Pouch",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:quiver",
+      "kind": "item",
+      "name": "Quiver",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Quiver holds up to 20 Arrows.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_quiver",
+        "name": "Quiver",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:ram-portable",
+      "kind": "item",
+      "name": "Ram, Portable",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "4.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You can use a Portable Ram to break down doors. When doing so, you gain a +4 bonus to the Strength check. One other character can help you use the ram, giving you Advantage on this check.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_ram-portable",
+        "name": "Ram, Portable",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "35.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:rations",
+      "kind": "item",
+      "name": "Rations",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.50",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Rations consist of travel-ready food, including jerky, dried fruit, hardtack, and nuts. See \"Malnutrition\" in \"Rules Glossary\" for the risks of not eating.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_rations",
+        "name": "Rations",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "2.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:robe",
+      "kind": "item",
+      "name": "Robe",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Robe has vocational or ceremonial significance. Some events and locations admit only people wearing a Robe bearing certain colors or symbols.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_robe",
+        "name": "Robe",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "4.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:rope",
+      "kind": "item",
+      "name": "Rope",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Utilize action, you can tie a knot with Rope if you succeed on a DC 10 Dexterity (Sleight of Hand) check. The Rope can be burst with a successful DC 20 Strength (Athletics) check. You can bind an unwilling creature with the Rope only if the creature has the Grappled, Incapacitated, or Restrained condition. If the creature's legs are bound, the creature has the Restrained condition until it escapes. Escaping the Rope requires the creature to make a successful DC 15 Dexterity (Acrobatics) check as an action.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_rope",
+        "name": "Rope",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:sack",
+      "kind": "item",
+      "name": "Sack",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.01",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Sack holds up to 30 pounds within 1 cubic foot.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_sack",
+        "name": "Sack",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.500",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:saddle-exotic",
+      "kind": "item",
+      "name": "Saddle (Exotic)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "60.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A saddle designed for unusual mounts, such as aquatic or flying creatures.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_saddle-exotic",
+        "name": "Saddle (Exotic)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "40.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:saddle-military",
+      "kind": "item",
+      "name": "Saddle (Military)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "20.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A saddle designed for combat, providing advantage on checks to remain mounted.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_saddle-military",
+        "name": "Saddle (Military)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "30.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:saddle-riding",
+      "kind": "item",
+      "name": "Saddle (Riding)",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "10.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A standard saddle for riding mounts.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_saddle-riding",
+        "name": "Saddle (Riding)",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "25.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:shovel",
+      "kind": "item",
+      "name": "Shovel",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Working for 1 hour, you can use a Shovel to dig a hole that is 5 feet on each side in soil or similar material.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_shovel",
+        "name": "Shovel",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:signal-whistle",
+      "kind": "item",
+      "name": "Signal Whistle",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.05",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When blown as a Utilize action, a Signal Whistle produces a sound that can be heard up to 600 feet away.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_signal-whistle",
+        "name": "Signal Whistle",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:spikes-iron",
+      "kind": "item",
+      "name": "Spikes, Iron",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Iron Spikes come in bundles of ten. As a Utilize action, you can use a blunt object, such as a Light Hammer, to hammer a spike into wood, earth, or a similar material. You can do so to jam a door shut or to then tie a Rope or Chain to the Spike.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_spikes-iron",
+        "name": "Spikes, Iron",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:spyglass",
+      "kind": "item",
+      "name": "Spyglass",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1000.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Objects viewed through a Spyglass are magnified to twice their size.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_spyglass",
+        "name": "Spyglass",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:string",
+      "kind": "item",
+      "name": "String",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.10",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "String is 10 feet long. You can tie a knot in it as a Utilize action.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_string",
+        "name": "String",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:tent",
+      "kind": "item",
+      "name": "Tent",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "2.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Tent sleeps up to two Small or Medium creatures.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_tent",
+        "name": "Tent",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "20.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:tinderbox",
+      "kind": "item",
+      "name": "Tinderbox",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.50",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Tinderbox is a small container holding flint, fire steel, and tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a Candle, Lamp, Lantern, or Torch—or anything else with exposed fuel—takes a Bonus Action. Lighting any other fire takes 1 minute.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_tinderbox",
+        "name": "Tinderbox",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "1.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:vial",
+      "kind": "item",
+      "name": "Vial",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "1.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Vial holds up to 4 ounces.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_vial",
+        "name": "Vial",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:waterskin",
+      "kind": "item",
+      "name": "Waterskin",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "adventuring-gear",
+          "name": "Adventuring Gear"
+        },
+        "cost": "0.20",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "A Waterskin holds up to 4 pints. If you don't drink sufficient water, you risk dehydration (see \"Rules Glossary\").",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_waterskin",
+        "name": "Waterskin",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "5.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "item-type-module",
+  "schemaVersion": 1
+}

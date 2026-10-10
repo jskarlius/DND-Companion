@@ -14,7 +14,7 @@ const srdSource = {
 export const minimalContentFixture: ContentFixture = {
   manifest: {
     schemaVersion: 1,
-    id: 'srd-5.2.1',
+    id: 'srd-2024',
     name: 'SRD 5.2.1 bootstrap fixture',
     version: 'fixture',
     ruleset: '5e-2024',
@@ -23,7 +23,7 @@ export const minimalContentFixture: ContentFixture = {
   },
   features: [
     {
-      id: 'srd-5.2.1:feature:wizard-spellcasting',
+      id: 'srd-2024:feature:wizard-spellcasting',
       name: 'Spellcasting',
       kind: 'feature',
       ruleset: '5e-2024',
@@ -31,16 +31,16 @@ export const minimalContentFixture: ContentFixture = {
       automation: 'reference',
     },
     {
-      id: 'srd-5.2.1:feature:wizard-arcane-recovery',
+      id: 'srd-2024:feature:wizard-arcane-recovery',
       name: 'Arcane Recovery',
       kind: 'feature',
       ruleset: '5e-2024',
       source: srdSource,
       automation: 'tracked',
-      resourceId: 'srd-5.2.1:resource:wizard-arcane-recovery',
+      resourceId: 'srd-2024:resource:wizard-arcane-recovery',
     },
     {
-      id: 'srd-5.2.1:feature:fighter-fighting-style',
+      id: 'srd-2024:feature:fighter-fighting-style',
       name: 'Fighting Style',
       kind: 'feature',
       ruleset: '5e-2024',
@@ -48,18 +48,18 @@ export const minimalContentFixture: ContentFixture = {
       automation: 'reference',
     },
     {
-      id: 'srd-5.2.1:feature:fighter-second-wind',
+      id: 'srd-2024:feature:fighter-second-wind',
       name: 'Second Wind',
       kind: 'feature',
       ruleset: '5e-2024',
       source: srdSource,
       automation: 'tracked',
-      resourceId: 'srd-5.2.1:resource:fighter-second-wind',
+      resourceId: 'srd-2024:resource:fighter-second-wind',
     },
   ],
   choices: [
     {
-      id: 'srd-5.2.1:choice:fighter-fighting-style',
+      id: 'srd-2024:choice:fighter-fighting-style',
       name: 'Fighting Style',
       kind: 'choice',
       ruleset: '5e-2024',
@@ -76,7 +76,7 @@ export const minimalContentFixture: ContentFixture = {
   ],
   resources: [
     {
-      id: 'srd-5.2.1:resource:wizard-arcane-recovery',
+      id: 'srd-2024:resource:wizard-arcane-recovery',
       name: 'Arcane Recovery uses',
       kind: 'resource',
       ruleset: '5e-2024',
@@ -85,7 +85,7 @@ export const minimalContentFixture: ContentFixture = {
       recharge: 'long-rest',
     },
     {
-      id: 'srd-5.2.1:resource:fighter-second-wind',
+      id: 'srd-2024:resource:fighter-second-wind',
       name: 'Second Wind uses',
       kind: 'resource',
       ruleset: '5e-2024',
@@ -96,7 +96,7 @@ export const minimalContentFixture: ContentFixture = {
   ],
   spells: [
     {
-      id: 'srd-5.2.1:spell:fire-bolt',
+      id: 'srd-2024:spell:fire-bolt',
       name: 'Fire Bolt',
       kind: 'spell',
       ruleset: '5e-2024',
@@ -109,7 +109,7 @@ export const minimalContentFixture: ContentFixture = {
       scalingBasis: 'character-level',
     },
     {
-      id: 'srd-5.2.1:spell:magic-missile',
+      id: 'srd-2024:spell:magic-missile',
       name: 'Magic Missile',
       kind: 'spell',
       ruleset: '5e-2024',
@@ -123,7 +123,7 @@ export const minimalContentFixture: ContentFixture = {
   ],
   feats: [
     {
-      id: 'srd-5.2.1:feat:ability-score-improvement',
+      id: 'srd-2024:feat:ability-score-improvement',
       name: 'Ability Score Improvement',
       kind: 'feat',
       ruleset: '5e-2024',
@@ -136,14 +136,14 @@ export const minimalContentFixture: ContentFixture = {
   ],
   classes: [
     {
-      id: 'srd-5.2.1:class:wizard',
+      id: 'srd-2024:class:wizard',
       name: 'Wizard',
       kind: 'class',
       ruleset: '5e-2024',
       source: srdSource,
       hitDie: 6,
       savingThrowAbilities: ['intelligence', 'wisdom'],
-      spellListIds: ['srd-5.2.1:spell:fire-bolt', 'srd-5.2.1:spell:magic-missile'],
+      spellListIds: ['srd-2024:spell:fire-bolt', 'srd-2024:spell:magic-missile'],
       multiclassing: { prerequisiteGroups: [{ intelligence: 13 }], initialGrants: [] },
       spellcasting: {
         ability: 'intelligence', slotKind: 'spell-slots', slotRecharge: 'long-rest',
@@ -157,13 +157,13 @@ export const minimalContentFixture: ContentFixture = {
         ],
       },
       advancement: [
-        { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-spellcasting' }] },
-        { level: 2, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:wizard-arcane-recovery' }] },
+        { level: 1, grants: [{ type: 'feature', featureId: 'srd-2024:feature:wizard-spellcasting' }] },
+        { level: 2, grants: [{ type: 'feature', featureId: 'srd-2024:feature:wizard-arcane-recovery' }] },
         { level: 4, grants: [{ type: 'ability-score-improvement' }] },
       ],
     },
     {
-      id: 'srd-5.2.1:class:fighter',
+      id: 'srd-2024:class:fighter',
       name: 'Fighter',
       kind: 'class',
       ruleset: '5e-2024',
@@ -173,12 +173,12 @@ export const minimalContentFixture: ContentFixture = {
       spellListIds: [],
       multiclassing: { prerequisiteGroups: [{ strength: 13 }, { dexterity: 13 }], initialGrants: [] },
       advancement: [
-        { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:fighter-fighting-style' }, { type: 'choice', choiceId: 'srd-5.2.1:choice:fighter-fighting-style' }] },
+        { level: 1, grants: [{ type: 'feature', featureId: 'srd-2024:feature:fighter-fighting-style' }, { type: 'choice', choiceId: 'srd-2024:choice:fighter-fighting-style' }] },
         {
           level: 2,
           grants: [
-            { type: 'feature', featureId: 'srd-5.2.1:feature:fighter-second-wind' },
-            { type: 'resource', resourceId: 'srd-5.2.1:resource:fighter-second-wind', amount: 1 },
+            { type: 'feature', featureId: 'srd-2024:feature:fighter-second-wind' },
+            { type: 'resource', resourceId: 'srd-2024:resource:fighter-second-wind', amount: 1 },
           ],
         },
         { level: 4, grants: [{ type: 'ability-score-improvement' }] },

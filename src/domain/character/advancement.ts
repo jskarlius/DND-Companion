@@ -1,6 +1,6 @@
 import type { ContentRepository } from '../content/repository';
 import type { AdvancementGrant, Class, Subclass } from '../content/types';
-import { getCharacterLevel, getProficiencyBonus } from './calculations';
+import { getAbilityModifier, getCharacterLevel, getProficiencyBonus } from './calculations';
 import type { Ability, Character, CharacterPlayState, ClassEntry, HitPointGain, SpellSelection } from './types';
 
 export interface AdvancementRequest {
@@ -109,9 +109,11 @@ export function planAdvancement(character: Character, playState: CharacterPlaySt
   for (const [ability, increase] of Object.entries(request.abilityScoreIncreases ?? {})) abilityScores[ability as Ability] += increase!;
   const selections = request.spellSelections ?? [];
   const spellcastingProgression = characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel);
-  const expectedSpellSelections = characterClass.spellcasting?.selectionMode === 'known-and-prepared'
-    ? (spellcastingProgression?.spellsLearned ?? 0)
-    : (spellcastingProgression?.preparedSpells ?? 0);
+  const existingPreparedSpells = character.preparedSpells.filter((selection) => selection.classEntryId === entryId && (repository.getSpell(selection.spellId)?.level ?? 0) > 0).length;
+  const learnsSpellList = characterClass.spellcasting?.selectionMode === 'known-and-prepared' || characterClass.spellcasting?.selectionMode === 'level-up-list';
+  const expectedSpellSelections = learnsSpellList
+    ? (spellcastingProgression?.spellsLearned ?? Math.max((spellcastingProgression?.preparedSpells ?? 0) - (characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel - 1)?.preparedSpells ?? 0), 0))
+    : Math.max((spellcastingProgression?.preparedSpells ?? 0) - existingPreparedSpells, 0);
   const previousCantrips = characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel - 1)?.cantripsKnown ?? 0;
   const expectedCantripSelections = characterClass.spellcasting
     ? Math.max((spellcastingProgression?.cantripsKnown ?? 0) - previousCantrips, 0)
@@ -127,16 +129,30 @@ export function planAdvancement(character: Character, playState: CharacterPlaySt
   if (selections.some((selection) => character.spellSelections.some((existingSelection) => existingSelection.classEntryId === entryId && existingSelection.spellId === selection.spellId))) return { ok: false, issues: [{ field: 'spells', message: 'Choose spells that are not already recorded for this class.' }] };
   const maximumSpellLevel = Math.max(0, ...Object.keys(spellcastingProgression?.slots ?? {}).map(Number));
   if (selections.some((selection) => (repository.getSpell(selection.spellId)?.level ?? 0) > maximumSpellLevel)) return { ok: false, issues: [{ field: 'spells', message: 'Choose spells of a level you can cast.' }] };
-  const spellSelections = [...character.spellSelections, ...selections.map((selection) => ({ ...selection, acquiredAtClassLevel: nextLevel, prepared: characterClass.spellcasting?.selectionMode === 'prepared-from-list' ? true : selection.prepared }))];
+  const preparedSelections = characterClass.spellcasting?.selectionMode === 'prepared-from-list'
+    ? selections.filter((selection) => (repository.getSpell(selection.spellId)?.level ?? 0) > 0).map(({ classEntryId, spellId }) => ({ classEntryId, spellId }))
+    : [];
+  const spellSelections = [...character.spellSelections, ...selections
+    .filter((selection) => characterClass.spellcasting?.selectionMode !== 'prepared-from-list' || (repository.getSpell(selection.spellId)?.level ?? 0) === 0)
+    .map((selection) => ({ ...selection, acquiredAtClassLevel: nextLevel, prepared: false }))];
   const candidate: Character = {
     ...character,
     abilityScores,
     classes,
     spellSelections,
+    preparedSpells: [...character.preparedSpells, ...preparedSelections],
     hitPointGains: [...character.hitPointGains, { ...request.hitPointGain, classEntryId: entryId, classLevel: nextLevel }],
   };
   const totalAfter = getCharacterLevel(classes).value;
-  const changes: AdvancementChange[] = [{ label: characterClass.name, detail: `${existing ? 'Level' : 'New class'} ${nextLevel}` }, { label: 'Hit points', detail: `+${request.hitPointGain.hitPoints} (${request.hitPointGain.method})` }];
+  const hitDieMethod = request.hitPointGain.method === 'fixed' ? 'fixed average' : request.hitPointGain.method;
+  const constitutionModifier = getAbilityModifier(abilityScores.constitution).value;
+  const maximumHpIncrease = request.hitPointGain.hitPoints + constitutionModifier;
+  const constitutionTerm = `${constitutionModifier >= 0 ? '+' : ''}${constitutionModifier}`;
+  const changes: AdvancementChange[] = [
+    { label: characterClass.name, detail: `${existing ? 'Level' : 'New class'} ${nextLevel}` },
+    { label: 'Hit Die', detail: `+${request.hitPointGain.hitPoints} (${hitDieMethod})` },
+    { label: 'Maximum HP', detail: `${maximumHpIncrease >= 0 ? '+' : ''}${maximumHpIncrease} (Hit Die +${request.hitPointGain.hitPoints}, Constitution ${constitutionTerm})` },
+  ];
   if (request.subclassId) changes.push({ label: 'Subclass', detail: subclass!.name });
   if (request.abilityScoreIncreases) changes.push({ label: 'Ability scores', detail: Object.entries(request.abilityScoreIncreases).map(([ability, value]) => `${ability} +${value}`).join(', ') });
   for (const grant of grants) changes.push(describeGrant(grant, repository));
