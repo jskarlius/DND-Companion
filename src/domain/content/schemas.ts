@@ -169,7 +169,15 @@ export const packEntitySchema = contentEntitySchema.extend({
   ownerId: contentIdSchema.optional(),
   featureIds: z.array(contentIdSchema).optional(),
   parentClassId: contentIdSchema.optional(),
-}).passthrough();
+  spellListClassIds: z.array(contentIdSchema).refine(
+    (ids) => new Set(ids).size === ids.length,
+    'must not repeat class IDs',
+  ).optional(),
+}).passthrough().superRefine((entity, context) => {
+  if (entity.kind === 'spell' && entity.spellListClassIds === undefined) {
+    context.addIssue({ code: 'custom', path: ['spellListClassIds'], message: 'is required for spell entities' });
+  }
+});
 
 export const contentPackModuleSchema = z.object({
   schemaVersion: z.int().positive(),

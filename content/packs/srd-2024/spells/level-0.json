@@ -109,7 +109,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:chill-touch",
@@ -222,7 +226,12 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:warlock",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:dancing-lights",
@@ -302,7 +311,12 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:druidcraft",
@@ -374,7 +388,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:druid"
+      ]
     },
     {
       "id": "srd-2024:spell:eldritch-blast",
@@ -479,7 +496,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:warlock"
+      ]
     },
     {
       "id": "srd-2024:spell:elementalism",
@@ -559,7 +579,12 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:druid",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:fire-bolt",
@@ -668,7 +693,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:guidance",
@@ -744,7 +773,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:cleric",
+        "srd-2024:class:druid"
+      ]
     },
     {
       "id": "srd-2024:spell:light",
@@ -828,7 +861,13 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:cleric",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:mage-hand",
@@ -912,7 +951,13 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:warlock",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:mending",
@@ -1000,7 +1045,14 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:cleric",
+        "srd-2024:class:druid",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:message",
@@ -1084,7 +1136,13 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:druid",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:minor-illusion",
@@ -1168,7 +1226,13 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:warlock",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:poison-spray",
@@ -1285,7 +1349,13 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:druid",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:warlock",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:prestidigitation",
@@ -1369,7 +1439,13 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:warlock",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:produce-flame",
@@ -1474,7 +1550,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:druid"
+      ]
     },
     {
       "id": "srd-2024:spell:ray-of-frost",
@@ -1583,7 +1662,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:resistance",
@@ -1659,7 +1742,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:cleric",
+        "srd-2024:class:druid"
+      ]
     },
     {
       "id": "srd-2024:spell:sacred-flame",
@@ -1764,7 +1851,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:cleric"
+      ]
     },
     {
       "id": "srd-2024:spell:shillelagh",
@@ -1869,7 +1959,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:druid"
+      ]
     },
     {
       "id": "srd-2024:spell:shocking-grasp",
@@ -1978,7 +2071,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:sorcerous-burst",
@@ -2081,7 +2178,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:sorcerer"
+      ]
     },
     {
       "id": "srd-2024:spell:spare-the-dying",
@@ -2188,7 +2288,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:cleric",
+        "srd-2024:class:druid"
+      ]
     },
     {
       "id": "srd-2024:spell:starry-wisp",
@@ -2297,7 +2401,11 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:druid"
+      ]
     },
     {
       "id": "srd-2024:spell:thaumaturgy",
@@ -2369,7 +2477,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:cleric"
+      ]
     },
     {
       "id": "srd-2024:spell:true-strike",
@@ -2486,7 +2597,13 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard",
+        "srd-2024:class:sorcerer",
+        "srd-2024:class:warlock",
+        "srd-2024:class:wizard"
+      ]
     },
     {
       "id": "srd-2024:spell:vicious-mockery",
@@ -2591,7 +2708,10 @@
         "title": "System Reference Document 5.2",
         "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
         "url": "https://dnd.wizards.com/resources/systems-reference-document"
-      }
+      },
+      "spellListClassIds": [
+        "srd-2024:class:bard"
+      ]
     }
   ]
 }

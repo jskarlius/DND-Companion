@@ -706,6 +706,10 @@ Initial implementation progress (2026-10-10):
 - This is reference data only. The production `ContentPack` schemas, repository
   composition/indexes, structured parsers, and migration from the legacy
   bootstrap pack remain in this slice.
+- Normalized spell-list membership is now stored on every spell as class IDs,
+  validated by both the runtime composition boundary and the offline verifier.
+  The generated snapshot no longer infers that relationship from Open5e's
+  opaque reference payload at runtime.
 
 ## Product checkpoint: Full public-pack integration and manual testing
 
@@ -866,11 +870,18 @@ import/export may use one equivalent JSON file. Maximum HP will trace base
 class gains, Constitution, permanent content effects, and temporary effects
 separately.
 
-Slice 8 is in progress. The deterministic reference-pack generator and module
-verifier are complete, but the application still uses the legacy bootstrap
-fixture.
+Slice 8 is in progress. The deterministic reference-pack generator, module
+verifier, production loader, composition/indexes, and application adapter are
+in place. The app now derives its gameplay-facing data from the bundled full
+pack, with spell-to-class list membership normalized and validated on spell
+records rather than inferred from the Open5e reference payload.
 
-Next: define the production `ContentPack` module schemas and loader validation,
-then implement repository composition/indexes and migrate consumers from the
-legacy bootstrap data. Do not begin character creation until that content
-foundation validates.
+Provenance review (2026-10-10): the official SRD page identifies the current
+download as SRD v5.2.1, while the pinned Open5e records identify their source
+only as “System Reference Document 5.2.” The records are therefore retained as
+that exact upstream label under the durable `srd-2024` namespace; the project
+does not claim they are verified v5.2.1 data.
+
+Next: complete the owner-led Slice 8 pack review, then begin the approved
+level-0-to-level-1 creation work with the separate spell-collection/prepared
+state migration. Do not add incremental first-level controls to the sheet.

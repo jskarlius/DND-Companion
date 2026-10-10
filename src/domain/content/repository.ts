@@ -103,6 +103,7 @@ export class ComposedContentRepository {
       for (const featureId of entity.featureIds ?? []) this.requireKind(entity.id, featureId, 'feature');
       if (entity.ownerId && !this.entities.has(entity.ownerId)) throw new ContentPackValidationError(`${entity.id} references missing owner ${entity.ownerId}.`);
       if (entity.kind === 'subclass') this.requireKind(entity.id, entity.parentClassId, 'class');
+      if (entity.kind === 'spell') for (const classId of entity.spellListClassIds ?? []) this.requireKind(entity.id, classId, 'class');
     }
     this.items = [...this.entities.values()]
       .filter((entity) => entity.kind === 'item')

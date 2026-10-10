@@ -41,6 +41,14 @@ describe('ComposedContentRepository', () => {
     expect(() => new ComposedContentRepository([broken])).toThrow('references missing feature');
   });
 
+  it('rejects a spell list that names a missing class', () => {
+    const broken = pack({
+      manifest: { ...pack().manifest, modules: [descriptor('spells.json', ['spell'], { spell: 1 })] },
+      modules: [{ schemaVersion: 1, moduleKind: 'spell-level-module', spells: [{ id: 'test:spell:missing-class', kind: 'spell', name: 'Missing class', ruleset: '5e-2024', source, spellListClassIds: ['test:class:missing'] }] }],
+    });
+    expect(() => new ComposedContentRepository([broken])).toThrow('references missing class');
+  });
+
   it('rejects an entity whose ruleset conflicts with its manifest', () => {
     const conflicting = pack({ modules: [{ schemaVersion: 1, moduleKind: 'item-type-module', items: [{ id: 'test:item:rope', kind: 'item', name: 'Rope', ruleset: '5e-2014', source }] }] });
     expect(() => new ComposedContentRepository([conflicting])).toThrow();

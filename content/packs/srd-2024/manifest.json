@@ -460,7 +460,7 @@
         "spell"
       ],
       "path": "spells/level-0.json",
-      "sha256": "25e5dda117ef3667cd61b2fb38fde428965e39facdcd749244dda8b83c3e3432"
+      "sha256": "98cd6e8cc11d77d555561307d9bd198b6680bf603268761a0a2d440469133387"
     },
     {
       "counts": {
@@ -470,7 +470,7 @@
         "spell"
       ],
       "path": "spells/level-1.json",
-      "sha256": "228aedf73fa648886744c614c62e45da8dad61ef110e86354808f59e6560bb6a"
+      "sha256": "a66226bd74ff387623c02bd7cbf798e486a2bd6d8728d5c692b5d75528fff6b2"
     },
     {
       "counts": {
@@ -480,7 +480,7 @@
         "spell"
       ],
       "path": "spells/level-2.json",
-      "sha256": "73b7f8249016a236d8bb6a86df570bf6a5a2cc053d1f39d6d3290720f5d45f51"
+      "sha256": "956ab6f3dfcbbbe93ccc32e6c3a2709562d1c4baae829635560b68a2afcfdd83"
     },
     {
       "counts": {
@@ -490,7 +490,7 @@
         "spell"
       ],
       "path": "spells/level-3.json",
-      "sha256": "c34b06a5fb516d0471ac6641f416047b489a5f665df210c3718396d57364492d"
+      "sha256": "40baacd8e9af19182587ebc11d0192b4602c9a50682911dc4d80b8c4c091a42c"
     },
     {
       "counts": {
@@ -500,7 +500,7 @@
         "spell"
       ],
       "path": "spells/level-4.json",
-      "sha256": "f18b1b4918e1d28fc28cfdde06cb25cd4867024bc28c44b3e29f04b04c9fd933"
+      "sha256": "933c4870e9537ee7b190b03d606b17d2d18484bb7d71491be1339c9c1da6da0c"
     },
     {
       "counts": {
@@ -510,7 +510,7 @@
         "spell"
       ],
       "path": "spells/level-5.json",
-      "sha256": "bed443e6461532d4e82ff538612662974f33d739cf8208f4fbd7b074f515da7b"
+      "sha256": "a05e59fc49a2a10acbb8f6316b692c78bfdde38c5e1f694971e95fbbd36da655"
     },
     {
       "counts": {
@@ -520,7 +520,7 @@
         "spell"
       ],
       "path": "spells/level-6.json",
-      "sha256": "9b435305d5e4395fb85d58848b68157206d7afae9b217debeff1924b98cb6077"
+      "sha256": "1e03aa73e637a29d9ecee743573d0e1372b1aabd8fe32d2a3dbae2d0a1025723"
     },
     {
       "counts": {
@@ -530,7 +530,7 @@
         "spell"
       ],
       "path": "spells/level-7.json",
-      "sha256": "35194ac967d339dd5adf10fe8e19246b79a14a125dcf0a2df5a89919023ff270"
+      "sha256": "5b83ee7964975b072c0a1867da4e896a4c6fc51a4c27439fee8510765492c2f7"
     },
     {
       "counts": {
@@ -540,7 +540,7 @@
         "spell"
       ],
       "path": "spells/level-8.json",
-      "sha256": "53f22c580b0a3e7ca4bb15d552c5249c7f08df03ed3cb6ee58999558233bf045"
+      "sha256": "1fe8b54e8a614742f376e5d22b50d3d20130d8481db9dddb2482e1ef7876955a"
     },
     {
       "counts": {
@@ -550,7 +550,7 @@
         "spell"
       ],
       "path": "spells/level-9.json",
-      "sha256": "82fe8053fa6e49ce0c575bb730cbbd95cd765305c7730861323a7a771d8ec4f4"
+      "sha256": "ef188cd6da48547c45ff2905c532148e397592cac768263c112543ccbadb7eae"
     },
     {
       "counts": {

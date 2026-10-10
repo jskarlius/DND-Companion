@@ -88,7 +88,13 @@ function referenceEntity(category, record, reference = record) {
   assertAllowedRecord(record, category);
   const kind = kindByCategory[category];
   if (!kind) throw new Error(`No entity-kind mapping exists for ${category}.`);
-  return { id: contentId(kind, record.key), kind, name: requireString(record.name, `${category} name`), ruleset: rulesetKey, source: entitySource(record.document), reference: sortJson(reference) };
+  const spellListClassIds = category === 'spells'
+    ? (record.classes ?? []).map((entry) => contentId('class', requireString(entry.key, `${record.key} spell-list class key`))).sort()
+    : undefined;
+  return {
+    id: contentId(kind, record.key), kind, name: requireString(record.name, `${category} name`), ruleset: rulesetKey,
+    source: entitySource(record.document), ...(spellListClassIds ? { spellListClassIds } : {}), reference: sortJson(reference),
+  };
 }
 
 function ownerFeature(ownerKind, ownerRecord, sourceFeature, fallbackIndex) {

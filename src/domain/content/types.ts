@@ -172,6 +172,11 @@ export interface PackEntity extends ContentEntity {
   readonly ownerId?: ContentId;
   readonly featureIds?: readonly ContentId[];
   readonly parentClassId?: ContentId;
+  /**
+   * Classes whose spell lists include this spell. This belongs on the spell so
+   * another pack can extend a class list without replacing its class record.
+   */
+  readonly spellListClassIds?: readonly ContentId[];
 }
 
 export interface ContentPackModule {

@@ -60,6 +60,11 @@ async function main() {
     for (const featureId of entity.featureIds ?? []) if (entities.get(featureId)?.kind !== 'feature') throw new Error(`${entity.id} references missing feature ${featureId}.`);
     if (entity.kind === 'subclass' && entities.get(entity.parentClassId)?.kind !== 'class') throw new Error(`${entity.id} references missing parent class ${entity.parentClassId}.`);
     if (entity.kind === 'feature' && !entities.has(entity.ownerId)) throw new Error(`${entity.id} has missing owner ${entity.ownerId}.`);
+    if (entity.kind === 'spell') {
+      if (!Array.isArray(entity.spellListClassIds)) throw new Error(`${entity.id} is missing normalized spell-list class IDs.`);
+      if (new Set(entity.spellListClassIds).size !== entity.spellListClassIds.length) throw new Error(`${entity.id} repeats a spell-list class ID.`);
+      for (const classId of entity.spellListClassIds) if (entities.get(classId)?.kind !== 'class') throw new Error(`${entity.id} references missing spell-list class ${classId}.`);
+    }
   }
 
   const actualCounts = {};

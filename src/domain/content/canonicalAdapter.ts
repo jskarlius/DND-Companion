@@ -52,7 +52,6 @@ function nonEmpty(value: string | null | undefined): string | undefined {
  */
 export function adaptProductionPack(repository: ComposedContentRepository): ContentFixture {
   const entities = repository.list();
-  const sources = new Map(entities.map((entity) => [entity.id, entity.source]));
   const rawFeatures = entities.filter((entity) => entity.kind === 'feature');
   const features: Feature[] = rawFeatures.map((entity) => ({
     id: entity.id, name: entity.name, kind: 'feature', ruleset: entity.ruleset, source: entity.source, automation: 'reference',
@@ -70,10 +69,9 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
   });
   const spellIdsByClass = new Map<string, string[]>();
   for (const entity of entities.filter((entry) => entry.kind === 'spell')) {
-    const raw = reference(entity.reference, spellReferenceSchema);
-    for (const entry of raw?.classes ?? []) {
-      const classId = `srd-2024:class:${entry.key.replace(/^srd-2024_/, '').replaceAll('_', '-')}`;
-      if (sources.has(classId)) spellIdsByClass.set(classId, [...(spellIdsByClass.get(classId) ?? []), entity.id]);
+    const classIds = entity.spellListClassIds ?? [];
+    for (const classId of classIds) if (entities.some((candidate) => candidate.id === classId && candidate.kind === 'class')) {
+      spellIdsByClass.set(classId, [...(spellIdsByClass.get(classId) ?? []), entity.id]);
     }
   }
   const makeAdvancement = (ownerId: string): Class['advancement'] => Array.from({ length: 20 }, (_, index) => {
