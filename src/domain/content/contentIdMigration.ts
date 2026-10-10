@@ -22,6 +22,7 @@ export function migrateDevelopmentContentIds(character: Character, playState: Ch
       knownSpellIds: character.knownSpellIds.map(contentId),
       preparedSpellIds: character.preparedSpellIds.map(contentId),
       spellSelections: character.spellSelections.map((selection) => ({ ...selection, spellId: contentId(selection.spellId) })),
+      preparedSpells: character.preparedSpells.map((selection) => ({ ...selection, spellId: contentId(selection.spellId) })),
       inventory: character.inventory.map((entry) => ({ ...entry, itemId: contentId(entry.itemId) })),
     },
     playState: { ...playState, usedResources: Object.fromEntries(Object.entries(playState.usedResources).map(([id, value]) => [contentId(id), value])) },

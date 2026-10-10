@@ -39,7 +39,7 @@ function createMinimalCharacter(): { character: Character; playState: CharacterP
       abilityScoreGeneration: 'custom',
       abilityScores: { strength: 10, dexterity: 10, constitution: 10, intelligence: 10, wisdom: 10, charisma: 10 },
       classes: [{ id: `${id}:class-entry:wizard`, classId: 'srd-2024:class:wizard', level: 1, choices: {} }],
-      choices: {}, proficiencies: { savingThrowAbilities: ['intelligence', 'wisdom'], skills: {} }, knownSpellIds: [], preparedSpellIds: [], spellSelections: [], hitPointGains: [{ classEntryId: `${id}:class-entry:wizard`, classLevel: 1, method: 'fixed', hitPoints: 6 }], inventory: [], manualOverrides: {},
+      choices: {}, proficiencies: { savingThrowAbilities: ['intelligence', 'wisdom'], skills: {} }, knownSpellIds: [], preparedSpellIds: [], spellSelections: [], preparedSpells: [], hitPointGains: [{ classEntryId: `${id}:class-entry:wizard`, classLevel: 1, method: 'fixed', hitPoints: 6 }], inventory: [], manualOverrides: {},
     },
     playState: { characterId: id, currentHp: 6, temporaryHp: 0, temporaryMaximumHpBonus: 0, inspiration: false, usedHitDice: {}, usedResources: {}, usedSpellSlots: {}, deathSaveSuccesses: 0, deathSaveFailures: 0, conditions: [] },
   };

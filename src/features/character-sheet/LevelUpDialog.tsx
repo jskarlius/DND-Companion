@@ -63,11 +63,11 @@ export function LevelUpDialog({ character, playState, content, onCommit }: Level
   const subclasses = useMemo(() => content.subclasses.filter((entry) => entry.classId === classId), [classId, content.subclasses]);
   const progression = targetClass?.spellcasting?.progression.find((entry) => entry.level === nextLevel);
   const previousProgression = targetClass?.spellcasting?.progression.find((entry) => entry.level === nextLevel - 1);
-  const needsSpellChoices = targetClass?.spellcasting?.selectionMode === 'known-and-prepared';
+  const learnsSpellList = targetClass?.spellcasting?.selectionMode === 'known-and-prepared' || targetClass?.spellcasting?.selectionMode === 'level-up-list';
   const cantripChoiceCount = targetClass?.spellcasting ? Math.max((progression?.cantripsKnown ?? 0) - (previousProgression?.cantripsKnown ?? 0), 0) : 0;
-  const existingPreparedSpells = character.spellSelections.filter((selection) => selection.classEntryId === choiceEntryId && selection.prepared && (content.spells.find((spell) => spell.id === selection.spellId)?.level ?? 0) > 0).length;
-  const spellChoiceCount = targetClass?.spellcasting?.selectionMode === 'known-and-prepared'
-    ? progression?.spellsLearned ?? 0
+  const existingPreparedSpells = character.preparedSpells.filter((selection) => selection.classEntryId === choiceEntryId && (content.spells.find((spell) => spell.id === selection.spellId)?.level ?? 0) > 0).length;
+  const spellChoiceCount = learnsSpellList
+    ? progression?.spellsLearned ?? Math.max((progression?.preparedSpells ?? 0) - (previousProgression?.preparedSpells ?? 0), 0)
     : targetClass?.spellcasting ? Math.max((progression?.preparedSpells ?? 0) - existingPreparedSpells, 0) : 0;
   const maximumSpellLevel = Math.max(0, ...Object.keys(progression?.slots ?? {}).map(Number));
   const availableSpells = targetClass

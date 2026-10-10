@@ -101,7 +101,7 @@ export const classSchema = contentEntitySchema.extend({
     ability: abilitySchema,
     slotKind: z.enum(['spell-slots', 'pact-magic']),
     slotRecharge: z.enum(['short-rest', 'long-rest']),
-    selectionMode: z.enum(['known-and-prepared', 'prepared-from-list']).default('known-and-prepared'),
+    selectionMode: z.enum(['known-and-prepared', 'prepared-from-list', 'level-up-list']).default('known-and-prepared'),
     multiclassContribution: z.enum(['full', 'half-round-up', 'half-round-down', 'third-round-down', 'none']).default('full'),
     progression: z.array(z.object({
       level: z.int().min(1).max(20),

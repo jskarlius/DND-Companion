@@ -46,7 +46,7 @@ describe('advancement planner', () => {
       ].map((slug) => ({ classEntryId: 'test:cleric', spellId: `srd-2024:spell:${slug}`, acquiredAtClassLevel: 1, prepared: false })),
     });
     if (!result.ok) throw new Error(result.issues.map((issue) => issue.message).join(' '));
-    expect(result.preview.character.spellSelections.filter((selection) => selection.classEntryId === 'test:cleric' && selection.spellId.endsWith(':bless'))[0]).toMatchObject({ prepared: true });
+    expect(result.preview.character.preparedSpells).toContainEqual({ classEntryId: 'test:cleric', spellId: 'srd-2024:spell:bless' });
   });
 
   test('describes subclass feature grants and resolved class choices in the preview', () => {

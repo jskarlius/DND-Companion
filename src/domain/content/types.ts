@@ -16,7 +16,8 @@ export type ScalingBasis =
   | 'fixed';
 
 export type Recharge = 'short-rest' | 'long-rest' | 'manual';
-export type SpellSelectionMode = 'known-and-prepared' | 'prepared-from-list';
+/** When a class is allowed to change its level-1+ spell list. */
+export type SpellSelectionMode = 'known-and-prepared' | 'prepared-from-list' | 'level-up-list';
 
 export interface ContentSource {
   readonly title: string;

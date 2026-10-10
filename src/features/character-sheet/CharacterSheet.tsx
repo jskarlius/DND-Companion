@@ -152,15 +152,13 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const setSpellPrepared = (spellId: string, prepared: boolean) => {
     setDraftCharacter((current) => ({
       ...current,
-      spellSelections: (() => {
+      preparedSpells: (() => {
         const classEntryId = current.classes.find((entry) => content.classes.find((candidate) => candidate.id === entry.classId)?.spellListIds.includes(spellId))?.id ?? '';
-        const selection = current.spellSelections.find((entry) => entry.spellId === spellId && entry.classEntryId === classEntryId);
-        if (selection) return current.spellSelections.map((entry) => entry === selection ? { ...entry, prepared } : entry);
-        return prepared ? [...current.spellSelections, { spellId, classEntryId, acquiredAtClassLevel: current.classes.find((entry) => entry.id === classEntryId)?.level ?? 1, prepared: true }] : current.spellSelections;
+        if (!classEntryId || content.classes.find((entry) => entry.id === current.classes.find((entry) => entry.id === classEntryId)?.classId)?.spellcasting?.selectionMode === 'level-up-list') return current.preparedSpells;
+        return prepared
+          ? current.preparedSpells.some((entry) => entry.classEntryId === classEntryId && entry.spellId === spellId) ? current.preparedSpells : [...current.preparedSpells, { classEntryId, spellId }]
+          : current.preparedSpells.filter((entry) => entry.classEntryId !== classEntryId || entry.spellId !== spellId);
       })(),
-      preparedSpellIds: prepared
-        ? current.preparedSpellIds.includes(spellId) ? current.preparedSpellIds : [...current.preparedSpellIds, spellId]
-        : current.preparedSpellIds.filter((id) => id !== spellId),
     }));
   };
 
@@ -228,7 +226,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
         ))}
       </TabsList>
 
-      {activeTab === 'spells' && <p className="spell-count-summary"><span>Cantrips {sheet.cantrips.length}{sheet.spellLimits && ` / ${sheet.spellLimits.cantripsKnown}`}</span><span>Known spells {sheet.spells.length}</span><span>Prepared {sheet.spells.filter(({ prepared }) => prepared).length}{sheet.spellLimits && ` / ${sheet.spellLimits.preparedSpells}`}</span></p>}
+      {activeTab === 'spells' && <div className="spell-count-summary"><span>Cantrips {sheet.cantrips.length}{sheet.spellLimits && ` / ${sheet.spellLimits.cantripsKnown}`}</span>{sheet.spellSummaries.map((summary) => <span key={summary.classEntryId}>{summary.className} {summary.label} {summary.current}{summary.maximum === undefined ? '' : ` / ${summary.maximum}`}</span>)}</div>}
 
       <TabsContent value="sheet" className="sheet-grid">
         <div className="sheet-column">

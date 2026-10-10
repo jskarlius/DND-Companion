@@ -105,6 +105,29 @@ export class CompanionDatabase extends Dexie {
         await playState.put(migrated.playState);
       }
     });
+    this.version(6).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        classes?: { id: string; classId: string }[];
+        preparedSpells?: unknown[];
+        preparedSpellIds?: string[];
+        spellSelections?: { classEntryId: string; spellId: string; prepared?: boolean }[];
+      }) => {
+        if (character.preparedSpells !== undefined) return;
+        const selected = (character.spellSelections ?? []).filter((selection) => selection.prepared)
+          .map(({ classEntryId, spellId }) => ({ classEntryId, spellId }));
+        const owner = character.classes?.filter((entry) => entry.classId.endsWith(':class:wizard'));
+        const legacy = owner?.length === 1
+          ? (character.preparedSpellIds ?? []).map((spellId) => ({ classEntryId: owner[0]!.id, spellId }))
+          : [];
+        character.preparedSpells = [...new Map([...selected, ...legacy].map((entry) => [`${entry.classEntryId}:${entry.spellId}`, entry])).values()];
+      });
+    });
   }
 }
 

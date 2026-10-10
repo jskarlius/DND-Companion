@@ -222,8 +222,8 @@ test('groups spells by level with preparation, casting details, and compact slot
   userEvent.click(screen.getByRole('tab', { name: 'Spells' }));
 
   expect(screen.getByText('Cantrips 1 / 3')).toBeInTheDocument();
-  expect(screen.getByText('Known spells 1')).toBeInTheDocument();
-  expect(screen.getByText('Prepared 1 / 5')).toBeInTheDocument();
+  expect(screen.getByText('Wizard Spells known 1')).toBeInTheDocument();
+  expect(screen.getByText('Wizard Spells prepared 1 / 5')).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Cantrips' })).toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Level 1' })).toBeInTheDocument();
   expect(screen.getAllByText(/Action.*120 feet.*V, S.*Instantaneous/)).toHaveLength(2);
@@ -265,7 +265,7 @@ test('renders every entry in a long spell list', () => {
   );
 
   userEvent.click(screen.getByRole('tab', { name: 'Spells' }));
-  expect(screen.getByText('Known spells 18')).toBeInTheDocument();
+  expect(screen.getByText('Wizard Spells known 18')).toBeInTheDocument();
   expect(screen.getAllByText(/^Test spell /)).toHaveLength(18);
 });
 

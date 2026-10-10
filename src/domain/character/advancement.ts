@@ -109,9 +109,10 @@ export function planAdvancement(character: Character, playState: CharacterPlaySt
   for (const [ability, increase] of Object.entries(request.abilityScoreIncreases ?? {})) abilityScores[ability as Ability] += increase!;
   const selections = request.spellSelections ?? [];
   const spellcastingProgression = characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel);
-  const existingPreparedSpells = character.spellSelections.filter((selection) => selection.classEntryId === entryId && selection.prepared && (repository.getSpell(selection.spellId)?.level ?? 0) > 0).length;
-  const expectedSpellSelections = characterClass.spellcasting?.selectionMode === 'known-and-prepared'
-    ? (spellcastingProgression?.spellsLearned ?? 0)
+  const existingPreparedSpells = character.preparedSpells.filter((selection) => selection.classEntryId === entryId && (repository.getSpell(selection.spellId)?.level ?? 0) > 0).length;
+  const learnsSpellList = characterClass.spellcasting?.selectionMode === 'known-and-prepared' || characterClass.spellcasting?.selectionMode === 'level-up-list';
+  const expectedSpellSelections = learnsSpellList
+    ? (spellcastingProgression?.spellsLearned ?? Math.max((spellcastingProgression?.preparedSpells ?? 0) - (characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel - 1)?.preparedSpells ?? 0), 0))
     : Math.max((spellcastingProgression?.preparedSpells ?? 0) - existingPreparedSpells, 0);
   const previousCantrips = characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel - 1)?.cantripsKnown ?? 0;
   const expectedCantripSelections = characterClass.spellcasting
@@ -128,12 +129,18 @@ export function planAdvancement(character: Character, playState: CharacterPlaySt
   if (selections.some((selection) => character.spellSelections.some((existingSelection) => existingSelection.classEntryId === entryId && existingSelection.spellId === selection.spellId))) return { ok: false, issues: [{ field: 'spells', message: 'Choose spells that are not already recorded for this class.' }] };
   const maximumSpellLevel = Math.max(0, ...Object.keys(spellcastingProgression?.slots ?? {}).map(Number));
   if (selections.some((selection) => (repository.getSpell(selection.spellId)?.level ?? 0) > maximumSpellLevel)) return { ok: false, issues: [{ field: 'spells', message: 'Choose spells of a level you can cast.' }] };
-  const spellSelections = [...character.spellSelections, ...selections.map((selection) => ({ ...selection, acquiredAtClassLevel: nextLevel, prepared: characterClass.spellcasting?.selectionMode === 'prepared-from-list' ? true : selection.prepared }))];
+  const preparedSelections = characterClass.spellcasting?.selectionMode === 'prepared-from-list'
+    ? selections.filter((selection) => (repository.getSpell(selection.spellId)?.level ?? 0) > 0).map(({ classEntryId, spellId }) => ({ classEntryId, spellId }))
+    : [];
+  const spellSelections = [...character.spellSelections, ...selections
+    .filter((selection) => characterClass.spellcasting?.selectionMode !== 'prepared-from-list' || (repository.getSpell(selection.spellId)?.level ?? 0) === 0)
+    .map((selection) => ({ ...selection, acquiredAtClassLevel: nextLevel, prepared: false }))];
   const candidate: Character = {
     ...character,
     abilityScores,
     classes,
     spellSelections,
+    preparedSpells: [...character.preparedSpells, ...preparedSelections],
     hitPointGains: [...character.hitPointGains, { ...request.hitPointGain, classEntryId: entryId, classLevel: nextLevel }],
   };
   const totalAfter = getCharacterLevel(classes).value;

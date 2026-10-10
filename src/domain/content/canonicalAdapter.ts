@@ -103,7 +103,7 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
       spellcasting: caster ? {
         ability: entity.name === 'Cleric' || entity.name === 'Druid' || entity.name === 'Ranger' ? 'wisdom' : entity.name === 'Bard' || entity.name === 'Paladin' || entity.name === 'Sorcerer' || entity.name === 'Warlock' ? 'charisma' : 'intelligence',
         slotKind: raw.caster_type === 'PACT' ? 'pact-magic' : 'spell-slots', slotRecharge: raw.caster_type === 'PACT' ? 'short-rest' : 'long-rest',
-        selectionMode: entity.name === 'Wizard' ? 'known-and-prepared' : 'prepared-from-list',
+        selectionMode: entity.name === 'Wizard' ? 'known-and-prepared' : entity.name === 'Bard' || entity.name === 'Sorcerer' ? 'level-up-list' : 'prepared-from-list',
         multiclassContribution: raw.caster_type === 'FULL' ? 'full' : raw.caster_type === 'HALF' ? 'half-round-up' : 'none',
         progression: Array.from({ length: 20 }, (_, index) => ({ level: index + 1, cantripsKnown: tableAt(table('Cantrips'), index + 1), preparedSpells: tableAt(table('Prepared Spells'), index + 1), slots: Object.fromEntries(slotTables.map((slots, slotIndex) => [slotIndex + 1, tableAt(slots, index + 1)]).filter(([, count]) => count > 0)) })),
       } : undefined,

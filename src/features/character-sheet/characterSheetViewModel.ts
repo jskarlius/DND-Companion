@@ -30,6 +30,7 @@ export interface CharacterSheetViewModel {
   readonly spellcasting: readonly { readonly className: string; readonly ability: Ability; readonly slotKind: 'spell-slots' | 'pact-magic'; readonly slotRecharge: 'short-rest' | 'long-rest' }[];
   readonly spellSlots: readonly { readonly level: number; readonly maximum: number; readonly label: string; readonly recharge: 'short-rest' | 'long-rest' }[];
   readonly spellLimits?: { readonly cantripsKnown: number; readonly preparedSpells: number };
+  readonly spellSummaries: readonly { readonly classEntryId: string; readonly className: string; readonly label: string; readonly current: number; readonly maximum?: number }[];
   readonly hitDiceGroups: readonly { readonly classEntryId: string; readonly className: string; readonly die: number; readonly maximum: number; readonly used: number }[];
   readonly cantrips: readonly Spell[];
   readonly spells: readonly { readonly spell: Spell; readonly prepared: boolean; readonly classEntryId: string }[];
@@ -76,7 +77,7 @@ export function buildCharacterSheetViewModel(
     : character.knownSpellIds.map((spellId) => ({ classEntryId: character.classes.find((entry) => entry.classId.endsWith(':class:wizard'))?.id ?? '', spellId, acquiredAtClassLevel: 1, prepared: character.preparedSpellIds.includes(spellId) }));
   const knownSpells = spellSelections
     .filter((selection) => content.classes.find((entry) => entry.id === character.classes.find((classEntry) => classEntry.id === selection.classEntryId)?.classId)?.spellcasting?.selectionMode !== 'prepared-from-list')
-    .map((selection) => ({ spell: findRequired(content.spells, selection.spellId), prepared: selection.prepared, classEntryId: selection.classEntryId }));
+    .map((selection) => ({ spell: findRequired(content.spells, selection.spellId), prepared: character.preparedSpells.some((prepared) => prepared.classEntryId === selection.classEntryId && prepared.spellId === selection.spellId), classEntryId: selection.classEntryId }));
   const spellcastingProgression = character.classes.flatMap((classEntry) => {
     const characterClass = findRequired(content.classes, classEntry.classId);
     const spellcasting = characterClass.spellcasting;
@@ -89,7 +90,7 @@ export function buildCharacterSheetViewModel(
     const progression = characterClass.spellcasting?.progression.find((entry) => entry.level === classEntry.level);
     const highestSpellLevel = Math.max(0, ...Object.keys(progression?.slots ?? {}).map(Number));
     return characterClass.spellcasting?.selectionMode === 'prepared-from-list'
-      ? characterClass.spellListIds.filter((id) => { const level = findRequired(content.spells, id).level; return level > 0 && level <= highestSpellLevel; }).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: spellSelections.some((selection) => selection.classEntryId === classEntry.id && selection.spellId === spellId && selection.prepared), classEntryId: classEntry.id }))
+      ? characterClass.spellListIds.filter((id) => { const level = findRequired(content.spells, id).level; return level > 0 && level <= highestSpellLevel; }).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: character.preparedSpells.some((prepared) => prepared.classEntryId === classEntry.id && prepared.spellId === spellId), classEntryId: classEntry.id }))
       : [];
   });
 
@@ -123,6 +124,20 @@ export function buildCharacterSheetViewModel(
     }),
     spellSlots: Object.entries(slotMaximums).map(([level, maximum]) => ({ level: Number(level), maximum, label: 'Spell slots', recharge: 'long-rest' as const })),
     spellLimits: spellcastingProgression.length === 1 ? { cantripsKnown: spellcastingProgression[0].entry.cantripsKnown, preparedSpells: spellcastingProgression[0].entry.preparedSpells } : undefined,
+    spellSummaries: character.classes.flatMap((classEntry) => {
+      const characterClass = findRequired(content.classes, classEntry.classId);
+      const spellcasting = characterClass.spellcasting;
+      if (!spellcasting) return [];
+      const progression = spellcasting.progression.find((entry) => entry.level === classEntry.level);
+      const owned = spellSelections.filter((entry) => entry.classEntryId === classEntry.id && findRequired(content.spells, entry.spellId).level > 0).length;
+      const prepared = character.preparedSpells.filter((entry) => entry.classEntryId === classEntry.id).length;
+      if (spellcasting.selectionMode === 'level-up-list') return [{ classEntryId: classEntry.id, className: characterClass.name, label: 'Spells prepared', current: owned }];
+      if (spellcasting.selectionMode === 'known-and-prepared') return [
+        { classEntryId: classEntry.id, className: characterClass.name, label: 'Spells known', current: owned },
+        { classEntryId: `${classEntry.id}:prepared`, className: characterClass.name, label: 'Spells prepared', current: prepared, maximum: progression?.preparedSpells },
+      ];
+      return [{ classEntryId: classEntry.id, className: characterClass.name, label: 'Spells prepared', current: prepared, maximum: progression?.preparedSpells }];
+    }),
     hitDiceGroups: character.classes.map((classEntry) => {
       const characterClass = findRequired(content.classes, classEntry.classId);
       return {

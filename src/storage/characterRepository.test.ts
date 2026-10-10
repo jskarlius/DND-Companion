@@ -81,7 +81,7 @@ test('migrates a version 0 backup by adding missing play-state and rest-policy f
     playState: (({ temporaryMaximumHpBonus: _removed, ...playState }) => playState)(representativePlayState),
   });
 
-  expect(backup.schemaVersion).toBe(3);
+  expect(backup.schemaVersion).toBe(4);
   expect(backup.character.schemaVersion).toBe(1);
   expect(backup.playState.temporaryMaximumHpBonus).toBe(0);
   expect(backup.playState.usedHitDice).toEqual({});

@@ -73,7 +73,14 @@ export interface SpellSelection {
   readonly classEntryId: string;
   readonly spellId: string;
   readonly acquiredAtClassLevel: number;
+  /** @deprecated Prepared state is stored separately in Character.preparedSpells. */
   readonly prepared: boolean;
+}
+
+/** A daily prepared spell is independent of a spellbook or known-spell entry. */
+export interface PreparedSpell {
+  readonly classEntryId: string;
+  readonly spellId: string;
 }
 
 /** Records only the HP decision made for a gained class level. */
@@ -132,6 +139,8 @@ export interface Character {
   /** @deprecated Migrated to spellSelections at database/import boundaries. */
   readonly preparedSpellIds: readonly string[];
   readonly spellSelections: readonly SpellSelection[];
+  /** Class-entry-owned daily preparation state; it never changes spell ownership. */
+  readonly preparedSpells: readonly PreparedSpell[];
   readonly hitPointGains: readonly HitPointGain[];
   readonly inventory: readonly InventoryEntry[];
   readonly manualOverrides: ManualOverrides;

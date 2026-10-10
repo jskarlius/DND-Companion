@@ -129,6 +129,7 @@ export const representativeCharacter: Character = {
     { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-2024:spell:fire-bolt', acquiredAtClassLevel: 1, prepared: false },
     { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-2024:spell:magic-missile', acquiredAtClassLevel: 1, prepared: true },
   ],
+  preparedSpells: [{ classEntryId: 'demo:class-entry:wizard', spellId: 'srd-2024:spell:magic-missile' }],
   hitPointGains: [
     { classEntryId: 'demo:class-entry:wizard', classLevel: 1, method: 'fixed', hitPoints: 6 },
     { classEntryId: 'demo:class-entry:wizard', classLevel: 2, method: 'fixed', hitPoints: 4 },
