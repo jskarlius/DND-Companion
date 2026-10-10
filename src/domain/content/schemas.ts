@@ -30,6 +30,11 @@ export const featureSchema = contentEntitySchema.extend({
   resourceId: contentIdSchema.optional(),
 });
 
+export const choiceSchema = contentEntitySchema.extend({
+  kind: z.literal('choice'),
+  options: z.array(z.object({ id: z.string().min(1), name: z.string().min(1) })).min(1),
+});
+
 export const resourceSchema = contentEntitySchema.extend({
   kind: z.literal('resource'),
   maximum: z.int().positive(),
@@ -84,13 +89,21 @@ export const classSchema = contentEntitySchema.extend({
   savingThrowAbilities: z.array(abilitySchema).min(1),
   advancement: z.array(advancementLevelSchema),
   spellListIds: z.array(contentIdSchema),
+  subclassSelectionLevel: z.int().min(1).max(20).optional(),
+  multiclassing: z.object({
+    prerequisiteGroups: z.array(z.partialRecord(abilitySchema, z.int().min(1).max(30))).min(1),
+    initialGrants: z.array(advancementGrantSchema),
+  }).optional(),
   spellcasting: z.object({
     ability: abilitySchema,
     slotKind: z.enum(['spell-slots', 'pact-magic']),
     slotRecharge: z.enum(['short-rest', 'long-rest']),
+    selectionMode: z.enum(['known-and-prepared', 'prepared-from-list']).default('known-and-prepared'),
+    multiclassContribution: z.enum(['full', 'half-round-up', 'half-round-down', 'third-round-down', 'none']).default('full'),
     progression: z.array(z.object({
       level: z.int().min(1).max(20),
       cantripsKnown: z.int().min(0),
+      spellsLearned: z.int().min(0).default(0),
       preparedSpells: z.int().min(0),
       slots: z.record(z.string(), z.int().min(0)),
     })),
@@ -116,6 +129,7 @@ export const contentFixtureSchema = z.object({
   classes: z.array(classSchema),
   subclasses: z.array(subclassSchema),
   features: z.array(featureSchema),
+  choices: z.array(choiceSchema).default([]),
   resources: z.array(resourceSchema),
   spells: z.array(spellSchema),
   feats: z.array(featSchema),

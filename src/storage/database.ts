@@ -59,6 +59,29 @@ export class CompanionDatabase extends Dexie {
         if (playState.usedHitDice === undefined) playState.usedHitDice = {};
       });
     });
+    this.version(4).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        classes?: { id: string; classId: string }[];
+        knownSpellIds?: string[];
+        preparedSpellIds?: string[];
+        spellSelections?: unknown[];
+        hitPointGains?: unknown[];
+      }) => {
+        if (character.spellSelections === undefined) {
+          const owner = character.classes?.find((entry) => entry.classId.endsWith(':class:wizard')) ?? character.classes?.[0];
+          character.spellSelections = owner
+            ? (character.knownSpellIds ?? []).map((spellId) => ({ classEntryId: owner.id, spellId, acquiredAtClassLevel: 1, prepared: character.preparedSpellIds?.includes(spellId) ?? false }))
+            : [];
+        }
+        if (character.hitPointGains === undefined) character.hitPointGains = [];
+      });
+    });
   }
 }
 

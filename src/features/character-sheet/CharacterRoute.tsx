@@ -73,5 +73,11 @@ export function CharacterRoute({ onRemember, onStorageError }: CharacterRoutePro
         .then(() => onStorageError(undefined))
         .catch((cause: unknown) => onStorageError(cause instanceof Error ? cause.message : 'Play-state changes could not be saved locally.'));
     }}
+    onAdvancementCommit={async (nextCharacter, unchangedPlayState) => {
+      await characterRepository.commitAdvancement(nextCharacter, unchangedPlayState);
+      setCharacter(nextCharacter);
+      setPlayState(unchangedPlayState);
+      onStorageError(undefined);
+    }}
   />;
 }

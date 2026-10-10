@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { ABILITIES, MANUAL_OVERRIDE_TARGETS, SKILLS, type Character, type CharacterPlayState } from '../domain/character/types';
 
 /** The format of a character file is independent from whichever local database we use. */
-export const CHARACTER_EXPORT_SCHEMA_VERSION = 2;
+export const CHARACTER_EXPORT_SCHEMA_VERSION = 3;
 
 const choiceValueSchema = z.union([z.string(), z.array(z.string())]);
 const abilitySchema = z.enum(ABILITIES);
@@ -31,6 +31,12 @@ const characterFieldsSchema = z.object({
   }),
   knownSpellIds: z.array(z.string()),
   preparedSpellIds: z.array(z.string()),
+  spellSelections: z.array(z.object({
+    classEntryId: z.string().min(1), spellId: z.string().min(1), acquiredAtClassLevel: z.number().int().min(1), prepared: z.boolean(),
+  })),
+  hitPointGains: z.array(z.object({
+    classEntryId: z.string().min(1), classLevel: z.number().int().min(1), method: z.enum(['fixed', 'rolled', 'custom']), hitPoints: z.number().int().min(0),
+  })),
   inventory: z.array(z.object({ itemId: z.string().min(1), quantity: z.number().int().min(0) })),
   manualOverrides: z.partialRecord(manualOverrideTargetSchema, z.object({ value: z.number(), reason: z.string().min(1).optional() })),
 });
@@ -64,11 +70,17 @@ export const characterExportSchema = z.object({
 
 export type CharacterExport = z.infer<typeof characterExportSchema>;
 
-const versionOneCharacterExportSchema = z.object({
+const versionTwoCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character'),
-  schemaVersion: z.literal(1),
+  schemaVersion: z.literal(2),
   exportedAt: z.string().datetime(),
-  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true }).extend({ schemaVersion: z.literal(1) }),
+  character: characterFieldsSchema.omit({ spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(1) }),
+  playState: characterPlayStateSchema,
+});
+
+const versionOneCharacterExportSchema = z.object({
+  format: z.literal('dnd-companion-character'), schemaVersion: z.literal(1), exportedAt: z.string().datetime(),
+  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true, spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(1) }),
   playState: characterPlayStateSchema.omit({ usedHitDice: true }),
 });
 
@@ -76,7 +88,7 @@ const legacyCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character').optional(),
   schemaVersion: z.literal(0).optional(),
   exportedAt: z.string().optional(),
-  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true }).extend({ schemaVersion: z.literal(0).optional() }),
+  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true, spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(0).optional() }),
   playState: characterPlayStateSchema.omit({ temporaryMaximumHpBonus: true, usedHitDice: true }),
 });
 
@@ -88,12 +100,19 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
   const current = characterExportSchema.safeParse(input);
   if (current.success) return current.data;
 
+  const versionTwo = versionTwoCharacterExportSchema.safeParse(input);
+  if (versionTwo.success) return characterExportSchema.parse({
+    ...versionTwo.data,
+    schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
+    character: { ...versionTwo.data.character, ...legacyAdvancementFields(versionTwo.data.character) },
+  });
+
   const versionOne = versionOneCharacterExportSchema.safeParse(input);
   if (versionOne.success) {
     return characterExportSchema.parse({
       ...versionOne.data,
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
-      character: { ...versionOne.data.character, longRestHitDiceRecovery: '2024-all' },
+      character: { ...versionOne.data.character, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(versionOne.data.character) },
       playState: { ...versionOne.data.playState, usedHitDice: {} },
     });
   }
@@ -104,12 +123,23 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
       format: 'dnd-companion-character',
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
       exportedAt: legacy.data.exportedAt ?? new Date(0).toISOString(),
-      character: { ...legacy.data.character, schemaVersion: 1, longRestHitDiceRecovery: '2024-all' },
+      character: { ...legacy.data.character, schemaVersion: 1, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(legacy.data.character) },
       playState: { ...legacy.data.playState, temporaryMaximumHpBonus: 0, usedHitDice: {} },
     });
   }
 
   throw new Error(`This character backup is not supported: ${current.error.issues[0]?.message ?? 'unknown format'}`);
+}
+
+function legacyAdvancementFields(character: { classes: readonly { id: string; classId: string; level: number }[]; knownSpellIds: readonly string[]; preparedSpellIds: readonly string[] }) {
+  const spellOwner = character.classes.find((entry) => entry.classId.endsWith(':class:wizard')) ?? character.classes[0];
+  if (!spellOwner && character.knownSpellIds.length > 0) throw new Error('This legacy backup has spells but no class entry to own them.');
+  return {
+    spellSelections: spellOwner ? character.knownSpellIds.map((spellId) => ({ classEntryId: spellOwner.id, spellId, acquiredAtClassLevel: 1, prepared: character.preparedSpellIds.includes(spellId) })) : [],
+    // Historical files do not say how prior HP was chosen. Keep this empty so
+    // the sheet retains its legacy derived total; only future levels record a choice.
+    hitPointGains: [],
+  };
 }
 
 export function createCharacterExport(character: Character, playState: CharacterPlayState): CharacterExport {

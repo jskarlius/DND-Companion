@@ -1,6 +1,8 @@
-import { cleanup, render, screen } from '@testing-library/react';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, expect, test } from 'vitest';
+import { afterEach, expect, test, vi } from 'vitest';
+import { bundledContentFixture } from '../../domain/content/bundledContent';
+import { buildCharacterSheetViewModel } from './characterSheetViewModel';
 import { minimalContentFixture } from '../../domain/content/fixtures';
 import { CharacterSheet } from './CharacterSheet';
 import {
@@ -240,7 +242,7 @@ test('renders every entry in a long spell list', () => {
   }));
   render(
     <CharacterSheet
-      character={{ ...representativeCharacter, knownSpellIds: [representativeCharacter.knownSpellIds[0], ...extraSpells.map((spell) => spell.id)] }}
+      character={{ ...representativeCharacter, knownSpellIds: [representativeCharacter.knownSpellIds[0], ...extraSpells.map((spell) => spell.id)], spellSelections: extraSpells.map((spell) => ({ classEntryId: representativeCharacter.classes[0]!.id, spellId: spell.id, acquiredAtClassLevel: 1, prepared: false })) }}
       playState={representativePlayState}
       content={{ ...minimalContentFixture, spells: [...minimalContentFixture.spells, ...extraSpells] }}
       details={representativeCharacterSheetDetails}
@@ -275,4 +277,60 @@ test('adds an Aid maximum-HP bonus separately from the base maximum', () => {
   expect(screen.getByText('31')).toBeInTheDocument();
   expect(screen.getByText('Includes Aid +5')).toBeInTheDocument();
   expect(screen.getByLabelText('Current hit points')).toHaveValue(27);
+});
+
+test('reviews a level-up before one explicit confirm and leaves the character unchanged on cancel', () => {
+  const onAdvancementCommit = vi.fn();
+  const levelOneWizard = {
+    ...representativeCharacter,
+    classes: [{ ...representativeCharacter.classes[0], level: 1 }],
+    hitPointGains: representativeCharacter.hitPointGains.slice(0, 1),
+  };
+  render(<CharacterSheet character={levelOneWizard} playState={representativePlayState} content={bundledContentFixture} details={representativeCharacterSheetDetails} onAdvancementCommit={onAdvancementCommit} />);
+  userEvent.click(screen.getByRole('button', { name: 'Level up' }));
+  fireEvent.change(screen.getByLabelText('New spell 1'), { target: { value: 'srd-5.2.1:spell:shield' } });
+  fireEvent.change(screen.getByLabelText('New spell 2'), { target: { value: 'srd-5.2.1:spell:sleep' } });
+  userEvent.click(screen.getByRole('button', { name: 'Review level-up' }));
+  expect(screen.getByRole('region', { name: 'Level-up preview' })).toHaveTextContent('Wizard: Level 2');
+  userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+  expect(onAdvancementCommit).not.toHaveBeenCalled();
+  userEvent.click(screen.getByRole('button', { name: 'Level up' }));
+  userEvent.click(screen.getByRole('button', { name: 'Review level-up' }));
+  userEvent.click(screen.getByRole('button', { name: 'Confirm level-up' }));
+  expect(onAdvancementCommit).toHaveBeenCalledWith(expect.objectContaining({ classes: [expect.objectContaining({ level: 2 })] }), representativePlayState);
+});
+
+test('lists the Cleric bootstrap spell subset as available prepared spells', () => {
+  const clericCharacter = {
+    ...representativeCharacter,
+    classes: [{ id: 'test:cleric', classId: 'srd-5.2.1:class:cleric', level: 1, choices: {} }],
+    knownSpellIds: [], preparedSpellIds: [], spellSelections: [], hitPointGains: [{ classEntryId: 'test:cleric', classLevel: 1, method: 'fixed' as const, hitPoints: 8 }],
+  };
+  const model = buildCharacterSheetViewModel(clericCharacter, representativePlayState, bundledContentFixture, representativeCharacterSheetDetails);
+  expect(model.spells.map(({ spell }) => spell.name)).toContain('Cure Wounds');
+  expect(model.spells.every(({ prepared }) => !prepared)).toBe(true);
+});
+
+test('shows Fighting Style and Cleric spell choices in the level-up dialog', () => {
+  const fighterEligibleWizard = { ...representativeCharacter, classes: [{ ...representativeCharacter.classes[0], level: 1 }] };
+  render(<CharacterSheet character={fighterEligibleWizard} playState={representativePlayState} content={bundledContentFixture} details={representativeCharacterSheetDetails} onAdvancementCommit={vi.fn()} />);
+  userEvent.click(screen.getByRole('button', { name: 'Level up' }));
+  fireEvent.change(screen.getByLabelText('Class to advance'), { target: { value: 'srd-5.2.1:class:fighter' } });
+  expect(screen.getByLabelText('Fighting Style')).toBeInTheDocument();
+  fireEvent.change(screen.getByLabelText('Class to advance'), { target: { value: 'srd-5.2.1:class:cleric' } });
+  expect(screen.getAllByLabelText(/New cantrip/)).toHaveLength(3);
+  expect(screen.getAllByLabelText(/New spell/)).toHaveLength(4);
+});
+
+test('edits final ability scores and records their generation method without a manual override', () => {
+  const onCharacterChange = vi.fn();
+  render(<CharacterSheet character={representativeCharacter} playState={representativePlayState} content={minimalContentFixture} details={representativeCharacterSheetDetails} onCharacterChange={onCharacterChange} />);
+  userEvent.click(screen.getByRole('button', { name: 'Edit ability scores' }));
+  fireEvent.change(screen.getByLabelText('Strength score'), { target: { value: '15' } });
+  userEvent.click(screen.getByRole('button', { name: 'Save ability scores' }));
+  expect(onCharacterChange).toHaveBeenLastCalledWith(expect.objectContaining({
+    abilityScoreGeneration: 'standard-array',
+    abilityScores: expect.objectContaining({ strength: 15 }),
+  }));
+  expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
 });

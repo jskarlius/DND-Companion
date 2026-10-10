@@ -2,6 +2,7 @@ import generatedBootstrapPack from '../../../content/generated/open5e-srd-2024-b
 import { contentFixtureSchema } from './schemas';
 import type { ContentFixture } from './types';
 import { minimalContentFixture, validateContentFixture } from './fixtures';
+import { clericBootstrapClass, clericBootstrapSpells } from './clericFixture';
 
 /** The reviewed build artifact used at runtime; it is never fetched by the browser. */
 const validatedGeneratedPack = contentFixtureSchema.parse(generatedBootstrapPack);
@@ -14,9 +15,28 @@ const fighterResources = minimalContentFixture.resources.filter((entry) => entry
 
 export const bundledContentFixture: ContentFixture = {
   ...validatedGeneratedPack,
-  classes: fighterClass ? [...validatedGeneratedPack.classes, fighterClass] : validatedGeneratedPack.classes,
+  classes: [
+    ...validatedGeneratedPack.classes.map((entry) => entry.id === 'srd-5.2.1:class:wizard'
+      ? {
+        ...entry,
+        subclassSelectionLevel: 3,
+        multiclassing: { prerequisiteGroups: [{ intelligence: 13 }], initialGrants: [] },
+        spellcasting: entry.spellcasting && {
+          ...entry.spellcasting,
+          progression: entry.spellcasting.progression.map((progression) => ({
+            ...progression,
+            spellsLearned: progression.level === 1 ? 6 : 2,
+          })),
+        },
+      }
+      : entry),
+    ...(fighterClass ? [fighterClass] : []),
+    clericBootstrapClass,
+  ],
   features: [...validatedGeneratedPack.features, ...fighterFeatures],
+  choices: minimalContentFixture.choices,
   resources: [...validatedGeneratedPack.resources, ...fighterResources],
+  spells: [...validatedGeneratedPack.spells, ...clericBootstrapSpells],
 };
 
 validateContentFixture(bundledContentFixture);

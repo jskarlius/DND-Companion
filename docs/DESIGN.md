@@ -248,7 +248,7 @@ content-pack manifest
 ├── species / backgrounds
 ├── equipment / items
 ├── resources
-└── choices
+└── choices       → named class/subclass selection options and their stable IDs
 ```
 
 For example, a character's spellbook retains spell IDs, a class progression
@@ -364,8 +364,21 @@ type Character = {
   }>;
   choices: Record<string, string | string[]>;
   proficiencies: ProficiencySelection[];
+  /** Legacy import fields; normal play uses class-entry-owned spell selections. */
   knownSpellIds: string[];
   preparedSpellIds: string[];
+  spellSelections: Array<{
+    classEntryId: string;
+    spellId: string;
+    acquiredAtClassLevel: number;
+    prepared: boolean;
+  }>;
+  hitPointGains: Array<{
+    classEntryId: string;
+    classLevel: number;
+    method: "fixed" | "rolled" | "custom";
+    hitPoints: number;
+  }>;
   inventory: InventoryEntry[];
   manualOverrides: Record<string, unknown>;
 };
@@ -422,7 +435,27 @@ terms so the interface can expose an explanation, such as on hover or focus.
 The trace is an explanation of the calculation, never a second editable source
 of truth.
 
-### 8.2 Temporary play state and rests
+### 8.2 Character creation is a level 0 to level 1 transaction
+
+Creating a character is not a shortcut that stores a partially populated class
+fixture. The workflow holds a draft at level 0, gathers every required
+first-level choice from the enabled rules content, shows a review, and then
+atomically writes the completed `Character` and its initial `CharacterPlayState`.
+Canceling or failing validation writes neither record.
+
+The initial workflow must cover the selected starting class, final ability
+scores and provenance, starting proficiencies and skills, species/background
+choices, starting equipment, cantrips and spells, initial HP, and any declared
+first-level grants. A choice that has not been modeled must be an explicit
+blocking or deferred choice in the creation flow; it must not be filled from a
+representative fixture or deferred to an unrelated character-sheet control.
+
+The exact content scope and new source-data references for species, background,
+and equipment require an architecture checkpoint before implementation. Once
+created, a character must be valid for normal sheet play, duplication,
+reload/export/import, and ordinary level-up without special fixture handling.
+
+### 8.3 Temporary play state and rests
 
 Permanent character choices remain separate from temporary play state. A
 level-up preserves current HP, temporary HP, used resources, used spell slots,

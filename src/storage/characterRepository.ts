@@ -34,6 +34,11 @@ export class CharacterRepository {
     });
   }
 
+  /** Commits a reviewed level-up without letting temporary play state drift. */
+  async commitAdvancement(character: Character, unchangedPlayState: CharacterPlayState): Promise<void> {
+    await this.save(character, unchangedPlayState);
+  }
+
   async exportCharacter(id: string): Promise<CharacterExport> {
     const [character, playState] = await Promise.all([this.loadCharacter(id), this.loadPlayState(id)]);
     if (!character || !playState) throw new Error('The requested character is incomplete or does not exist.');

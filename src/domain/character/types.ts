@@ -68,6 +68,22 @@ export interface ClassEntry {
   readonly choices: Readonly<Record<string, ChoiceValue>>;
 }
 
+/** A spell remains owned by the class entry that granted it. */
+export interface SpellSelection {
+  readonly classEntryId: string;
+  readonly spellId: string;
+  readonly acquiredAtClassLevel: number;
+  readonly prepared: boolean;
+}
+
+/** Records only the HP decision made for a gained class level. */
+export interface HitPointGain {
+  readonly classEntryId: string;
+  readonly classLevel: number;
+  readonly method: 'fixed' | 'rolled' | 'custom';
+  readonly hitPoints: number;
+}
+
 export type SkillProficiency = 'none' | 'proficient' | 'expertise';
 
 export interface CharacterProficiencies {
@@ -111,8 +127,12 @@ export interface Character {
   readonly classes: readonly ClassEntry[];
   readonly choices: Readonly<Record<string, ChoiceValue>>;
   readonly proficiencies: CharacterProficiencies;
+  /** @deprecated Migrated to spellSelections at database/import boundaries. */
   readonly knownSpellIds: readonly string[];
+  /** @deprecated Migrated to spellSelections at database/import boundaries. */
   readonly preparedSpellIds: readonly string[];
+  readonly spellSelections: readonly SpellSelection[];
+  readonly hitPointGains: readonly HitPointGain[];
   readonly inventory: readonly InventoryEntry[];
   readonly manualOverrides: ManualOverrides;
 }

@@ -16,6 +16,7 @@ export type ScalingBasis =
   | 'fixed';
 
 export type Recharge = 'short-rest' | 'long-rest' | 'manual';
+export type SpellSelectionMode = 'known-and-prepared' | 'prepared-from-list';
 
 export interface ContentSource {
   readonly title: string;
@@ -37,6 +38,12 @@ export interface Feature extends ContentEntity {
   readonly kind: 'feature';
   readonly automation: AutomationTier;
   readonly resourceId?: ContentId;
+}
+
+/** A rules-owned selection recorded on the class entry that receives it. */
+export interface Choice extends ContentEntity {
+  readonly kind: 'choice';
+  readonly options: readonly { readonly id: string; readonly name: string }[];
 }
 
 export interface Resource extends ContentEntity {
@@ -94,11 +101,22 @@ export interface Class extends ContentEntity {
   readonly savingThrowAbilities: readonly Ability[];
   readonly advancement: readonly AdvancementLevel[];
   readonly spellListIds: readonly ContentId[];
+  /** The level at which this class asks its entry to choose a subclass. */
+  readonly subclassSelectionLevel?: number;
+  readonly multiclassing?: {
+    /** Meet every score in any one group (Fighter is Strength 13 or Dexterity 13). */
+    readonly prerequisiteGroups: readonly Readonly<Partial<Record<Ability, number>>>[];
+    /** Grants applied only when this class is newly multiclassed into. */
+    readonly initialGrants: readonly AdvancementGrant[];
+  };
   /** Present only for a class with Spellcasting or Pact Magic. */
   readonly spellcasting?: {
     readonly ability: Ability;
     readonly slotKind: 'spell-slots' | 'pact-magic';
     readonly slotRecharge: 'short-rest' | 'long-rest';
+    readonly selectionMode: SpellSelectionMode;
+    /** Contribution to the ordinary multiclass spell-slot table. */
+    readonly multiclassContribution: 'full' | 'half-round-up' | 'half-round-down' | 'third-round-down' | 'none';
     readonly progression: readonly SpellcastingProgression[];
   };
 }
@@ -106,6 +124,8 @@ export interface Class extends ContentEntity {
 export interface SpellcastingProgression {
   readonly level: number;
   readonly cantripsKnown: number;
+  /** Spells added to a known-spell collection or spellbook at this class level. */
+  readonly spellsLearned?: number;
   readonly preparedSpells: number;
   readonly slots: Readonly<Record<number, number>>;
 }
@@ -121,6 +141,7 @@ export interface ContentFixture {
   readonly classes: readonly Class[];
   readonly subclasses: readonly Subclass[];
   readonly features: readonly Feature[];
+  readonly choices: readonly Choice[];
   readonly resources: readonly Resource[];
   readonly spells: readonly Spell[];
   readonly feats: readonly Feat[];

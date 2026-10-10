@@ -81,11 +81,13 @@ test('migrates a version 0 backup by adding missing play-state and rest-policy f
     playState: (({ temporaryMaximumHpBonus: _removed, ...playState }) => playState)(representativePlayState),
   });
 
-  expect(backup.schemaVersion).toBe(2);
+  expect(backup.schemaVersion).toBe(3);
   expect(backup.character.schemaVersion).toBe(1);
   expect(backup.playState.temporaryMaximumHpBonus).toBe(0);
   expect(backup.playState.usedHitDice).toEqual({});
   expect(backup.character.longRestHitDiceRecovery).toBe('2024-all');
+  expect(backup.character.spellSelections).toHaveLength(2);
+  expect(backup.character.hitPointGains).toEqual([]);
 });
 
 test('upgrades a version 1 database by adding the Aid maximum-HP field', async () => {
@@ -103,4 +105,22 @@ test('upgrades a version 1 database by adding the Aid maximum-HP field', async (
   databases.push(upgradedDatabase);
   const repository = new CharacterRepository(upgradedDatabase);
   expect(await repository.loadPlayState(representativeCharacter.id)).toEqual(representativePlayState);
+});
+
+test('upgrades a version 3 database with class-owned spells and empty HP history', async () => {
+  const name = `advancement-legacy-${crypto.randomUUID()}`;
+  const legacyDatabase = new Dexie(name);
+  legacyDatabase.version(3).stores({
+    characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+  });
+  await legacyDatabase.open();
+  const { spellSelections: _spellSelections, hitPointGains: _hitPointGains, ...legacyCharacter } = representativeCharacter;
+  await legacyDatabase.table('characters').put(legacyCharacter);
+  legacyDatabase.close();
+
+  const upgradedDatabase = new CompanionDatabase(name);
+  databases.push(upgradedDatabase);
+  const upgraded = await new CharacterRepository(upgradedDatabase).loadCharacter(representativeCharacter.id);
+  expect(upgraded?.spellSelections).toEqual(representativeCharacter.spellSelections);
+  expect(upgraded?.hitPointGains).toEqual([]);
 });

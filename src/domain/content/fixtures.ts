@@ -57,6 +57,23 @@ export const minimalContentFixture: ContentFixture = {
       resourceId: 'srd-5.2.1:resource:fighter-second-wind',
     },
   ],
+  choices: [
+    {
+      id: 'srd-5.2.1:choice:fighter-fighting-style',
+      name: 'Fighting Style',
+      kind: 'choice',
+      ruleset: '5e-2024',
+      source: srdSource,
+      options: [
+        { id: 'archery', name: 'Archery' },
+        { id: 'defense', name: 'Defense' },
+        { id: 'dueling', name: 'Dueling' },
+        { id: 'great-weapon-fighting', name: 'Great Weapon Fighting' },
+        { id: 'protection', name: 'Protection' },
+        { id: 'two-weapon-fighting', name: 'Two-Weapon Fighting' },
+      ],
+    },
+  ],
   resources: [
     {
       id: 'srd-5.2.1:resource:wizard-arcane-recovery',
@@ -127,8 +144,10 @@ export const minimalContentFixture: ContentFixture = {
       hitDie: 6,
       savingThrowAbilities: ['intelligence', 'wisdom'],
       spellListIds: ['srd-5.2.1:spell:fire-bolt', 'srd-5.2.1:spell:magic-missile'],
+      multiclassing: { prerequisiteGroups: [{ intelligence: 13 }], initialGrants: [] },
       spellcasting: {
         ability: 'intelligence', slotKind: 'spell-slots', slotRecharge: 'long-rest',
+        selectionMode: 'known-and-prepared', multiclassContribution: 'full',
         progression: [
           { level: 1, cantripsKnown: 3, preparedSpells: 4, slots: { 1: 2 } },
           { level: 2, cantripsKnown: 3, preparedSpells: 5, slots: { 1: 3 } },
@@ -152,8 +171,9 @@ export const minimalContentFixture: ContentFixture = {
       hitDie: 10,
       savingThrowAbilities: ['strength', 'constitution'],
       spellListIds: [],
+      multiclassing: { prerequisiteGroups: [{ strength: 13 }, { dexterity: 13 }], initialGrants: [] },
       advancement: [
-        { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:fighter-fighting-style' }] },
+        { level: 1, grants: [{ type: 'feature', featureId: 'srd-5.2.1:feature:fighter-fighting-style' }, { type: 'choice', choiceId: 'srd-5.2.1:choice:fighter-fighting-style' }] },
         {
           level: 2,
           grants: [
