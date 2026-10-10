@@ -42,7 +42,10 @@ export function createUnchosenCharacterSheetDetails(character: Character, conten
   const totalLevel = getCharacterLevel(character.classes).value;
   const constitutionModifier = getAbilityModifier(character.abilityScores.constitution).value;
   const dexterityModifier = getAbilityModifier(character.abilityScores.dexterity).value;
-  const hitPointBase = character.classes.reduce((total, entry) => {
+  const expectedHitPointGains = character.classes.reduce((total, entry) => total + entry.level, 0);
+  const hitPointBase = character.hitPointGains.length === expectedHitPointGains
+    ? character.hitPointGains.reduce((total, gain) => total + gain.hitPoints, 0)
+    : character.classes.reduce((total, entry) => {
     const characterClass = content.classes.find((candidate) => candidate.id === entry.classId);
     if (!characterClass) return total;
     return total + characterClass.hitDie + Math.max(entry.level - 1, 0) * Math.ceil(characterClass.hitDie / 2);
@@ -122,6 +125,16 @@ export const representativeCharacter: Character = {
     'srd-5.2.1:spell:magic-missile',
   ],
   preparedSpellIds: ['srd-5.2.1:spell:magic-missile'],
+  spellSelections: [
+    { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-5.2.1:spell:fire-bolt', acquiredAtClassLevel: 1, prepared: false },
+    { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-5.2.1:spell:magic-missile', acquiredAtClassLevel: 1, prepared: true },
+  ],
+  hitPointGains: [
+    { classEntryId: 'demo:class-entry:wizard', classLevel: 1, method: 'fixed', hitPoints: 6 },
+    { classEntryId: 'demo:class-entry:wizard', classLevel: 2, method: 'fixed', hitPoints: 4 },
+    { classEntryId: 'demo:class-entry:fighter', classLevel: 1, method: 'fixed', hitPoints: 10 },
+    { classEntryId: 'demo:class-entry:fighter', classLevel: 2, method: 'fixed', hitPoints: 6 },
+  ],
   inventory: [
     { itemId: 'demo:item:scholar-pack', quantity: 1 },
     { itemId: 'demo:item:spellbook', quantity: 1 },

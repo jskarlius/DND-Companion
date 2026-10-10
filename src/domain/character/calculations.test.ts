@@ -53,6 +53,8 @@ const multiclassCharacter: Character = {
   },
   knownSpellIds: [],
   preparedSpellIds: [],
+  spellSelections: [],
+  hitPointGains: [],
   inventory: [],
   manualOverrides: {},
 };

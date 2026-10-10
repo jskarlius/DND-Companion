@@ -14,6 +14,8 @@ import {
   type Skill,
 } from '../../domain/character/types';
 import type { ContentFixture, Feature, Resource, Spell } from '../../domain/content/types';
+import { BundledContentRepository } from '../../domain/content/repository';
+import { getCombinedSpellSlots } from '../../domain/character/advancement';
 import type { CharacterSheetDetails } from './characterSheetFixture';
 
 export interface CharacterSheetViewModel {
@@ -30,7 +32,7 @@ export interface CharacterSheetViewModel {
   readonly spellLimits?: { readonly cantripsKnown: number; readonly preparedSpells: number };
   readonly hitDiceGroups: readonly { readonly classEntryId: string; readonly className: string; readonly die: number; readonly maximum: number; readonly used: number }[];
   readonly cantrips: readonly Spell[];
-  readonly spells: readonly { readonly spell: Spell; readonly prepared: boolean }[];
+  readonly spells: readonly { readonly spell: Spell; readonly prepared: boolean; readonly classEntryId: string }[];
   readonly features: readonly Feature[];
   readonly resources: readonly { readonly resource: Resource; readonly used: number }[];
 }
@@ -69,17 +71,25 @@ export function buildCharacterSheetViewModel(
   const features = [...featureIds].map((id) => findRequired(content.features, id));
   for (const feature of features) if (feature.resourceId) resourceIds.add(feature.resourceId);
 
-  const knownSpells = character.knownSpellIds.map((id) => findRequired(content.spells, id));
+  const spellSelections = character.spellSelections.length > 0
+    ? character.spellSelections
+    : character.knownSpellIds.map((spellId) => ({ classEntryId: character.classes.find((entry) => entry.classId.endsWith(':class:wizard'))?.id ?? '', spellId, acquiredAtClassLevel: 1, prepared: character.preparedSpellIds.includes(spellId) }));
+  const knownSpells = spellSelections
+    .filter((selection) => content.classes.find((entry) => entry.id === character.classes.find((classEntry) => classEntry.id === selection.classEntryId)?.classId)?.spellcasting?.selectionMode !== 'prepared-from-list')
+    .map((selection) => ({ spell: findRequired(content.spells, selection.spellId), prepared: selection.prepared, classEntryId: selection.classEntryId }));
   const spellcastingProgression = character.classes.flatMap((classEntry) => {
     const characterClass = findRequired(content.classes, classEntry.classId);
     const spellcasting = characterClass.spellcasting;
     if (!spellcasting || spellcasting.slotKind !== 'spell-slots') return [];
     return spellcasting.progression.filter((entry) => entry.level === classEntry.level).map((entry) => ({ entry, spellcasting }));
   });
-  const slotMaximums = new Map<number, number>();
-  for (const { entry } of spellcastingProgression) for (const [level, maximum] of Object.entries(entry.slots)) {
-    slotMaximums.set(Number(level), (slotMaximums.get(Number(level)) ?? 0) + maximum);
-  }
+  const slotMaximums = getCombinedSpellSlots(character.classes, new BundledContentRepository(content));
+  const preparedFromList = character.classes.flatMap((classEntry) => {
+    const characterClass = findRequired(content.classes, classEntry.classId);
+    return characterClass.spellcasting?.selectionMode === 'prepared-from-list'
+      ? characterClass.spellListIds.filter((id) => findRequired(content.spells, id).level > 0).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: spellSelections.some((selection) => selection.classEntryId === classEntry.id && selection.spellId === spellId && selection.prepared), classEntryId: classEntry.id }))
+      : [];
+  });
 
   return {
     character,
@@ -109,7 +119,7 @@ export function buildCharacterSheetViewModel(
       const characterClass = findRequired(content.classes, classEntry.classId);
       return characterClass.spellcasting ? [{ className: characterClass.name, ...characterClass.spellcasting }] : [];
     }),
-    spellSlots: [...slotMaximums].sort(([left], [right]) => left - right).map(([level, maximum]) => ({ level, maximum, label: 'Spell slots', recharge: 'long-rest' })),
+    spellSlots: Object.entries(slotMaximums).map(([level, maximum]) => ({ level: Number(level), maximum, label: 'Spell slots', recharge: 'long-rest' as const })),
     spellLimits: spellcastingProgression.length === 1 ? { cantripsKnown: spellcastingProgression[0].entry.cantripsKnown, preparedSpells: spellcastingProgression[0].entry.preparedSpells } : undefined,
     hitDiceGroups: character.classes.map((classEntry) => {
       const characterClass = findRequired(content.classes, classEntry.classId);
@@ -121,10 +131,8 @@ export function buildCharacterSheetViewModel(
         used: Math.min(Math.max(playState.usedHitDice[classEntry.id] ?? 0, 0), classEntry.level),
       };
     }),
-    cantrips: knownSpells.filter((spell) => spell.level === 0),
-    spells: knownSpells
-      .filter((spell) => spell.level > 0)
-      .map((spell) => ({ spell, prepared: character.preparedSpellIds.includes(spell.id) })),
+    cantrips: knownSpells.filter(({ spell }) => spell.level === 0).map(({ spell }) => spell),
+    spells: [...knownSpells.filter(({ spell }) => spell.level > 0), ...preparedFromList],
     features,
     resources: [...resourceIds].map((id) => ({
       resource: findRequired(content.resources, id),

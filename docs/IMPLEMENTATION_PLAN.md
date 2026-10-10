@@ -463,7 +463,56 @@ boundary, multiclass prerequisites, class-entry choices, combined spell-slot
 strategy, spell choice ownership, derived-sheet updates, and rollback behavior
 before implementing the workflow.
 
-## Slice 7: Level-up and multiclass workflow
+Checkpoint review approved by the owner (2026-10-10):
+
+- The level-up engine will be a pure planner: it receives an immutable
+  `Character`, `CharacterPlayState`, and `ContentRepository`, then returns
+  either actionable validation issues or an `AdvancementPreview`. The preview
+  contains a complete candidate `Character`, a list of permanent changes,
+  derived-stat before/after traces, and a required-choice list. The UI may edit
+  only an in-memory draft; it will commit the candidate character and the
+  unchanged play state together through one repository transaction. Cancel or a
+  validation failure performs no write.
+- The repository boundary will gain explicit lookups for subclasses, features,
+  resources, and the class metadata needed to plan an advancement. The planner
+  must not read the bundled JSON directly. Missing referenced content becomes a
+  displayed blocking validation issue, never a partial commit.
+- A class entry is the durable owner of class-specific choices. Slice 7 will
+  allow one entry for each class ID: advancing selects the existing entry;
+  taking a new class creates one new entry with a fresh stable ID. The entry
+  stores its chosen subclass and choice values. This keeps Hit Dice, resources,
+  spells, and future grants addressable when a character is copied or exported.
+- Class data will declare multiclass prerequisites and the limited initial
+  proficiencies/grants for a newly added class. The initial Wizard/Fighter
+  scope will model only the data needed for those paths; unsupported content
+  reports that it cannot yet be selected rather than guessing a grant.
+- Replace global `knownSpellIds` and `preparedSpellIds` with versioned spell
+  selections that include `classEntryId`, `spellId`, acquisition level, and
+  prepared state where applicable. Migration assigns existing selections to the
+  sole compatible spellcasting entry; ambiguous or incompatible legacy data is
+  retained as an explicit unresolved-import error rather than silently being
+  assigned.
+- Ordinary Spellcasting uses a ruleset-owned combined-caster-level calculation
+  and slot table, not the current sum of each class's own progression rows.
+  Pact Magic remains a separate short-rest slot pool. The first implementation
+  will add a minimal second full-caster fixture and tests for the combined-table
+  path; no Pact Magic class is introduced in this slice.
+- HP is recorded as a per-class-entry, per-level advancement choice (fixed,
+  rolled result, or custom adjustment) so only the new level's HP is added.
+  Existing play state — HP, temporary HP, used resources and slots, Hit Dice,
+  death saves, conditions, and rest setting — is preserved verbatim. Derived
+  sheet values are recomputed only after the atomic commit; manual overrides
+  remain separate and visible.
+
+Current implementation gaps identified by this review: the repository lacks
+subclass/resource lookups and multiclass metadata; the character contract has
+no HP advancement history or spell-selection ownership; and the sheet currently
+sums full-caster slot progressions. These changes belong to Slice 7 and its
+required migrations/tests, not to the checkpoint itself.
+
+The owner approved this contract on 2026-10-10. Slice 7 may implement it.
+
+## Slice 7: Level-up and multiclass workflow — complete (2026-10-10)
 
 Goal: add one level to an existing class or take level 1 in another class.
 
@@ -482,6 +531,29 @@ Acceptance:
 - class grants occur only at the correct class level;
 - spell selection remains associated with its granting class; and
 - canceling leaves the character unchanged.
+
+Completed implementation:
+
+- Added a pure, preview-first advancement planner and an atomic repository
+  commit path. The character sheet now provides a Level up dialog that selects
+  an existing or new class, captures HP, requests an available subclass or ASI
+  when required, displays the complete change list, and writes only after
+  confirmation.
+- Added class-entry-owned spell selections and per-level HP decisions, with
+  IndexedDB version 4 and backup-format version 3 migrations. Existing HP
+  remains on the prior derived calculation when historical choice data was not
+  recorded; new levels always retain their exact HP decision.
+- Added multiclass prerequisites, class/subclass/resource repository lookups,
+  a ruleset-owned combined full-caster slot table, and a small public Cleric
+  bootstrap fixture. Cleric proves prepare-from-list behavior and a second
+  full caster; it is explicitly not a complete Cleric content pack.
+- Added planner and component tests for preview/cancel/confirm, subclass
+  timing, class-entry spell ownership, multiclass prerequisites, combined
+  Wizard/Cleric slots, and Cleric available spells.
+
+Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (87 tests),
+and `npm.cmd run build` passed. Owner testing is now required at the following
+product checkpoint before beginning Slice 8.
 
 ## Product checkpoint: Advancement and integrated character flow
 
@@ -512,6 +584,54 @@ accessibility issues are resolved, deferred scope is recorded, and the owner
 explicitly approves proceeding to the full content repository and public-pack
 work.
 
+### Post-checkpoint correction pass (2026-10-10)
+
+- Corrected the level-up control contrast, label/control collision, ability-score
+  editor crash, and inconsistent placement of its edit affordance.
+- Corrected character-sheet text encoding for spell metadata and death-save
+  markers; inventory entries without loaded item content now use a readable ID
+  fallback instead of exposing their storage key.
+- Made level-up HP entry explicitly a Hit Die result. Its fixed-average default,
+  input range, and planner validation now follow the selected class's Hit Die;
+  Constitution and other maximum-HP effects remain separate calculations.
+- Added class-entry-owned Wizard spell choices to level-up and validation for
+  duplicate or too-high spell choices.
+- Replaced the fragile death-save icon treatment with visible native checkboxes
+  using success/failure accent colors. Added class-entry choice data and the
+  supported Fighter Fighting Style selection; advancement previews now resolve
+  feature, resource, choice, and subclass grants by name. Cleric multiclass
+  level 1 now collects its cantrips and prepared spells from the bootstrap list.
+- Deferred the temporary in-sheet level-1 spell picker. Initial spells, skills,
+  and all other first-level choices belong to character creation, not a recovery
+  control on an already-created sheet.
+
+The owner identified a product gap during this pass: the current “new
+character” action creates a minimal Wizard 1 bootstrap record. It is not a
+usable or representative character-creation workflow and must not be used as
+the acceptance path for level-1 play.
+
+## Architecture checkpoint: Level 0 to level 1 character creation
+
+Before beginning more content work, review and approve the creation contract
+and its initial supported content scope. The workflow must collect choices in a
+draft and save one valid character plus play state only after review.
+
+- Define the source-of-truth references and choices for starting class, ability
+  scores, species, background, skills/proficiencies, equipment, spells,
+  cantrips, and initial HP.
+- Decide the small, license-verified public bootstrap scope needed to exercise
+  those choices without borrowing values from the representative fixture.
+- Specify which grants are automated, tracked, or explicit manual choices;
+  unsupported grants must be shown as unavailable rather than guessed.
+- Define validation, cancel/review behavior, and tests for a complete level-1
+  Wizard and at least one other supported starting class.
+- Confirm the creation result can be duplicated, reloaded, exported, imported,
+  and advanced without fixture-only data or orphaned class-entry references.
+
+Do not replace this checkpoint with incremental sheet controls. The approved
+creation flow is the level 0 to level 1 transaction; ordinary level-up begins
+only after that initial character exists.
+
 ## Slice 8: Content repository and public packs
 
 Goal: unify bundled and locally installed content behind one interface.
@@ -531,6 +651,17 @@ Acceptance:
 - duplicate IDs and broken references are reported;
 - application play remains independent of the live API; and
 - generated output is reproducible.
+
+## Product checkpoint: Full public-pack integration and manual testing
+
+After Slice 8, stop for extensive owner-led testing before beginning private
+packs. Exercise the generated SRD packs through creation, single-class and
+multiclass advancement, spell preparation and selections, class/subclass
+choices, sheet play state, content-pack installation/removal, and backup
+round-trips. Re-run the responsive, keyboard, touch-target, and 200 percent
+zoom scenarios in `docs/UI_DESIGN.md` against a deliberately varied set of
+classes and long content lists. Record blockers and intentional deferrals
+before approving Slice 9.
 
 ## Later inventory-management follow-on (after Slice 8)
 
@@ -669,8 +800,10 @@ The generated manifest preserves Open5e's exact upstream source label
 the official SRD 5.2.1 document before claiming verified 5.2.1 provenance.
 This is a provenance-review follow-up, not a runtime dependency.
 
-Next: Architecture checkpoint B. Review and approve the advancement-diff
-format, repository access boundary, multiclass prerequisites, class-entry and
-subclass choices, combined spell-slot strategy, spell-choice ownership,
-derived-sheet updates, and rollback behavior. Do not implement the level-up
-workflow until this checkpoint is approved.
+The advancement product checkpoint surfaced and resolved its bounded sheet and
+level-up corrections. It also established that a minimal Wizard fixture cannot
+stand in for character creation.
+
+Next: hold the **Level 0 to level 1 character creation architecture checkpoint**
+above. Define the initial creation contract and supported public bootstrap data
+before implementing creation or beginning Slice 8.
