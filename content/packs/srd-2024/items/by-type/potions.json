@@ -1,0 +1,202 @@
+{
+  "items": [
+    {
+      "id": "srd-2024:item:antitoxin",
+      "kind": "item",
+      "name": "Antitoxin",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "potion",
+          "name": "Potion"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "As a Bonus Action, you can drink a vial of Antitoxin to gain Advantage on saving throws to avoid or end the Poisoned condition for 1 hour. abo",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_antitoxin",
+        "name": "Antitoxin",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:potion-of-giant-strength",
+      "kind": "item",
+      "name": "Potion of Giant Strength",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "potion",
+          "name": "Potion"
+        },
+        "cost": "0.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "When you drink this potion, your Strength score changes for 1 hour. The type of giant determines the score (see the table below). The potion has no effect on you if your Strength is equal to or greater than that score.\n\nThis potion's transparent liquid has floating in it a sliver of light resembling a giant's fingernail.\n\n| Potion                                    | Str. | Rarity    |\n|-------------------------------------------|------|-----------|\n| Potion of Giant Strength (hill)           | 21   | Uncommon  |\n| Potion of Giant Strength (frost or stone) | 23   | Rare      |\n| Potion of Giant Strength (fire)           | 25   | Rare      |\n| Potion of Giant Strength (cloud)          | 27   | Very Rare |\n| Potion of Giant Strength (storm)          | 29   | Legendary |",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_potion-of-giant-strength",
+        "name": "Potion of Giant Strength",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:potion-of-healing",
+      "kind": "item",
+      "name": "Potion of Healing",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "potion",
+          "name": "Potion"
+        },
+        "cost": "50.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "This potion is a magic item. As a Bonus Action, you can drink it or administer it to another creature within 5 feet of yourself. The creature that drinks the magical red fluid in this vial regains 2d4 + 2 Hit Points.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_potion-of-healing",
+        "name": "Potion of Healing",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.500",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:item:potions-of-healing",
+      "kind": "item",
+      "name": "Potions of Healing",
+      "reference": {
+        "armor": null,
+        "category": {
+          "key": "potion",
+          "name": "Potion"
+        },
+        "cost": "0.00",
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You regain Hit Points when you drink this potion. The number of Hit Points depends on the potion's rarity, as shown in the table below.\n\nWhatever its potency, the potion's red liquid glimmers when agitated.\n\n| Potion                       | HP Regained | Rarity    |\n|------------------------------|-------------|-----------|\n| Potion of Healing            | 2d4 + 2     | Common    |\n| Potion of Healing (greater)  | 4d4 + 4     | Uncommon  |\n| Potion of Healing (superior) | 8d4 + 8     | Rare      |\n| Potion of Healing (supreme)  | 10d4 + 20   | Very Rare |",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "key": "srd-2024_potions-of-healing",
+        "name": "Potions of Healing",
+        "size": {
+          "key": "tiny",
+          "name": "Tiny"
+        },
+        "weapon": null,
+        "weight": "0.000",
+        "weight_unit": "lb"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "item-type-module",
+  "schemaVersion": 1
+}

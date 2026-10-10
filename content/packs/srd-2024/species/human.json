@@ -1,0 +1,213 @@
+{
+  "choices": [],
+  "features": [
+    {
+      "id": "srd-2024:feature:human-trait-1",
+      "kind": "feature",
+      "name": "Size",
+      "ownerId": "srd-2024:species:human",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Medium (about 4–7 feet tall) or Small (about 2–4 feet tall), chosen when you select this species",
+        "key": "srd-2024_human_trait-1",
+        "name": "Size",
+        "order": 1,
+        "type": "SIZE"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:human-trait-2",
+      "kind": "feature",
+      "name": "Speed",
+      "ownerId": "srd-2024:species:human",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "30 feet",
+        "key": "srd-2024_human_trait-2",
+        "name": "Speed",
+        "order": 2,
+        "type": "SPEED"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:human-trait-3",
+      "kind": "feature",
+      "name": "Resourceful",
+      "ownerId": "srd-2024:species:human",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You gain Heroic Inspiration whenever you finish a Long Rest.",
+        "key": "srd-2024_human_trait-3",
+        "name": "Resourceful",
+        "order": 3,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:human-trait-4",
+      "kind": "feature",
+      "name": "Skillful",
+      "ownerId": "srd-2024:species:human",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You gain proficiency in one skill of your choice.",
+        "key": "srd-2024_human_trait-4",
+        "name": "Skillful",
+        "order": 4,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:human-trait-5",
+      "kind": "feature",
+      "name": "Versatile",
+      "ownerId": "srd-2024:species:human",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You gain an Origin feat of your choice (see \"Feats\"). Skilled is recommended.",
+        "key": "srd-2024_human_trait-5",
+        "name": "Versatile",
+        "order": 5,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "species-module",
+  "resources": [],
+  "schemaVersion": 1,
+  "species": {
+    "id": "srd-2024:species:human",
+    "kind": "species",
+    "name": "Human",
+    "reference": {
+      "crossreferences": {
+        "to": []
+      },
+      "desc": "",
+      "document": {
+        "display_name": "5e 2024 Rules",
+        "gamesystem": {
+          "key": "5e-2024",
+          "name": "5th Edition 2024"
+        },
+        "key": "srd-2024",
+        "name": "System Reference Document 5.2",
+        "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+        "publisher": {
+          "key": "wizards-of-the-coast",
+          "name": "Wizards of the Coast"
+        },
+        "type": "SOURCE"
+      },
+      "is_subspecies": false,
+      "key": "srd-2024_human",
+      "name": "Human",
+      "subspecies_of": null,
+      "traits": [
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Medium (about 4–7 feet tall) or Small (about 2–4 feet tall), chosen when you select this species",
+          "name": "Size",
+          "order": 1,
+          "type": "SIZE"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "30 feet",
+          "name": "Speed",
+          "order": 2,
+          "type": "SPEED"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You gain Heroic Inspiration whenever you finish a Long Rest.",
+          "name": "Resourceful",
+          "order": 3,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You gain proficiency in one skill of your choice.",
+          "name": "Skillful",
+          "order": 4,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You gain an Origin feat of your choice (see \"Feats\"). Skilled is recommended.",
+          "name": "Versatile",
+          "order": 5,
+          "type": null
+        }
+      ]
+    },
+    "ruleset": "5e-2024",
+    "source": {
+      "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+      "license": "CC BY 4.0",
+      "title": "System Reference Document 5.2",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    }
+  }
+}

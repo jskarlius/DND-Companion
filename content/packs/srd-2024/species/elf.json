@@ -1,0 +1,279 @@
+{
+  "choices": [],
+  "features": [
+    {
+      "id": "srd-2024:feature:elf-trait-1",
+      "kind": "feature",
+      "name": "Size",
+      "ownerId": "srd-2024:species:elf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Medium (about 5–6 feet tall)",
+        "key": "srd-2024_elf_trait-1",
+        "name": "Size",
+        "order": 1,
+        "type": "SIZE"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:elf-trait-2",
+      "kind": "feature",
+      "name": "Speed",
+      "ownerId": "srd-2024:species:elf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "30 feet",
+        "key": "srd-2024_elf_trait-2",
+        "name": "Speed",
+        "order": 2,
+        "type": "SPEED"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:elf-trait-3",
+      "kind": "feature",
+      "name": "Darkvision",
+      "ownerId": "srd-2024:species:elf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have Darkvision with a range of 60 feet.",
+        "key": "srd-2024_elf_trait-3",
+        "name": "Darkvision",
+        "order": 3,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:elf-trait-4",
+      "kind": "feature",
+      "name": "Elven Lineage",
+      "ownerId": "srd-2024:species:elf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You are part of a lineage that grants you supernatural abilities. Choose a lineage from the Elven Lineages table. You gain the level 1 benefit of that lineage.\n\nWhen you reach character levels 3 and 5, you learn a higher-level spell, as shown on the table. You always have that spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have of the appropriate level.\n\nTable: Elven Lineages\n\n|Lineage|Level 1|Level 3|Level 5|\n|---|---|---|---|\n|Drow|The range of your Darkvision increases to 120 feet. You also know the Dancing Lights cantrip.|Faerie Fire|Darkness|\n|High Elf|You know the Prestidigitation cantrip. Whenever you finish a Long Rest, you can replace that cantrip with a different cantrip from the Wizard spell list.|Detect Magic|Misty Step|\n|Wood Elf|Your Speed increases to 35 feet. You also know the Druidcraft cantrip.|Longstrider|Pass without Trace|\n\nIntelligence, Wisdom, or Charisma is your spellcasting ability for the spells you cast with this trait (choose the ability when you select the lineage).",
+        "key": "srd-2024_elf_trait-4",
+        "name": "Elven Lineage",
+        "order": 4,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:elf-trait-5",
+      "kind": "feature",
+      "name": "Fey Ancestry",
+      "ownerId": "srd-2024:species:elf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have Advantage on saving throws you make to avoid or end the Charmed condition.",
+        "key": "srd-2024_elf_trait-5",
+        "name": "Fey Ancestry",
+        "order": 5,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:elf-trait-6",
+      "kind": "feature",
+      "name": "Keen Senses",
+      "ownerId": "srd-2024:species:elf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have proficiency in the Insight, Perception, or Survival skill.",
+        "key": "srd-2024_elf_trait-6",
+        "name": "Keen Senses",
+        "order": 6,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:elf-trait-7",
+      "kind": "feature",
+      "name": "Trance",
+      "ownerId": "srd-2024:species:elf",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You don't need to sleep, and magic can't put you to sleep. You can finish a Long Rest in 4 hours if you spend those hours in a trancelike meditation, during which you retain consciousness.",
+        "key": "srd-2024_elf_trait-7",
+        "name": "Trance",
+        "order": 7,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "species-module",
+  "resources": [],
+  "schemaVersion": 1,
+  "species": {
+    "id": "srd-2024:species:elf",
+    "kind": "species",
+    "name": "Elf",
+    "reference": {
+      "crossreferences": {
+        "to": []
+      },
+      "desc": "",
+      "document": {
+        "display_name": "5e 2024 Rules",
+        "gamesystem": {
+          "key": "5e-2024",
+          "name": "5th Edition 2024"
+        },
+        "key": "srd-2024",
+        "name": "System Reference Document 5.2",
+        "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+        "publisher": {
+          "key": "wizards-of-the-coast",
+          "name": "Wizards of the Coast"
+        },
+        "type": "SOURCE"
+      },
+      "is_subspecies": false,
+      "key": "srd-2024_elf",
+      "name": "Elf",
+      "subspecies_of": null,
+      "traits": [
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Medium (about 5–6 feet tall)",
+          "name": "Size",
+          "order": 1,
+          "type": "SIZE"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "30 feet",
+          "name": "Speed",
+          "order": 2,
+          "type": "SPEED"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have Darkvision with a range of 60 feet.",
+          "name": "Darkvision",
+          "order": 3,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You are part of a lineage that grants you supernatural abilities. Choose a lineage from the Elven Lineages table. You gain the level 1 benefit of that lineage.\n\nWhen you reach character levels 3 and 5, you learn a higher-level spell, as shown on the table. You always have that spell prepared. You can cast it once without a spell slot, and you regain the ability to cast it in that way when you finish a Long Rest. You can also cast the spell using any spell slots you have of the appropriate level.\n\nTable: Elven Lineages\n\n|Lineage|Level 1|Level 3|Level 5|\n|---|---|---|---|\n|Drow|The range of your Darkvision increases to 120 feet. You also know the Dancing Lights cantrip.|Faerie Fire|Darkness|\n|High Elf|You know the Prestidigitation cantrip. Whenever you finish a Long Rest, you can replace that cantrip with a different cantrip from the Wizard spell list.|Detect Magic|Misty Step|\n|Wood Elf|Your Speed increases to 35 feet. You also know the Druidcraft cantrip.|Longstrider|Pass without Trace|\n\nIntelligence, Wisdom, or Charisma is your spellcasting ability for the spells you cast with this trait (choose the ability when you select the lineage).",
+          "name": "Elven Lineage",
+          "order": 4,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have Advantage on saving throws you make to avoid or end the Charmed condition.",
+          "name": "Fey Ancestry",
+          "order": 5,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have proficiency in the Insight, Perception, or Survival skill.",
+          "name": "Keen Senses",
+          "order": 6,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You don't need to sleep, and magic can't put you to sleep. You can finish a Long Rest in 4 hours if you spend those hours in a trancelike meditation, during which you retain consciousness.",
+          "name": "Trance",
+          "order": 7,
+          "type": null
+        }
+      ]
+    },
+    "ruleset": "5e-2024",
+    "source": {
+      "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+      "license": "CC BY 4.0",
+      "title": "System Reference Document 5.2",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    }
+  }
+}

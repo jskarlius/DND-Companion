@@ -1,0 +1,715 @@
+{
+  "distribution": "public",
+  "id": "srd-2024",
+  "modules": [
+    {
+      "counts": {
+        "background": 1,
+        "feature": 5
+      },
+      "kinds": [
+        "background",
+        "feature"
+      ],
+      "path": "backgrounds/acolyte.json",
+      "sha256": "ae10f9a765d089a1fc344d75fbd8e19bb00efc7f9b85bacd1a7b1b1f9b88f013"
+    },
+    {
+      "counts": {
+        "background": 1,
+        "feature": 5
+      },
+      "kinds": [
+        "background",
+        "feature"
+      ],
+      "path": "backgrounds/criminal.json",
+      "sha256": "52a888343b00159e709d4d2a5fade1241e8ec58b9845898e45f0c699d72a085b"
+    },
+    {
+      "counts": {
+        "background": 1,
+        "feature": 5
+      },
+      "kinds": [
+        "background",
+        "feature"
+      ],
+      "path": "backgrounds/sage.json",
+      "sha256": "9b3d4e236edec40550ca8d67690d92e4a835d10303ba77212587419f637357e1"
+    },
+    {
+      "counts": {
+        "background": 1,
+        "feature": 5
+      },
+      "kinds": [
+        "background",
+        "feature"
+      ],
+      "path": "backgrounds/soldier.json",
+      "sha256": "d4c17a1109e8551980ba85d4ebdd9a327329f64b3fcfdb2136c85906f6dad9ab"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 25
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/barbarian.json",
+      "sha256": "40ad0c8fb8e65b56f246c039a0c80a68c34af5e4efca839216c65865ebf44e86"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 27
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/bard.json",
+      "sha256": "5d1d588ea08fd3cdc978c485ec0e7cb32e384a3247561e0c8b297541ba9f57ac"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 26
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/cleric.json",
+      "sha256": "a20f1fad3f82466f7c93f21922cc989c217ab3c7e090473f5ec0da863ef87fcb"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 28
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/druid.json",
+      "sha256": "ca4dea1908ba6351134f0bb5a5d8757711ec9bc8893f22491bd56068b7d13454"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 19
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/fighter.json",
+      "sha256": "8ac72e4b38dbf99037d92dd61ef32502776d4a4426ef61cef0d8d2bd6c6e6ce7"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 26
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/monk.json",
+      "sha256": "1c4ba99e345228acb9adbd0398b3286864fa299ae8401d4ac42119bd4105c5b0"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 27
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/paladin.json",
+      "sha256": "844cd1ab084decead28855905bd406ae703f319e44f12e6968d36739691b2f4d"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 27
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/ranger.json",
+      "sha256": "dee19d65315ac27c42dc4a2a2de59c96230188d22d5c1e9981d85410c276b83a"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 21
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/rogue.json",
+      "sha256": "deb53fc7b9d450c6c21bd376ffffefeefe698caadef43a96ab60c161563719be"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 26
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/sorcerer.json",
+      "sha256": "fabdbdb9244bbaa0c69bef4597b1a84f3e6c29fcf9bf8763a2549d7e96d1ceea"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 18
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/warlock.json",
+      "sha256": "d7d55d6d110878dc2b6e96127a1a1a612d67dc8eff472d29240dbca6c824d3c5"
+    },
+    {
+      "counts": {
+        "class": 1,
+        "feature": 24
+      },
+      "kinds": [
+        "class",
+        "feature"
+      ],
+      "path": "classes/wizard.json",
+      "sha256": "b9681ed8324007a981e80e3f71c430818c6714c4e1561df64cc6241af5c617c7"
+    },
+    {
+      "counts": {
+        "feat": 7
+      },
+      "kinds": [
+        "feat"
+      ],
+      "path": "feats/epic-boon.json",
+      "sha256": "3d794c1b19b74df291e9e327dd5a22fbd81d6c5453a82455d6f58740a5738197"
+    },
+    {
+      "counts": {
+        "feat": 2
+      },
+      "kinds": [
+        "feat"
+      ],
+      "path": "feats/general.json",
+      "sha256": "0deb9534a1fd0d3c356a6df914b1a58a1e9fdd04b39669a2e0515d620df00f6d"
+    },
+    {
+      "counts": {
+        "feat": 4
+      },
+      "kinds": [
+        "feat"
+      ],
+      "path": "feats/origin.json",
+      "sha256": "a7467e891830804e84720714e239663f6417223f4f3351bbb368a93708738cff"
+    },
+    {
+      "counts": {
+        "feat": 4
+      },
+      "kinds": [
+        "feat"
+      ],
+      "path": "feats/other.json",
+      "sha256": "018460e6ca1ebd8fd314dad5a5ca9fe4801087d2fc229a39b9c2baefe6bbf6ab"
+    },
+    {
+      "counts": {
+        "item": 64
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/adventuring-gear.json",
+      "sha256": "0bac35ea36894e9fff9a27801a101ee20ea93f0886d5ac10b2069073638e8fae"
+    },
+    {
+      "counts": {
+        "item": 5
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/ammunition.json",
+      "sha256": "553849a207eb0b7f57c829626dac28ac582a0a00aec03168543776dade20f7c9"
+    },
+    {
+      "counts": {
+        "item": 13
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/armor.json",
+      "sha256": "cf9bed9900fbbac5362c86147f4b7d286949bfa34bb01f0a6b3153ddaa6b1374"
+    },
+    {
+      "counts": {
+        "item": 19
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/mounts-and-vehicles.json",
+      "sha256": "ab68472da6317c6f94213dff303ce4f7260c9fee6cce709fdef543a06ffbe40a"
+    },
+    {
+      "counts": {
+        "item": 8
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/packs.json",
+      "sha256": "aff53725dd2b044d7a4ccb43cc1f2e6c0f3f56f2d360506df5fd9be3efa299f9"
+    },
+    {
+      "counts": {
+        "item": 4
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/potions.json",
+      "sha256": "9e3f56bbb73402540fbf5cd59336dbcf9dab3cebfcdf7718d7ee2628af128a67"
+    },
+    {
+      "counts": {
+        "item": 2
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/scrolls.json",
+      "sha256": "4c59dc2d8bc86a40e5a01685031de99b4be5574cda19ec518d1c7661a82c0b59"
+    },
+    {
+      "counts": {
+        "item": 3
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/spellcasting-focuses.json",
+      "sha256": "9db8391be09e66a357edd6056cbddc8ebdc24053e3a2c552190fa218678335e0"
+    },
+    {
+      "counts": {
+        "item": 39
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/tools.json",
+      "sha256": "629f1a45b97986081babf5f02ef4a093ece5fddb6118abaddee0a8710960d0a3"
+    },
+    {
+      "counts": {
+        "item": 44
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/weapons.json",
+      "sha256": "1b53c0f909d51119d6dd2123e10e9080aa6f2789ee6b18c6694f7d637d0de3e3"
+    },
+    {
+      "counts": {
+        "item": 2
+      },
+      "kinds": [
+        "item"
+      ],
+      "path": "items/by-type/wondrous-items.json",
+      "sha256": "b9a1910ca3e4aab7a2381f179b98fb933e3b332e70ddd637950031ecc7a43fbd"
+    },
+    {
+      "counts": {
+        "feature": 7,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/dragonborn.json",
+      "sha256": "b2d319b377f5c90220559dcea983ef83e7acc5ac7f32b647857cac1381e9abe5"
+    },
+    {
+      "counts": {
+        "feature": 6,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/dwarf.json",
+      "sha256": "011fe9830ca5bac65bbff0aae7bce81ec56545d5089aa5ef87a1b09a45ab7a6c"
+    },
+    {
+      "counts": {
+        "feature": 7,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/elf.json",
+      "sha256": "1b957f61cd650dcda92ded6e81dfb5c9d0ae1a51de8613f59cde4d4ca62b2281"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/gnome.json",
+      "sha256": "d59e327fe313a9c1604ad871ae12a1e2b6229c8718f8253bc135d5e1f5c6b6d7"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/goliath.json",
+      "sha256": "4ae88cf4986abff5dfeeb018516e50546892704b2d3640c6b989e5dd9546f5c8"
+    },
+    {
+      "counts": {
+        "feature": 6,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/halfling.json",
+      "sha256": "b9c5703b94857b29d39f499feccea654518e222d7f27cfb2ff1ad84b76366dab"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/human.json",
+      "sha256": "09e15b62e24001f0f83895e32e7b9e278bfd048c15bb680c0c51bf63ded3f4b9"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/orc.json",
+      "sha256": "f9f86d4ac4864db1de457f88120f78c6583da023e14d763c845d0e23fc9b9240"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "species": 1
+      },
+      "kinds": [
+        "feature",
+        "species"
+      ],
+      "path": "species/tiefling.json",
+      "sha256": "8d68eb58eb47d1508684ec4cf97ddb6c24e33c3fe95ad720c7e30c9f46d864fd"
+    },
+    {
+      "counts": {
+        "spell": 27
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-0.json",
+      "sha256": "25e5dda117ef3667cd61b2fb38fde428965e39facdcd749244dda8b83c3e3432"
+    },
+    {
+      "counts": {
+        "spell": 57
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-1.json",
+      "sha256": "228aedf73fa648886744c614c62e45da8dad61ef110e86354808f59e6560bb6a"
+    },
+    {
+      "counts": {
+        "spell": 57
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-2.json",
+      "sha256": "73b7f8249016a236d8bb6a86df570bf6a5a2cc053d1f39d6d3290720f5d45f51"
+    },
+    {
+      "counts": {
+        "spell": 42
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-3.json",
+      "sha256": "c34b06a5fb516d0471ac6641f416047b489a5f665df210c3718396d57364492d"
+    },
+    {
+      "counts": {
+        "spell": 34
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-4.json",
+      "sha256": "f18b1b4918e1d28fc28cfdde06cb25cd4867024bc28c44b3e29f04b04c9fd933"
+    },
+    {
+      "counts": {
+        "spell": 38
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-5.json",
+      "sha256": "bed443e6461532d4e82ff538612662974f33d739cf8208f4fbd7b074f515da7b"
+    },
+    {
+      "counts": {
+        "spell": 31
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-6.json",
+      "sha256": "9b435305d5e4395fb85d58848b68157206d7afae9b217debeff1924b98cb6077"
+    },
+    {
+      "counts": {
+        "spell": 20
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-7.json",
+      "sha256": "35194ac967d339dd5adf10fe8e19246b79a14a125dcf0a2df5a89919023ff270"
+    },
+    {
+      "counts": {
+        "spell": 17
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-8.json",
+      "sha256": "53f22c580b0a3e7ca4bb15d552c5249c7f08df03ed3cb6ee58999558233bf045"
+    },
+    {
+      "counts": {
+        "spell": 16
+      },
+      "kinds": [
+        "spell"
+      ],
+      "path": "spells/level-9.json",
+      "sha256": "82fe8053fa6e49ce0c575bb730cbbd95cd765305c7730861323a7a771d8ec4f4"
+    },
+    {
+      "counts": {
+        "feature": 4,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/barbarian/path-of-the-berserker.json",
+      "sha256": "4dc0edc645e99b283f53f39b5e568c21fffd42f37f588f856fa880405385361f"
+    },
+    {
+      "counts": {
+        "feature": 4,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/bard/college-of-lore.json",
+      "sha256": "1fc9acbf8405c299bdd587682f68bdc2df4be74d47bb0aa42277466618ca4800"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/cleric/life-domain.json",
+      "sha256": "6e23477876d91b9e8659b99856c48bbe81d46b7c715fa03d7c1919fe64d14a12"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/druid/circle-of-the-land.json",
+      "sha256": "d4cf1cedb0468f5e1e1c95f1b748c9b2b59ba7986578eb5e1eba9567d822edf3"
+    },
+    {
+      "counts": {
+        "feature": 6,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/fighter/champion.json",
+      "sha256": "6f15bf01f494095931ce8e24fc3a8a6f03be6ae62d1879e490728151ee8d44f5"
+    },
+    {
+      "counts": {
+        "feature": 4,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/monk/warrior-of-the-open-hand.json",
+      "sha256": "914fa95dac8763adb25c6e46c5f06615ca7820ebcf0d448caaed855e65e53d69"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/paladin/oath-of-devotion.json",
+      "sha256": "548db43e9d1e0a2605e3fd7c906970495fa7fbb4dac4892cc94b63a24c0fd949"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/ranger/hunter.json",
+      "sha256": "c59bea9bf8a7c56384e403dd04d8acdee24c00e46477d1e6c7c7de8bf6141a7c"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/rogue/thief.json",
+      "sha256": "11ab120b80b451b9bbcc8dc84d8741e143d4a3ad2e7db160a42a1f5c9b6f8163"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/sorcerer/draconic-sorcery.json",
+      "sha256": "dd727d197a92a073f03bebe856455ed504f967454098db0a1a5d49ef8443a9e8"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/warlock/fiend-patron.json",
+      "sha256": "468084c4bd16a2b3bb8e0e753088b83c5b58d8e0ba08c774efcaa6272c26afda"
+    },
+    {
+      "counts": {
+        "feature": 5,
+        "subclass": 1
+      },
+      "kinds": [
+        "feature",
+        "subclass"
+      ],
+      "path": "subclasses/wizard/evoker.json",
+      "sha256": "fede98c8db7b3585d3d9b4ef5320058b50b1f399bb1fc3cf9421869e498862a9"
+    }
+  ],
+  "name": "Open5e SRD 2024 reference pack",
+  "report": {
+    "path": "import-report.json",
+    "sha256": "50e112395a47ef322ce0a6ee32fa715c31c45ed23049bb7761a3c0d58b6c2029"
+  },
+  "ruleset": "5e-2024",
+  "schemaVersion": 2,
+  "source": {
+    "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+    "license": "CC BY 4.0",
+    "title": "System Reference Document 5.2",
+    "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+    "url": "https://dnd.wizards.com/resources/systems-reference-document"
+  },
+  "version": "2024-01-01T00:00:00"
+}

@@ -1,0 +1,212 @@
+{
+  "background": {
+    "id": "srd-2024:background:acolyte",
+    "kind": "background",
+    "name": "Acolyte",
+    "reference": {
+      "benefits": [
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Intelligence, Wisdom, Charisma",
+          "name": "Ability Scores",
+          "type": "ability_score"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "*Choose A or B:* (A) Calligrapher's Supplies, Book (prayers), Holy Symbol, Parchment (10 sheets), Robe, 8 GP; or (B) 50 GP",
+          "name": "Equipment",
+          "type": "equipment"
+        },
+        {
+          "crossreferences": {
+            "to": [
+              {
+                "anchor": "Magic Initiate",
+                "url": "https://api.open5e.com/v2/feats/srd-2024_magic-initiate/"
+              }
+            ]
+          },
+          "desc": "Magic Initiate (Cleric)",
+          "name": "Feat",
+          "type": "feat"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Insight and Religion",
+          "name": "Skill Proficiencies",
+          "type": "skill_proficiency"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Calligrapher's Supplies",
+          "name": "Tool Proficiency",
+          "type": "tool_proficiency"
+        }
+      ],
+      "crossreferences": {
+        "to": []
+      },
+      "desc": "",
+      "document": {
+        "display_name": "5e 2024 Rules",
+        "gamesystem": {
+          "key": "5e-2024",
+          "name": "5th Edition 2024"
+        },
+        "key": "srd-2024",
+        "name": "System Reference Document 5.2",
+        "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+        "publisher": {
+          "key": "wizards-of-the-coast",
+          "name": "Wizards of the Coast"
+        },
+        "type": "SOURCE"
+      },
+      "key": "srd-2024_acolyte",
+      "name": "Acolyte"
+    },
+    "ruleset": "5e-2024",
+    "source": {
+      "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+      "license": "CC BY 4.0",
+      "title": "System Reference Document 5.2",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    }
+  },
+  "choices": [],
+  "equipmentPackages": [],
+  "features": [
+    {
+      "id": "srd-2024:feature:acolyte-benefit-1",
+      "kind": "feature",
+      "name": "Ability Scores",
+      "ownerId": "srd-2024:background:acolyte",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Intelligence, Wisdom, Charisma",
+        "key": "srd-2024_acolyte_benefit-1",
+        "name": "Ability Scores",
+        "type": "ability_score"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:acolyte-benefit-2",
+      "kind": "feature",
+      "name": "Equipment",
+      "ownerId": "srd-2024:background:acolyte",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "*Choose A or B:* (A) Calligrapher's Supplies, Book (prayers), Holy Symbol, Parchment (10 sheets), Robe, 8 GP; or (B) 50 GP",
+        "key": "srd-2024_acolyte_benefit-2",
+        "name": "Equipment",
+        "type": "equipment"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:acolyte-benefit-3",
+      "kind": "feature",
+      "name": "Feat",
+      "ownerId": "srd-2024:background:acolyte",
+      "reference": {
+        "crossreferences": {
+          "to": [
+            {
+              "anchor": "Magic Initiate",
+              "url": "https://api.open5e.com/v2/feats/srd-2024_magic-initiate/"
+            }
+          ]
+        },
+        "desc": "Magic Initiate (Cleric)",
+        "key": "srd-2024_acolyte_benefit-3",
+        "name": "Feat",
+        "type": "feat"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:acolyte-benefit-4",
+      "kind": "feature",
+      "name": "Skill Proficiencies",
+      "ownerId": "srd-2024:background:acolyte",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Insight and Religion",
+        "key": "srd-2024_acolyte_benefit-4",
+        "name": "Skill Proficiencies",
+        "type": "skill_proficiency"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:acolyte-benefit-5",
+      "kind": "feature",
+      "name": "Tool Proficiency",
+      "ownerId": "srd-2024:background:acolyte",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Calligrapher's Supplies",
+        "key": "srd-2024_acolyte_benefit-5",
+        "name": "Tool Proficiency",
+        "type": "tool_proficiency"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "background-module",
+  "resources": [],
+  "schemaVersion": 1
+}

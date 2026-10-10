@@ -26,3 +26,8 @@ the dependencies are available.
 
 Treat the workbook as reference evidence rather than a fixed UI layout. Keep
 repeated UI sections dynamic and do not copy private book text into the app.
+
+When the owner asks a design question or challenges a proposal, give candid,
+evidence-based analysis. Do not agree merely to be accommodating: explain
+material trade-offs, identify risks or flawed assumptions, recommend the best
+option, and clearly distinguish a recommendation from an owner decision.

@@ -1,0 +1,106 @@
+{
+  "feats": [
+    {
+      "id": "srd-2024:feat:ability-score-improvement",
+      "kind": "feat",
+      "name": "Ability Score Improvement",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "Increase one ability score of your choice by 2, or increase two ability scores of your choice by 1. This feat can't increase an ability score above 20."
+          },
+          {
+            "desc": "You can take this feat more than once."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": true,
+        "key": "srd-2024_ability-score-improvement",
+        "name": "Ability Score Improvement",
+        "prerequisite": "Level 4+",
+        "type": "General"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feat:grappler",
+      "kind": "feat",
+      "name": "Grappler",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "Increase your Strength or Dexterity score by 1, to a maximum of 20."
+          },
+          {
+            "desc": "When you hit a creature with an Unarmed Strike as part of the Attack action on your turn, you can use both the Damage and the Grapple option. You can use this benefit only once per turn."
+          },
+          {
+            "desc": "You have Advantage on attack rolls against a creature Grappled by you."
+          },
+          {
+            "desc": "You don't have to spend extra movement to move a creature Grappled by you if the creature is your size or smaller."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You gain the following benefits.",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": true,
+        "key": "srd-2024_grappler",
+        "name": "Grappler",
+        "prerequisite": "Level 4+, Strength or Dexterity 13+",
+        "type": "General"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "feat-category-module",
+  "schemaVersion": 1
+}

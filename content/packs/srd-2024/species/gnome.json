@@ -1,0 +1,213 @@
+{
+  "choices": [],
+  "features": [
+    {
+      "id": "srd-2024:feature:gnome-trait-1",
+      "kind": "feature",
+      "name": "Size",
+      "ownerId": "srd-2024:species:gnome",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "Small (about 3–4 feet tall)",
+        "key": "srd-2024_gnome_trait-1",
+        "name": "Size",
+        "order": 1,
+        "type": "SIZE"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:gnome-trait-2",
+      "kind": "feature",
+      "name": "Speed",
+      "ownerId": "srd-2024:species:gnome",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "30 feet",
+        "key": "srd-2024_gnome_trait-2",
+        "name": "Speed",
+        "order": 2,
+        "type": "SPEED"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:gnome-trait-3",
+      "kind": "feature",
+      "name": "Darkvision",
+      "ownerId": "srd-2024:species:gnome",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have Darkvision with a range of 60 feet.",
+        "key": "srd-2024_gnome_trait-3",
+        "name": "Darkvision",
+        "order": 3,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:gnome-trait-4",
+      "kind": "feature",
+      "name": "Gnomish Cunning",
+      "ownerId": "srd-2024:species:gnome",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You have Advantage on Intelligence, Wisdom, and Charisma saving throws.",
+        "key": "srd-2024_gnome_trait-4",
+        "name": "Gnomish Cunning",
+        "order": 4,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feature:gnome-trait-5",
+      "kind": "feature",
+      "name": "Gnomish Lineage",
+      "ownerId": "srd-2024:species:gnome",
+      "reference": {
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "You are part of a lineage that grants you supernatural abilities. Choose one of the following options; whichever one you choose, Intelligence, Wisdom, or Charisma is your spellcasting ability for the spells you cast with this trait (choose the ability when you select the lineage):\n\n**Forest Gnome.** You know the *Minor Illusion* cantrip. You also always have the *Speak with Animals* spell prepared. You can cast it without a spell slot a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest. You can also use any spell slots you have to cast the spell.\n\n**Rock Gnome.** You know the *Mending* and *Prestidigitation* cantrips. In addition, you can spend 10 minutes casting *Prestidigitation* to create a Tiny clockwork device (AC 5, 1 HP), such as a toy, fire starter, or music box. When you create the device, you determine its function by choosing one effect from *Prestidigitation*; the device produces that effect whenever you or another creature takes a Bonus Action to activate it with a touch. If the chosen effect has options within it, you choose one of those options for the device when you create it. For example, if you choose the spell's ignite-extinguish effect, you determine whether the device ignites or extinguishes fire; the device doesn't do both. You can have three such devices in existence at a time, and each falls apart 8 hours after its creation or when you dismantle it with a touch as a Utilize action.",
+        "key": "srd-2024_gnome_trait-5",
+        "name": "Gnomish Lineage",
+        "order": 5,
+        "type": null
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "species-module",
+  "resources": [],
+  "schemaVersion": 1,
+  "species": {
+    "id": "srd-2024:species:gnome",
+    "kind": "species",
+    "name": "Gnome",
+    "reference": {
+      "crossreferences": {
+        "to": []
+      },
+      "desc": "",
+      "document": {
+        "display_name": "5e 2024 Rules",
+        "gamesystem": {
+          "key": "5e-2024",
+          "name": "5th Edition 2024"
+        },
+        "key": "srd-2024",
+        "name": "System Reference Document 5.2",
+        "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+        "publisher": {
+          "key": "wizards-of-the-coast",
+          "name": "Wizards of the Coast"
+        },
+        "type": "SOURCE"
+      },
+      "is_subspecies": false,
+      "key": "srd-2024_gnome",
+      "name": "Gnome",
+      "subspecies_of": null,
+      "traits": [
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "Small (about 3–4 feet tall)",
+          "name": "Size",
+          "order": 1,
+          "type": "SIZE"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "30 feet",
+          "name": "Speed",
+          "order": 2,
+          "type": "SPEED"
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have Darkvision with a range of 60 feet.",
+          "name": "Darkvision",
+          "order": 3,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You have Advantage on Intelligence, Wisdom, and Charisma saving throws.",
+          "name": "Gnomish Cunning",
+          "order": 4,
+          "type": null
+        },
+        {
+          "crossreferences": {
+            "to": []
+          },
+          "desc": "You are part of a lineage that grants you supernatural abilities. Choose one of the following options; whichever one you choose, Intelligence, Wisdom, or Charisma is your spellcasting ability for the spells you cast with this trait (choose the ability when you select the lineage):\n\n**Forest Gnome.** You know the *Minor Illusion* cantrip. You also always have the *Speak with Animals* spell prepared. You can cast it without a spell slot a number of times equal to your Proficiency Bonus, and you regain all expended uses when you finish a Long Rest. You can also use any spell slots you have to cast the spell.\n\n**Rock Gnome.** You know the *Mending* and *Prestidigitation* cantrips. In addition, you can spend 10 minutes casting *Prestidigitation* to create a Tiny clockwork device (AC 5, 1 HP), such as a toy, fire starter, or music box. When you create the device, you determine its function by choosing one effect from *Prestidigitation*; the device produces that effect whenever you or another creature takes a Bonus Action to activate it with a touch. If the chosen effect has options within it, you choose one of those options for the device when you create it. For example, if you choose the spell's ignite-extinguish effect, you determine whether the device ignites or extinguishes fire; the device doesn't do both. You can have three such devices in existence at a time, and each falls apart 8 hours after its creation or when you dismantle it with a touch as a Utilize action.",
+          "name": "Gnomish Lineage",
+          "order": 5,
+          "type": null
+        }
+      ]
+    },
+    "ruleset": "5e-2024",
+    "source": {
+      "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+      "license": "CC BY 4.0",
+      "title": "System Reference Document 5.2",
+      "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+      "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    }
+  }
+}

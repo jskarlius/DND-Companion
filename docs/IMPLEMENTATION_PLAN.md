@@ -610,7 +610,7 @@ character” action creates a minimal Wizard 1 bootstrap record. It is not a
 usable or representative character-creation workflow and must not be used as
 the acceptance path for level-1 play.
 
-## Architecture checkpoint: Level 0 to level 1 character creation
+## Architecture checkpoint: Level 0 to level 1 character creation — approved, amended (2026-10-10)
 
 Before beginning more content work, review and approve the creation contract
 and its initial supported content scope. The workflow must collect choices in a
@@ -619,8 +619,15 @@ draft and save one valid character plus play state only after review.
 - Define the source-of-truth references and choices for starting class, ability
   scores, species, background, skills/proficiencies, equipment, spells,
   cantrips, and initial HP.
-- Decide the small, license-verified public bootstrap scope needed to exercise
-  those choices without borrowing values from the representative fixture.
+- Use a reviewed, deterministic full public SRD pack generated through the
+  Slice 8 repository/import pipeline rather than a new hand-curated creation
+  bootstrap subset. The application remains offline at runtime; Open5e is a
+  deliberate, allowlisted build-time ingestion source only.
+- Model maximum HP as separate, traceable terms: class Hit Die history,
+  Constitution by total character level, permanent content-derived effects,
+  and temporary play-state effects. Feats and species traits such as Tough and
+  Dwarven Toughness must use structured permanent maximum-HP effects rather
+  than being folded into an HP gain.
 - Specify which grants are automated, tracked, or explicit manual choices;
   unsupported grants must be shown as unavailable rather than guessed.
 - Define validation, cancel/review behavior, and tests for a complete level-1
@@ -632,25 +639,58 @@ Do not replace this checkpoint with incremental sheet controls. The approved
 creation flow is the level 0 to level 1 transaction; ordinary level-up begins
 only after that initial character exists.
 
-## Slice 8: Content repository and public packs
+## Slice 8: Content repository and public packs — next
 
 Goal: unify bundled and locally installed content behind one interface.
 
-- Extend the Slice 6.75 repository contract for installed packs and searchable
-  content without changing sheet or advancement consumers.
+- Replace the fixture-shaped bundled-content contract with a `ContentPack`
+  contract. A bundled pack is a structured directory of deterministic modules:
+  one module per class, subclass, species, and background; spells grouped by
+  level; feats grouped by category; and items grouped by explicit item type.
+  Owner modules colocate their features, choices, resources, and equipment
+  packages. The manifest hashes/counts every module and the import report
+  records categories the source cannot structure safely. Its portable
+  import/export representation may be one JSON file with the identical modules.
+- Build a composed repository that validates enabled bundled and installed
+  packs, indexes entities by ID, rejects duplicate IDs/ruleset conflicts, and
+  reports broken cross-pack references. Consumers query this repository rather
+  than bundled JSON or pack arrays.
+- Normalize spell-list membership onto spells as class IDs so an installed
+  pack can add a spell to a base class's list without rewriting that class.
 - Extend Zod validation and pack manifests from the pinned bootstrap subset to
-  complete public packs.
+  complete public packs, including species, backgrounds, items, equipment
+  packages, and reviewed structured mechanical effects.
 - Add source/ruleset filtering and reference resolution.
 - Define item entities and searchable repository queries for inventory.
-- Build an allowlisted Open5e v2 importer.
-- Generate deterministic SRD packs after reviewing attribution output.
+- Replace the bootstrap script with an allowlisted Open5e v2 full-SRD importer
+  that emits the structured category files and a deterministic review report.
+  It must stop on malformed or unrepresentable required relationships and must
+  never run at application startup.
+- Reconcile Open5e's upstream label to the official SRD document before
+  claiming verified 5.2.1 provenance. Use `srd-2024` as the durable canonical
+  namespace until that review is complete, with a migration for development
+  character references that use the old namespace.
 
 Acceptance:
 
 - malformed packs fail with actionable errors;
 - duplicate IDs and broken references are reported;
 - application play remains independent of the live API; and
-- generated output is reproducible.
+- generated module output, manifest hashes, and report are reproducible.
+
+Initial implementation progress (2026-10-10):
+
+- Replaced the Wizard-only bootstrap generator with a deterministic,
+  allowlisted full-SRD reference-pack generator. It writes 62 owner-oriented
+  modules, a manifest with per-module hashes/counts, and an import report.
+- Added an offline verifier for module hashes, provenance, duplicate IDs,
+  ownership links, class/subclass feature links, and aggregate counts. A second
+  generation produced identical hashes.
+- The source exposes no structured magic-item or rarity field, so item modules
+  are grouped only by explicit item type; the import report records this limit.
+- This is reference data only. The production `ContentPack` schemas, repository
+  composition/indexes, structured parsers, and migration from the legacy
+  bootstrap pack remain in this slice.
 
 ## Product checkpoint: Full public-pack integration and manual testing
 
@@ -804,6 +844,18 @@ The advancement product checkpoint surfaced and resolved its bounded sheet and
 level-up corrections. It also established that a minimal Wizard fixture cannot
 stand in for character creation.
 
-Next: hold the **Level 0 to level 1 character creation architecture checkpoint**
-above. Define the initial creation contract and supported public bootstrap data
-before implementing creation or beginning Slice 8.
+The owner approved the amended creation checkpoint: build the full public SRD
+content foundation before implementing character creation. Bundled packs use
+owner-oriented JSON modules behind one composed repository; portable pack
+import/export may use one equivalent JSON file. Maximum HP will trace base
+class gains, Constitution, permanent content effects, and temporary effects
+separately.
+
+Slice 8 is in progress. The deterministic reference-pack generator and module
+verifier are complete, but the application still uses the legacy bootstrap
+fixture.
+
+Next: define the production `ContentPack` module schemas and loader validation,
+then implement repository composition/indexes and migrate consumers from the
+legacy bootstrap data. Do not begin character creation until that content
+foundation validates.

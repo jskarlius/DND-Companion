@@ -42,7 +42,9 @@
     "build": "tsc -b && vite build",
     "test": "vitest run",
     "typecheck": "tsc -b --pretty false",
-    "content:bootstrap": "node --use-system-ca scripts/import-content/import-open5e-bootstrap.mjs"
+    "content:bootstrap": "node --use-system-ca scripts/import-content/import-open5e-srd.mjs",
+    "content:import-srd": "node --use-system-ca scripts/import-content/import-open5e-srd.mjs",
+    "content:verify-srd": "node scripts/import-content/verify-open5e-srd-pack.mjs"
   },
   "allowScripts": {
     "esbuild@0.28.2": true

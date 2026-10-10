@@ -1,0 +1,24 @@
+{
+  "deferredStructuredModeling": [
+    "class and background starting-equipment alternatives",
+    "species and background player choices",
+    "feature resources and recharge rules",
+    "feature/feat mechanical effects",
+    "class spellcasting and advancement tables"
+  ],
+  "importedEntityCounts": {
+    "background": 4,
+    "class": 12,
+    "feat": 17,
+    "feature": 423,
+    "item": 203,
+    "species": 9,
+    "spell": 339,
+    "subclass": 12
+  },
+  "packId": "srd-2024",
+  "schemaVersion": 1,
+  "sourceLimitations": [
+    "Open5e item responses for this document provide no structured magic-item or rarity field; items are grouped only by explicit type."
+  ]
+}

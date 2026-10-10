@@ -1,0 +1,182 @@
+{
+  "feats": [
+    {
+      "id": "srd-2024:feat:archery",
+      "kind": "feat",
+      "name": "Archery",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "You gain a +2 bonus to attack rolls you make with Ranged weapons."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": true,
+        "key": "srd-2024_archery",
+        "name": "Archery",
+        "prerequisite": "Fighting Style Feature",
+        "type": "Fighting Style"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feat:defense",
+      "kind": "feat",
+      "name": "Defense",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "While you're wearing Light, Medium, or Heavy armor, you gain a +1 bonus to Armor Class."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": true,
+        "key": "srd-2024_defense",
+        "name": "Defense",
+        "prerequisite": "Fighting Style Feature",
+        "type": "Fighting Style"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feat:great-weapon-fighting",
+      "kind": "feat",
+      "name": "Great Weapon Fighting",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "When you roll damage for an attack you make with a Melee weapon that you are holding with two hands, you can treat any 1 or 2 on a damage die as a 3. The weapon must have the Two-Handed or Versatile property to gain this benefit."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": true,
+        "key": "srd-2024_great-weapon-fighting",
+        "name": "Great Weapon Fighting",
+        "prerequisite": "Fighting Style Feature",
+        "type": "Fighting Style"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    },
+    {
+      "id": "srd-2024:feat:two-weapon-fighting",
+      "kind": "feat",
+      "name": "Two-Weapon Fighting",
+      "reference": {
+        "benefits": [
+          {
+            "desc": "When you make an extra attack as a result of using a weapon that has the Light property, you can add your ability modifier to the damage of that attack if you aren't already adding it to the damage."
+          }
+        ],
+        "crossreferences": {
+          "to": []
+        },
+        "desc": "",
+        "document": {
+          "display_name": "5e 2024 Rules",
+          "gamesystem": {
+            "key": "5e-2024",
+            "name": "5th Edition 2024"
+          },
+          "key": "srd-2024",
+          "name": "System Reference Document 5.2",
+          "permalink": "https://dnd.wizards.com/resources/systems-reference-document",
+          "publisher": {
+            "key": "wizards-of-the-coast",
+            "name": "Wizards of the Coast"
+          },
+          "type": "SOURCE"
+        },
+        "has_prerequisite": true,
+        "key": "srd-2024_two-weapon-fighting",
+        "name": "Two-Weapon Fighting",
+        "prerequisite": "Fighting Style Feature",
+        "type": "Fighting Style"
+      },
+      "ruleset": "5e-2024",
+      "source": {
+        "attribution": "This work includes material from the System Reference Document by Wizards of the Coast LLC, available under CC BY 4.0.",
+        "license": "CC BY 4.0",
+        "title": "System Reference Document 5.2",
+        "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
+        "url": "https://dnd.wizards.com/resources/systems-reference-document"
+      }
+    }
+  ],
+  "moduleKind": "feat-category-module",
+  "schemaVersion": 1
+}
