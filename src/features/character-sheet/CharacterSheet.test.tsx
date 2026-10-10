@@ -238,6 +238,42 @@ test('groups spells by level with preparation, casting details, and compact slot
   expect(screen.getByLabelText('Prepare Magic Missile')).not.toBeChecked();
 });
 
+test('filters spells by caster and does not offer daily preparation for level-up spell lists', () => {
+  const bardSpell = { ...minimalContentFixture.spells[1], id: 'test:spell:bardic-inspiration', name: 'Bardic Inspiration' };
+  const bard = {
+    ...minimalContentFixture.classes[0],
+    id: 'test:class:bard',
+    name: 'Bard',
+    spellListIds: [bardSpell.id],
+    spellcasting: { ...minimalContentFixture.classes[0].spellcasting!, ability: 'charisma' as const, selectionMode: 'level-up-list' as const },
+  };
+  const bardEntry = { id: 'test:class-entry:bard', classId: bard.id, level: 2, choices: {} };
+  const character = {
+    ...representativeCharacter,
+    classes: [representativeCharacter.classes[0], bardEntry],
+    spellSelections: [
+      ...representativeCharacter.spellSelections,
+      { classEntryId: bardEntry.id, spellId: bardSpell.id, acquiredAtClassLevel: 2, prepared: false },
+    ],
+  };
+
+  render(<CharacterSheet character={character} playState={representativePlayState} content={{ ...minimalContentFixture, classes: [...minimalContentFixture.classes, bard], spells: [...minimalContentFixture.spells, bardSpell] }} details={representativeCharacterSheetDetails} />);
+  userEvent.click(screen.getByRole('tab', { name: 'Spells' }));
+  expect(screen.getByRole('tab', { name: 'All' })).toBeInTheDocument();
+  expect(screen.getByText('Wizard attack bonus')).toBeInTheDocument();
+  expect(screen.getByText('Bard attack bonus')).toBeInTheDocument();
+  expect(screen.getByText('+5')).toBeInTheDocument();
+  expect(screen.getByText('+1')).toBeInTheDocument();
+  expect(screen.getByText('13')).toBeInTheDocument();
+  expect(screen.getByText('9')).toBeInTheDocument();
+  userEvent.click(screen.getByRole('tab', { name: 'Bard' }));
+
+  expect(screen.getByText('Bardic Inspiration')).toBeInTheDocument();
+  expect(screen.queryByText('Magic Missile')).not.toBeInTheDocument();
+  expect(screen.queryByLabelText('Prepare Bardic Inspiration')).not.toBeInTheDocument();
+  expect(screen.getByText('Bard Spells prepared 1')).toBeInTheDocument();
+});
+
 test('exposes second-level Wizard spells when Wizard reaches level 3', () => {
   const wizard = bundledContentFixture.classes.find((entry) => entry.id === 'srd-2024:class:wizard');
   expect(wizard?.spellcasting?.progression.find((entry) => entry.level === 3)?.slots[2]).toBeGreaterThan(0);

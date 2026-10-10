@@ -654,6 +654,24 @@ Do not replace this checkpoint with incremental sheet controls. The approved
 creation flow is the level 0 to level 1 transaction; ordinary level-up begins
 only after that initial character exists.
 
+### Spell-state and sheet follow-up (2026-10-10)
+
+- Completed the separate, class-entry-owned prepared-spell migration (IndexedDB
+  v6 and backup v4), retaining spell ownership independently from daily
+  preparation state and migrating existing persisted data without dropping
+  references.
+- The sheet now presents spellcasting classes through an All view plus
+  per-caster tabs. Each spell identifies its source class; daily-preparation
+  controls appear only for caster models that can change preparations. Bard and
+  Sorcerer-style level-up spell lists show their selected spell total instead.
+- Spell attack bonuses and save DCs are derived per casting class. When a
+  multiclass character uses more than one spellcasting ability, the sheet shows
+  separately labeled class values rather than presenting the first caster's
+  statistics as a shared value.
+- Next session starting point: owner-review the level-0-to-level-1 creation
+  contract against the full public pack, then begin that transaction workflow;
+  do not add further sheet-only first-level controls.
+
 ## Slice 8: Content repository and public packs — next
 
 Goal: unify bundled and locally installed content behind one interface.

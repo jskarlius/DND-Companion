@@ -27,12 +27,12 @@ export interface CharacterSheetViewModel {
   readonly savingThrows: readonly { readonly ability: Ability; readonly value: number; readonly proficient: boolean }[];
   readonly skills: readonly { readonly skill: Skill; readonly value: number; readonly proficiency: string }[];
   readonly classes: readonly { readonly name: string; readonly level: number }[];
-  readonly spellcasting: readonly { readonly className: string; readonly ability: Ability; readonly slotKind: 'spell-slots' | 'pact-magic'; readonly slotRecharge: 'short-rest' | 'long-rest' }[];
+  readonly spellcasting: readonly { readonly classEntryId: string; readonly className: string; readonly ability: Ability; readonly attackBonus: number; readonly saveDc: number; readonly selectionMode: 'known-and-prepared' | 'prepared-from-list' | 'level-up-list'; readonly slotKind: 'spell-slots' | 'pact-magic'; readonly slotRecharge: 'short-rest' | 'long-rest' }[];
   readonly spellSlots: readonly { readonly level: number; readonly maximum: number; readonly label: string; readonly recharge: 'short-rest' | 'long-rest' }[];
   readonly spellLimits?: { readonly cantripsKnown: number; readonly preparedSpells: number };
   readonly spellSummaries: readonly { readonly classEntryId: string; readonly className: string; readonly label: string; readonly current: number; readonly maximum?: number }[];
   readonly hitDiceGroups: readonly { readonly classEntryId: string; readonly className: string; readonly die: number; readonly maximum: number; readonly used: number }[];
-  readonly cantrips: readonly Spell[];
+  readonly cantrips: readonly { readonly spell: Spell; readonly classEntryId: string }[];
   readonly spells: readonly { readonly spell: Spell; readonly prepared: boolean; readonly classEntryId: string }[];
   readonly features: readonly Feature[];
   readonly resources: readonly { readonly resource: Resource; readonly used: number }[];
@@ -55,6 +55,7 @@ export function buildCharacterSheetViewModel(
   details: CharacterSheetDetails,
 ): CharacterSheetViewModel {
   const totalLevel = getCharacterLevel(character.classes).value;
+  const proficiencyBonus = getProficiencyBonus(totalLevel).value;
   const featureIds = new Set<string>();
   const resourceIds = new Set<string>();
 
@@ -93,12 +94,19 @@ export function buildCharacterSheetViewModel(
       ? characterClass.spellListIds.filter((id) => { const level = findRequired(content.spells, id).level; return level > 0 && level <= highestSpellLevel; }).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: character.preparedSpells.some((prepared) => prepared.classEntryId === classEntry.id && prepared.spellId === spellId), classEntryId: classEntry.id }))
       : [];
   });
+  const spellcasting = character.classes.flatMap((classEntry) => {
+    const characterClass = findRequired(content.classes, classEntry.classId);
+    if (!characterClass.spellcasting) return [];
+    const { ability } = characterClass.spellcasting;
+    const modifier = getAbilityModifier(character.abilityScores[ability]).value;
+    return [{ classEntryId: classEntry.id, className: characterClass.name, attackBonus: modifier + proficiencyBonus, saveDc: 8 + modifier + proficiencyBonus, ...characterClass.spellcasting }];
+  });
 
   return {
     character,
     details,
     totalLevel,
-    proficiencyBonus: getProficiencyBonus(totalLevel).value,
+    proficiencyBonus,
     abilities: ABILITIES.map((ability) => ({
       ability,
       score: character.abilityScores[ability],
@@ -118,10 +126,7 @@ export function buildCharacterSheetViewModel(
       name: findRequired(content.classes, classEntry.classId).name,
       level: classEntry.level,
     })),
-    spellcasting: character.classes.flatMap((classEntry) => {
-      const characterClass = findRequired(content.classes, classEntry.classId);
-      return characterClass.spellcasting ? [{ className: characterClass.name, ...characterClass.spellcasting }] : [];
-    }),
+    spellcasting,
     spellSlots: Object.entries(slotMaximums).map(([level, maximum]) => ({ level: Number(level), maximum, label: 'Spell slots', recharge: 'long-rest' as const })),
     spellLimits: spellcastingProgression.length === 1 ? { cantripsKnown: spellcastingProgression[0].entry.cantripsKnown, preparedSpells: spellcastingProgression[0].entry.preparedSpells } : undefined,
     spellSummaries: character.classes.flatMap((classEntry) => {
@@ -148,7 +153,7 @@ export function buildCharacterSheetViewModel(
         used: Math.min(Math.max(playState.usedHitDice[classEntry.id] ?? 0, 0), classEntry.level),
       };
     }),
-    cantrips: knownSpells.filter(({ spell }) => spell.level === 0).map(({ spell }) => spell),
+    cantrips: knownSpells.filter(({ spell }) => spell.level === 0),
     spells: [...knownSpells.filter(({ spell }) => spell.level > 0), ...preparedFromList],
     features,
     resources: [...resourceIds].map((id) => ({
