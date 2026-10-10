@@ -230,8 +230,23 @@ test('groups spells by level with preparation, casting details, and compact slot
   expect(screen.queryByLabelText('Prepare Fire Bolt')).not.toBeInTheDocument();
   expect(screen.getByLabelText('Prepare Magic Missile')).toBeChecked();
 
+  userEvent.click(screen.getByRole('button', { name: 'View Magic Missile description' }));
+  expect(screen.getByRole('heading', { name: 'Magic Missile' })).toBeInTheDocument();
+  userEvent.click(screen.getByRole('button', { name: 'Close dialog' }));
+
   userEvent.click(screen.getByLabelText('Prepare Magic Missile'));
   expect(screen.getByLabelText('Prepare Magic Missile')).not.toBeChecked();
+});
+
+test('exposes second-level Wizard spells when Wizard reaches level 3', () => {
+  const wizard = bundledContentFixture.classes.find((entry) => entry.id === 'srd-2024:class:wizard');
+  expect(wizard?.spellcasting?.progression.find((entry) => entry.level === 3)?.slots[2]).toBeGreaterThan(0);
+  const levelTwoWizard = { ...representativeCharacter, classes: [{ ...representativeCharacter.classes[0], level: 2 }], hitPointGains: representativeCharacter.hitPointGains.slice(0, 2) };
+  render(<CharacterSheet character={levelTwoWizard} playState={representativePlayState} content={bundledContentFixture} details={representativeCharacterSheetDetails} onAdvancementCommit={vi.fn()} />);
+  userEvent.click(screen.getByRole('button', { name: 'Level up' }));
+  userEvent.click(screen.getByLabelText('New spell 1'));
+  userEvent.click(screen.getByRole('tab', { name: 'Level 2' }));
+  expect(screen.getByRole('option', { name: /Misty Step/ })).toBeInTheDocument();
 });
 
 test('renders every entry in a long spell list', () => {
@@ -288,10 +303,24 @@ test('reviews a level-up before one explicit confirm and leaves the character un
   };
   render(<CharacterSheet character={levelOneWizard} playState={representativePlayState} content={bundledContentFixture} details={representativeCharacterSheetDetails} onAdvancementCommit={onAdvancementCommit} />);
   userEvent.click(screen.getByRole('button', { name: 'Level up' }));
-  fireEvent.change(screen.getByLabelText('New spell 1'), { target: { value: 'srd-5.2.1:spell:shield' } });
-  fireEvent.change(screen.getByLabelText('New spell 2'), { target: { value: 'srd-5.2.1:spell:sleep' } });
+  fireEvent.change(screen.getByLabelText('Hit points gained'), { target: { value: '5' } });
+  userEvent.click(screen.getByRole('button', { name: 'Use fixed average (+4)' }));
+  expect(screen.getByLabelText('Hit points gained')).toHaveValue(4);
+  fireEvent.change(screen.getByLabelText('New spell 1'), { target: { value: 'shield' } });
+  expect(screen.getByLabelText('New spell 1')).toHaveValue('Shield');
+  userEvent.click(screen.getByLabelText('New spell 1'));
+  expect(screen.getByRole('option', { name: /Shield/ })).toBeInTheDocument();
+  userEvent.click(screen.getByRole('button', { name: 'View full description' }));
+  expect(screen.getByRole('heading', { name: 'Shield' })).toBeInTheDocument();
+  userEvent.click(screen.getByRole('button', { name: 'Close dialog' }));
+  userEvent.click(screen.getByLabelText('New spell 1'));
+  userEvent.click(screen.getByRole('option', { name: /Shield/ }));
+  fireEvent.change(screen.getByLabelText('New spell 2'), { target: { value: 'sleep' } });
+  expect(screen.getByLabelText('New spell 2')).toHaveValue('Sleep');
   userEvent.click(screen.getByRole('button', { name: 'Review level-up' }));
   expect(screen.getByRole('region', { name: 'Level-up preview' })).toHaveTextContent('Wizard: Level 2');
+  expect(screen.getByRole('region', { name: 'Level-up preview' })).toHaveTextContent('Hit Die: +4 (fixed average)');
+  expect(screen.getByRole('region', { name: 'Level-up preview' })).toHaveTextContent('Maximum HP: +6 (Hit Die +4, Constitution +2)');
   userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
   expect(onAdvancementCommit).not.toHaveBeenCalled();
   userEvent.click(screen.getByRole('button', { name: 'Level up' }));
@@ -303,11 +332,12 @@ test('reviews a level-up before one explicit confirm and leaves the character un
 test('lists the Cleric bootstrap spell subset as available prepared spells', () => {
   const clericCharacter = {
     ...representativeCharacter,
-    classes: [{ id: 'test:cleric', classId: 'srd-5.2.1:class:cleric', level: 1, choices: {} }],
+    classes: [{ id: 'test:cleric', classId: 'srd-2024:class:cleric', level: 1, choices: {} }],
     knownSpellIds: [], preparedSpellIds: [], spellSelections: [], hitPointGains: [{ classEntryId: 'test:cleric', classLevel: 1, method: 'fixed' as const, hitPoints: 8 }],
   };
   const model = buildCharacterSheetViewModel(clericCharacter, representativePlayState, bundledContentFixture, representativeCharacterSheetDetails);
   expect(model.spells.map(({ spell }) => spell.name)).toContain('Cure Wounds');
+  expect(model.spells.every(({ spell }) => spell.level <= 1)).toBe(true);
   expect(model.spells.every(({ prepared }) => !prepared)).toBe(true);
 });
 
@@ -315,9 +345,14 @@ test('shows Fighting Style and Cleric spell choices in the level-up dialog', () 
   const fighterEligibleWizard = { ...representativeCharacter, classes: [{ ...representativeCharacter.classes[0], level: 1 }] };
   render(<CharacterSheet character={fighterEligibleWizard} playState={representativePlayState} content={bundledContentFixture} details={representativeCharacterSheetDetails} onAdvancementCommit={vi.fn()} />);
   userEvent.click(screen.getByRole('button', { name: 'Level up' }));
-  fireEvent.change(screen.getByLabelText('Class to advance'), { target: { value: 'srd-5.2.1:class:fighter' } });
+  fireEvent.change(screen.getByLabelText('Class to advance'), { target: { value: 'srd-2024:class:fighter' } });
   expect(screen.getByLabelText('Fighting Style')).toBeInTheDocument();
-  fireEvent.change(screen.getByLabelText('Class to advance'), { target: { value: 'srd-5.2.1:class:cleric' } });
+  fireEvent.change(screen.getByLabelText('Fighting Style'), { target: { value: 'defense' } });
+  userEvent.click(screen.getByRole('button', { name: 'Review level-up' }));
+  expect(screen.getByRole('region', { name: 'Level-up preview' })).toHaveTextContent('Fighting Style: Defense');
+  userEvent.click(screen.getByRole('button', { name: 'Cancel' }));
+  userEvent.click(screen.getByRole('button', { name: 'Level up' }));
+  fireEvent.change(screen.getByLabelText('Class to advance'), { target: { value: 'srd-2024:class:cleric' } });
   expect(screen.getAllByLabelText(/New cantrip/)).toHaveLength(3);
   expect(screen.getAllByLabelText(/New spell/)).toHaveLength(4);
 });

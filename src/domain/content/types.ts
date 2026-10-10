@@ -156,3 +156,48 @@ export interface ContentPackManifest {
   readonly distribution: 'public' | 'private';
   readonly source: ContentSource;
 }
+
+/** The kinds exposed by the module-based public/private pack interchange format. */
+export type PackEntityKind =
+  | 'class' | 'subclass' | 'species' | 'background' | 'feature' | 'choice'
+  | 'resource' | 'spell' | 'feat' | 'item';
+
+/**
+ * A source-preserving entity.  `reference` deliberately remains opaque: an
+ * import must never infer mechanics that its source did not structure.
+ */
+export interface PackEntity extends ContentEntity {
+  readonly kind: PackEntityKind;
+  readonly reference?: unknown;
+  readonly ownerId?: ContentId;
+  readonly featureIds?: readonly ContentId[];
+  readonly parentClassId?: ContentId;
+}
+
+export interface ContentPackModule {
+  readonly schemaVersion: number;
+  readonly moduleKind: string;
+  readonly [key: string]: unknown;
+}
+
+export interface ContentPackModuleDescriptor {
+  readonly path: string;
+  readonly kinds: readonly PackEntityKind[];
+  readonly counts: Readonly<Partial<Record<PackEntityKind, number>>>;
+  readonly sha256: string;
+}
+
+export interface ProductionContentPackManifest extends ContentPackManifest {
+  readonly modules: readonly ContentPackModuleDescriptor[];
+  readonly report: { readonly path: string; readonly sha256: string };
+}
+
+/** Portable representation; directory packs use the same modules separately. */
+export interface ContentPack {
+  readonly manifest: ProductionContentPackManifest;
+  readonly modules: readonly ContentPackModule[];
+}
+
+export interface Item extends PackEntity {
+  readonly kind: 'item';
+}

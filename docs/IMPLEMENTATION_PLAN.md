@@ -632,6 +632,21 @@ draft and save one valid character plus play state only after review.
   unsupported grants must be shown as unavailable rather than guessed.
 - Define validation, cancel/review behavior, and tests for a complete level-1
   Wizard and at least one other supported starting class.
+- Replace the current two-mode spell-selection contract before creation work:
+  persist a class-entry-owned spell collection separately from its prepared
+  state, with an explicit class casting model. Wizard creation must collect a
+  six-spell level-1 spellbook and an independently editable daily prepared
+  subset; Druid and Paladin creation must collect a daily prepared subset from
+  their eligible class list without inventing a known-spell collection; and
+  Bard creation must collect its level-up-selected spell list, which is not a
+  daily preparation list. Preserve the source class entry, acquisition level,
+  and replacement history needed to validate later advancement. Migrate current
+  `spellSelections` and legacy known/prepared arrays without losing references.
+- Apply the same model to level-up: Wizard gains add to the spellbook and never
+  overwrite daily preparations; daily preparers adjust their prepared subset at
+  the permitted time; and Bard selections follow its level-up replacement rule.
+  Spell selection controls must expose eligible spell-level tabs while keeping
+  search, keyboard operation, and the accessible full-description dialog.
 - Confirm the creation result can be duplicated, reloaded, exported, imported,
   and advanced without fixture-only data or orphaned class-entry references.
 

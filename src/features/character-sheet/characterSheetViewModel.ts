@@ -86,8 +86,10 @@ export function buildCharacterSheetViewModel(
   const slotMaximums = getCombinedSpellSlots(character.classes, new BundledContentRepository(content));
   const preparedFromList = character.classes.flatMap((classEntry) => {
     const characterClass = findRequired(content.classes, classEntry.classId);
+    const progression = characterClass.spellcasting?.progression.find((entry) => entry.level === classEntry.level);
+    const highestSpellLevel = Math.max(0, ...Object.keys(progression?.slots ?? {}).map(Number));
     return characterClass.spellcasting?.selectionMode === 'prepared-from-list'
-      ? characterClass.spellListIds.filter((id) => findRequired(content.spells, id).level > 0).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: spellSelections.some((selection) => selection.classEntryId === classEntry.id && selection.spellId === spellId && selection.prepared), classEntryId: classEntry.id }))
+      ? characterClass.spellListIds.filter((id) => { const level = findRequired(content.spells, id).level; return level > 0 && level <= highestSpellLevel; }).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: spellSelections.some((selection) => selection.classEntryId === classEntry.id && selection.spellId === spellId && selection.prepared), classEntryId: classEntry.id }))
       : [];
   });
 

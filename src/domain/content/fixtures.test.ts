@@ -12,7 +12,7 @@ describe('minimal content fixture', () => {
     const renamedWizard = {
       ...minimalContentFixture,
       classes: minimalContentFixture.classes.map((characterClass) =>
-        characterClass.id === 'srd-5.2.1:class:wizard'
+        characterClass.id === 'srd-2024:class:wizard'
           ? { ...characterClass, name: 'Renamed Wizard' }
           : characterClass,
       ),
@@ -21,7 +21,7 @@ describe('minimal content fixture', () => {
     expect(() => validateContentFixture(renamedWizard)).not.toThrow();
     expect(renamedWizard.classes[0]?.advancement[0]?.grants[0]).toMatchObject({
       type: 'feature',
-      featureId: 'srd-5.2.1:feature:wizard-spellcasting',
+      featureId: 'srd-2024:feature:wizard-spellcasting',
     });
   });
 
@@ -29,8 +29,8 @@ describe('minimal content fixture', () => {
     const brokenFixture = {
       ...minimalContentFixture,
       classes: minimalContentFixture.classes.map((characterClass) =>
-        characterClass.id === 'srd-5.2.1:class:wizard'
-          ? { ...characterClass, spellListIds: ['srd-5.2.1:spell:missing'] }
+        characterClass.id === 'srd-2024:class:wizard'
+          ? { ...characterClass, spellListIds: ['srd-2024:spell:missing'] }
           : characterClass,
       ),
     };

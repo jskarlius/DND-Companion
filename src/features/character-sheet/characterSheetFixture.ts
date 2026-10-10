@@ -85,7 +85,7 @@ export const representativeCharacter: Character = {
   name: 'Ariel Thorne',
   ruleset: '5e-2024',
   longRestHitDiceRecovery: '2024-all',
-  enabledContentPackIds: ['srd-5.2.1'],
+  enabledContentPackIds: ['srd-2024'],
   abilityScoreGeneration: 'standard-array',
   abilityScores: {
     strength: 10,
@@ -98,13 +98,13 @@ export const representativeCharacter: Character = {
   classes: [
     {
       id: 'demo:class-entry:wizard',
-      classId: 'srd-5.2.1:class:wizard',
+      classId: 'srd-2024:class:wizard',
       level: 2,
       choices: {},
     },
     {
       id: 'demo:class-entry:fighter',
-      classId: 'srd-5.2.1:class:fighter',
+      classId: 'srd-2024:class:fighter',
       level: 2,
       choices: {},
     },
@@ -121,13 +121,13 @@ export const representativeCharacter: Character = {
     },
   },
   knownSpellIds: [
-    'srd-5.2.1:spell:fire-bolt',
-    'srd-5.2.1:spell:magic-missile',
+    'srd-2024:spell:fire-bolt',
+    'srd-2024:spell:magic-missile',
   ],
-  preparedSpellIds: ['srd-5.2.1:spell:magic-missile'],
+  preparedSpellIds: ['srd-2024:spell:magic-missile'],
   spellSelections: [
-    { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-5.2.1:spell:fire-bolt', acquiredAtClassLevel: 1, prepared: false },
-    { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-5.2.1:spell:magic-missile', acquiredAtClassLevel: 1, prepared: true },
+    { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-2024:spell:fire-bolt', acquiredAtClassLevel: 1, prepared: false },
+    { classEntryId: 'demo:class-entry:wizard', spellId: 'srd-2024:spell:magic-missile', acquiredAtClassLevel: 1, prepared: true },
   ],
   hitPointGains: [
     { classEntryId: 'demo:class-entry:wizard', classLevel: 1, method: 'fixed', hitPoints: 6 },
@@ -151,8 +151,8 @@ export const representativePlayState: CharacterPlayState = {
   inspiration: false,
   usedHitDice: {},
   usedResources: {
-    'srd-5.2.1:resource:wizard-arcane-recovery': 0,
-    'srd-5.2.1:resource:fighter-second-wind': 1,
+    'srd-2024:resource:wizard-arcane-recovery': 0,
+    'srd-2024:resource:fighter-second-wind': 1,
   },
   usedSpellSlots: { 1: 1 },
   deathSaveSuccesses: 0,

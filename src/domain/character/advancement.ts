@@ -1,6 +1,6 @@
 import type { ContentRepository } from '../content/repository';
 import type { AdvancementGrant, Class, Subclass } from '../content/types';
-import { getCharacterLevel, getProficiencyBonus } from './calculations';
+import { getAbilityModifier, getCharacterLevel, getProficiencyBonus } from './calculations';
 import type { Ability, Character, CharacterPlayState, ClassEntry, HitPointGain, SpellSelection } from './types';
 
 export interface AdvancementRequest {
@@ -109,9 +109,10 @@ export function planAdvancement(character: Character, playState: CharacterPlaySt
   for (const [ability, increase] of Object.entries(request.abilityScoreIncreases ?? {})) abilityScores[ability as Ability] += increase!;
   const selections = request.spellSelections ?? [];
   const spellcastingProgression = characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel);
+  const existingPreparedSpells = character.spellSelections.filter((selection) => selection.classEntryId === entryId && selection.prepared && (repository.getSpell(selection.spellId)?.level ?? 0) > 0).length;
   const expectedSpellSelections = characterClass.spellcasting?.selectionMode === 'known-and-prepared'
     ? (spellcastingProgression?.spellsLearned ?? 0)
-    : (spellcastingProgression?.preparedSpells ?? 0);
+    : Math.max((spellcastingProgression?.preparedSpells ?? 0) - existingPreparedSpells, 0);
   const previousCantrips = characterClass.spellcasting?.progression.find((entry) => entry.level === nextLevel - 1)?.cantripsKnown ?? 0;
   const expectedCantripSelections = characterClass.spellcasting
     ? Math.max((spellcastingProgression?.cantripsKnown ?? 0) - previousCantrips, 0)
@@ -136,7 +137,15 @@ export function planAdvancement(character: Character, playState: CharacterPlaySt
     hitPointGains: [...character.hitPointGains, { ...request.hitPointGain, classEntryId: entryId, classLevel: nextLevel }],
   };
   const totalAfter = getCharacterLevel(classes).value;
-  const changes: AdvancementChange[] = [{ label: characterClass.name, detail: `${existing ? 'Level' : 'New class'} ${nextLevel}` }, { label: 'Hit points', detail: `+${request.hitPointGain.hitPoints} (${request.hitPointGain.method})` }];
+  const hitDieMethod = request.hitPointGain.method === 'fixed' ? 'fixed average' : request.hitPointGain.method;
+  const constitutionModifier = getAbilityModifier(abilityScores.constitution).value;
+  const maximumHpIncrease = request.hitPointGain.hitPoints + constitutionModifier;
+  const constitutionTerm = `${constitutionModifier >= 0 ? '+' : ''}${constitutionModifier}`;
+  const changes: AdvancementChange[] = [
+    { label: characterClass.name, detail: `${existing ? 'Level' : 'New class'} ${nextLevel}` },
+    { label: 'Hit Die', detail: `+${request.hitPointGain.hitPoints} (${hitDieMethod})` },
+    { label: 'Maximum HP', detail: `${maximumHpIncrease >= 0 ? '+' : ''}${maximumHpIncrease} (Hit Die +${request.hitPointGain.hitPoints}, Constitution ${constitutionTerm})` },
+  ];
   if (request.subclassId) changes.push({ label: 'Subclass', detail: subclass!.name });
   if (request.abilityScoreIncreases) changes.push({ label: 'Ability scores', detail: Object.entries(request.abilityScoreIncreases).map(([ability, value]) => `${ability} +${value}`).join(', ') });
   for (const grant of grants) changes.push(describeGrant(grant, repository));

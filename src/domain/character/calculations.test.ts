@@ -24,14 +24,14 @@ const abilityScores: AbilityScores = {
 
 const wizard: ClassEntry = {
   id: 'wizard-entry',
-  classId: 'srd-5.2.1:class:wizard',
+  classId: 'srd-2024:class:wizard',
   level: 3,
   choices: {},
 };
 
 const fighter: ClassEntry = {
   id: 'fighter-entry',
-  classId: 'srd-5.2.1:class:fighter',
+  classId: 'srd-2024:class:fighter',
   level: 2,
   choices: {},
 };
@@ -89,7 +89,7 @@ describe('character and class levels', () => {
     expect(getCharacterLevel([wizard, fighter]).value).toBe(5);
     expect(getClassLevel([wizard, fighter], wizard.classId).value).toBe(3);
     expect(getClassLevel([wizard, fighter], fighter.classId).value).toBe(2);
-    expect(getClassLevel([wizard, fighter], 'srd-5.2.1:class:rogue').value).toBe(0);
+    expect(getClassLevel([wizard, fighter], 'srd-2024:class:rogue').value).toBe(0);
   });
 
   test('rejects invalid class levels', () => {

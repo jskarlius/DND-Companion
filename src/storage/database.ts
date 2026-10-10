@@ -1,5 +1,6 @@
 import Dexie, { type EntityTable } from 'dexie';
 import type { Character, CharacterPlayState } from '../domain/character/types';
+import { migrateDevelopmentContentIds } from '../domain/content/contentIdMigration';
 
 export interface StoredContentPack {
   readonly id: string;
@@ -81,6 +82,28 @@ export class CompanionDatabase extends Dexie {
         }
         if (character.hitPointGains === undefined) character.hitPointGains = [];
       });
+    });
+    this.version(5).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      const characters = transaction.table('characters');
+      const playState = transaction.table('playState');
+      const [storedCharacters, storedPlayState] = await Promise.all([
+        characters.toArray() as Promise<Character[]>,
+        playState.toArray() as Promise<CharacterPlayState[]>,
+      ]);
+      const stateByCharacterId = new Map(storedPlayState.map((state) => [state.characterId, state]));
+      for (const character of storedCharacters) {
+        const state = stateByCharacterId.get(character.id);
+        if (!state) continue;
+        const migrated = migrateDevelopmentContentIds(character, state);
+        await characters.put(migrated.character);
+        await playState.put(migrated.playState);
+      }
     });
   }
 }

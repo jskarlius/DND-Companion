@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ABILITIES, MANUAL_OVERRIDE_TARGETS, SKILLS, type Character, type CharacterPlayState } from '../domain/character/types';
+import { migrateDevelopmentContentIds } from '../domain/content/contentIdMigration';
 
 /** The format of a character file is independent from whichever local database we use. */
 export const CHARACTER_EXPORT_SCHEMA_VERSION = 3;
@@ -98,7 +99,7 @@ const legacyCharacterExportSchema = z.object({
  */
 export function migrateCharacterExport(input: unknown): CharacterExport {
   const current = characterExportSchema.safeParse(input);
-  if (current.success) return current.data;
+  if (current.success) return migrateDevelopmentReferences(current.data);
 
   const versionTwo = versionTwoCharacterExportSchema.safeParse(input);
   if (versionTwo.success) return characterExportSchema.parse({
@@ -109,23 +110,23 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
 
   const versionOne = versionOneCharacterExportSchema.safeParse(input);
   if (versionOne.success) {
-    return characterExportSchema.parse({
+    return migrateDevelopmentReferences(characterExportSchema.parse({
       ...versionOne.data,
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
       character: { ...versionOne.data.character, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(versionOne.data.character) },
       playState: { ...versionOne.data.playState, usedHitDice: {} },
-    });
+    }));
   }
 
   const legacy = legacyCharacterExportSchema.safeParse(input);
   if (legacy.success) {
-    return characterExportSchema.parse({
+    return migrateDevelopmentReferences(characterExportSchema.parse({
       format: 'dnd-companion-character',
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
       exportedAt: legacy.data.exportedAt ?? new Date(0).toISOString(),
       character: { ...legacy.data.character, schemaVersion: 1, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(legacy.data.character) },
       playState: { ...legacy.data.playState, temporaryMaximumHpBonus: 0, usedHitDice: {} },
-    });
+    }));
   }
 
   throw new Error(`This character backup is not supported: ${current.error.issues[0]?.message ?? 'unknown format'}`);
@@ -143,11 +144,16 @@ function legacyAdvancementFields(character: { classes: readonly { id: string; cl
 }
 
 export function createCharacterExport(character: Character, playState: CharacterPlayState): CharacterExport {
-  return characterExportSchema.parse({
+    return migrateDevelopmentReferences(characterExportSchema.parse({
     format: 'dnd-companion-character',
     schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
     exportedAt: new Date().toISOString(),
     character,
     playState,
-  });
+    }));
+}
+
+function migrateDevelopmentReferences(backup: CharacterExport): CharacterExport {
+  const migrated = migrateDevelopmentContentIds(backup.character, backup.playState);
+  return characterExportSchema.parse({ ...backup, ...migrated });
 }

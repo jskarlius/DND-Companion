@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../components/ui/button';
 import type { Character, CharacterPlayState } from '../../domain/character/types';
-import { bundledContentRepository } from '../../domain/content/repository';
+import { bundledContentRepository } from '../../domain/content/bundledContent';
 import { CharacterRepository } from '../../storage/characterRepository';
 import { CharacterSheet } from './CharacterSheet';
 import { createUnchosenCharacterSheetDetails } from './characterSheetFixture';
@@ -12,9 +12,10 @@ const characterRepository = new CharacterRepository();
 interface CharacterRouteProps {
   readonly onRemember: (id: string) => void;
   readonly onStorageError: (error?: string) => void;
+  readonly onAdvancementCommitted: () => void;
 }
 
-export function CharacterRoute({ onRemember, onStorageError }: CharacterRouteProps) {
+export function CharacterRoute({ onRemember, onStorageError, onAdvancementCommitted }: CharacterRouteProps) {
   const { characterId } = useParams();
   const [character, setCharacter] = useState<Character>();
   const [playState, setPlayState] = useState<CharacterPlayState>();
@@ -78,6 +79,7 @@ export function CharacterRoute({ onRemember, onStorageError }: CharacterRoutePro
       setCharacter(nextCharacter);
       setPlayState(unchangedPlayState);
       onStorageError(undefined);
+      onAdvancementCommitted();
     }}
   />;
 }
