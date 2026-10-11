@@ -42,6 +42,25 @@ describe('planCharacterCreation', () => {
     if (!result.ok) expect(result.issues.map((issue) => issue.message)).toContain('Prepared Wizard spells must be in the selected spellbook.');
   });
 
+  test('applies a reviewed Sage background without mutating generated ability scores', () => {
+    const result = planCharacterCreation(wizardRequest({
+      backgroundId: 'srd-2024:background:sage',
+      backgroundAbilityIncreases: { intelligence: 2, wisdom: 1 },
+      backgroundEquipmentPackageId: 'a',
+      grantedSpellIds: { 'magic-initiate-wizard': [...wizardCantrips.slice(0, 2), wizardSpellCandidates[0]!] },
+      grantedSpellCastingAbilities: { 'magic-initiate-wizard': 'intelligence' },
+    }), bundledContentRepository);
+
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.character.generatedAbilityScores!.intelligence).toBe(15);
+    expect(result.character.abilityScores).toMatchObject({ intelligence: 17, wisdom: 13 });
+    expect(result.character.proficiencies.toolIds).toContain('srd-2024:item:calligraphers-supplies');
+    expect(result.character.currency!.gp).toBe(13);
+    expect(result.character.inventory).toContainEqual({ itemId: 'srd-2024:item:parchment', quantity: 8 });
+    expect(result.character.grantedSpells).toHaveLength(3);
+  });
+
   test('validates reviewed Weapon Mastery options against the class training', () => {
     const fighter = bundledContentRepository.getClass('srd-2024:class:fighter')!;
     const weaponMasteries = bundledContentRepository.searchItems('').filter((item) => item.weapon?.mastery).slice(0, 3).map((item) => item.id);

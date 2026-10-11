@@ -87,6 +87,10 @@ export const representativeCharacter: Character = {
   longRestHitDiceRecovery: '2024-all',
   enabledContentPackIds: ['srd-2024'],
   abilityScoreGeneration: 'standard-array',
+  generatedAbilityScores: {
+    strength: 10, dexterity: 14, constitution: 14,
+    intelligence: 16, wisdom: 12, charisma: 8,
+  },
   abilityScores: {
     strength: 10,
     dexterity: 14,

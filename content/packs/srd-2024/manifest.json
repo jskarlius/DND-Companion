@@ -12,7 +12,7 @@
         "feature"
       ],
       "path": "backgrounds/acolyte.json",
-      "sha256": "981a85446afbf72a0778fa3643a5f0248d9fe6a52d530e5d4b2edeb3ecaaeb2e"
+      "sha256": "7e257d403a8c6100720f11d7b6dde3b53ed50dadffb78fa289b3aac2ca621e54"
     },
     {
       "counts": {
@@ -24,7 +24,7 @@
         "feature"
       ],
       "path": "backgrounds/criminal.json",
-      "sha256": "d1f89031f5c911ca77c406313df0c00773937b66638c02b43dbc8b044d7827ef"
+      "sha256": "4f7daf122130bc8a707df7beebd9e9a08e2460cd48161ea69a657a454a1a3b50"
     },
     {
       "counts": {
@@ -36,7 +36,7 @@
         "feature"
       ],
       "path": "backgrounds/sage.json",
-      "sha256": "e6db7178ab2afdb7babe45cd65c89867bd6f8ef83fa09bd1d3cb7d6357e6c25b"
+      "sha256": "38277dc2abe716ff6ebfaf4d6582385b110f05c459be216cf07e74e0b60b53f0"
     },
     {
       "counts": {
@@ -48,7 +48,7 @@
         "feature"
       ],
       "path": "backgrounds/soldier.json",
-      "sha256": "9d4495eca43d4931d108c3f933f47181bb7d6c22dc38296e03c21f1c4e237290"
+      "sha256": "007452c92f6e8faeb8755a3653660d4611bed3b7961f93eae05dd13a7b3150c9"
     },
     {
       "counts": {
@@ -700,7 +700,7 @@
   "name": "Open5e SRD 2024 reference pack",
   "report": {
     "path": "import-report.json",
-    "sha256": "e25946121d22f3ca118a42a63529cf9d26e902962f541814f580d8806e58571e"
+    "sha256": "54940776bb9b33f008011b398ea5662060bc401ffe8bd4de074b8d3709b7cd11"
   },
   "ruleset": "5e-2024",
   "schemaVersion": 2,

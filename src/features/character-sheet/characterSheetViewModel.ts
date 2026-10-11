@@ -94,6 +94,11 @@ export function buildCharacterSheetViewModel(
       ? characterClass.spellListIds.filter((id) => { const level = findRequired(content.spells, id).level; return level > 0 && level <= highestSpellLevel; }).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: character.preparedSpells.some((prepared) => prepared.classEntryId === classEntry.id && prepared.spellId === spellId), classEntryId: classEntry.id }))
       : [];
   });
+  const grantedSpells = (character.grantedSpells ?? []).map((grant) => ({
+    spell: findRequired(content.spells, grant.spellId),
+    prepared: true,
+    classEntryId: `origin:${grant.grantorId}`,
+  }));
   const spellcasting = character.classes.flatMap((classEntry) => {
     const characterClass = findRequired(content.classes, classEntry.classId);
     if (!characterClass.spellcasting) return [];
@@ -155,8 +160,8 @@ export function buildCharacterSheetViewModel(
         used: Math.min(Math.max(playState.usedHitDice[classEntry.id] ?? 0, 0), classEntry.level),
       };
     }),
-    cantrips: knownSpells.filter(({ spell }) => spell.level === 0),
-    spells: [...knownSpells.filter(({ spell }) => spell.level > 0), ...preparedFromList],
+    cantrips: [...knownSpells.filter(({ spell }) => spell.level === 0), ...grantedSpells.filter(({ spell }) => spell.level === 0)],
+    spells: [...knownSpells.filter(({ spell }) => spell.level > 0), ...preparedFromList, ...grantedSpells.filter(({ spell }) => spell.level > 0)],
     features,
     resources: [...resourceIds].map((id) => ({
       resource: findRequired(content.resources, id),

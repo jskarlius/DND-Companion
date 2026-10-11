@@ -46,6 +46,28 @@ export interface StartingEquipmentPackage {
   readonly entries: readonly StartingEquipmentEntry[];
 }
 
+/** Reviewed rules needed to turn a species or background into character data. */
+export interface CreationProfile {
+  readonly choices: readonly LevelOneChoice[];
+  readonly skillGrants: readonly Skill[];
+  readonly toolGrants: readonly ContentId[];
+  readonly abilityScoreOptions?: readonly Ability[];
+  readonly equipmentPackages?: readonly StartingEquipmentPackage[];
+  readonly featIds?: readonly ContentId[];
+  readonly spellGrants?: readonly SpellGrantDefinition[];
+}
+
+/** A source-defined spell choice that remains outside class spell ownership. */
+export interface SpellGrantDefinition {
+  readonly id: ContentId;
+  readonly spellListClassId: ContentId;
+  readonly cantripCount: number;
+  readonly spellCount: number;
+  readonly spellLevel: number;
+  readonly castingAbilityChoiceId?: string;
+  readonly replacement: 'none' | 'on-level-up';
+}
+
 export type StartingEquipmentEntry =
   | { readonly type: 'item'; readonly itemId: ContentId; readonly quantity: number }
   | { readonly type: 'chosen-item'; readonly choiceId: string; readonly quantity: number };
@@ -143,6 +165,18 @@ export interface Feat extends ContentEntity {
   readonly automation: AutomationTier;
 }
 
+export interface Species extends ContentEntity {
+  readonly kind: 'species';
+  readonly featureIds: readonly ContentId[];
+  readonly creation?: CreationProfile;
+}
+
+export interface Background extends ContentEntity {
+  readonly kind: 'background';
+  readonly featureIds: readonly ContentId[];
+  readonly creation?: CreationProfile;
+}
+
 export type AdvancementGrant =
   | { readonly type: 'feature'; readonly featureId: ContentId }
   | { readonly type: 'resource'; readonly resourceId: ContentId; readonly amount: number }
@@ -207,6 +241,8 @@ export interface ContentFixture {
   readonly resources: readonly Resource[];
   readonly spells: readonly Spell[];
   readonly feats: readonly Feat[];
+  readonly species: readonly Species[];
+  readonly backgrounds: readonly Background[];
   /**
    * Items are kept alongside the gameplay-facing fixture so creation can
    * resolve a reviewed equipment package without reaching back into raw JSON.
@@ -245,6 +281,8 @@ export interface PackEntity extends ContentEntity {
    */
   readonly spellListClassIds?: readonly ContentId[];
   readonly equipmentPackages?: readonly StartingEquipmentPackage[];
+  /** Deterministic reviewed creation facts; never inferred by the client. */
+  readonly creation?: CreationProfile;
 }
 
 export interface ContentPackModule {

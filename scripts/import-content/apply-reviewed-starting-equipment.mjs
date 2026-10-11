@@ -27,6 +27,13 @@ const packages = {
   wizard: [packageOf('a', 5, [item('dagger', 2), item('quarterstaff'), item('robe'), item('spellbook'), item('scholars-pack')]), packageOf('b', 55, [])],
 };
 
+const backgroundProfiles = {
+  acolyte: { skillGrants: ['insight', 'religion'], toolGrants: ['srd-2024:item:calligraphers-supplies'], abilityScoreOptions: ['intelligence', 'wisdom', 'charisma'], featIds: ['srd-2024:feat:magic-initiate'], spellGrants: [{ id: 'magic-initiate-cleric', spellListClassId: 'srd-2024:class:cleric', cantripCount: 2, spellCount: 1, spellLevel: 1, castingAbilityChoiceId: 'magic-initiate-ability', replacement: 'on-level-up' }], choices: [], equipmentPackages: [packageOf('a', 8, [item('calligraphers-supplies'), item('book'), chosen('holy-symbol'), item('parchment', 10), item('robe')]), packageOf('b', 50, [])] },
+  criminal: { skillGrants: ['sleightOfHand', 'stealth'], toolGrants: ['srd-2024:item:thieves-tools'], abilityScoreOptions: ['dexterity', 'constitution', 'intelligence'], featIds: ['srd-2024:feat:alert'], choices: [], equipmentPackages: [packageOf('a', 16, [item('dagger', 2), item('thieves-tools'), item('crowbar'), item('pouch', 2), item('clothes-travelers')]), packageOf('b', 50, [])] },
+  sage: { skillGrants: ['arcana', 'history'], toolGrants: ['srd-2024:item:calligraphers-supplies'], abilityScoreOptions: ['constitution', 'intelligence', 'wisdom'], featIds: ['srd-2024:feat:magic-initiate'], spellGrants: [{ id: 'magic-initiate-wizard', spellListClassId: 'srd-2024:class:wizard', cantripCount: 2, spellCount: 1, spellLevel: 1, castingAbilityChoiceId: 'magic-initiate-ability', replacement: 'on-level-up' }], choices: [], equipmentPackages: [packageOf('a', 8, [item('quarterstaff'), item('calligraphers-supplies'), item('book'), item('parchment', 8), item('robe')]), packageOf('b', 50, [])] },
+  soldier: { skillGrants: ['athletics', 'intimidation'], toolGrants: [], abilityScoreOptions: ['strength', 'dexterity', 'constitution'], featIds: ['srd-2024:feat:savage-attacker'], choices: [{ id: 'gaming-set', label: 'Gaming Set', count: 1, optionIds: ['srd-2024:item:gaming-set-dice', 'srd-2024:item:gaming-set-dragonchess', 'srd-2024:item:gaming-set-playing-cards', 'srd-2024:item:gaming-set-three-dragon-ante'] }], equipmentPackages: [packageOf('a', 14, [item('spear'), item('shortbow'), item('arrows-20'), chosen('gaming-set'), item('healers-kit'), item('quiver'), item('clothes-travelers')]), packageOf('b', 50, [])] },
+};
+
 const sort = (value) => Array.isArray(value) ? value.map(sort) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, sort(value[key])])) : value;
 const text = (value) => `${JSON.stringify(sort(value), null, 2)}\n`;
 const hash = (value) => createHash('sha256').update(value, 'utf8').digest('hex');
@@ -41,6 +48,17 @@ for (const path of classPaths) {
   module.class.equipmentPackages = packages[key];
   if (!module.class.equipmentPackages) throw new Error(`No reviewed equipment package for ${module.class.id}.`);
   delete module.equipmentPackages;
+  await writeJson(path, module);
+}
+
+const backgroundPaths = (await readdir(join(root, 'backgrounds'))).filter((name) => name.endsWith('.json')).map((name) => `backgrounds/${name}`);
+for (const path of backgroundPaths) {
+  const module = await readJson(path);
+  const key = module.background.id.split(':').at(-1);
+  const profile = backgroundProfiles[key];
+  if (!profile) throw new Error(`No reviewed background profile for ${module.background.id}.`);
+  module.background.creation = profile;
+  module.background.equipmentPackages = profile.equipmentPackages;
   await writeJson(path, module);
 }
 
@@ -65,10 +83,10 @@ for (const descriptor of manifest.modules) {
 }
 const report = await readJson('import-report.json');
 report.deferredStructuredModeling = report.deferredStructuredModeling.filter((item) => item !== 'class and background starting-equipment alternatives');
-report.deferredStructuredModeling.push('background starting-equipment alternatives');
+report.deferredStructuredModeling = report.deferredStructuredModeling.filter((item) => item !== 'background starting-equipment alternatives');
 report.importedEntityCounts = {};
 for (const descriptor of manifest.modules) for (const [kind, count] of Object.entries(descriptor.counts)) report.importedEntityCounts[kind] = (report.importedEntityCounts[kind] ?? 0) + count;
 await writeJson('import-report.json', report);
 manifest.report.sha256 = hash(text(report));
 await writeJson('manifest.json', manifest);
-console.log(`Applied reviewed class starting equipment to ${classPaths.length} class modules.`);
+console.log(`Applied reviewed class and background creation equipment to ${classPaths.length} class and ${backgroundPaths.length} background modules.`);

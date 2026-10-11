@@ -160,6 +160,22 @@ species/background reviewed enrichment and its persisted choice contracts are
 implemented; the UI labels its custom-ability limitation rather than implying
 the approved full contract is complete.
 
+Wizard creation progress (2026-10-11): the reviewed Acolyte, Criminal, Sage,
+and Soldier backgrounds are available through a searchable picker that previews
+their ability increases, skills, tool proficiency, origin feat, and equipment.
+The draft persists source-qualified background choices, applies legal
+background increases to the generated ability scores, resolves the selected
+equipment into inventory and currency, and includes background skills in the
+sheet and review. Magic Initiate selections are validated against the class
+spell selections, appear on the sheet as Magic Initiate grants, and its
+level-1 spell has an independent once-per-Long-Rest free-cast resource. The
+resource resets on a Long Rest and does not consume a Wizard spell slot.
+
+Next-session starting point: continue the Wizard slice with source-backed
+calculation explanations for AC, skills, attacks, and damage, then define the
+source-owned attack/equipment workflow. Do not mark the Wizard vertical slice
+complete until the level-20 advancement and acceptance checks are complete.
+
 Owner UX revision (2026-10-11): proficiency markers are read-only during play.
 One override button in each section opens an intentional edit dialog. Inside
 that dialog, markers cycle none, proficient, and expertise for skills or none

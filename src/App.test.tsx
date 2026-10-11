@@ -41,6 +41,17 @@ test('handles an unknown character URL gracefully', async () => {
   expect(screen.getByRole('link', { name: 'Return to library' })).toHaveAttribute('href', '#/');
 });
 
+test('offers the searchable background chooser during Wizard creation', async () => {
+  render(<App />);
+
+  await userEvent.click(await screen.findByRole('button', { name: 'Create your first character' }));
+  await userEvent.click(screen.getByRole('button', { name: /Wizard/ }));
+  expect(await screen.findByRole('button', { name: 'Choose a background' })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: 'Choose a background' }));
+  expect(await screen.findByRole('dialog')).toBeInTheDocument();
+  expect(screen.getByRole('option', { name: 'Sage' })).toBeInTheDocument();
+});
+
 test('loads a stored character from its stable URL', async () => {
   await database.characters.put(representativeCharacter);
   await database.playState.put(representativePlayState);

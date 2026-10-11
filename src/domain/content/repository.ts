@@ -1,5 +1,5 @@
 import { contentPackManifestSchema, contentPackModuleSchema, contentPackSchema, packEntitySchema } from './schemas';
-import type { Choice, Class, ContentFixture, ContentPack, ContentPackModule, Feat, Feature, Item, PackEntity, ProductionContentPackManifest, Resource, Spell, Subclass } from './types';
+import type { Background, Choice, Class, ContentFixture, ContentPack, ContentPackModule, Feat, Feature, Item, PackEntity, ProductionContentPackManifest, Resource, Species, Spell, Subclass } from './types';
 
 /**
  * Read-only boundary used by both presentation and future advancement code.
@@ -15,6 +15,8 @@ export interface ContentRepository {
   getChoice(id: string): Choice | undefined;
   getResource(id: string): Resource | undefined;
   getItem(id: string): Item | undefined;
+  getSpecies(id: string): Species | undefined;
+  getBackground(id: string): Background | undefined;
   searchItems(query: string): readonly Item[];
   getFixture(): ContentFixture;
 }
@@ -31,6 +33,8 @@ export class BundledContentRepository implements ContentRepository {
   getChoice(id: string): Choice | undefined { return this.fixture.choices.find((entity) => entity.id === id); }
   getResource(id: string): Resource | undefined { return this.fixture.resources.find((entity) => entity.id === id); }
   getItem(id: string): Item | undefined { return this.fixture.items.find((entity) => entity.id === id); }
+  getSpecies(id: string): Species | undefined { return this.fixture.species.find((entity) => entity.id === id); }
+  getBackground(id: string): Background | undefined { return this.fixture.backgrounds.find((entity) => entity.id === id); }
   searchItems(query: string): readonly Item[] {
     const normalized = query.trim().toLocaleLowerCase();
     return normalized === '' ? this.fixture.items : this.fixture.items.filter((item) => item.name.toLocaleLowerCase().includes(normalized));

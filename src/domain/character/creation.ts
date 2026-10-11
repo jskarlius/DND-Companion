@@ -1,6 +1,6 @@
 import type { ContentRepository } from '../content/repository';
 import type { Class, Item, LevelOneChoice } from '../content/types';
-import { ABILITIES, EMPTY_CURRENCY_PURSE, type AbilityScores, type AbilityScoreGeneration, type Character, type CharacterPlayState, type ChoiceValue, type HitPointGain, type Skill, type SpellSelection } from './types';
+import { ABILITIES, EMPTY_CURRENCY_PURSE, type Ability, type AbilityScores, type AbilityScoreGeneration, type Character, type CharacterPlayState, type ChoiceValue, type GrantedSpell, type HitPointGain, type Skill, type SpellSelection } from './types';
 
 /**
  * The UI owns this mutable-looking draft. This module never persists it; it
@@ -14,6 +14,15 @@ export interface CharacterCreationRequest {
   readonly abilityScoreGeneration: AbilityScoreGeneration;
   readonly abilityScores: AbilityScores;
   readonly classId: string;
+  readonly speciesId?: string;
+  readonly backgroundId?: string;
+  /** The selected +2/+1 or +1/+1/+1 allocation, applied to generated scores. */
+  readonly backgroundAbilityIncreases?: Readonly<Partial<Record<Ability, number>>>;
+  readonly backgroundEquipmentPackageId?: string;
+  readonly backgroundChoices?: Readonly<Record<string, readonly string[]>>;
+  /** Spell IDs selected for a source-owned, non-class spell grant. */
+  readonly grantedSpellIds?: Readonly<Record<string, readonly string[]>>;
+  readonly grantedSpellCastingAbilities?: Readonly<Record<string, Ability>>;
   readonly classSkillIds: readonly Skill[];
   /** Granted and selected tool proficiencies are item IDs, not inventory. */
   readonly toolIds: readonly string[];
@@ -98,6 +107,7 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
   if (!characterClass) return { ok: false, issues: [{ field: 'class', message: 'Choose an installed class.' }] };
   if (!characterClass.levelOne) return { ok: false, issues: [{ field: 'class', message: `${characterClass.name} has no reviewed level-one creation profile.` }] };
   const profile = characterClass.levelOne;
+  const background = request.backgroundId ? repository.getBackground(request.backgroundId) : undefined;
 
   if (request.characterId.trim() === '') issues.push({ field: 'characterId', message: 'A stable character ID is required.' });
   if (request.classEntryId.trim() === '') issues.push({ field: 'classEntryId', message: 'A stable class-entry ID is required.' });
@@ -108,6 +118,18 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
   // need the same sane numeric boundary used by the sheet editor.
   if (ABILITIES.some((ability) => !Number.isInteger(request.abilityScores[ability]) || request.abilityScores[ability] < 1 || request.abilityScores[ability] > 30)) {
     issues.push({ field: 'abilityScores', message: 'Each ability score must be a whole number from 1 to 30.' });
+  }
+  if (request.backgroundId && !background?.creation) issues.push({ field: 'background', message: 'Choose a background with reviewed creation facts.' });
+  const backgroundProfile = background?.creation;
+  const backgroundIncrease = request.backgroundAbilityIncreases ?? {};
+  if (backgroundProfile) {
+    const increases = Object.entries(backgroundIncrease) as [Ability, number][];
+    const validAllocation = (increases.length === 2 && increases.every(([ability, value]) => backgroundProfile.abilityScoreOptions?.includes(ability) && (value === 1 || value === 2)) && increases.reduce((total, [, value]) => total + value, 0) === 3)
+      || (increases.length === 3 && increases.every(([ability, value]) => backgroundProfile.abilityScoreOptions?.includes(ability) && value === 1));
+    if (!validAllocation) issues.push({ field: 'backgroundAbilityIncreases', message: 'Choose +2/+1 among two background abilities, or +1 to all three.' });
+    if (ABILITIES.some((ability) => request.abilityScores[ability] + (backgroundIncrease[ability] ?? 0) > 20)) issues.push({ field: 'backgroundAbilityIncreases', message: 'A background increase cannot raise an ability score above 20.' });
+    const packageId = request.backgroundEquipmentPackageId;
+    if (!backgroundProfile.equipmentPackages?.some((entry) => entry.id === packageId)) issues.push({ field: 'backgroundEquipment', message: 'Choose a valid background equipment package.' });
   }
 
   validateExactSelection(issues, 'classSkills', 'class skill', request.classSkillIds, profile.skillChoices.count, profile.skillChoices.options);
@@ -121,11 +143,22 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
   if (profile.languageChoiceCount) issues.push({ field: 'proficiencies', message: `${characterClass.name} needs language options that are not yet structured in the content pack.` });
 
   const selectedPackage = characterClass.startingEquipmentPackages?.find((entry) => entry.id === request.equipmentPackageId);
+  const backgroundPackage = backgroundProfile?.equipmentPackages?.find((entry) => entry.id === request.backgroundEquipmentPackageId);
   if (!selectedPackage) issues.push({ field: 'equipment', message: 'Choose a valid starting-equipment package.' });
   else {
     for (const entry of selectedPackage.entries) {
       if (entry.type === 'chosen-item') issues.push({ field: 'equipment', message: 'This equipment package needs an item choice that is not yet structured.' });
       else if (!repository.getItem(entry.itemId)) issues.push({ field: 'equipment', message: `Starting item ${entry.itemId} is missing from enabled content.` });
+    }
+  }
+  if (backgroundProfile && backgroundPackage) {
+    for (const entry of backgroundPackage.entries) {
+      if (entry.type === 'chosen-item') {
+        const selected = request.backgroundChoices?.[entry.choiceId] ?? [];
+        const choice = backgroundProfile.choices.find((candidate) => candidate.id === entry.choiceId);
+        if (!choice) issues.push({ field: 'backgroundEquipment', message: `Background equipment choice ${entry.choiceId} is not structured.` });
+        else validateExactSelection(issues, `backgroundChoices.${entry.choiceId}`, choice.label, selected, choice.count, choice.optionIds ?? []);
+      } else if (!repository.getItem(entry.itemId)) issues.push({ field: 'backgroundEquipment', message: `Starting item ${entry.itemId} is missing from enabled content.` });
     }
   }
 
@@ -158,26 +191,47 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
   const selectedSpellIds = [...request.cantripIds, ...request.spellbookSpellIds, ...request.selectedSpellIds];
   if (!hasUniqueValues(selectedSpellIds)) return { ok: false, issues: [{ field: 'spells', message: 'A spell can only be recorded once for this class entry.' }] };
   const spellSelections: SpellSelection[] = selectedSpellIds.map((spellId) => ({ classEntryId: request.classEntryId, spellId, acquiredAtClassLevel: 1, prepared: false }));
-  const maximumHp = request.initialHitPoints + Math.floor((request.abilityScores.constitution - 10) / 2);
+  const finalAbilityScores = Object.fromEntries(ABILITIES.map((ability) => [ability, request.abilityScores[ability] + (backgroundIncrease[ability] ?? 0)])) as AbilityScores;
+  const grantedSpells: GrantedSpell[] = [];
+  for (const grant of backgroundProfile?.spellGrants ?? []) {
+    const selected = request.grantedSpellIds?.[grant.id] ?? [];
+    const grantingClass = repository.getClass(grant.spellListClassId);
+    const castingAbility = request.grantedSpellCastingAbilities?.[grant.id];
+    const cantrips = selected.filter((id) => repository.getSpell(id)?.level === 0);
+    const leveled = selected.filter((id) => repository.getSpell(id)?.level === grant.spellLevel);
+    if (!grantingClass || selected.length !== grant.cantripCount + grant.spellCount || !hasUniqueValues(selected)
+      || selected.some((id) => !grantingClass.spellListIds.includes(id)) || cantrips.length !== grant.cantripCount || leveled.length !== grant.spellCount) {
+      return { ok: false, issues: [{ field: `grantedSpells.${grant.id}`, message: 'Choose the required non-class cantrips and spell from the grant’s spell list.' }] };
+    }
+    if (grant.castingAbilityChoiceId && !castingAbility) return { ok: false, issues: [{ field: `grantedSpells.${grant.id}`, message: 'Choose the spellcasting ability for this spell grant.' }] };
+    grantedSpells.push(...selected.map((spellId) => ({ grantorId: background!.creation!.featIds?.[0] ?? background!.id, spellId, acquiredAtCharacterLevel: 1, castingAbility: castingAbility ?? 'intelligence', preparation: repository.getSpell(spellId)?.level === 0 ? 'available' as const : 'always-prepared' as const, replacementHistory: [] })));
+  }
+  const maximumHp = request.initialHitPoints + Math.floor((finalAbilityScores.constitution - 10) / 2);
 
   return {
     ok: true,
     character: {
       schemaVersion: 1, id: request.characterId, name: request.name.trim(), ruleset: '5e-2024', longRestHitDiceRecovery: '2024-all',
-      enabledContentPackIds: request.enabledContentPackIds, abilityScoreGeneration: request.abilityScoreGeneration, abilityScores: request.abilityScores,
+      enabledContentPackIds: request.enabledContentPackIds, abilityScoreGeneration: request.abilityScoreGeneration, abilityScores: finalAbilityScores,
+      generatedAbilityScores: request.abilityScores,
+      speciesId: request.speciesId, backgroundId: request.backgroundId,
       classes: [{ id: request.classEntryId, classId: characterClass.id, level: 1, choices: classChoices }], choices: {},
       proficiencies: {
-        savingThrowAbilities: characterClass.savingThrowAbilities, skills: Object.fromEntries(request.classSkillIds.map((skill) => [skill, 'proficient'])),
-        weaponTraining: profile.weaponTraining, armorTraining: profile.armorTraining, toolIds: [...new Set([...grantedToolIds, ...requestedToolIds])], languageIds: [],
+        savingThrowAbilities: characterClass.savingThrowAbilities, skills: Object.fromEntries([...new Set([...request.classSkillIds, ...(backgroundProfile?.skillGrants ?? [])])].map((skill) => [skill, 'proficient'])),
+        weaponTraining: profile.weaponTraining, armorTraining: profile.armorTraining,
+        toolIds: [...new Set([...grantedToolIds, ...requestedToolIds, ...(backgroundProfile?.toolGrants ?? []), ...Object.values(request.backgroundChoices ?? {}).flat()])], languageIds: [],
       },
       knownSpellIds: [], preparedSpellIds: [], spellSelections,
       preparedSpells: request.preparedSpellIds.map((spellId) => ({ classEntryId: request.classEntryId, spellId })),
+      grantedSpells,
       hitPointGains: [{ classEntryId: request.classEntryId, classLevel: 1, method: request.hitPointMethod, hitPoints: request.initialHitPoints }],
-      currency: { ...EMPTY_CURRENCY_PURSE, gp: selectedPackage.currencyGp },
+      currency: { ...EMPTY_CURRENCY_PURSE, gp: selectedPackage.currencyGp + (backgroundPackage?.currencyGp ?? 0) },
       // Kept during the migration rollout for old readers and backups.
-      currencyGp: selectedPackage.currencyGp,
+      currencyGp: selectedPackage.currencyGp + (backgroundPackage?.currencyGp ?? 0),
+      sourceChoices: backgroundProfile ? [{ ownerId: background!.id, choiceId: 'ability-increase', optionIds: Object.entries(backgroundIncrease).map(([ability, value]) => `${ability}+${value}`) }] : [],
       proficiencyOverrides: { skills: {}, savingThrows: {} },
-      inventory: selectedPackage.entries.filter((entry): entry is Extract<typeof entry, { type: 'item' }> => entry.type === 'item').map((entry) => ({ itemId: entry.itemId, quantity: entry.quantity })),
+      inventory: [...selectedPackage.entries, ...(backgroundPackage?.entries ?? [])]
+        .flatMap((entry) => entry.type === 'item' ? [{ itemId: entry.itemId, quantity: entry.quantity }] : (request.backgroundChoices?.[entry.choiceId] ?? []).map((itemId) => ({ itemId, quantity: entry.quantity }))),
       manualOverrides: {},
     },
     playState: {

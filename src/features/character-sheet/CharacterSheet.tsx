@@ -219,7 +219,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
       const beforeRest = pendingRest === 'short'
         ? { ...current, usedHitDice: { ...current.usedHitDice, ...pendingHitDice } }
         : current;
-      return takeRest(
+      const rested = takeRest(
         beforeRest,
         sheet.resources.map(({ resource }) => resource),
         pendingRest,
@@ -228,6 +228,12 @@ export function CharacterSheet({ character, playState, content, details, onChara
         hitDiceRecovery,
         pendingHitDice,
       );
+      if (pendingRest !== 'long') return rested;
+      const usedResources = { ...rested.usedResources };
+      for (const grant of character.grantedSpells ?? []) {
+        if ((content.spells.find((spell) => spell.id === grant.spellId)?.level ?? 0) > 0) usedResources[`origin-free-cast:${grant.grantorId}:${grant.spellId}`] = 0;
+      }
+      return { ...rested, usedResources };
     });
     setPendingRest(null);
   };
@@ -285,7 +291,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
 
         <div className="sheet-column">
           <Section title="Features"><ul className="card-list">{sheet.features.map((feature) => <li key={feature.id}><strong>{feature.name}</strong><span>{titleCase(feature.automation)} automation</span></li>)}</ul></Section>
-          <Section title="Resources"><ul className="card-list">{sheet.resources.map(({ resource, used }) => <li key={resource.id}><strong>{resource.name}</strong><span>{resource.maximum - used} / {resource.maximum} remaining / {titleCase(resource.recharge)}</span><div className="resource-actions"><button type="button" aria-label={`Use ${resource.name}`} disabled={used === resource.maximum} onClick={() => setSessionState((current) => setResourceUses(current, resource, used + 1))}>Use</button><button type="button" className="resource-restore" aria-label={`Restore ${resource.name}`} disabled={used === 0} onClick={() => setSessionState((current) => setResourceUses(current, resource, used - 1))}>Restore use</button></div></li>)}</ul></Section>
+          <Section title="Resources"><ul className="card-list">{(character.grantedSpells ?? []).filter((grant) => (content.spells.find((spell) => spell.id === grant.spellId)?.level ?? 0) > 0).map((grant) => { const spell = content.spells.find((entry) => entry.id === grant.spellId)!; const resourceId = `origin-free-cast:${grant.grantorId}:${grant.spellId}`; const used = sessionState.usedResources[resourceId] ?? 0; return <li key={resourceId}><strong>Magic Initiate: {spell.name}</strong><span>{1 - used} / 1 remaining / Long Rest</span><div className="resource-actions"><button type="button" aria-label={`Use free Magic Initiate cast of ${spell.name}`} disabled={used === 1} onClick={() => setSessionState((current) => ({ ...current, usedResources: { ...current.usedResources, [resourceId]: 1 } }))}>Use free cast</button><button type="button" className="resource-restore" aria-label={`Restore free Magic Initiate cast of ${spell.name}`} disabled={used === 0} onClick={() => setSessionState((current) => ({ ...current, usedResources: { ...current.usedResources, [resourceId]: 0 } }))}>Restore use</button></div></li>; })}{sheet.resources.map(({ resource, used }) => <li key={resource.id}><strong>{resource.name}</strong><span>{resource.maximum - used} / {resource.maximum} remaining / {titleCase(resource.recharge)}</span><div className="resource-actions"><button type="button" aria-label={`Use ${resource.name}`} disabled={used === resource.maximum} onClick={() => setSessionState((current) => setResourceUses(current, resource, used + 1))}>Use</button><button type="button" className="resource-restore" aria-label={`Restore ${resource.name}`} disabled={used === 0} onClick={() => setSessionState((current) => setResourceUses(current, resource, used - 1))}>Restore use</button></div></li>)}</ul></Section>
         </div>
       </TabsContent>
 
@@ -297,7 +303,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
         onShowDetails={setDetailSpellId}
       /></TabsContent>}
 
-      <Dialog open={Boolean(detailSpell)} onOpenChange={(nextOpen) => { if (!nextOpen) setDetailSpellId(undefined); }}><DialogContent className="spell-detail-dialog"><DialogTitle>{detailSpell?.name}</DialogTitle><DialogDescription>Level {detailSpell?.level} spell{detailSpell?.castingTime ? ` Â· ${detailSpell.castingTime}` : ''}{detailSpell?.range ? ` Â· ${detailSpell.range}` : ''}</DialogDescription>{detailSpell?.description ? <p>{detailSpell.description}</p> : <p>No description is available for this spell.</p>}{detailSpell?.higherLevelDescription && <section><h3>At higher levels</h3><p>{detailSpell.higherLevelDescription}</p></section>}</DialogContent></Dialog>
+      <Dialog open={Boolean(detailSpell)} onOpenChange={(nextOpen) => { if (!nextOpen) setDetailSpellId(undefined); }}><DialogContent className="spell-detail-dialog"><DialogTitle>{detailSpell?.name}</DialogTitle><DialogDescription>Level {detailSpell?.level} spell{detailSpell?.castingTime ? ` · ${detailSpell.castingTime}` : ''}{detailSpell?.range ? ` · ${detailSpell.range}` : ''}</DialogDescription>{detailSpell?.description ? <p>{detailSpell.description}</p> : <p>No description is available for this spell.</p>}{detailSpell?.higherLevelDescription && <section><h3>At higher levels</h3><p>{detailSpell.higherLevelDescription}</p></section>}</DialogContent></Dialog>
       <TabsContent value="inventory" className="tab-panel"><Section title="Inventory"><div className="currency-purse" role="group" aria-label="Currency"><h3>Currency</h3>{(Object.keys(EMPTY_CURRENCY_PURSE) as Array<keyof typeof EMPTY_CURRENCY_PURSE>).map((denomination) => <label key={denomination}>{denomination.toUpperCase()}<input type="number" min="0" step="1" aria-label={`${denomination.toUpperCase()} currency`} value={draftCharacter.currency?.[denomination] ?? (denomination === 'gp' ? draftCharacter.currencyGp : 0)} onChange={(event) => changeCurrency(denomination, event.currentTarget.valueAsNumber)} /></label>)}</div><ul className="inventory-list">{character.inventory.map((entry) => <li key={entry.itemId}><strong>{inventoryLabel(entry.itemId, details.inventory)}</strong><span>Quantity {entry.quantity}</span></li>)}</ul></Section></TabsContent>
 
       <TabsContent value="character" className="tab-panel character-panel">

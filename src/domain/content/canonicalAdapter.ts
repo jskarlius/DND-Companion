@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import type { Ability } from '../character/types';
-import type { AdvancementGrant, Class, ContentFixture, Feat, Feature, Item, Spell, Subclass } from './types';
+import type { AdvancementGrant, Background, Class, ContentFixture, Feat, Feature, Item, Species, Spell, Subclass } from './types';
 import { ComposedContentRepository } from './repository';
 
 const abilitySchema = z.enum(['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']);
@@ -24,7 +24,7 @@ const spellReferenceSchema = z.object({
   concentration: z.boolean().optional(), ritual: z.boolean().optional(), desc: z.string().optional(), higher_level: z.string().optional(),
   damage_roll: z.string().nullable().optional(), damage_types: z.array(z.string()).optional(),
 }).passthrough();
-const featReferenceSchema = z.object({ type: z.string().optional(), desc: z.string().optional(), prerequisite: z.string().nullable().optional() }).passthrough();
+const featReferenceSchema = z.object({ type: z.string().optional(), desc: z.string().optional(), prerequisite: z.string().nullable().optional(), benefits: z.array(z.object({ desc: z.string().optional() })).optional() }).passthrough();
 const itemReferenceSchema = z.object({
   weapon: z.object({
     is_simple: z.boolean().optional(), is_martial: z.boolean().optional(),
@@ -124,9 +124,22 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
     return {
       id: entity.id, name: entity.name, kind: 'feat', ruleset: entity.ruleset, source: entity.source,
       category: nonEmpty(raw?.type) ?? 'Other', prerequisite: nonEmpty(raw?.prerequisite),
-      benefits: nonEmpty(raw?.desc) ? [raw!.desc!] : [], automation: 'reference',
+      benefits: [raw?.benefits?.flatMap((benefit) => {
+        const description = nonEmpty(benefit.desc);
+        return description ? [description] : [];
+      }).join(' ') ?? nonEmpty(raw?.desc)].filter((benefit): benefit is string => Boolean(benefit)), automation: 'reference',
     };
   });
+  const species: Species[] = entities.filter((entity) => entity.kind === 'species').map((entity) => ({
+    id: entity.id, name: entity.name, kind: 'species', ruleset: entity.ruleset, source: entity.source,
+    featureIds: entity.featureIds ?? rawFeatures.filter((feature) => feature.ownerId === entity.id).map((feature) => feature.id),
+    creation: entity.creation,
+  }));
+  const backgrounds: Background[] = entities.filter((entity) => entity.kind === 'background').map((entity) => ({
+    id: entity.id, name: entity.name, kind: 'background', ruleset: entity.ruleset, source: entity.source,
+    featureIds: entity.featureIds ?? rawFeatures.filter((feature) => feature.ownerId === entity.id).map((feature) => feature.id),
+    creation: entity.creation,
+  }));
   // Only source fields that are already structured become creation metadata;
   // this never attempts to infer weapon properties from item prose.
   const items: Item[] = entities.filter((entity) => entity.kind === 'item').map((entity) => {
@@ -146,7 +159,7 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
   });
   return {
     manifest: repository.packs[0]!.manifest, classes, subclasses, features, choices: [], resources: [], spells,
-    feats,
+    feats, species, backgrounds,
     items,
   };
 }

@@ -186,6 +186,8 @@ export const minimalContentFixture: ContentFixture = {
     },
   ],
   subclasses: [],
+  species: [],
+  backgrounds: [],
   items: [],
 };
 

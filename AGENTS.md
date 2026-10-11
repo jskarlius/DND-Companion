@@ -20,6 +20,12 @@ stated verification commands, and report changed files, assumptions, risks,
 and test results. Stop at architecture checkpoints unless explicitly asked to
 continue.
 
+When the owner asks for an implementation or UI change, begin implementing it
+in the same turn. Do not respond with only a proposed plan or wait for a second
+request unless a genuine architecture decision, missing authority, dependency
+failure, or stated manual-test checkpoint requires the owner's input. Brief
+progress updates are welcome, but they do not replace doing the requested work.
+
 Do not create commits automatically. Commit only when the user explicitly asks
 in the current prompt, and make at most that one requested commit; after it,
 assume further changes must remain uncommitted unless the user asks again.

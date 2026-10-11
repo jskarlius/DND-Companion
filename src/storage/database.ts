@@ -173,6 +173,31 @@ export class CompanionDatabase extends Dexie {
         }
       });
     });
+    this.version(10).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        sourceChoices?: unknown;
+        grantedSpells?: unknown;
+      }) => {
+        // These collections are source-owned overlays. Existing characters
+        // deliberately receive no inferred species, background, or grants.
+        character.sourceChoices ??= [];
+        character.grantedSpells ??= [];
+      });
+    });
+    this.version(11).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        abilityScores: Record<string, number>;
+        generatedAbilityScores?: Record<string, number>;
+      }) => {
+        // Pre-origin records have no distinct generated scores. Preserve their
+        // existing playable values as the generation input rather than guess.
+        character.generatedAbilityScores ??= { ...character.abilityScores };
+      });
+    });
   }
 }
 

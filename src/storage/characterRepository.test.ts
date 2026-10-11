@@ -92,6 +92,23 @@ describe('CharacterRepository', () => {
     expect(await repository.loadCharacter(representativeCharacter.id)).toEqual(representativeCharacter);
     expect(await repository.loadPlayState(representativeCharacter.id)).toEqual(representativePlayState);
   });
+
+  test('round-trips source-qualified creation selections and non-class spell grants', async () => {
+    const repository = createRepository();
+    const character = {
+      ...representativeCharacter,
+      speciesId: 'srd-2024:species:dwarf',
+      backgroundId: 'srd-2024:background:sage',
+      sourceChoices: [{ ownerId: 'srd-2024:background:sage', choiceId: 'ability-increase', optionIds: ['intelligence+2', 'wisdom+1'] }],
+      grantedSpells: [{ grantorId: 'srd-2024:feat:magic-initiate', spellId: 'srd-2024:spell:detect-magic', acquiredAtCharacterLevel: 1, castingAbility: 'intelligence' as const, preparation: 'always-prepared' as const, replacementHistory: [] }],
+    };
+    const playState = { ...representativePlayState, characterId: character.id };
+    await repository.save(character, playState);
+    const backup = await repository.exportCharacter(character.id);
+    await repository.deleteCharacter(character.id);
+    await repository.importCharacter(backup);
+    await expect(repository.loadCharacter(character.id)).resolves.toEqual(character);
+  });
 });
 
 test('migrates a version 0 backup by adding missing play-state and rest-policy fields', () => {
@@ -101,7 +118,7 @@ test('migrates a version 0 backup by adding missing play-state and rest-policy f
     playState: (({ temporaryMaximumHpBonus: _removed, ...playState }) => playState)(representativePlayState),
   });
 
-  expect(backup.schemaVersion).toBe(6);
+    expect(backup.schemaVersion).toBe(8);
   expect(backup.character.schemaVersion).toBe(1);
   expect(backup.playState.temporaryMaximumHpBonus).toBe(0);
   expect(backup.playState.usedHitDice).toEqual({});
@@ -109,6 +126,7 @@ test('migrates a version 0 backup by adding missing play-state and rest-policy f
   expect(backup.character.spellSelections).toHaveLength(2);
   expect(backup.character.hitPointGains).toEqual([]);
   expect(backup.character.currencyGp).toBe(0);
+  expect(backup.character.generatedAbilityScores).toEqual(backup.character.abilityScores);
   expect(backup.character.proficiencies).toMatchObject({ weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [] });
 });
 

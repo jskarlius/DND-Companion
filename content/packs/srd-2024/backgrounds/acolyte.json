@@ -1,5 +1,110 @@
 {
   "background": {
+    "creation": {
+      "abilityScoreOptions": [
+        "intelligence",
+        "wisdom",
+        "charisma"
+      ],
+      "choices": [],
+      "equipmentPackages": [
+        {
+          "currencyGp": 8,
+          "entries": [
+            {
+              "itemId": "srd-2024:item:calligraphers-supplies",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:book",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "choiceId": "holy-symbol",
+              "quantity": 1,
+              "type": "chosen-item"
+            },
+            {
+              "itemId": "srd-2024:item:parchment",
+              "quantity": 10,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:robe",
+              "quantity": 1,
+              "type": "item"
+            }
+          ],
+          "id": "a"
+        },
+        {
+          "currencyGp": 50,
+          "entries": [],
+          "id": "b"
+        }
+      ],
+      "featIds": [
+        "srd-2024:feat:magic-initiate"
+      ],
+      "skillGrants": [
+        "insight",
+        "religion"
+      ],
+      "spellGrants": [
+        {
+          "cantripCount": 2,
+          "castingAbilityChoiceId": "magic-initiate-ability",
+          "id": "magic-initiate-cleric",
+          "replacement": "on-level-up",
+          "spellCount": 1,
+          "spellLevel": 1,
+          "spellListClassId": "srd-2024:class:cleric"
+        }
+      ],
+      "toolGrants": [
+        "srd-2024:item:calligraphers-supplies"
+      ]
+    },
+    "equipmentPackages": [
+      {
+        "currencyGp": 8,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:calligraphers-supplies",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:book",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "choiceId": "holy-symbol",
+            "quantity": 1,
+            "type": "chosen-item"
+          },
+          {
+            "itemId": "srd-2024:item:parchment",
+            "quantity": 10,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:robe",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 50,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "id": "srd-2024:background:acolyte",
     "kind": "background",
     "name": "Acolyte",

@@ -126,6 +126,16 @@ const startingEquipmentPackageSchema = z.object({
   ])),
 });
 
+const creationProfileSchema = z.object({
+  choices: z.array(z.object({ id: z.string().min(1), label: z.string().min(1), count: z.int().positive(), optionIds: z.array(z.string().min(1)).min(1) })),
+  skillGrants: z.array(skillSchema),
+  toolGrants: z.array(contentIdSchema),
+  abilityScoreOptions: z.array(abilitySchema).length(3).optional(),
+  equipmentPackages: z.array(startingEquipmentPackageSchema).optional(),
+  featIds: z.array(contentIdSchema).optional(),
+  spellGrants: z.array(z.object({ id: z.string().min(1), spellListClassId: contentIdSchema, cantripCount: z.int().min(0), spellCount: z.int().min(0), spellLevel: z.int().min(1).max(9), castingAbilityChoiceId: z.string().min(1).optional(), replacement: z.enum(['none', 'on-level-up']) })).optional(),
+}).strict();
+
 export const classSchema = contentEntitySchema.extend({
   kind: z.literal('class'),
   hitDie: z.int().positive(),
@@ -178,6 +188,8 @@ export const contentFixtureSchema = z.object({
   resources: z.array(resourceSchema),
   spells: z.array(spellSchema),
   feats: z.array(featSchema),
+  species: z.array(contentEntitySchema.extend({ kind: z.literal('species'), featureIds: z.array(contentIdSchema) }).passthrough()).default([]),
+  backgrounds: z.array(contentEntitySchema.extend({ kind: z.literal('background'), featureIds: z.array(contentIdSchema) }).passthrough()).default([]),
   items: z.array(contentEntitySchema.extend({ kind: z.literal('item') }).passthrough()).default([]),
 });
 
@@ -217,6 +229,7 @@ export const packEntitySchema = contentEntitySchema.extend({
     'must not repeat class IDs',
   ).optional(),
   equipmentPackages: z.array(startingEquipmentPackageSchema).optional(),
+  creation: creationProfileSchema.optional(),
 }).passthrough().superRefine((entity, context) => {
   if (entity.kind === 'spell' && entity.spellListClassIds === undefined) {
     context.addIssue({ code: 'custom', path: ['spellListClassIds'], message: 'is required for spell entities' });

@@ -399,7 +399,13 @@ type Character = {
   longRestHitDiceRecovery: "2024-all" | "2014-half";
   enabledContentPackIds: string[];
   abilityScoreGeneration: "standard-array" | "point-buy" | "custom";
+  /** Values selected by the generation method, before background increases. */
+  generatedAbilityScores: Record<Ability, number>;
+  /** Derived final values after reviewed, source-owned ability-score grants. */
   abilityScores: Record<Ability, number>;
+  /** Source-qualified ancestry and upbringing, never inferred from a name. */
+  speciesId?: string;
+  backgroundId?: string;
   classes: Array<{
     id: string;
     classId: string;
@@ -408,6 +414,12 @@ type Character = {
     choices: Record<string, string | string[]>;
   }>;
   choices: Record<string, string | string[]>;
+  /** Selections owned by species, background, feat, or feature content. */
+  sourceChoices: Array<{
+    ownerId: string;
+    choiceId: string;
+    optionIds: string[];
+  }>;
   proficiencies: {
     savingThrowAbilities: Ability[];
     skills: Record<Skill, "none" | "proficient" | "expertise">;
@@ -435,12 +447,28 @@ type Character = {
     method: "fixed" | "rolled" | "custom";
     hitPoints: number;
   }>;
+  /** Spells granted outside a class spellbook/known-spell collection. */
+  grantedSpells: Array<{
+    grantorId: string;
+    spellId: string;
+    acquiredAtCharacterLevel: number;
+    castingAbility: Ability;
+    preparation: "always-prepared" | "available";
+    replacementHistory: string[];
+  }>;
   /** Currency is character-owned rather than represented as fictitious items. */
   currency: { cp: number; sp: number; ep: number; gp: number; pp: number };
   inventory: InventoryEntry[];
   manualOverrides: Record<string, unknown>;
 };
 ```
+
+An origin feat or similar non-class grant never becomes a class spellbook
+selection. It is rendered with its grantor as the source and can be
+always-prepared independently of a class preparation limit. A once-per-long-
+rest free cast is tracked in `CharacterPlayState.usedResources` under the
+stable key `origin-free-cast:${grantorId}:${spellId}`; it is not a spell slot
+and a Long Rest restores that use.
 
 Temporary play state is persisted independently:
 

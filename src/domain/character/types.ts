@@ -60,6 +60,24 @@ export type LongRestHitDiceRecovery = '2024-all' | '2014-half';
 
 export type ChoiceValue = string | readonly string[];
 
+/** A selection whose valid options are defined by source-qualified content. */
+export interface SourceChoiceSelection {
+  readonly ownerId: string;
+  readonly choiceId: string;
+  readonly optionIds: readonly string[];
+}
+
+/** A spell granted by species, background, feat, or feature instead of a class entry. */
+export interface GrantedSpell {
+  readonly grantorId: string;
+  readonly spellId: string;
+  readonly acquiredAtCharacterLevel: number;
+  readonly castingAbility: Ability;
+  readonly preparation: 'always-prepared' | 'available';
+  /** Stable historical spell IDs when a grant explicitly permits replacement. */
+  readonly replacementHistory: readonly string[];
+}
+
 export interface ClassEntry {
   readonly id: string;
   readonly classId: string;
@@ -158,9 +176,17 @@ export interface Character {
   readonly longRestHitDiceRecovery: LongRestHitDiceRecovery;
   readonly enabledContentPackIds: readonly string[];
   readonly abilityScoreGeneration: AbilityScoreGeneration;
+  /** Values selected by the generation method before origin grants apply. */
+  readonly generatedAbilityScores?: AbilityScores;
+  /** Derived final values used by rules calculations and displayed on the sheet. */
   readonly abilityScores: AbilityScores;
+  /** Optional only while pre-Wizard-creation records are migrated. */
+  readonly speciesId?: string;
+  readonly backgroundId?: string;
   readonly classes: readonly ClassEntry[];
   readonly choices: Readonly<Record<string, ChoiceValue>>;
+  /** Choices owned by content other than a class entry. */
+  readonly sourceChoices?: readonly SourceChoiceSelection[];
   readonly proficiencies: CharacterProficiencies;
   /** Missing only on pre-migration records; readers treat it as an empty overlay. */
   readonly proficiencyOverrides?: ProficiencyOverrides;
@@ -171,6 +197,8 @@ export interface Character {
   readonly spellSelections: readonly SpellSelection[];
   /** Class-entry-owned daily preparation state; it never changes spell ownership. */
   readonly preparedSpells: readonly PreparedSpell[];
+  /** Non-class spell grants remain distinct from spellbook/known spell ownership. */
+  readonly grantedSpells?: readonly GrantedSpell[];
   readonly hitPointGains: readonly HitPointGain[];
   /** Currency is character-owned rather than represented by inventory items. */
   readonly currency?: CurrencyPurse;
