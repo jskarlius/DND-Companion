@@ -176,6 +176,52 @@ calculation explanations for AC, skills, attacks, and damage, then define the
 source-owned attack/equipment workflow. Do not mark the Wizard vertical slice
 complete until the level-20 advancement and acceptance checks are complete.
 
+Species implementation checkpoint (2026-10-11): Dwarf, Halfling, Orc, and
+Goliath have reviewed base traits in the creation picker. Goliath's Giant
+Ancestry uses the shared choice picker and persists its selected option. The
+generic option contract can now represent an option's reference text, a
+proficiency-bonus/Long-Rest resource, skill grants, and resolved trait changes.
+It is deliberately incomplete until the resulting resources and effects appear
+on the sheet and reset correctly on rests.
+
+Before owner-led level-one creation testing, complete the following species
+work:
+
+Progress (2026-10-11): all nine bundled species now have reviewed base traits
+and required level-one picker choices. Dragonborn ancestry applies its damage
+resistance, Elf Keen Senses and Human Skillful apply skill proficiency, and
+the sheet tracks proficiency-bonus uses for Breath Weapon, Stonecunning,
+Adrenaline Rush, and selected Giant Ancestry options with the declared rest
+recovery. The remaining species work is spell/feat grants, their creation
+review representation, and focused persistence/advancement coverage.
+
+Species spell progress (2026-10-11): Elf, Gnome, and Tiefling lineage/legacy
+spells are now source-owned grants with their level-one and later-level unlock
+levels persisted on the character. Creation requires and stores the selected
+spellcasting ability; the sheet projects a grant only at or after its required
+character level. Human records its Origin Feat selection, but Magic Initiate's
+full reusable class/spell configuration remains the next species blocker.
+
+1. Render selected species-choice resources in the existing Resources section,
+   scale proficiency-bonus maxima by total character level, and restore them on
+   their declared rest.
+2. Add reviewed Dragonborn ancestry options that set the damage resistance and
+   Breath Weapon's damage type, then track Breath Weapon uses.
+3. Add Elf lineage and Keen Senses choices, including the level-one grant,
+   spellcasting ability, level-3/5 always-prepared grants, and free-cast
+   resources.
+4. Add Gnome lineage choices and their cantrip/always-prepared spell grants.
+5. Add Human size, Skillful skill choice, and an Origin-feat choice that
+   reuses the selected feat's own configuration (including Magic Initiate).
+6. Add Tiefling legacy choices and their spell grants. Review every remaining
+   no-choice species resource (Dwarven Stonecunning and Orc Adrenaline Rush)
+   for the same Resources/rest behavior.
+7. Include species, selected choices, applied proficiencies, and granted
+   spells in the creation review; add planner, backup, reload, and sheet tests.
+
+The picker pattern is mandatory for substantive choices: the compact creation
+form shows a trigger and selected result, while a dialog previews choices.
+
 Owner UX revision (2026-10-11): proficiency markers are read-only during play.
 One override button in each section opens an intentional edit dialog. Inside
 that dialog, markers cycle none, proficient, and expertise for skills or none

@@ -63,8 +63,8 @@ export function createUnchosenCharacterSheetDetails(character: Character, conten
     backstory: '',
     combat: {
       armorClass: 10 + dexterityModifier,
-      speed: 0,
-      maximumHp: Math.max(hitPointBase + constitutionModifier * totalLevel, 1),
+      speed: character.speciesTraits?.speed ?? 0,
+      maximumHp: Math.max(hitPointBase + constitutionModifier * totalLevel + (character.speciesTraits?.maximumHpPerCharacterLevel ?? 0) * totalLevel, 1),
       spellAttackBonus: spellAbility ? spellModifier + proficiency : 0,
       spellSaveDc: spellAbility ? 8 + spellModifier + proficiency : 0,
     },

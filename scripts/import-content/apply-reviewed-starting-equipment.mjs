@@ -34,6 +34,26 @@ const backgroundProfiles = {
   soldier: { skillGrants: ['athletics', 'intimidation'], toolGrants: [], abilityScoreOptions: ['strength', 'dexterity', 'constitution'], featIds: ['srd-2024:feat:savage-attacker'], choices: [{ id: 'gaming-set', label: 'Gaming Set', count: 1, optionIds: ['srd-2024:item:gaming-set-dice', 'srd-2024:item:gaming-set-dragonchess', 'srd-2024:item:gaming-set-playing-cards', 'srd-2024:item:gaming-set-three-dragon-ante'] }], equipmentPackages: [packageOf('a', 14, [item('spear'), item('shortbow'), item('arrows-20'), chosen('gaming-set'), item('healers-kit'), item('quiver'), item('clothes-travelers')]), packageOf('b', 50, [])] },
 };
 
+// These are the initial no-choice species slice. Traits needing an additional
+// lineage, feat, spell, or ancestry choice stay unavailable until their
+// source-owned choice contract is implemented.
+const speciesTraits = {
+  dwarf: { size: 'Medium', speed: 30, senses: ['Darkvision 120 ft.'], damageResistances: ['Poison'], maximumHpPerCharacterLevel: 1 },
+  halfling: { size: 'Small', speed: 30, senses: [], damageResistances: [] },
+  orc: { size: 'Medium', speed: 30, senses: ['Darkvision 120 ft.'], damageResistances: [] },
+  goliath: { size: 'Medium', speed: 35, senses: [], damageResistances: [] },
+};
+const speciesChoices = {
+  goliath: [{ id: 'giant-ancestry', label: 'Giant Ancestry', options: [
+    ['cloud', "Cloud's Jaunt", 'Bonus Action: teleport up to 30 feet to an unoccupied space you can see.'],
+    ['fire', "Fire's Burn", 'When you hit with an attack roll and deal damage, deal an extra 1d10 Fire damage.'],
+    ['frost', "Frost's Chill", 'When you hit with an attack roll and deal damage, deal an extra 1d6 Cold damage and reduce the target’s Speed by 10 feet until your next turn.'],
+    ['hill', "Hill's Tumble", 'When you hit a Large or smaller creature with an attack roll and deal damage, you can give it the Prone condition.'],
+    ['stone', "Stone's Endurance", 'Reaction when you take damage: roll 1d12 + your Constitution modifier and reduce the damage by that total.'],
+    ['storm', "Storm's Thunder", 'Reaction when a creature within 60 feet damages you: deal 1d8 Thunder damage to it.'],
+  ].map(([id, label, description]) => ({ id, label, description, resource: { recharge: 'long-rest', maximum: 'proficiency-bonus' } })) }],
+};
+
 const sort = (value) => Array.isArray(value) ? value.map(sort) : value && typeof value === 'object' ? Object.fromEntries(Object.keys(value).sort().map((key) => [key, sort(value[key])])) : value;
 const text = (value) => `${JSON.stringify(sort(value), null, 2)}\n`;
 const hash = (value) => createHash('sha256').update(value, 'utf8').digest('hex');
@@ -59,6 +79,15 @@ for (const path of backgroundPaths) {
   if (!profile) throw new Error(`No reviewed background profile for ${module.background.id}.`);
   module.background.creation = profile;
   module.background.equipmentPackages = profile.equipmentPackages;
+  await writeJson(path, module);
+}
+
+const speciesPaths = (await readdir(join(root, 'species'))).filter((name) => name.endsWith('.json')).map((name) => `species/${name}`);
+for (const path of speciesPaths) {
+  const module = await readJson(path);
+  const key = module.species.id.split(':').at(-1);
+  if (speciesTraits[key]) module.species.traits = speciesTraits[key];
+  if (speciesChoices[key]) module.species.choices = speciesChoices[key];
   await writeJson(path, module);
 }
 
@@ -89,4 +118,4 @@ for (const descriptor of manifest.modules) for (const [kind, count] of Object.en
 await writeJson('import-report.json', report);
 manifest.report.sha256 = hash(text(report));
 await writeJson('manifest.json', manifest);
-console.log(`Applied reviewed class and background creation equipment to ${classPaths.length} class and ${backgroundPaths.length} background modules.`);
+console.log(`Applied reviewed creation data to ${classPaths.length} class, ${backgroundPaths.length} background, and ${Object.keys(speciesTraits).length} species modules.`);

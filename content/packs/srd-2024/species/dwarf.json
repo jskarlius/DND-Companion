@@ -241,6 +241,17 @@
       "title": "System Reference Document 5.2",
       "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    },
+    "traits": {
+      "damageResistances": [
+        "Poison"
+      ],
+      "maximumHpPerCharacterLevel": 1,
+      "senses": [
+        "Darkvision 120 ft."
+      ],
+      "size": "Medium",
+      "speed": 30
     }
   }
 }

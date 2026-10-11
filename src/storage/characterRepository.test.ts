@@ -37,7 +37,7 @@ describe('CharacterRepository', () => {
     const result = planCharacterCreation({
       characterId: 'test:created', classEntryId: 'test:created:class-entry:wizard', name: 'Created', enabledContentPackIds: ['srd-2024'],
       abilityScoreGeneration: 'custom', abilityScores: { strength: 10, dexterity: 10, constitution: 10, intelligence: 16, wisdom: 10, charisma: 10 },
-      classId: wizard.id, classSkillIds: ['arcana', 'history'], toolIds: [], classChoices: {}, equipmentPackageId: 'a',
+      classId: wizard.id, speciesId: 'srd-2024:species:dwarf', classSkillIds: ['arcana', 'history'], toolIds: [], classChoices: {}, equipmentPackageId: 'a',
       cantripIds: cantrips, spellbookSpellIds: spells, selectedSpellIds: [], preparedSpellIds: spells.slice(0, 4), initialHitPoints: 6, hitPointMethod: 'fixed',
     }, bundledContentRepository);
     if (!result.ok) throw new Error(result.issues.map((issue) => issue.message).join('; '));

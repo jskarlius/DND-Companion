@@ -136,6 +136,19 @@ const creationProfileSchema = z.object({
   spellGrants: z.array(z.object({ id: z.string().min(1), spellListClassId: contentIdSchema, cantripCount: z.int().min(0), spellCount: z.int().min(0), spellLevel: z.int().min(1).max(9), castingAbilityChoiceId: z.string().min(1).optional(), replacement: z.enum(['none', 'on-level-up']) })).optional(),
 }).strict();
 
+const speciesTraitsSchema = z.object({
+  size: z.string().min(1),
+  speed: z.int().positive(),
+  senses: z.array(z.string().min(1)),
+  damageResistances: z.array(z.string().min(1)),
+  maximumHpPerCharacterLevel: z.int().positive().optional(),
+}).strict();
+const speciesChoiceSchema = z.object({
+  id: z.string().min(1), label: z.string().min(1),
+  options: z.array(z.object({ id: z.string().min(1), label: z.string().min(1), description: z.string().min(1), resource: z.object({ recharge: z.enum(['short-rest', 'long-rest', 'manual']), maximum: z.literal('proficiency-bonus') }).optional(), skillGrants: z.array(skillSchema).optional(), traits: speciesTraitsSchema.partial().optional(), grantedSpells: z.array(z.object({ spellId: contentIdSchema, acquiredAtCharacterLevel: z.int().min(1).max(20), preparation: z.enum(['always-prepared', 'available']), freeCast: z.boolean().optional() })).optional(), requiresSpellcastingAbility: z.boolean().optional() })).min(1),
+});
+const speciesResourceSchema = z.object({ id: z.string().min(1), label: z.string().min(1), recharge: z.enum(['short-rest', 'long-rest', 'manual']), maximum: z.literal('proficiency-bonus') });
+
 export const classSchema = contentEntitySchema.extend({
   kind: z.literal('class'),
   hitDie: z.int().positive(),
@@ -230,6 +243,9 @@ export const packEntitySchema = contentEntitySchema.extend({
   ).optional(),
   equipmentPackages: z.array(startingEquipmentPackageSchema).optional(),
   creation: creationProfileSchema.optional(),
+  traits: speciesTraitsSchema.optional(),
+  choices: z.array(speciesChoiceSchema).optional(),
+  resources: z.array(speciesResourceSchema).optional(),
 }).passthrough().superRefine((entity, context) => {
   if (entity.kind === 'spell' && entity.spellListClassIds === undefined) {
     context.addIssue({ code: 'custom', path: ['spellListClassIds'], message: 'is required for spell entities' });

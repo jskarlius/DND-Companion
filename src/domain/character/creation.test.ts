@@ -13,7 +13,7 @@ function wizardRequest(overrides: Partial<CharacterCreationRequest> = {}): Chara
     characterId: 'local:character:creation-test', classEntryId: 'local:character:creation-test:class-entry:wizard', name: 'Aster',
     enabledContentPackIds: ['srd-2024'], abilityScoreGeneration: 'standard-array',
     abilityScores: { strength: 8, dexterity: 14, constitution: 13, intelligence: 15, wisdom: 12, charisma: 10 },
-    classId: wizard.id, classSkillIds: ['arcana', 'history'], classChoices: {}, equipmentPackageId: 'a',
+    classId: wizard.id, speciesId: 'srd-2024:species:dwarf', classSkillIds: ['arcana', 'history'], classChoices: {}, equipmentPackageId: 'a',
     cantripIds: wizardCantrips, spellbookSpellIds: wizardSpells, selectedSpellIds: [], preparedSpellIds: wizardSpells.slice(0, 4),
     initialHitPoints: 6, hitPointMethod: 'fixed',
     ...overrides, toolIds: overrides.toolIds ?? [],
@@ -32,7 +32,7 @@ describe('planCharacterCreation', () => {
     expect(result.character.preparedSpells).toHaveLength(4);
     expect(result.character.currencyGp).toBe(5);
     expect(result.character.inventory).toContainEqual({ itemId: 'srd-2024:item:spellbook', quantity: 1 });
-    expect(result.playState).toMatchObject({ currentHp: 7, usedHitDice: { 'local:character:creation-test:class-entry:wizard': 0 }, usedResources: {} });
+    expect(result.playState).toMatchObject({ currentHp: 8, usedHitDice: { 'local:character:creation-test:class-entry:wizard': 0 }, usedResources: {} });
   });
 
   test('does not accept a prepared Wizard spell outside the selected spellbook', () => {
@@ -59,6 +59,22 @@ describe('planCharacterCreation', () => {
     expect(result.character.currency!.gp).toBe(13);
     expect(result.character.inventory).toContainEqual({ itemId: 'srd-2024:item:parchment', quantity: 8 });
     expect(result.character.grantedSpells).toHaveLength(3);
+  });
+
+  test('persists species spell grants and their chosen casting ability', () => {
+    const result = planCharacterCreation(wizardRequest({
+      speciesId: 'srd-2024:species:elf',
+      speciesChoices: { 'elven-lineage': 'drow', 'keen-senses': 'perception' },
+      speciesSpellcastingAbilities: { drow: 'charisma' },
+    }), bundledContentRepository);
+
+    expect(result.ok).toBe(true);
+    if (!result.ok) return;
+    expect(result.character.proficiencies.skills.perception).toBe('proficient');
+    expect(result.character.grantedSpells).toEqual(expect.arrayContaining([
+      expect.objectContaining({ spellId: 'srd-2024:spell:dancing-lights', acquiredAtCharacterLevel: 1, castingAbility: 'charisma' }),
+      expect.objectContaining({ spellId: 'srd-2024:spell:faerie-fire', acquiredAtCharacterLevel: 3, preparation: 'always-prepared' }),
+    ]));
   });
 
   test('validates reviewed Weapon Mastery options against the class training', () => {

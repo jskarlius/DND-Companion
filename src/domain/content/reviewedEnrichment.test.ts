@@ -47,4 +47,18 @@ describe('reviewed level-one class profiles', () => {
     expect(byName('Bard')?.[0]?.entries).toContainEqual({ type: 'chosen-item', choiceId: 'musical-instrument', quantity: 1 });
     expect(byName('Paladin')?.[0]?.entries).toContainEqual({ type: 'chosen-item', choiceId: 'holy-symbol', quantity: 1 });
   });
+
+  it('makes every bundled SRD species selectable with reviewed creation facts', () => {
+    expect(bundledContentFixture.species).toHaveLength(9);
+    for (const species of bundledContentFixture.species) {
+      expect(species.traits, species.name).toBeDefined();
+      expect(species.traits?.speed, species.name).toBeGreaterThan(0);
+    }
+    expect(bundledContentFixture.species.find((entry) => entry.name === 'Dragonborn')?.choices?.[0]?.options).toHaveLength(10);
+    expect(bundledContentFixture.species.find((entry) => entry.name === 'Elf')?.choices).toEqual(expect.arrayContaining([
+      expect.objectContaining({ id: 'elven-lineage' }),
+      expect.objectContaining({ id: 'keen-senses' }),
+    ]));
+    expect(bundledContentFixture.species.find((entry) => entry.name === 'Orc')?.resources).toContainEqual(expect.objectContaining({ id: 'adrenaline-rush', recharge: 'short-rest' }));
+  });
 });

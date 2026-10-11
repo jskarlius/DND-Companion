@@ -15,6 +15,8 @@ export interface CharacterCreationRequest {
   readonly abilityScores: AbilityScores;
   readonly classId: string;
   readonly speciesId?: string;
+  readonly speciesChoices?: Readonly<Record<string, string>>;
+  readonly speciesSpellcastingAbilities?: Readonly<Record<string, Ability>>;
   readonly backgroundId?: string;
   /** The selected +2/+1 or +1/+1/+1 allocation, applied to generated scores. */
   readonly backgroundAbilityIncreases?: Readonly<Partial<Record<Ability, number>>>;
@@ -107,6 +109,7 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
   if (!characterClass) return { ok: false, issues: [{ field: 'class', message: 'Choose an installed class.' }] };
   if (!characterClass.levelOne) return { ok: false, issues: [{ field: 'class', message: `${characterClass.name} has no reviewed level-one creation profile.` }] };
   const profile = characterClass.levelOne;
+  const species = request.speciesId ? repository.getSpecies(request.speciesId) : undefined;
   const background = request.backgroundId ? repository.getBackground(request.backgroundId) : undefined;
 
   if (request.characterId.trim() === '') issues.push({ field: 'characterId', message: 'A stable character ID is required.' });
@@ -114,6 +117,14 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
   if (request.name.trim() === '') issues.push({ field: 'name', message: 'Enter a character name.' });
   if (request.enabledContentPackIds.length === 0) issues.push({ field: 'content', message: 'Enable the content pack that supplies the chosen class.' });
   if (!request.enabledContentPackIds.includes('srd-2024')) issues.push({ field: 'content', message: 'The selected class requires the bundled SRD content pack.' });
+  if (!request.speciesId || !species?.traits) issues.push({ field: 'species', message: 'Choose a species with reviewed creation facts.' });
+  for (const choice of species?.choices ?? []) {
+    const selected = request.speciesChoices?.[choice.id];
+    if (!selected || !choice.options.some((option) => option.id === selected)) issues.push({ field: `speciesChoices.${choice.id}`, message: `Choose ${choice.label}.` });
+  }
+  for (const option of (species?.choices ?? []).flatMap((choice) => choice.options.filter((candidate) => candidate.id === request.speciesChoices?.[choice.id]))) {
+    if (option.requiresSpellcastingAbility && !request.speciesSpellcastingAbilities?.[option.id]) issues.push({ field: `speciesSpellcastingAbilities.${option.id}`, message: `Choose the spellcasting ability for ${option.label}.` });
+  }
   // Ability-score generation is provenance, but the final saved values still
   // need the same sane numeric boundary used by the sheet editor.
   if (ABILITIES.some((ability) => !Number.isInteger(request.abilityScores[ability]) || request.abilityScores[ability] < 1 || request.abilityScores[ability] > 30)) {
@@ -192,6 +203,8 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
   if (!hasUniqueValues(selectedSpellIds)) return { ok: false, issues: [{ field: 'spells', message: 'A spell can only be recorded once for this class entry.' }] };
   const spellSelections: SpellSelection[] = selectedSpellIds.map((spellId) => ({ classEntryId: request.classEntryId, spellId, acquiredAtClassLevel: 1, prepared: false }));
   const finalAbilityScores = Object.fromEntries(ABILITIES.map((ability) => [ability, request.abilityScores[ability] + (backgroundIncrease[ability] ?? 0)])) as AbilityScores;
+  const selectedSpeciesOptions = (species?.choices ?? []).flatMap((choice) => choice.options.filter((option) => option.id === request.speciesChoices?.[choice.id]));
+  const resolvedSpeciesTraits = species?.traits ? { ...species.traits, ...Object.assign({}, ...selectedSpeciesOptions.map((option) => option.traits ?? {})) } : undefined;
   const grantedSpells: GrantedSpell[] = [];
   for (const grant of backgroundProfile?.spellGrants ?? []) {
     const selected = request.grantedSpellIds?.[grant.id] ?? [];
@@ -206,7 +219,18 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
     if (grant.castingAbilityChoiceId && !castingAbility) return { ok: false, issues: [{ field: `grantedSpells.${grant.id}`, message: 'Choose the spellcasting ability for this spell grant.' }] };
     grantedSpells.push(...selected.map((spellId) => ({ grantorId: background!.creation!.featIds?.[0] ?? background!.id, spellId, acquiredAtCharacterLevel: 1, castingAbility: castingAbility ?? 'intelligence', preparation: repository.getSpell(spellId)?.level === 0 ? 'available' as const : 'always-prepared' as const, replacementHistory: [] })));
   }
-  const maximumHp = request.initialHitPoints + Math.floor((finalAbilityScores.constitution - 10) / 2);
+  for (const option of selectedSpeciesOptions) {
+    const castingAbility = request.speciesSpellcastingAbilities?.[option.id] ?? 'intelligence';
+    grantedSpells.push(...(option.grantedSpells ?? []).map((grant) => ({
+      grantorId: species!.id,
+      spellId: grant.spellId,
+      acquiredAtCharacterLevel: grant.acquiredAtCharacterLevel,
+      castingAbility,
+      preparation: grant.preparation,
+      replacementHistory: [],
+    })));
+  }
+  const maximumHp = request.initialHitPoints + Math.floor((finalAbilityScores.constitution - 10) / 2) + (resolvedSpeciesTraits?.maximumHpPerCharacterLevel ?? 0);
 
   return {
     ok: true,
@@ -214,10 +238,10 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
       schemaVersion: 1, id: request.characterId, name: request.name.trim(), ruleset: '5e-2024', longRestHitDiceRecovery: '2024-all',
       enabledContentPackIds: request.enabledContentPackIds, abilityScoreGeneration: request.abilityScoreGeneration, abilityScores: finalAbilityScores,
       generatedAbilityScores: request.abilityScores,
-      speciesId: request.speciesId, backgroundId: request.backgroundId,
+      speciesId: request.speciesId, speciesTraits: resolvedSpeciesTraits, backgroundId: request.backgroundId,
       classes: [{ id: request.classEntryId, classId: characterClass.id, level: 1, choices: classChoices }], choices: {},
       proficiencies: {
-        savingThrowAbilities: characterClass.savingThrowAbilities, skills: Object.fromEntries([...new Set([...request.classSkillIds, ...(backgroundProfile?.skillGrants ?? [])])].map((skill) => [skill, 'proficient'])),
+        savingThrowAbilities: characterClass.savingThrowAbilities, skills: Object.fromEntries([...new Set([...request.classSkillIds, ...(backgroundProfile?.skillGrants ?? []), ...selectedSpeciesOptions.flatMap((option) => option.skillGrants ?? [])])].map((skill) => [skill, 'proficient'])),
         weaponTraining: profile.weaponTraining, armorTraining: profile.armorTraining,
         toolIds: [...new Set([...grantedToolIds, ...requestedToolIds, ...(backgroundProfile?.toolGrants ?? []), ...Object.values(request.backgroundChoices ?? {}).flat()])], languageIds: [],
       },
@@ -228,7 +252,10 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
       currency: { ...EMPTY_CURRENCY_PURSE, gp: selectedPackage.currencyGp + (backgroundPackage?.currencyGp ?? 0) },
       // Kept during the migration rollout for old readers and backups.
       currencyGp: selectedPackage.currencyGp + (backgroundPackage?.currencyGp ?? 0),
-      sourceChoices: backgroundProfile ? [{ ownerId: background!.id, choiceId: 'ability-increase', optionIds: Object.entries(backgroundIncrease).map(([ability, value]) => `${ability}+${value}`) }] : [],
+      sourceChoices: [
+        ...(backgroundProfile ? [{ ownerId: background!.id, choiceId: 'ability-increase', optionIds: Object.entries(backgroundIncrease).map(([ability, value]) => `${ability}+${value}`) }] : []),
+        ...(species?.choices ?? []).flatMap((choice) => request.speciesChoices?.[choice.id] ? [{ ownerId: species!.id, choiceId: choice.id, optionIds: [request.speciesChoices[choice.id]!] }] : []),
+      ],
       proficiencyOverrides: { skills: {}, savingThrows: {} },
       inventory: [...selectedPackage.entries, ...(backgroundPackage?.entries ?? [])]
         .flatMap((entry) => entry.type === 'item' ? [{ itemId: entry.itemId, quantity: entry.quantity }] : (request.backgroundChoices?.[entry.choiceId] ?? []).map((itemId) => ({ itemId, quantity: entry.quantity }))),

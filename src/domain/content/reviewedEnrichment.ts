@@ -1,4 +1,4 @@
-import type { Choice, Class, ContentFixture, Feature, LevelOneCreationProfile, Resource } from './types';
+import type { Choice, Class, ContentFixture, Feature, LevelOneCreationProfile, Resource, Species } from './types';
 
 type SupportedClass =
   | 'barbarian' | 'bard' | 'cleric' | 'druid' | 'fighter' | 'monk'
@@ -124,5 +124,79 @@ export function applyReviewedEnrichment(fixture: ContentFixture): ContentFixture
     const advancement = key === 'fighter' ? entry.advancement.map((level) => level.level === 1 ? { ...level, grants: [...level.grants, { type: 'choice' as const, choiceId: 'srd-2024:choice:fighter-fighting-style' }] } : level) : entry.advancement;
     return { ...entry, levelOne: profiles[key], multiclassing: multiclassPrerequisites[key], spellcasting, advancement };
   });
-  return { ...fixture, classes, features, choices, resources };
+  const species: Species[] = fixture.species.map((entry) => {
+    const reviewed: Record<string, Omit<Species, keyof Pick<Species, 'id' | 'name' | 'kind' | 'ruleset' | 'source' | 'featureIds'>>> = {
+      dragonborn: {
+        traits: { size: 'Medium', speed: 30, senses: ['Darkvision 60 ft.'], damageResistances: [] },
+        choices: [{ id: 'draconic-ancestry', label: 'Draconic Ancestry', options: [
+          ['black', 'Black', 'Acid'], ['blue', 'Blue', 'Lightning'], ['brass', 'Brass', 'Fire'], ['bronze', 'Bronze', 'Lightning'], ['copper', 'Copper', 'Acid'], ['gold', 'Gold', 'Fire'], ['green', 'Green', 'Poison'], ['red', 'Red', 'Fire'], ['silver', 'Silver', 'Cold'], ['white', 'White', 'Cold'],
+        ].map(([id, label, resistance]) => ({ id, label, description: `${label} dragon ancestry grants ${resistance} resistance and determines your Breath Weapon damage.`, traits: { damageResistances: [resistance!] } })) }],
+        resources: [{ id: 'breath-weapon', label: 'Breath Weapon', recharge: 'long-rest', maximum: 'proficiency-bonus' }],
+      },
+      dwarf: { resources: [{ id: 'stonecunning', label: 'Stonecunning', recharge: 'long-rest', maximum: 'proficiency-bonus' }] },
+      elf: {
+        traits: { size: 'Medium', speed: 30, senses: ['Darkvision 60 ft.'], damageResistances: [] },
+        choices: [
+          { id: 'elven-lineage', label: 'Elven Lineage', options: [
+            { id: 'drow', label: 'Drow', description: 'Darkvision 120 ft. and Dancing Lights.', traits: { senses: ['Darkvision 120 ft.'] }, requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:dancing-lights', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:faerie-fire', acquiredAtCharacterLevel: 3, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:darkness', acquiredAtCharacterLevel: 5, preparation: 'always-prepared', freeCast: true }] },
+            { id: 'high-elf', label: 'High Elf', description: 'Prestidigitation, with a Wizard cantrip replacement after a Long Rest.', requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:prestidigitation', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:detect-magic', acquiredAtCharacterLevel: 3, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:misty-step', acquiredAtCharacterLevel: 5, preparation: 'always-prepared', freeCast: true }] },
+            { id: 'wood-elf', label: 'Wood Elf', description: 'Druidcraft and a 35-foot Speed.', traits: { speed: 35 }, requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:druidcraft', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:longstrider', acquiredAtCharacterLevel: 3, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:pass-without-trace', acquiredAtCharacterLevel: 5, preparation: 'always-prepared', freeCast: true }] },
+          ] },
+          { id: 'keen-senses', label: 'Keen Senses', options: [
+            { id: 'insight', label: 'Insight', description: 'Gain Insight proficiency.', skillGrants: ['insight'] },
+            { id: 'perception', label: 'Perception', description: 'Gain Perception proficiency.', skillGrants: ['perception'] },
+            { id: 'survival', label: 'Survival', description: 'Gain Survival proficiency.', skillGrants: ['survival'] },
+          ] },
+        ],
+      },
+      gnome: {
+        traits: { size: 'Small', speed: 30, senses: ['Darkvision 60 ft.'], damageResistances: [] },
+        choices: [{ id: 'gnomish-lineage', label: 'Gnomish Lineage', options: [
+          { id: 'forest', label: 'Forest Gnome', description: 'Minor Illusion and Speak with Animals.', requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:minor-illusion', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:speak-with-animals', acquiredAtCharacterLevel: 3, preparation: 'always-prepared', freeCast: true }] },
+          { id: 'rock', label: 'Rock Gnome', description: 'Mending and Prestidigitation.', requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:mending', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:prestidigitation', acquiredAtCharacterLevel: 1, preparation: 'available' }] },
+        ] }],
+      },
+      goliath: { resources: [] },
+      halfling: { traits: { size: 'Small', speed: 30, senses: [], damageResistances: [] } },
+      human: {
+        traits: { size: 'Medium', speed: 30, senses: [], damageResistances: [] },
+        choices: [
+          { id: 'size', label: 'Size', options: [{ id: 'medium', label: 'Medium', description: 'About 4–7 feet tall.', traits: { size: 'Medium' } }, { id: 'small', label: 'Small', description: 'About 2–4 feet tall.', traits: { size: 'Small' } }] },
+          { id: 'skillful', label: 'Skillful', options: allSkills.map((skill) => ({ id: skill, label: skill.replace(/([A-Z])/g, ' $1').replace(/^./, (letter) => letter.toUpperCase()), description: `Gain ${skill} proficiency.`, skillGrants: [skill] })) },
+          { id: 'origin-feat', label: 'Origin Feat', options: [
+            { id: 'srd-2024:feat:alert', label: 'Alert', description: 'Gain the Alert Origin Feat.' },
+            { id: 'srd-2024:feat:magic-initiate', label: 'Magic Initiate', description: 'Gain the Magic Initiate Origin Feat; its spell selection is shown as reference while the shared feat configuration is completed.' },
+            { id: 'srd-2024:feat:savage-attacker', label: 'Savage Attacker', description: 'Gain the Savage Attacker Origin Feat.' },
+            { id: 'srd-2024:feat:skilled', label: 'Skilled', description: 'Gain the Skilled Origin Feat.' },
+          ] },
+        ],
+      },
+      orc: { resources: [{ id: 'adrenaline-rush', label: 'Adrenaline Rush', recharge: 'short-rest', maximum: 'proficiency-bonus' }] },
+      tiefling: {
+        traits: { size: 'Medium', speed: 30, senses: ['Darkvision 60 ft.'], damageResistances: [] },
+        choices: [
+          { id: 'size', label: 'Size', options: [{ id: 'medium', label: 'Medium', description: 'About 4–7 feet tall.', traits: { size: 'Medium' } }, { id: 'small', label: 'Small', description: 'About 3–4 feet tall.', traits: { size: 'Small' } }] },
+          { id: 'fiendish-legacy', label: 'Fiendish Legacy', options: [
+            { id: 'abyssal', label: 'Abyssal', description: 'Poison Spray and poison resistance.', traits: { damageResistances: ['Poison'] }, requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:poison-spray', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:ray-of-sickness', acquiredAtCharacterLevel: 3, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:hold-person', acquiredAtCharacterLevel: 5, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:thaumaturgy', acquiredAtCharacterLevel: 1, preparation: 'available' }] },
+            { id: 'chthonic', label: 'Chthonic', description: 'Chill Touch and necrotic resistance.', traits: { damageResistances: ['Necrotic'] }, requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:chill-touch', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:false-life', acquiredAtCharacterLevel: 3, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:ray-of-enfeeblement', acquiredAtCharacterLevel: 5, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:thaumaturgy', acquiredAtCharacterLevel: 1, preparation: 'available' }] },
+            { id: 'infernal', label: 'Infernal', description: 'Fire Bolt and fire resistance.', traits: { damageResistances: ['Fire'] }, requiresSpellcastingAbility: true, grantedSpells: [{ spellId: 'srd-2024:spell:fire-bolt', acquiredAtCharacterLevel: 1, preparation: 'available' }, { spellId: 'srd-2024:spell:hellish-rebuke', acquiredAtCharacterLevel: 3, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:darkness', acquiredAtCharacterLevel: 5, preparation: 'always-prepared', freeCast: true }, { spellId: 'srd-2024:spell:thaumaturgy', acquiredAtCharacterLevel: 1, preparation: 'available' }] },
+          ] },
+        ],
+      },
+    };
+    const key = entry.id.split(':').at(-1)!;
+    const enrichment = reviewed[key];
+    return enrichment ? {
+      ...entry,
+      ...enrichment,
+      traits: {
+        size: enrichment.traits?.size ?? entry.traits?.size ?? 'Medium',
+        speed: enrichment.traits?.speed ?? entry.traits?.speed ?? 30,
+        senses: enrichment.traits?.senses ?? entry.traits?.senses ?? [],
+        damageResistances: enrichment.traits?.damageResistances ?? entry.traits?.damageResistances ?? [],
+        maximumHpPerCharacterLevel: enrichment.traits?.maximumHpPerCharacterLevel ?? entry.traits?.maximumHpPerCharacterLevel,
+      },
+    } : entry;
+  });
+  return { ...fixture, classes, features, choices, resources, species };
 }

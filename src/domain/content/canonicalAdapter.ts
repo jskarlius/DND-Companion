@@ -7,6 +7,7 @@ import { ComposedContentRepository } from './repository';
 const abilitySchema = z.enum(['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']);
 const tableValueSchema = z.object({ level: z.number().int().min(1).max(20), column_value: z.string() });
 const featureReferenceSchema = z.object({
+  desc: z.string().optional(),
   feature_type: z.string().optional(),
   gained_at: z.array(z.object({ level: z.number().int().min(1).max(20), detail: z.string().nullable().optional() })).optional(),
   data_for_class_table: z.array(tableValueSchema).optional(),
@@ -61,6 +62,7 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
   const rawFeatures = entities.filter((entity) => entity.kind === 'feature');
   const features: Feature[] = rawFeatures.map((entity) => ({
     id: entity.id, name: entity.name, kind: 'feature', ruleset: entity.ruleset, source: entity.source, automation: 'reference',
+    description: nonEmpty(reference(entity.reference, featureReferenceSchema)?.desc),
   }));
   const spells: Spell[] = entities.filter((entity) => entity.kind === 'spell').flatMap((entity) => {
     const raw = reference(entity.reference, spellReferenceSchema);
@@ -134,6 +136,9 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
     id: entity.id, name: entity.name, kind: 'species', ruleset: entity.ruleset, source: entity.source,
     featureIds: entity.featureIds ?? rawFeatures.filter((feature) => feature.ownerId === entity.id).map((feature) => feature.id),
     creation: entity.creation,
+    traits: entity.traits,
+    choices: entity.choices,
+    resources: entity.resources,
   }));
   const backgrounds: Background[] = entities.filter((entity) => entity.kind === 'background').map((entity) => ({
     id: entity.id, name: entity.name, kind: 'background', ruleset: entity.ruleset, source: entity.source,

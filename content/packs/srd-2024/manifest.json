@@ -354,7 +354,7 @@
         "species"
       ],
       "path": "species/dragonborn.json",
-      "sha256": "0d6dbe77247d5315b8d75b477cd87c9e4552d99e4388bfff685270581537243c"
+      "sha256": "b2d319b377f5c90220559dcea983ef83e7acc5ac7f32b647857cac1381e9abe5"
     },
     {
       "counts": {
@@ -366,7 +366,7 @@
         "species"
       ],
       "path": "species/dwarf.json",
-      "sha256": "46b059d82fae8d8c2d862c643b694826a2611fdcee8ce951efb6248daeb91b2b"
+      "sha256": "78f36ece15d21a37ed96e4a75d14fa25367c1cf0ef718d2d806acf435d93e70a"
     },
     {
       "counts": {
@@ -378,7 +378,7 @@
         "species"
       ],
       "path": "species/elf.json",
-      "sha256": "1ee9ddabfb85386eefc61ff6d5f5a3b84f882f1adaa8ae17b797db0ec5a2dc2a"
+      "sha256": "1b957f61cd650dcda92ded6e81dfb5c9d0ae1a51de8613f59cde4d4ca62b2281"
     },
     {
       "counts": {
@@ -390,7 +390,7 @@
         "species"
       ],
       "path": "species/gnome.json",
-      "sha256": "3a7c5b25e5b44e7dec514b776aff784707118cd975477eb6593a193f6445aec3"
+      "sha256": "d59e327fe313a9c1604ad871ae12a1e2b6229c8718f8253bc135d5e1f5c6b6d7"
     },
     {
       "counts": {
@@ -402,7 +402,7 @@
         "species"
       ],
       "path": "species/goliath.json",
-      "sha256": "20af3540d5880ef5ded04811374a3f29c8f6d753ce843caedf42b0a84059949d"
+      "sha256": "725ae2af0a29c81538e372eb3eab9e17c7edf4e70e776ed18a8a1a81bee6a28c"
     },
     {
       "counts": {
@@ -414,7 +414,7 @@
         "species"
       ],
       "path": "species/halfling.json",
-      "sha256": "cd78df529c038690339cf6d420de2e2d92e5b9cb1f893b188af5ed5db2f6e75f"
+      "sha256": "bb02f0e6df1ba09cf6b5726283ac53eaf9cda457ac0bb2fe2fbb0de764fb0ba8"
     },
     {
       "counts": {
@@ -426,7 +426,7 @@
         "species"
       ],
       "path": "species/human.json",
-      "sha256": "565a89e3c99079a773a89084da3a0ef70f5756d1a5d0a65ace2e0b5382f87070"
+      "sha256": "09e15b62e24001f0f83895e32e7b9e278bfd048c15bb680c0c51bf63ded3f4b9"
     },
     {
       "counts": {
@@ -438,7 +438,7 @@
         "species"
       ],
       "path": "species/orc.json",
-      "sha256": "8454dd1fa2f5fe7751d7cd2587943a01e041cb7f7f4ca58f3ded28c1208f9b13"
+      "sha256": "6c1f00bede18d3049bd6a4a24e8cb4ded0c6008da9b44a7c7328b6a1e383d38b"
     },
     {
       "counts": {
@@ -450,7 +450,7 @@
         "species"
       ],
       "path": "species/tiefling.json",
-      "sha256": "9f10cdf0a3fb85c8ce6e85dc1feaf7673c2a4331c310b7e252069a360a543024"
+      "sha256": "8d68eb58eb47d1508684ec4cf97ddb6c24e33c3fe95ad720c7e30c9f46d864fd"
     },
     {
       "counts": {

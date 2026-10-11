@@ -113,12 +113,33 @@ export function CharacterSheet({ character, playState, content, details, onChara
   const speed = resolveManualOverride(baseCalculation(combat.speed, 'Calculated speed'), draftCharacter.manualOverrides, 'speed').value;
   const baseMaximumHp = resolveManualOverride(baseCalculation(combat.maximumHp, 'Calculated maximum HP'), draftCharacter.manualOverrides, 'maximumHp').value;
   const maximumHp = baseMaximumHp + sessionState.temporaryMaximumHpBonus;
+  const selectedSpecies = draftCharacter.speciesId ? content.species.find((entry) => entry.id === draftCharacter.speciesId) : undefined;
+  const speciesTraits = draftCharacter.speciesTraits;
+  const toolNames = draftCharacter.proficiencies.toolIds.map((id) => content.items.find((item) => item.id === id)?.name ?? id);
+  const speciesFeatures = (selectedSpecies?.featureIds ?? []).map((id) => content.features.find((feature) => feature.id === id)).filter((feature): feature is NonNullable<typeof feature> => Boolean(feature) && !['Size', 'Speed', 'Darkvision'].includes(feature!.name));
   const hitDiceGroups = sheet.hitDiceGroups;
   const hitDiceRecovery = draftCharacter.longRestHitDiceRecovery;
   const hitDiceRecoveryLimitValue = hitDiceRecoveryLimit(hitDiceGroups.map(({ classEntryId, maximum }) => ({ classEntryId, maximum })), hitDiceRecovery);
   const usedHitDice = hitDiceGroups.reduce((total, group) => total + group.used, 0);
   const hitDiceSummary = hitDiceGroups.map((group) => `${group.maximum}d${group.die}`).join(' + ');
   const detailSpell = detailSpellId ? content.spells.find((spell) => spell.id === detailSpellId) : undefined;
+  const selectedSpeciesOptionIds = new Set((draftCharacter.sourceChoices ?? [])
+    .filter((choice) => choice.ownerId === selectedSpecies?.id)
+    .flatMap((choice) => choice.optionIds));
+  const speciesResources = [
+    ...(selectedSpecies?.resources ?? []),
+    ...(selectedSpecies?.choices ?? []).flatMap((choice) => choice.options
+      .filter((option) => selectedSpeciesOptionIds.has(option.id) && option.resource)
+      .map((option) => ({ id: `${choice.id}:${option.id}`, label: option.label, recharge: option.resource!.recharge, maximum: option.resource!.maximum }))),
+  ].map((resource) => ({
+    id: `species:${selectedSpecies!.id}:${resource.id}`,
+    name: resource.label,
+    kind: 'resource' as const,
+    ruleset: '5e-2024' as const,
+    source: selectedSpecies!.source,
+    maximum: sheet.proficiencyBonus,
+    recharge: resource.recharge,
+  }));
 
   useEffect(() => {
     if (previousCharacter.current !== draftCharacter) onCharacterChange?.(draftCharacter);
@@ -221,7 +242,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
         : current;
       const rested = takeRest(
         beforeRest,
-        sheet.resources.map(({ resource }) => resource),
+        [...sheet.resources.map(({ resource }) => resource), ...speciesResources],
         pendingRest,
         maximumHp,
         hitDiceGroups.map(({ classEntryId, maximum }) => ({ classEntryId, maximum })),
@@ -281,6 +302,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
           <Section title="Abilities" headerAction={<AbilityScoreDialog scores={draftCharacter.abilityScores} generation={draftCharacter.abilityScoreGeneration} onSave={(abilityScores, abilityScoreGeneration) => setDraftCharacter((current) => ({ ...current, abilityScores, abilityScoreGeneration }))} />}><dl className="ability-grid">{sheet.abilities.map(({ ability, score, modifier }) => <div key={ability}><dt aria-label={titleCase(ability)}><abbr title={titleCase(ability)}>{abilityAbbreviation(ability)}</abbr></dt><dd>{score}<small>{signed(modifier)}</small></dd></div>)}</dl></Section>
           <Section title="Saving throws" headerAction={<OverrideButton label="saving throws" active={false} onClick={() => setEditingProficiencySection('savingThrows')} />}><ul className="check-list">{sheet.savingThrows.map(({ ability, value, proficient }) => <li key={ability}><ProficiencyMarker value={proficient ? 'proficient' : 'none'} label={`${titleCase(ability)} saving throw${proficient ? ', proficient' : ''}`} /><b>{signed(value)}</b><span className="proficiency-name">{titleCase(ability)}</span>{draftCharacter.proficiencyOverrides?.savingThrows[ability] && <span className="proficiency-labels"><em>O</em></span>}</li>)}</ul></Section>
           <Section title="Skills" headerAction={<OverrideButton label="skills" active={false} onClick={() => setEditingProficiencySection('skills')} />}><ul className="check-list skill-list">{sheet.skills.map(({ skill, value, proficiency }) => <li key={skill}><ProficiencyMarker value={proficiency as 'none' | 'proficient' | 'expertise'} label={`${titleCase(skill)}: ${proficiency}`} /><b>{signed(value)}</b><span className="proficiency-name">{titleCase(skill)}</span>{(proficiency === 'expertise' || draftCharacter.proficiencyOverrides?.skills[skill]) && <span className="proficiency-labels">{proficiency === 'expertise' && <em>E</em>}{draftCharacter.proficiencyOverrides?.skills[skill] && <em>O</em>}</span>}</li>)}</ul></Section>
+          <Section title="Other proficiencies and traits"><dl className="other-proficiencies"><div><dt>Species</dt><dd>{selectedSpecies?.name ?? 'Not chosen'}</dd></div><div><dt>Weapon training</dt><dd>{draftCharacter.proficiencies.weaponTraining.map(titleCase).join(', ') || 'None'}</dd></div><div><dt>Armor training</dt><dd>{draftCharacter.proficiencies.armorTraining.map(titleCase).join(', ') || 'None'}</dd></div><div><dt>Tools</dt><dd>{toolNames.join(', ') || 'None'}</dd></div><div><dt>Languages</dt><dd>{draftCharacter.proficiencies.languageIds.join(', ') || 'None'}</dd></div><div><dt>Damage resistances</dt><dd>{speciesTraits?.damageResistances.join(', ') || 'None'}</dd></div><div><dt>Senses</dt><dd>{speciesTraits?.senses.join(', ') || 'None'}</dd></div></dl>{speciesFeatures.length > 0 && <div className="species-feature-list">{speciesFeatures.map((feature) => <article key={feature.id}><strong>{feature.name}</strong><p>{feature.description ?? 'Reference details are not available.'}</p></article>)}</div>}</Section>
         </div>
 
         <div className="sheet-column sheet-column-wide">
@@ -291,7 +313,7 @@ export function CharacterSheet({ character, playState, content, details, onChara
 
         <div className="sheet-column">
           <Section title="Features"><ul className="card-list">{sheet.features.map((feature) => <li key={feature.id}><strong>{feature.name}</strong><span>{titleCase(feature.automation)} automation</span></li>)}</ul></Section>
-          <Section title="Resources"><ul className="card-list">{(character.grantedSpells ?? []).filter((grant) => (content.spells.find((spell) => spell.id === grant.spellId)?.level ?? 0) > 0).map((grant) => { const spell = content.spells.find((entry) => entry.id === grant.spellId)!; const resourceId = `origin-free-cast:${grant.grantorId}:${grant.spellId}`; const used = sessionState.usedResources[resourceId] ?? 0; return <li key={resourceId}><strong>Magic Initiate: {spell.name}</strong><span>{1 - used} / 1 remaining / Long Rest</span><div className="resource-actions"><button type="button" aria-label={`Use free Magic Initiate cast of ${spell.name}`} disabled={used === 1} onClick={() => setSessionState((current) => ({ ...current, usedResources: { ...current.usedResources, [resourceId]: 1 } }))}>Use free cast</button><button type="button" className="resource-restore" aria-label={`Restore free Magic Initiate cast of ${spell.name}`} disabled={used === 0} onClick={() => setSessionState((current) => ({ ...current, usedResources: { ...current.usedResources, [resourceId]: 0 } }))}>Restore use</button></div></li>; })}{sheet.resources.map(({ resource, used }) => <li key={resource.id}><strong>{resource.name}</strong><span>{resource.maximum - used} / {resource.maximum} remaining / {titleCase(resource.recharge)}</span><div className="resource-actions"><button type="button" aria-label={`Use ${resource.name}`} disabled={used === resource.maximum} onClick={() => setSessionState((current) => setResourceUses(current, resource, used + 1))}>Use</button><button type="button" className="resource-restore" aria-label={`Restore ${resource.name}`} disabled={used === 0} onClick={() => setSessionState((current) => setResourceUses(current, resource, used - 1))}>Restore use</button></div></li>)}</ul></Section>
+          <Section title="Resources"><ul className="card-list">{(character.grantedSpells ?? []).filter((grant) => (content.spells.find((spell) => spell.id === grant.spellId)?.level ?? 0) > 0).map((grant) => { const spell = content.spells.find((entry) => entry.id === grant.spellId)!; const resourceId = `origin-free-cast:${grant.grantorId}:${grant.spellId}`; const used = sessionState.usedResources[resourceId] ?? 0; return <li key={resourceId}><strong>Magic Initiate: {spell.name}</strong><span>{1 - used} / 1 remaining / Long Rest</span><div className="resource-actions"><button type="button" aria-label={`Use free Magic Initiate cast of ${spell.name}`} disabled={used === 1} onClick={() => setSessionState((current) => ({ ...current, usedResources: { ...current.usedResources, [resourceId]: 1 } }))}>Use free cast</button><button type="button" className="resource-restore" aria-label={`Restore free Magic Initiate cast of ${spell.name}`} disabled={used === 0} onClick={() => setSessionState((current) => ({ ...current, usedResources: { ...current.usedResources, [resourceId]: 0 } }))}>Restore use</button></div></li>; })}{[...sheet.resources.map(({ resource }) => resource), ...speciesResources].map((resource) => { const used = sessionState.usedResources[resource.id] ?? 0; return <li key={resource.id}><strong>{resource.name}</strong><span>{resource.maximum - used} / {resource.maximum} remaining / {titleCase(resource.recharge)}</span><div className="resource-actions"><button type="button" aria-label={`Use ${resource.name}`} disabled={used === resource.maximum} onClick={() => setSessionState((current) => setResourceUses(current, resource, used + 1))}>Use</button><button type="button" className="resource-restore" aria-label={`Restore ${resource.name}`} disabled={used === 0} onClick={() => setSessionState((current) => setResourceUses(current, resource, used - 1))}>Restore use</button></div></li>; })}</ul></Section>
         </div>
       </TabsContent>
 

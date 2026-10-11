@@ -470,6 +470,18 @@ rest free cast is tracked in `CharacterPlayState.usedResources` under the
 stable key `origin-free-cast:${grantorId}:${spellId}`; it is not a spell slot
 and a Long Rest restores that use.
 
+Species use the same source-qualified creation boundary. Reviewed species
+traits persist only their resolved size, speed, senses, damage resistances,
+and explicit permanent maximum-HP modifier; feature prose remains in the
+content pack. The sheet groups weapon, armor, tool, and language training with
+those traits so a player can find all non-skill proficiencies in one place.
+
+Reviewed species choices are data-owned option groups. An option may carry a
+reference description and a tracked resource whose maximum scales from the
+character's proficiency bonus and recharges on a stated rest. The saved
+character records only the owner, choice ID, and selected option ID; the pack
+remains the source for its mechanics and display text.
+
 Temporary play state is persisted independently:
 
 ```ts
@@ -731,6 +743,11 @@ The design system is introduced before application navigation expands. A
 manual product checkpoint after the character-library slice validates the
 library, character sheet, responsive behavior, keyboard operation, and visual
 hierarchy before level-up work begins.
+
+Every rules choice uses one accessible picker pattern: a compact trigger in the
+form opens a searchable or browsable dialog with option previews, and the form
+then shows only the selected result. Radio-button walls are not used for
+content choices with descriptions or more than a trivial number of options.
 
 ## 11. Frontend and packaging technology
 

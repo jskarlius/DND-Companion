@@ -20,6 +20,10 @@ const characterFieldsSchema = z.object({
   generatedAbilityScores: z.record(abilitySchema, z.number()).optional(),
   abilityScores: z.record(abilitySchema, z.number()),
   speciesId: z.string().min(1).optional(),
+  speciesTraits: z.object({
+    size: z.string().min(1), speed: z.number().int().positive(), senses: z.array(z.string().min(1)), damageResistances: z.array(z.string().min(1)),
+    maximumHpPerCharacterLevel: z.number().int().positive().optional(),
+  }).optional(),
   backgroundId: z.string().min(1).optional(),
   classes: z.array(z.object({
     id: z.string().min(1),

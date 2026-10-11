@@ -126,6 +126,68 @@
   "resources": [],
   "schemaVersion": 1,
   "species": {
+    "choices": [
+      {
+        "id": "giant-ancestry",
+        "label": "Giant Ancestry",
+        "options": [
+          {
+            "description": "Bonus Action: teleport up to 30 feet to an unoccupied space you can see.",
+            "id": "cloud",
+            "label": "Cloud's Jaunt",
+            "resource": {
+              "maximum": "proficiency-bonus",
+              "recharge": "long-rest"
+            }
+          },
+          {
+            "description": "When you hit with an attack roll and deal damage, deal an extra 1d10 Fire damage.",
+            "id": "fire",
+            "label": "Fire's Burn",
+            "resource": {
+              "maximum": "proficiency-bonus",
+              "recharge": "long-rest"
+            }
+          },
+          {
+            "description": "When you hit with an attack roll and deal damage, deal an extra 1d6 Cold damage and reduce the target’s Speed by 10 feet until your next turn.",
+            "id": "frost",
+            "label": "Frost's Chill",
+            "resource": {
+              "maximum": "proficiency-bonus",
+              "recharge": "long-rest"
+            }
+          },
+          {
+            "description": "When you hit a Large or smaller creature with an attack roll and deal damage, you can give it the Prone condition.",
+            "id": "hill",
+            "label": "Hill's Tumble",
+            "resource": {
+              "maximum": "proficiency-bonus",
+              "recharge": "long-rest"
+            }
+          },
+          {
+            "description": "Reaction when you take damage: roll 1d12 + your Constitution modifier and reduce the damage by that total.",
+            "id": "stone",
+            "label": "Stone's Endurance",
+            "resource": {
+              "maximum": "proficiency-bonus",
+              "recharge": "long-rest"
+            }
+          },
+          {
+            "description": "Reaction when a creature within 60 feet damages you: deal 1d8 Thunder damage to it.",
+            "id": "storm",
+            "label": "Storm's Thunder",
+            "resource": {
+              "maximum": "proficiency-bonus",
+              "recharge": "long-rest"
+            }
+          }
+        ]
+      }
+    ],
     "id": "srd-2024:species:goliath",
     "kind": "species",
     "name": "Goliath",
@@ -208,6 +270,12 @@
       "title": "System Reference Document 5.2",
       "upstreamVersion": "Open5e document key srd-2024 (label: System Reference Document 5.2)",
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
+    },
+    "traits": {
+      "damageResistances": [],
+      "senses": [],
+      "size": "Medium",
+      "speed": 35
     }
   }
 }

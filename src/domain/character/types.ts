@@ -144,6 +144,15 @@ export interface CharacterProficiencies {
   readonly languageIds: readonly string[];
 }
 
+/** Source-owned, always-on facts resolved from the selected species. */
+export interface CharacterSpeciesTraits {
+  readonly size: string;
+  readonly speed: number;
+  readonly senses: readonly string[];
+  readonly damageResistances: readonly string[];
+  readonly maximumHpPerCharacterLevel?: number;
+}
+
 export const MANUAL_OVERRIDE_TARGETS = [
   'armorClass',
   'maximumHp',
@@ -182,6 +191,7 @@ export interface Character {
   readonly abilityScores: AbilityScores;
   /** Optional only while pre-Wizard-creation records are migrated. */
   readonly speciesId?: string;
+  readonly speciesTraits?: CharacterSpeciesTraits;
   readonly backgroundId?: string;
   readonly classes: readonly ClassEntry[];
   readonly choices: Readonly<Record<string, ChoiceValue>>;

@@ -57,6 +57,50 @@ export interface CreationProfile {
   readonly spellGrants?: readonly SpellGrantDefinition[];
 }
 
+/** Reviewed always-on facts granted by a selected species at character creation. */
+export interface SpeciesTraits {
+  readonly size: string;
+  readonly speed: number;
+  readonly senses: readonly string[];
+  readonly damageResistances: readonly string[];
+  /** A source-owned permanent maximum-HP increase per character level. */
+  readonly maximumHpPerCharacterLevel?: number;
+}
+
+export interface SpeciesChoiceOption {
+  readonly id: string;
+  readonly label: string;
+  readonly description: string;
+  readonly resource?: { readonly recharge: Recharge; readonly maximum: 'proficiency-bonus' };
+  readonly skillGrants?: readonly Skill[];
+  readonly traits?: Partial<SpeciesTraits>;
+  /** Fixed lineage/legacy spells, including spells unlocked at later character levels. */
+  readonly grantedSpells?: readonly SpeciesGrantedSpell[];
+  /** Intelligence, Wisdom, or Charisma is chosen when this option is selected. */
+  readonly requiresSpellcastingAbility?: boolean;
+}
+
+export interface SpeciesGrantedSpell {
+  readonly spellId: ContentId;
+  readonly acquiredAtCharacterLevel: number;
+  readonly preparation: 'always-prepared' | 'available';
+  readonly freeCast?: boolean;
+}
+
+export interface SpeciesChoice {
+  readonly id: string;
+  readonly label: string;
+  readonly options: readonly SpeciesChoiceOption[];
+}
+
+/** A reviewed species use tracker. Its maximum is derived from total level. */
+export interface SpeciesResource {
+  readonly id: string;
+  readonly label: string;
+  readonly recharge: Recharge;
+  readonly maximum: 'proficiency-bonus';
+}
+
 /** A source-defined spell choice that remains outside class spell ownership. */
 export interface SpellGrantDefinition {
   readonly id: ContentId;
@@ -119,6 +163,8 @@ export interface Feature extends ContentEntity {
   readonly kind: 'feature';
   readonly automation: AutomationTier;
   readonly resourceId?: ContentId;
+  /** Reference text retained for feature displays; it is not interpreted as mechanics. */
+  readonly description?: string;
 }
 
 /** A rules-owned selection recorded on the class entry that receives it. */
@@ -169,6 +215,9 @@ export interface Species extends ContentEntity {
   readonly kind: 'species';
   readonly featureIds: readonly ContentId[];
   readonly creation?: CreationProfile;
+  readonly traits?: SpeciesTraits;
+  readonly choices?: readonly SpeciesChoice[];
+  readonly resources?: readonly SpeciesResource[];
 }
 
 export interface Background extends ContentEntity {
@@ -283,6 +332,10 @@ export interface PackEntity extends ContentEntity {
   readonly equipmentPackages?: readonly StartingEquipmentPackage[];
   /** Deterministic reviewed creation facts; never inferred by the client. */
   readonly creation?: CreationProfile;
+  /** Deterministic species facts resolved at character creation. */
+  readonly traits?: SpeciesTraits;
+  readonly choices?: readonly SpeciesChoice[];
+  readonly resources?: readonly SpeciesResource[];
 }
 
 export interface ContentPackModule {
