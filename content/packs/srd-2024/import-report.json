@@ -1,17 +1,19 @@
 {
   "deferredStructuredModeling": [
-    "class and background starting-equipment alternatives",
     "species and background player choices",
     "feature resources and recharge rules",
     "feature/feat mechanical effects",
-    "class spellcasting and advancement tables"
+    "class spellcasting and advancement tables",
+    "background starting-equipment alternatives",
+    "background starting-equipment alternatives",
+    "background starting-equipment alternatives"
   ],
   "importedEntityCounts": {
     "background": 4,
     "class": 12,
     "feat": 17,
     "feature": 423,
-    "item": 203,
+    "item": 206,
     "species": 9,
     "spell": 339,
     "subclass": 12

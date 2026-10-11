@@ -98,6 +98,7 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
     return [{
       id: entity.id, name: entity.name, kind: 'class' as const, ruleset: entity.ruleset, source: entity.source,
       hitDie: Number(raw.hit_dice.slice(1)), savingThrowAbilities, spellListIds: spellIdsByClass.get(entity.id) ?? [],
+      startingEquipmentPackages: entity.equipmentPackages ?? [],
       subclassSelectionLevel: ownerFeatures.some((feature) => feature.name.endsWith(' Subclass')) ? 3 : undefined,
       advancement: makeAdvancement(entity.id),
       spellcasting: caster ? {

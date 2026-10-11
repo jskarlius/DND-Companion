@@ -13,6 +13,10 @@ const abilitySchema = z.enum([
   'wisdom',
   'charisma',
 ]);
+const skillSchema = z.enum([
+  'acrobatics', 'animalHandling', 'arcana', 'athletics', 'deception', 'history', 'insight', 'intimidation',
+  'investigation', 'medicine', 'nature', 'perception', 'performance', 'persuasion', 'religion', 'sleightOfHand', 'stealth', 'survival',
+]);
 
 const contentEntitySchema = z.object({
   id: contentIdSchema,
@@ -86,12 +90,50 @@ export const advancementLevelSchema = z.object({
   grants: z.array(advancementGrantSchema),
 });
 
+const levelOneCreationProfileSchema = z.object({
+  skillChoices: z.object({ count: z.int().min(0), options: z.array(skillSchema).min(1) }),
+  grantedToolIds: z.array(contentIdSchema).optional(),
+  toolChoice: z.object({ id: z.string().min(1), count: z.int().positive(), categories: z.array(z.enum(['artisan-tools', 'musical-instruments'])).min(1) }).optional(),
+  languageChoiceCount: z.int().positive().optional(),
+  weaponTraining: z.array(z.string().min(1)),
+  armorTraining: z.array(z.string().min(1)),
+  startingEquipmentOptionCount: z.int().min(2).max(3),
+  choices: z.array(z.object({
+    id: z.string().min(1), label: z.string().min(1), count: z.int().positive(), optionIds: z.array(z.string().min(1)).min(1).optional(),
+    optionCategory: z.enum(['skill-proficiency', 'weapon-mastery', 'eldritch-invocation']).optional(),
+  }).refine((choice) => choice.optionIds !== undefined || choice.optionCategory !== undefined, 'must declare options or an option category')),
+  resources: z.array(z.object({
+    id: z.string().min(1), recharge: z.enum(['short-rest', 'long-rest', 'manual']),
+    maximum: z.discriminatedUnion('basis', [
+      z.object({ basis: z.literal('fixed'), value: z.int().positive() }),
+      z.object({ basis: z.literal('ability-modifier'), ability: abilitySchema, minimum: z.int().positive() }),
+      z.object({ basis: z.literal('class-level'), multiplier: z.int().positive() }),
+    ]),
+  })),
+  spellcasting: z.object({
+    cantrips: z.int().min(0), selectedSpells: z.int().min(0), spellbookSpells: z.int().positive().optional(), preparedSpells: z.int().min(0),
+    preparationChange: z.enum(['long-rest', 'long-rest-one', 'on-class-level', 'none']),
+    alwaysPreparedSpellIds: z.array(contentIdSchema).optional(),
+  }).optional(),
+});
+
+const startingEquipmentPackageSchema = z.object({
+  id: z.string().min(1),
+  currencyGp: z.int().min(0),
+  entries: z.array(z.discriminatedUnion('type', [
+    z.object({ type: z.literal('item'), itemId: contentIdSchema, quantity: z.int().positive() }),
+    z.object({ type: z.literal('chosen-item'), choiceId: z.string().min(1), quantity: z.int().positive() }),
+  ])),
+});
+
 export const classSchema = contentEntitySchema.extend({
   kind: z.literal('class'),
   hitDie: z.int().positive(),
   savingThrowAbilities: z.array(abilitySchema).min(1),
   advancement: z.array(advancementLevelSchema),
   spellListIds: z.array(contentIdSchema),
+  levelOne: levelOneCreationProfileSchema.optional(),
+  startingEquipmentPackages: z.array(startingEquipmentPackageSchema).optional(),
   subclassSelectionLevel: z.int().min(1).max(20).optional(),
   multiclassing: z.object({
     prerequisiteGroups: z.array(z.partialRecord(abilitySchema, z.int().min(1).max(30))).min(1),
@@ -173,6 +215,7 @@ export const packEntitySchema = contentEntitySchema.extend({
     (ids) => new Set(ids).size === ids.length,
     'must not repeat class IDs',
   ).optional(),
+  equipmentPackages: z.array(startingEquipmentPackageSchema).optional(),
 }).passthrough().superRefine((entity, context) => {
   if (entity.kind === 'spell' && entity.spellListClassIds === undefined) {
     context.addIssue({ code: 'custom', path: ['spellListClassIds'], message: 'is required for spell entities' });

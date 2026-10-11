@@ -672,6 +672,37 @@ only after that initial character exists.
   contract against the full public pack, then begin that transaction workflow;
   do not add further sheet-only first-level controls.
 
+### Level-1 class-profile foundation (2026-10-11)
+
+- Added reviewed, validated level-1 creation profiles for all twelve bundled
+  2024 SRD classes. They declare class skill, tool, language, weapon-training,
+  armor-training, feature-choice, resource, and spell-selection requirements.
+- The profiles distinguish daily preparation, limited long-rest replacement,
+  level-up-only spell-list replacement, and the Wizard's separate spellbook
+  and prepared subset. They also record class-only choices such as Divine
+  Order, Primal Order, Fighting Style, Expertise, Weapon Mastery, and Eldritch
+  Invocations.
+- At this point the generated modules still declared empty equipment packages,
+  and several needed creation items (including spellbooks and arcane foci)
+  were absent from the generated item records. Package resolution was therefore
+  intentionally not inferred from class-table prose.
+- Next session starting point: complete the reviewed structured starting-
+  equipment and missing-item data, then build the pure level-0-to-level-1
+  draft/planner against these profiles before adding creation UI.
+
+### Starting-equipment package foundation (2026-10-11)
+
+- Added reviewed A/B (and Fighter C) class starting-equipment packages to all
+  twelve SRD class owner modules. Packages use stable item IDs, carry starting
+  currency, and refer back to a character's selected instrument, tool, or holy
+  symbol where the SRD requires the same selection.
+- Added the missing Crystal and Orb Arcane Focuses and Spellbook item records.
+  A deterministic local enrichment script reapplies these reviewed facts after
+  a future Open5e import and regenerates every manifest/report hash.
+- Next session starting point: build the pure level-0-to-level-1 draft/planner
+  that validates class-profile choices and resolves one selected equipment
+  package into character inventory before any creation route or UI is added.
+
 ## Slice 8: Content repository and public packs — next
 
 Goal: unify bundled and locally installed content behind one interface.

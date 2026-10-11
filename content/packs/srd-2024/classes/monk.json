@@ -1,6 +1,39 @@
 {
   "choices": [],
   "class": {
+    "equipmentPackages": [
+      {
+        "currencyGp": 11,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:spear",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:dagger",
+            "quantity": 5,
+            "type": "item"
+          },
+          {
+            "choiceId": "tool-proficiency",
+            "quantity": 1,
+            "type": "chosen-item"
+          },
+          {
+            "itemId": "srd-2024:item:explorers-pack",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 50,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "featureIds": [
       "srd-2024:feature:monk-ability-score-improvement",
       "srd-2024:feature:monk-acrobatic-movement",
@@ -82,7 +115,6 @@
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
     }
   },
-  "equipmentPackages": [],
   "features": [
     {
       "id": "srd-2024:feature:monk-ability-score-improvement",
