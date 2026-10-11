@@ -27,7 +27,8 @@ export type SpellSelectionMode = 'known-and-prepared' | 'prepared-from-list' | '
 export interface LevelOneCreationProfile {
   readonly skillChoices: { readonly count: number; readonly options: readonly Skill[] };
   readonly grantedToolIds?: readonly string[];
-  readonly toolChoice?: { readonly id: string; readonly count: number; readonly categories: readonly ('artisan-tools' | 'musical-instruments')[] };
+  /** Reviewed, stable item IDs; no tool options are inferred from display text. */
+  readonly toolChoice?: { readonly id: string; readonly count: number; readonly optionIds: readonly ContentId[] };
   readonly languageChoiceCount?: number;
   readonly weaponTraining: readonly string[];
   readonly armorTraining: readonly string[];
@@ -206,6 +207,11 @@ export interface ContentFixture {
   readonly resources: readonly Resource[];
   readonly spells: readonly Spell[];
   readonly feats: readonly Feat[];
+  /**
+   * Items are kept alongside the gameplay-facing fixture so creation can
+   * resolve a reviewed equipment package without reaching back into raw JSON.
+   */
+  readonly items: readonly Item[];
 }
 
 export interface ContentPackManifest {
@@ -267,4 +273,11 @@ export interface ContentPack {
 
 export interface Item extends PackEntity {
   readonly kind: 'item';
+  /** Structured weapon fields used only to present reviewed creation choices. */
+  readonly weapon?: {
+    readonly training: 'simple' | 'martial';
+    readonly properties: readonly string[];
+    /** Present only when the structured source marks a weapon mastery. */
+    readonly mastery?: string;
+  };
 }

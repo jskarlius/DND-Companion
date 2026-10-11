@@ -5,6 +5,8 @@ import { representativeCharacter, representativePlayState } from '../features/ch
 import { migrateCharacterExport } from './characterBackup';
 import { CharacterRepository } from './characterRepository';
 import { CompanionDatabase } from './database';
+import { planCharacterCreation } from '../domain/character/creation';
+import { bundledContentRepository } from '../domain/content/bundledContent';
 
 const databases: CompanionDatabase[] = [];
 
@@ -25,6 +27,24 @@ describe('CharacterRepository', () => {
 
     expect(await repository.loadCharacter(representativeCharacter.id)).toEqual(representativeCharacter);
     expect(await repository.loadPlayState(representativeCharacter.id)).toEqual(representativePlayState);
+  });
+
+  test('commits a completed creation as one character/play-state pair', async () => {
+    const repository = createRepository();
+    const wizard = bundledContentRepository.getClass('srd-2024:class:wizard')!;
+    const cantrips = wizard.spellListIds.filter((id) => bundledContentRepository.getSpell(id)?.level === 0).slice(0, 3);
+    const spells = wizard.spellListIds.filter((id) => bundledContentRepository.getSpell(id)?.level === 1).slice(0, 6);
+    const result = planCharacterCreation({
+      characterId: 'test:created', classEntryId: 'test:created:class-entry:wizard', name: 'Created', enabledContentPackIds: ['srd-2024'],
+      abilityScoreGeneration: 'custom', abilityScores: { strength: 10, dexterity: 10, constitution: 10, intelligence: 16, wisdom: 10, charisma: 10 },
+      classId: wizard.id, classSkillIds: ['arcana', 'history'], toolIds: [], classChoices: {}, equipmentPackageId: 'a',
+      cantripIds: cantrips, spellbookSpellIds: spells, selectedSpellIds: [], preparedSpellIds: spells.slice(0, 4), initialHitPoints: 6, hitPointMethod: 'fixed',
+    }, bundledContentRepository);
+    if (!result.ok) throw new Error(result.issues.map((issue) => issue.message).join('; '));
+
+    await repository.commitCreation(result.character, result.playState);
+    await expect(repository.loadCharacter(result.character.id)).resolves.toEqual(result.character);
+    await expect(repository.loadPlayState(result.character.id)).resolves.toEqual(result.playState);
   });
 
   test('lists only the characters stored locally', async () => {
@@ -81,13 +101,15 @@ test('migrates a version 0 backup by adding missing play-state and rest-policy f
     playState: (({ temporaryMaximumHpBonus: _removed, ...playState }) => playState)(representativePlayState),
   });
 
-  expect(backup.schemaVersion).toBe(4);
+  expect(backup.schemaVersion).toBe(6);
   expect(backup.character.schemaVersion).toBe(1);
   expect(backup.playState.temporaryMaximumHpBonus).toBe(0);
   expect(backup.playState.usedHitDice).toEqual({});
   expect(backup.character.longRestHitDiceRecovery).toBe('2024-all');
   expect(backup.character.spellSelections).toHaveLength(2);
   expect(backup.character.hitPointGains).toEqual([]);
+  expect(backup.character.currencyGp).toBe(0);
+  expect(backup.character.proficiencies).toMatchObject({ weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [] });
 });
 
 test('upgrades a version 1 database by adding the Aid maximum-HP field', async () => {
@@ -148,5 +170,6 @@ test('upgrades version 4 development references to the canonical SRD namespace',
   const [character, playState] = await Promise.all([repository.loadCharacter(representativeCharacter.id), repository.loadPlayState(representativeCharacter.id)]);
   expect(character?.classes[0]?.classId).toBe('srd-2024:class:wizard');
   expect(character?.enabledContentPackIds).toEqual(['srd-2024']);
+  expect(character?.currencyGp).toBe(0);
   expect(playState?.usedResources).toEqual({ 'srd-2024:resource:wizard-arcane-recovery': 1 });
 });

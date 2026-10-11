@@ -408,7 +408,14 @@ type Character = {
     choices: Record<string, string | string[]>;
   }>;
   choices: Record<string, string | string[]>;
-  proficiencies: ProficiencySelection[];
+  proficiencies: {
+    savingThrowAbilities: Ability[];
+    skills: Record<Skill, "none" | "proficient" | "expertise">;
+    weaponTraining: string[];
+    armorTraining: string[];
+    toolIds: string[];
+    languageIds: string[];
+  };
   /** Legacy import fields; normal play uses class-entry-owned spell selections. */
   knownSpellIds: string[];
   preparedSpellIds: string[];
@@ -424,6 +431,8 @@ type Character = {
     method: "fixed" | "rolled" | "custom";
     hitPoints: number;
   }>;
+  /** Starting and later recorded gold pieces; currency is not an item entity. */
+  currencyGp: number;
   inventory: InventoryEntry[];
   manualOverrides: Record<string, unknown>;
 };
@@ -494,6 +503,10 @@ choices, starting equipment, cantrips and spells, initial HP, and any declared
 first-level grants. A choice that has not been modeled must be an explicit
 blocking or deferred choice in the creation flow; it must not be filled from a
 representative fixture or deferred to an unrelated character-sheet control.
+
+Starting-equipment packages may grant both items and gold pieces. Item entries
+remain references to content IDs in `inventory`; gold is stored separately as
+the character's `currencyGp` so it is not represented as a fictitious item.
 
 The exact content scope and new source-data references for species, background,
 and equipment require an architecture checkpoint before implementation. Once

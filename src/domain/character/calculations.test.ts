@@ -50,11 +50,13 @@ const multiclassCharacter: Character = {
   proficiencies: {
     savingThrowAbilities: ['intelligence', 'wisdom'],
     skills: { arcana: 'expertise', athletics: 'proficient' },
+    weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [],
   },
   knownSpellIds: [],
   preparedSpellIds: [],
   spellSelections: [], preparedSpells: [],
   hitPointGains: [],
+  currencyGp: 0,
   inventory: [],
   manualOverrides: {},
 };

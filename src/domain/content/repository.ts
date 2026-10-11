@@ -30,8 +30,11 @@ export class BundledContentRepository implements ContentRepository {
   getFeature(id: string): Feature | undefined { return this.fixture.features.find((entity) => entity.id === id); }
   getChoice(id: string): Choice | undefined { return this.fixture.choices.find((entity) => entity.id === id); }
   getResource(id: string): Resource | undefined { return this.fixture.resources.find((entity) => entity.id === id); }
-  getItem(_id: string): Item | undefined { return undefined; }
-  searchItems(_query: string): readonly Item[] { return []; }
+  getItem(id: string): Item | undefined { return this.fixture.items.find((entity) => entity.id === id); }
+  searchItems(query: string): readonly Item[] {
+    const normalized = query.trim().toLocaleLowerCase();
+    return normalized === '' ? this.fixture.items : this.fixture.items.filter((item) => item.name.toLocaleLowerCase().includes(normalized));
+  }
 }
 /** Actionable validation error for an enabled pack graph. */
 export class ContentPackValidationError extends Error {}

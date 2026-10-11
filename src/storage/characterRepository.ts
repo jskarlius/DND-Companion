@@ -34,6 +34,14 @@ export class CharacterRepository {
     });
   }
 
+  /**
+   * Creation is a two-record transaction: a cancelled or invalid draft never
+   * reaches IndexedDB, and a completed character can never lack play state.
+   */
+  async commitCreation(character: Character, playState: CharacterPlayState): Promise<void> {
+    await this.save(character, playState);
+  }
+
   /** Commits a reviewed level-up without letting temporary play state drift. */
   async commitAdvancement(character: Character, unchangedPlayState: CharacterPlayState): Promise<void> {
     await this.save(character, unchangedPlayState);

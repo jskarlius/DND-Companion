@@ -128,6 +128,31 @@ export class CompanionDatabase extends Dexie {
         character.preparedSpells = [...new Map([...selected, ...legacy].map((entry) => [`${entry.classEntryId}:${entry.spellId}`, entry])).values()];
       });
     });
+    this.version(7).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      // Older characters predate structured starting equipment. Treat their
+      // unrecorded currency as zero instead of guessing from a class fixture.
+      await transaction.table('characters').toCollection().modify((character: { currencyGp?: number }) => {
+        if (character.currencyGp === undefined) character.currencyGp = 0;
+      });
+    });
+    this.version(8).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      // These fields describe grants, not derived values. Legacy characters
+      // retain their existing skills and receive empty explicit collections.
+      await transaction.table('characters').toCollection().modify((character: { proficiencies?: Record<string, unknown> }) => {
+        character.proficiencies ??= {};
+        for (const key of ['weaponTraining', 'armorTraining', 'toolIds', 'languageIds']) {
+          if (!Array.isArray(character.proficiencies[key])) character.proficiencies[key] = [];
+        }
+      });
+    });
   }
 }
 

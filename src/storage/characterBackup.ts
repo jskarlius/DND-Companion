@@ -3,7 +3,7 @@ import { ABILITIES, MANUAL_OVERRIDE_TARGETS, SKILLS, type Character, type Charac
 import { migrateDevelopmentContentIds } from '../domain/content/contentIdMigration';
 
 /** The format of a character file is independent from whichever local database we use. */
-export const CHARACTER_EXPORT_SCHEMA_VERSION = 4;
+export const CHARACTER_EXPORT_SCHEMA_VERSION = 6;
 
 const choiceValueSchema = z.union([z.string(), z.array(z.string())]);
 const abilitySchema = z.enum(ABILITIES);
@@ -29,6 +29,7 @@ const characterFieldsSchema = z.object({
   proficiencies: z.object({
     savingThrowAbilities: z.array(abilitySchema),
     skills: z.partialRecord(skillSchema, z.enum(['none', 'proficient', 'expertise'])),
+    weaponTraining: z.array(z.string()), armorTraining: z.array(z.string()), toolIds: z.array(z.string()), languageIds: z.array(z.string()),
   }),
   knownSpellIds: z.array(z.string()),
   preparedSpellIds: z.array(z.string()),
@@ -39,11 +40,17 @@ const characterFieldsSchema = z.object({
   hitPointGains: z.array(z.object({
     classEntryId: z.string().min(1), classLevel: z.number().int().min(1), method: z.enum(['fixed', 'rolled', 'custom']), hitPoints: z.number().int().min(0),
   })),
+  currencyGp: z.number().int().min(0),
   inventory: z.array(z.object({ itemId: z.string().min(1), quantity: z.number().int().min(0) })),
   manualOverrides: z.partialRecord(manualOverrideTargetSchema, z.object({ value: z.number(), reason: z.string().min(1).optional() })),
 });
 
 export const characterSchema = characterFieldsSchema.extend({ schemaVersion: z.literal(1) });
+// Backup versions through v5 predate explicit non-skill proficiency fields.
+// Keep their parser separate so migration remains readable and lossless.
+const preTrainingCharacterFieldsSchema = characterFieldsSchema.extend({
+  proficiencies: characterFieldsSchema.shape.proficiencies.omit({ weaponTraining: true, armorTraining: true, toolIds: true, languageIds: true }),
+});
 export const characterPlayStateSchema = z.object({
   characterId: z.string().min(1),
   currentHp: z.number().min(0),
@@ -72,23 +79,42 @@ export const characterExportSchema = z.object({
 
 export type CharacterExport = z.infer<typeof characterExportSchema>;
 
+function withDefaultTraining<T extends { proficiencies: { savingThrowAbilities: readonly string[]; skills: Record<string, unknown> } }>(character: T) {
+  return {
+    ...character,
+    proficiencies: { ...character.proficiencies, weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [] },
+  };
+}
+
+const versionFourCharacterExportSchema = z.object({
+  format: z.literal('dnd-companion-character'), schemaVersion: z.literal(4), exportedAt: z.string().datetime(),
+  character: preTrainingCharacterFieldsSchema.omit({ currencyGp: true }).extend({ schemaVersion: z.literal(1) }),
+  playState: characterPlayStateSchema,
+});
+
+const versionFiveCharacterExportSchema = z.object({
+  format: z.literal('dnd-companion-character'), schemaVersion: z.literal(5), exportedAt: z.string().datetime(),
+  character: preTrainingCharacterFieldsSchema.extend({ schemaVersion: z.literal(1) }),
+  playState: characterPlayStateSchema,
+});
+
 const versionTwoCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character'),
   schemaVersion: z.literal(2),
   exportedAt: z.string().datetime(),
-  character: characterFieldsSchema.omit({ spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(1) }),
+  character: preTrainingCharacterFieldsSchema.omit({ spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(1) }),
   playState: characterPlayStateSchema,
 });
 
 const versionThreeCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character'), schemaVersion: z.literal(3), exportedAt: z.string().datetime(),
-  character: characterFieldsSchema.omit({ preparedSpells: true }).extend({ schemaVersion: z.literal(1) }),
+  character: preTrainingCharacterFieldsSchema.omit({ preparedSpells: true }).extend({ schemaVersion: z.literal(1) }),
   playState: characterPlayStateSchema,
 });
 
 const versionOneCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character'), schemaVersion: z.literal(1), exportedAt: z.string().datetime(),
-  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true, spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(1) }),
+  character: preTrainingCharacterFieldsSchema.omit({ longRestHitDiceRecovery: true, spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(1) }),
   playState: characterPlayStateSchema.omit({ usedHitDice: true }),
 });
 
@@ -96,7 +122,7 @@ const legacyCharacterExportSchema = z.object({
   format: z.literal('dnd-companion-character').optional(),
   schemaVersion: z.literal(0).optional(),
   exportedAt: z.string().optional(),
-  character: characterFieldsSchema.omit({ longRestHitDiceRecovery: true, spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(0).optional() }),
+  character: preTrainingCharacterFieldsSchema.omit({ longRestHitDiceRecovery: true, spellSelections: true, hitPointGains: true }).extend({ schemaVersion: z.literal(0).optional() }),
   playState: characterPlayStateSchema.omit({ temporaryMaximumHpBonus: true, usedHitDice: true }),
 });
 
@@ -110,16 +136,27 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
 
   const versionTwo = versionTwoCharacterExportSchema.safeParse(input);
   const versionThree = versionThreeCharacterExportSchema.safeParse(input);
+  const versionFour = versionFourCharacterExportSchema.safeParse(input);
+  const versionFive = versionFiveCharacterExportSchema.safeParse(input);
+  if (versionFive.success) return migrateDevelopmentReferences(characterExportSchema.parse({
+    ...versionFive.data, schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
+    character: { ...versionFive.data.character, proficiencies: { ...versionFive.data.character.proficiencies, weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [] } },
+  }));
+  if (versionFour.success) return migrateDevelopmentReferences(characterExportSchema.parse({
+    ...versionFour.data,
+    schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
+    character: { ...withDefaultTraining(versionFour.data.character), currencyGp: 0 },
+  }));
   if (versionThree.success) return migrateDevelopmentReferences(characterExportSchema.parse({
     ...versionThree.data,
     schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
-    character: { ...versionThree.data.character, preparedSpells: legacyPreparedSpells(versionThree.data.character) },
+    character: { ...withDefaultTraining(versionThree.data.character), preparedSpells: legacyPreparedSpells(versionThree.data.character) },
   }));
 
   if (versionTwo.success) return characterExportSchema.parse({
     ...versionTwo.data,
     schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
-    character: { ...versionTwo.data.character, ...legacyAdvancementFields(versionTwo.data.character) },
+    character: { ...withDefaultTraining(versionTwo.data.character), currencyGp: 0, ...legacyAdvancementFields(versionTwo.data.character) },
   });
 
   const versionOne = versionOneCharacterExportSchema.safeParse(input);
@@ -127,7 +164,7 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
     return migrateDevelopmentReferences(characterExportSchema.parse({
       ...versionOne.data,
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
-      character: { ...versionOne.data.character, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(versionOne.data.character) },
+      character: { ...withDefaultTraining(versionOne.data.character), longRestHitDiceRecovery: '2024-all', currencyGp: 0, ...legacyAdvancementFields(versionOne.data.character) },
       playState: { ...versionOne.data.playState, usedHitDice: {} },
     }));
   }
@@ -138,7 +175,7 @@ export function migrateCharacterExport(input: unknown): CharacterExport {
       format: 'dnd-companion-character',
       schemaVersion: CHARACTER_EXPORT_SCHEMA_VERSION,
       exportedAt: legacy.data.exportedAt ?? new Date(0).toISOString(),
-      character: { ...legacy.data.character, schemaVersion: 1, longRestHitDiceRecovery: '2024-all', ...legacyAdvancementFields(legacy.data.character) },
+      character: { ...withDefaultTraining(legacy.data.character), schemaVersion: 1, longRestHitDiceRecovery: '2024-all', currencyGp: 0, ...legacyAdvancementFields(legacy.data.character) },
       playState: { ...legacy.data.playState, temporaryMaximumHpBonus: 0, usedHitDice: {} },
     }));
   }

@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import type { Ability } from '../character/types';
-import type { AdvancementGrant, Class, ContentFixture, Feat, Feature, Spell, Subclass } from './types';
+import type { AdvancementGrant, Class, ContentFixture, Feat, Feature, Item, Spell, Subclass } from './types';
 import { ComposedContentRepository } from './repository';
 
 const abilitySchema = z.enum(['strength', 'dexterity', 'constitution', 'intelligence', 'wisdom', 'charisma']);
@@ -25,6 +25,12 @@ const spellReferenceSchema = z.object({
   damage_roll: z.string().nullable().optional(), damage_types: z.array(z.string()).optional(),
 }).passthrough();
 const featReferenceSchema = z.object({ type: z.string().optional(), desc: z.string().optional(), prerequisite: z.string().nullable().optional() }).passthrough();
+const itemReferenceSchema = z.object({
+  weapon: z.object({
+    is_simple: z.boolean().optional(), is_martial: z.boolean().optional(),
+    properties: z.array(z.object({ property: z.object({ name: z.string().optional(), type: z.string().optional() }).passthrough() })).optional(),
+  }).nullable().optional(),
+}).passthrough();
 
 function reference<T>(value: unknown, schema: z.ZodType<T>): T | undefined {
   const result = schema.safeParse(value);
@@ -121,8 +127,26 @@ export function adaptProductionPack(repository: ComposedContentRepository): Cont
       benefits: nonEmpty(raw?.desc) ? [raw!.desc!] : [], automation: 'reference',
     };
   });
+  // Only source fields that are already structured become creation metadata;
+  // this never attempts to infer weapon properties from item prose.
+  const items: Item[] = entities.filter((entity) => entity.kind === 'item').map((entity) => {
+    const raw = reference(entity.reference, itemReferenceSchema);
+    const weapon = raw?.weapon;
+    const training = weapon?.is_simple ? 'simple' as const : weapon?.is_martial ? 'martial' as const : undefined;
+    return {
+      ...entity,
+      ...(training ? {
+        weapon: {
+          training,
+          properties: weapon?.properties?.flatMap((entry) => entry.property.name ? [entry.property.name.toLocaleLowerCase()] : []) ?? [],
+          mastery: weapon?.properties?.find((entry) => entry.property.type === 'Mastery')?.property.name?.toLocaleLowerCase(),
+        },
+      } : {}),
+    } as Item;
+  });
   return {
     manifest: repository.packs[0]!.manifest, classes, subclasses, features, choices: [], resources: [], spells,
     feats,
+    items,
   };
 }

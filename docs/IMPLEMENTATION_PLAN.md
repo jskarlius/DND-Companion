@@ -699,9 +699,33 @@ only after that initial character exists.
 - Added the missing Crystal and Orb Arcane Focuses and Spellbook item records.
   A deterministic local enrichment script reapplies these reviewed facts after
   a future Open5e import and regenerates every manifest/report hash.
-- Next session starting point: build the pure level-0-to-level-1 draft/planner
-  that validates class-profile choices and resolves one selected equipment
-  package into character inventory before any creation route or UI is added.
+- The pure Level 0-to-Level 1 planner is now complete. It validates a reviewed
+  draft without writing data, produces one level-1 character plus a fresh play
+  state on success, validates class skills and spell ownership/preparation,
+  resolves a selected package into inventory and `currencyGp`, and persists
+  both records through one repository transaction only after review.
+- The canonical gameplay fixture now exposes item records, allowing the
+  planner to reject a package whose referenced item is not installed rather
+  than copying item data into a character.
+- Full-class groundwork now persists weapon training, armor training, tool
+  proficiency item IDs, and language IDs in the character contract. Database
+  v8 and character-backup v6 migrate older characters with empty collections.
+- Bard and Monk tool choices use reviewed item IDs, and the adapter exposes
+  only structured weapon training/properties. Weapon Mastery therefore
+  validates against eligible mastered weapons for the selected class instead
+  of matching item display text. Rogue Expertise can use its selected skills.
+- Eldritch Invocation options and the Rogue's language options are still not
+  structured in the pack. Species and background grants also remain outside
+  the current character contract. These omissions are explicit rather than
+  silently guessed from source prose.
+- Completed verification: `npm.cmd run typecheck`, `npm.cmd run test` (108
+  tests), `npm.cmd run build`, and `npm.cmd run content:verify-srd` passed.
+- Next session starting point: add reviewed, stable option data for Eldritch
+  Invocations and standard languages, then test the planner against every
+  class profile. After full class coverage is verified, review and approve the
+  remaining creation contract for species and backgrounds before building the
+  creation route and review UI; do not replace the planner with another
+  minimal-character shortcut.
 
 ## Slice 8: Content repository and public packs — next
 

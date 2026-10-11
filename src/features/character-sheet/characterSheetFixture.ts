@@ -119,6 +119,7 @@ export const representativeCharacter: Character = {
       perception: 'proficient',
       stealth: 'proficient',
     },
+    weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [],
   },
   knownSpellIds: [
     'srd-2024:spell:fire-bolt',
@@ -136,6 +137,7 @@ export const representativeCharacter: Character = {
     { classEntryId: 'demo:class-entry:fighter', classLevel: 1, method: 'fixed', hitPoints: 10 },
     { classEntryId: 'demo:class-entry:fighter', classLevel: 2, method: 'fixed', hitPoints: 6 },
   ],
+  currencyGp: 0,
   inventory: [
     { itemId: 'demo:item:scholar-pack', quantity: 1 },
     { itemId: 'demo:item:spellbook', quantity: 1 },

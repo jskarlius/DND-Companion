@@ -5,6 +5,10 @@ type SupportedClass =
   | 'paladin' | 'ranger' | 'rogue' | 'sorcerer' | 'warlock' | 'wizard';
 
 const allSkills = ['acrobatics', 'animalHandling', 'arcana', 'athletics', 'deception', 'history', 'insight', 'intimidation', 'investigation', 'medicine', 'nature', 'perception', 'performance', 'persuasion', 'religion', 'sleightOfHand', 'stealth', 'survival'] as const;
+// These are reviewed SRD item IDs. Keeping the list here makes tool selection
+// a stable content reference rather than a UI filter based on an item name.
+const musicalInstrumentIds = ['srd-2024:item:musical-instrument-bagpipes', 'srd-2024:item:musical-instrument-drum', 'srd-2024:item:musical-instrument-dulcimer', 'srd-2024:item:musical-instrument-flute', 'srd-2024:item:musical-instrument-horn', 'srd-2024:item:musical-instrument-lute', 'srd-2024:item:musical-instrument-lyre', 'srd-2024:item:musical-instrument-pan-flute', 'srd-2024:item:musical-instrument-shawm', 'srd-2024:item:musical-instrument-viol'] as const;
+const artisanToolIds = ['srd-2024:item:alchemists-supplies', 'srd-2024:item:brewers-supplies', 'srd-2024:item:calligraphers-supplies', 'srd-2024:item:carpenters-tools', 'srd-2024:item:cartographers-tools', 'srd-2024:item:cobblers-tools', 'srd-2024:item:cooks-utensils', 'srd-2024:item:glassblowers-tools', 'srd-2024:item:jewelers-tools', 'srd-2024:item:leatherworkers-tools', 'srd-2024:item:masons-tools', 'srd-2024:item:painters-supplies', 'srd-2024:item:potters-tools', 'srd-2024:item:smiths-tools', 'srd-2024:item:tinkers-tools', 'srd-2024:item:weavers-tools', 'srd-2024:item:woodcarvers-tools'] as const;
 
 const profiles: Record<SupportedClass, LevelOneCreationProfile> = {
   barbarian: {
@@ -14,7 +18,7 @@ const profiles: Record<SupportedClass, LevelOneCreationProfile> = {
     resources: [{ id: 'rage', recharge: 'short-rest', maximum: { basis: 'fixed', value: 2 } }],
   },
   bard: {
-    skillChoices: { count: 3, options: allSkills }, toolChoice: { id: 'musical-instrument', count: 3, categories: ['musical-instruments'] },
+    skillChoices: { count: 3, options: allSkills }, toolChoice: { id: 'musical-instrument', count: 3, optionIds: musicalInstrumentIds },
     weaponTraining: ['simple'], armorTraining: ['light'], startingEquipmentOptionCount: 2, choices: [],
     resources: [{ id: 'bardic-inspiration', recharge: 'long-rest', maximum: { basis: 'ability-modifier', ability: 'charisma', minimum: 1 } }],
     spellcasting: { cantrips: 2, selectedSpells: 4, preparedSpells: 0, preparationChange: 'on-class-level' },
@@ -40,7 +44,7 @@ const profiles: Record<SupportedClass, LevelOneCreationProfile> = {
     ], resources: [{ id: 'second-wind', recharge: 'short-rest', maximum: { basis: 'fixed', value: 2 } }],
   },
   monk: {
-    skillChoices: { count: 2, options: ['acrobatics', 'athletics', 'history', 'insight', 'religion', 'stealth'] }, toolChoice: { id: 'tool-proficiency', count: 1, categories: ['artisan-tools', 'musical-instruments'] },
+    skillChoices: { count: 2, options: ['acrobatics', 'athletics', 'history', 'insight', 'religion', 'stealth'] }, toolChoice: { id: 'tool-proficiency', count: 1, optionIds: [...artisanToolIds, ...musicalInstrumentIds] },
     weaponTraining: ['simple', 'martial-light'], armorTraining: [], startingEquipmentOptionCount: 2, choices: [], resources: [],
   },
   paladin: {

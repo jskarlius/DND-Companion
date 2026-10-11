@@ -93,7 +93,7 @@ export const advancementLevelSchema = z.object({
 const levelOneCreationProfileSchema = z.object({
   skillChoices: z.object({ count: z.int().min(0), options: z.array(skillSchema).min(1) }),
   grantedToolIds: z.array(contentIdSchema).optional(),
-  toolChoice: z.object({ id: z.string().min(1), count: z.int().positive(), categories: z.array(z.enum(['artisan-tools', 'musical-instruments'])).min(1) }).optional(),
+  toolChoice: z.object({ id: z.string().min(1), count: z.int().positive(), optionIds: z.array(contentIdSchema).min(1) }).optional(),
   languageChoiceCount: z.int().positive().optional(),
   weaponTraining: z.array(z.string().min(1)),
   armorTraining: z.array(z.string().min(1)),
@@ -178,6 +178,7 @@ export const contentFixtureSchema = z.object({
   resources: z.array(resourceSchema),
   spells: z.array(spellSchema),
   feats: z.array(featSchema),
+  items: z.array(contentEntitySchema.extend({ kind: z.literal('item') }).passthrough()).default([]),
 });
 
 export const contentPackManifestSchema = z.object({

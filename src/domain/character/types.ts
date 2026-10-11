@@ -96,6 +96,12 @@ export type SkillProficiency = 'none' | 'proficient' | 'expertise';
 export interface CharacterProficiencies {
   readonly savingThrowAbilities: readonly Ability[];
   readonly skills: Readonly<Partial<Record<Skill, SkillProficiency>>>;
+  /** Class/background training is source data, kept separately from inventory. */
+  readonly weaponTraining: readonly string[];
+  readonly armorTraining: readonly string[];
+  /** Tool IDs refer to item records; languages use stable IDs once catalogued. */
+  readonly toolIds: readonly string[];
+  readonly languageIds: readonly string[];
 }
 
 export const MANUAL_OVERRIDE_TARGETS = [
@@ -142,6 +148,8 @@ export interface Character {
   /** Class-entry-owned daily preparation state; it never changes spell ownership. */
   readonly preparedSpells: readonly PreparedSpell[];
   readonly hitPointGains: readonly HitPointGain[];
+  /** Gold pieces are a character-owned starting-equipment result, not an item. */
+  readonly currencyGp: number;
   readonly inventory: readonly InventoryEntry[];
   readonly manualOverrides: ManualOverrides;
 }
