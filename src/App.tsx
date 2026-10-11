@@ -2,12 +2,13 @@ import { lazy, Suspense, useCallback, useEffect, useRef, useState } from 'react'
 import { HashRouter, Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import { CharacterLibrary } from './features/character-library/CharacterLibrary';
-import type { Character, CharacterPlayState } from './domain/character/types';
+import type { Character } from './domain/character/types';
 import { CharacterRepository } from './storage/characterRepository';
 import { requestPersistentStorage, type PersistentStorageStatus } from './storage/persistentStorage';
 import { Button } from './components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './components/ui/dialog';
 import { Moon, Sun } from 'lucide-react';
+import { CharacterCreation } from './features/character-creation/CharacterCreation';
 
 const characterRepository = new CharacterRepository();
 const RECENT_CHARACTER_KEY = 'dnd-companion-recent-character';
@@ -29,20 +30,6 @@ function storageExplanation(status: PersistentStorageStatus | 'checking'): strin
 
 function createId(): string {
   return `local:character:${crypto.randomUUID()}`;
-}
-
-function createMinimalCharacter(): { character: Character; playState: CharacterPlayState } {
-  const id = createId();
-  return {
-    character: {
-      schemaVersion: 1, id, name: 'New adventurer', ruleset: '5e-2024', longRestHitDiceRecovery: '2024-all', enabledContentPackIds: ['srd-2024'],
-      abilityScoreGeneration: 'custom',
-      abilityScores: { strength: 10, dexterity: 10, constitution: 10, intelligence: 10, wisdom: 10, charisma: 10 },
-      classes: [{ id: `${id}:class-entry:wizard`, classId: 'srd-2024:class:wizard', level: 1, choices: {} }],
-      choices: {}, proficiencies: { savingThrowAbilities: ['intelligence', 'wisdom'], skills: {}, weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [] }, knownSpellIds: [], preparedSpellIds: [], spellSelections: [], preparedSpells: [], hitPointGains: [{ classEntryId: `${id}:class-entry:wizard`, classLevel: 1, method: 'fixed', hitPoints: 6 }], currencyGp: 0, inventory: [], manualOverrides: {},
-    },
-    playState: { characterId: id, currentHp: 6, temporaryHp: 0, temporaryMaximumHpBonus: 0, inspiration: false, usedHitDice: {}, usedResources: {}, usedSpellSlots: {}, deathSaveSuccesses: 0, deathSaveFailures: 0, conditions: [] },
-  };
 }
 
 function downloadBackup(name: string, backup: unknown): void {
@@ -88,10 +75,7 @@ function AppShell() {
   useEffect(() => { void refreshCharacters(); void requestPersistentStorage().then(setStorageStatus).catch(() => setStorageStatus('not-supported')); }, []);
 
   const rememberCharacter = useCallback((id: string) => { setRecentCharacterId(id); window.localStorage.setItem(RECENT_CHARACTER_KEY, id); }, []);
-  const createCharacter = async () => {
-    try { const created = createMinimalCharacter(); await characterRepository.save(created.character, created.playState); await refreshCharacters(); rememberCharacter(created.character.id); navigate(`/characters/${encodeURIComponent(created.character.id)}`); }
-    catch (cause) { setError(cause instanceof Error ? cause.message : 'A character could not be created.'); }
-  };
+  const createCharacter = () => { navigate('/create/wizard'); };
   const duplicateCharacter = async (source: Character) => {
     try {
       const playState = await characterRepository.loadPlayState(source.id);
@@ -105,7 +89,12 @@ function AppShell() {
           return duplicatedId === undefined ? [] : [[duplicatedId, used]];
         }),
       );
-      await characterRepository.save({ ...source, id, name: `${source.name} copy`, classes }, { ...playState, characterId: id, usedHitDice });
+      await characterRepository.save({
+        ...source, id, name: `${source.name} copy`, classes,
+        spellSelections: source.spellSelections.map((selection) => ({ ...selection, classEntryId: classEntryIds.get(selection.classEntryId) ?? selection.classEntryId })),
+        preparedSpells: source.preparedSpells.map((selection) => ({ ...selection, classEntryId: classEntryIds.get(selection.classEntryId) ?? selection.classEntryId })),
+        hitPointGains: source.hitPointGains.map((gain) => ({ ...gain, classEntryId: classEntryIds.get(gain.classEntryId) ?? gain.classEntryId })),
+      }, { ...playState, characterId: id, usedHitDice });
       await refreshCharacters();
       rememberCharacter(id);
       navigate(`/characters/${encodeURIComponent(id)}`);
@@ -142,6 +131,7 @@ function AppShell() {
         : libraryStatus === 'error'
           ? <main className="route-message"><h1>Character library unavailable</h1><p>Local storage could not load your characters.</p><Button type="button" onClick={() => { setLibraryStatus('loading'); void refreshCharacters(); }}>Try again</Button></main>
           : <CharacterLibrary characters={characters} recentCharacterId={recentCharacterId} onCreate={() => void createCharacter()} onDuplicate={(character) => void duplicateCharacter(character)} onExport={(character) => void exportCharacter(character)} onDelete={setDeleteCandidate} />} />
+      <Route path="/create/wizard" element={<CharacterCreation />} />
       <Route path="/characters/:characterId" element={<Suspense fallback={<main className="route-message" aria-live="polite"><h1>Loading character…</h1></main>}><CharacterRoute onRemember={rememberCharacter} onStorageError={setError} onAdvancementCommitted={() => { void refreshCharacters(); }} /></Suspense>} />
       <Route path="*" element={<main className="route-message"><h1>Page not found</h1><p>The requested page does not exist.</p><Button asChild><Link to="/">Return to library</Link></Button></main>} />
     </Routes>

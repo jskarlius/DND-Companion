@@ -2,8 +2,9 @@ import { useMemo, useState } from 'react';
 import { planAdvancement, type AdvancementPreview } from '../../domain/character/advancement';
 import type { Character, CharacterPlayState } from '../../domain/character/types';
 import { BundledContentRepository } from '../../domain/content/repository';
-import type { ContentFixture, Spell } from '../../domain/content/types';
+import type { ContentFixture } from '../../domain/content/types';
 import { Button } from '../../components/ui/button';
+import { SpellChoicePicker } from '../../components/SpellChoicePicker';
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from '../../components/ui/dialog';
 
 interface LevelUpDialogProps {
@@ -15,29 +16,6 @@ interface LevelUpDialogProps {
 
 function classEntryId(character: Character, classId: string): string {
   return `${character.id}:class-entry:${classId.split(':').at(-1)}`;
-}
-
-function SpellChoicePicker({ label, value, spells, onChange, onShowDetails }: {
-  readonly label: string;
-  readonly value: string;
-  readonly spells: readonly Spell[];
-  readonly onChange: (id: string) => void;
-  readonly onShowDetails: (id: string) => void;
-}) {
-  const selected = spells.find((spell) => spell.id === value);
-  const [query, setQuery] = useState(selected?.name ?? '');
-  const [open, setOpen] = useState(false);
-  const [previewId, setPreviewId] = useState(value);
-  const [levelFilter, setLevelFilter] = useState<number | 'all'>('all');
-  const filtered = spells.filter((spell) => spell.name.toLocaleLowerCase().includes(query.trim().toLocaleLowerCase()));
-  const spellLevels = [...new Set(spells.map((spell) => spell.level))].sort((left, right) => left - right);
-  const displayed = filtered.filter((spell) => levelFilter === 'all' || spell.level === levelFilter).sort((left, right) => left.name.localeCompare(right.name));
-  const preview = spells.find((spell) => spell.id === previewId) ?? filtered[0];
-  const selectSpell = (spell: Spell) => { onChange(spell.id); setQuery(spell.name); setPreviewId(spell.id); setOpen(false); };
-
-  return <label className="level-up-field spell-choice-picker"><span>{label}</span><input aria-label={label} role="combobox" aria-autocomplete="list" aria-expanded={open} value={query} placeholder="Search spells" onFocus={() => setOpen(true)} onChange={(event) => { const nextQuery = event.currentTarget.value; const exactMatch = spells.find((spell) => spell.name.localeCompare(nextQuery, undefined, { sensitivity: 'accent' }) === 0); if (exactMatch) selectSpell(exactMatch); else { setQuery(nextQuery); setOpen(true); setPreviewId(''); } }} onBlur={(event) => { if (!event.currentTarget.parentElement?.contains(event.relatedTarget)) setOpen(false); }} />
-    {open && <div className="spell-choice-menu" role="listbox" aria-label={`${label} matches`}><div className="spell-level-tabs" role="tablist" aria-label={`${label} spell levels`}><button type="button" role="tab" aria-selected={levelFilter === 'all'} onMouseDown={(event) => event.preventDefault()} onClick={() => setLevelFilter('all')}>All</button>{spellLevels.map((level) => <button key={level} type="button" role="tab" aria-selected={levelFilter === level} onMouseDown={(event) => event.preventDefault()} onClick={() => setLevelFilter(level)}>{level === 0 ? 'Cantrips' : `Level ${level}`}</button>)}</div><ul>{displayed.map((spell) => <li key={spell.id}><button type="button" role="option" aria-selected={spell.id === value} onMouseDown={(event) => event.preventDefault()} onMouseEnter={() => setPreviewId(spell.id)} onFocus={() => setPreviewId(spell.id)} onClick={() => selectSpell(spell)}>{spell.name}<small>Level {spell.level}</small></button></li>)}</ul>{filtered.length === 0 && <p>No eligible spells match that search.</p>}{preview && <div className="spell-choice-preview"><strong>{preview.name}</strong><p>{preview.description?.slice(0, 260) || 'No description is available.'}</p><Button type="button" variant="secondary" onMouseDown={(event) => event.preventDefault()} onClick={() => onShowDetails(preview.id)}>View full description</Button></div>}</div>}
-  </label>;
 }
 
 export function LevelUpDialog({ character, playState, content, onCommit }: LevelUpDialogProps) {

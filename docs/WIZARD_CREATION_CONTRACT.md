@@ -4,7 +4,10 @@ Status: approved 2026-10-11; contract implementation in progress
 
 This is the architecture-checkpoint review for the first supported-class
 slice. It defines the reusable creation contract required to create and
-advance a 2024 SRD Wizard. It does not authorize creation UI work yet.
+advance a 2024 SRD Wizard. It authorizes implementation in the dependency
+order below; the existing Wizard draft route is a constrained test checkpoint,
+not completion of this contract, until species/background facts and choices
+are structured, persisted, and validated.
 
 ## Recommendation
 

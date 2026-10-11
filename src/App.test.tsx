@@ -14,12 +14,20 @@ beforeEach(async () => {
 
 afterEach(cleanup);
 
-test('shows an empty library and creates a locally stored character', async () => {
+test('shows an empty library and creates a locally stored Wizard only after review', async () => {
   render(<App />);
 
   expect(screen.getByRole('heading', { name: 'Loading character library…' })).toBeInTheDocument();
   expect(await screen.findByRole('heading', { name: 'Start your party' })).toBeInTheDocument();
   await userEvent.click(screen.getByRole('button', { name: 'Create your first character' }));
+  expect(await screen.findByRole('heading', { name: 'Choose a class' })).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: /Wizard/ }));
+  expect(await screen.findByRole('heading', { name: 'Create a Wizard' })).toBeInTheDocument();
+  expect(await database.characters.count()).toBe(0);
+  await userEvent.type(screen.getByLabelText('Character name'), 'Aster');
+  await userEvent.click(screen.getByRole('button', { name: 'Review character' }));
+  expect(screen.getByText('Nothing has been saved')).toBeInTheDocument();
+  await userEvent.click(screen.getByRole('button', { name: 'Create Wizard' }));
 
   await waitFor(async () => expect(await database.characters.count()).toBe(1));
   expect(window.location.hash).toMatch(/^#\/characters\//);

@@ -1,6 +1,6 @@
 import type { ContentRepository } from '../content/repository';
 import type { Class, Item, LevelOneChoice } from '../content/types';
-import { ABILITIES, type AbilityScores, type AbilityScoreGeneration, type Character, type CharacterPlayState, type ChoiceValue, type HitPointGain, type Skill, type SpellSelection } from './types';
+import { ABILITIES, EMPTY_CURRENCY_PURSE, type AbilityScores, type AbilityScoreGeneration, type Character, type CharacterPlayState, type ChoiceValue, type HitPointGain, type Skill, type SpellSelection } from './types';
 
 /**
  * The UI owns this mutable-looking draft. This module never persists it; it
@@ -173,7 +173,10 @@ export function planCharacterCreation(request: CharacterCreationRequest, reposit
       knownSpellIds: [], preparedSpellIds: [], spellSelections,
       preparedSpells: request.preparedSpellIds.map((spellId) => ({ classEntryId: request.classEntryId, spellId })),
       hitPointGains: [{ classEntryId: request.classEntryId, classLevel: 1, method: request.hitPointMethod, hitPoints: request.initialHitPoints }],
+      currency: { ...EMPTY_CURRENCY_PURSE, gp: selectedPackage.currencyGp },
+      // Kept during the migration rollout for old readers and backups.
       currencyGp: selectedPackage.currencyGp,
+      proficiencyOverrides: { skills: {}, savingThrows: {} },
       inventory: selectedPackage.entries.filter((entry): entry is Extract<typeof entry, { type: 'item' }> => entry.type === 'item').map((entry) => ({ itemId: entry.itemId, quantity: entry.quantity })),
       manualOverrides: {},
     },

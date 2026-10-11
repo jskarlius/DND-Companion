@@ -137,6 +137,29 @@ The controls persist through the normal character-save path. A dedicated backup
 format version and required-field cleanup remain in progress before the broader
 Wizard creation migration is complete.
 
+Testable creation checkpoint (2026-10-11): the library's Create Character
+action first shows the supported-class picker, where Wizard is currently the
+only available option. Its level-1 draft route collects a name, custom ability
+scores, two Wizard skills, a reviewed class equipment package with resolved
+contents, three cantrips, six spellbook spells, and four independently
+prepared spells. The route validates through the pure planner, presents an
+explicit review, and commits one character plus fresh play state only after
+confirmation. Cancel writes nothing.
+
+Wizard spell selections use one shared, searchable, responsive spell browser
+in creation and level-up. It presents the legal spell list, filters by spell
+level only when that filter is meaningful, previews casting metadata and a
+viewport-bounded reference excerpt, and opens the full description on demand.
+The browser changes from side-by-side results/preview panes to a stacked view
+when its own dialog becomes narrow, including at high browser zoom. The
+level-up dialog is likewise viewport-bounded and scrolls internally with a
+sticky confirmation footer.
+
+This remains deliberately limited to the existing Wizard class contract while
+species/background reviewed enrichment and its persisted choice contracts are
+implemented; the UI labels its custom-ability limitation rather than implying
+the approved full contract is complete.
+
 Owner UX revision (2026-10-11): proficiency markers are read-only during play.
 One override button in each section opens an intentional edit dialog. Inside
 that dialog, markers cycle none, proficient, and expertise for skills or none
