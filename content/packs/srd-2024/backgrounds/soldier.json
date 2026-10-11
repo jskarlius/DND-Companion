@@ -1,5 +1,129 @@
 {
   "background": {
+    "creation": {
+      "abilityScoreOptions": [
+        "strength",
+        "dexterity",
+        "constitution"
+      ],
+      "choices": [
+        {
+          "count": 1,
+          "id": "gaming-set",
+          "label": "Gaming Set",
+          "optionIds": [
+            "srd-2024:item:gaming-set-dice",
+            "srd-2024:item:gaming-set-dragonchess",
+            "srd-2024:item:gaming-set-playing-cards",
+            "srd-2024:item:gaming-set-three-dragon-ante"
+          ]
+        }
+      ],
+      "equipmentPackages": [
+        {
+          "currencyGp": 14,
+          "entries": [
+            {
+              "itemId": "srd-2024:item:spear",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:shortbow",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:arrows-20",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "choiceId": "gaming-set",
+              "quantity": 1,
+              "type": "chosen-item"
+            },
+            {
+              "itemId": "srd-2024:item:healers-kit",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:quiver",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:clothes-travelers",
+              "quantity": 1,
+              "type": "item"
+            }
+          ],
+          "id": "a"
+        },
+        {
+          "currencyGp": 50,
+          "entries": [],
+          "id": "b"
+        }
+      ],
+      "featIds": [
+        "srd-2024:feat:savage-attacker"
+      ],
+      "skillGrants": [
+        "athletics",
+        "intimidation"
+      ],
+      "toolGrants": []
+    },
+    "equipmentPackages": [
+      {
+        "currencyGp": 14,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:spear",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:shortbow",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:arrows-20",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "choiceId": "gaming-set",
+            "quantity": 1,
+            "type": "chosen-item"
+          },
+          {
+            "itemId": "srd-2024:item:healers-kit",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:quiver",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:clothes-travelers",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 50,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "id": "srd-2024:background:soldier",
     "kind": "background",
     "name": "Soldier",

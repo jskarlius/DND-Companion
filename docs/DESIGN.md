@@ -399,7 +399,13 @@ type Character = {
   longRestHitDiceRecovery: "2024-all" | "2014-half";
   enabledContentPackIds: string[];
   abilityScoreGeneration: "standard-array" | "point-buy" | "custom";
+  /** Values selected by the generation method, before background increases. */
+  generatedAbilityScores: Record<Ability, number>;
+  /** Derived final values after reviewed, source-owned ability-score grants. */
   abilityScores: Record<Ability, number>;
+  /** Source-qualified ancestry and upbringing, never inferred from a name. */
+  speciesId?: string;
+  backgroundId?: string;
   classes: Array<{
     id: string;
     classId: string;
@@ -408,7 +414,24 @@ type Character = {
     choices: Record<string, string | string[]>;
   }>;
   choices: Record<string, string | string[]>;
-  proficiencies: ProficiencySelection[];
+  /** Selections owned by species, background, feat, or feature content. */
+  sourceChoices: Array<{
+    ownerId: string;
+    choiceId: string;
+    optionIds: string[];
+  }>;
+  proficiencies: {
+    savingThrowAbilities: Ability[];
+    skills: Record<Skill, "none" | "proficient" | "expertise">;
+    weaponTraining: string[];
+    armorTraining: string[];
+    toolIds: string[];
+    languageIds: string[];
+  };
+  proficiencyOverrides: {
+    skills: Partial<Record<Skill, { value: "none" | "proficient" | "expertise"; reason?: string }>>;
+    savingThrows: Partial<Record<Ability, { value: "none" | "proficient"; reason?: string }>>;
+  };
   /** Legacy import fields; normal play uses class-entry-owned spell selections. */
   knownSpellIds: string[];
   preparedSpellIds: string[];
@@ -424,10 +447,40 @@ type Character = {
     method: "fixed" | "rolled" | "custom";
     hitPoints: number;
   }>;
+  /** Spells granted outside a class spellbook/known-spell collection. */
+  grantedSpells: Array<{
+    grantorId: string;
+    spellId: string;
+    acquiredAtCharacterLevel: number;
+    castingAbility: Ability;
+    preparation: "always-prepared" | "available";
+    replacementHistory: string[];
+  }>;
+  /** Currency is character-owned rather than represented as fictitious items. */
+  currency: { cp: number; sp: number; ep: number; gp: number; pp: number };
   inventory: InventoryEntry[];
   manualOverrides: Record<string, unknown>;
 };
 ```
+
+An origin feat or similar non-class grant never becomes a class spellbook
+selection. It is rendered with its grantor as the source and can be
+always-prepared independently of a class preparation limit. A once-per-long-
+rest free cast is tracked in `CharacterPlayState.usedResources` under the
+stable key `origin-free-cast:${grantorId}:${spellId}`; it is not a spell slot
+and a Long Rest restores that use.
+
+Species use the same source-qualified creation boundary. Reviewed species
+traits persist only their resolved size, speed, senses, damage resistances,
+and explicit permanent maximum-HP modifier; feature prose remains in the
+content pack. The sheet groups weapon, armor, tool, and language training with
+those traits so a player can find all non-skill proficiencies in one place.
+
+Reviewed species choices are data-owned option groups. An option may carry a
+reference description and a tracked resource whose maximum scales from the
+character's proficiency bonus and recharges on a stated rest. The saved
+character records only the owner, choice ID, and selected option ID; the pack
+remains the source for its mechanics and display text.
 
 Temporary play state is persisted independently:
 
@@ -475,6 +528,13 @@ DC. An override stores a separate replacement value and reason/label; removing
 it immediately returns to the underlying calculation. The data model remains
 extensible for additional override targets after play testing.
 
+Skills and saving throws retain their source grants separately from an explicit
+manual overlay. A skill override selects none, proficiency, or expertise; a
+saving-throw override selects none or proficiency. Each may carry a reason,
+is visibly marked, and can be reset to restore the underlying grant. Weapons,
+armor, tools, and languages use set-like add/remove semantics and require a
+later dedicated override contract.
+
 All core calculation results provide a final value plus a trace of contributing
 terms so the interface can expose an explanation, such as on hover or focus.
 The trace is an explanation of the calculation, never a second editable source
@@ -494,6 +554,13 @@ choices, starting equipment, cantrips and spells, initial HP, and any declared
 first-level grants. A choice that has not been modeled must be an explicit
 blocking or deferred choice in the creation flow; it must not be filled from a
 representative fixture or deferred to an unrelated character-sheet control.
+
+Starting-equipment packages may grant both items and currency. Item entries
+remain references to content IDs in `inventory`; currency is stored separately
+as a five-denomination (`cp`, `sp`, `ep`, `gp`, `pp`) character-owned purse, so
+coins are not represented as fictitious items. The app preserves denominations
+and does not automatically exchange them; helpers may provide a total
+copper-piece value where useful.
 
 The exact content scope and new source-data references for species, background,
 and equipment require an architecture checkpoint before implementation. Once
@@ -676,6 +743,11 @@ The design system is introduced before application navigation expands. A
 manual product checkpoint after the character-library slice validates the
 library, character sheet, responsive behavior, keyboard operation, and visual
 hierarchy before level-up work begins.
+
+Every rules choice uses one accessible picker pattern: a compact trigger in the
+form opens a searchable or browsable dialog with option previews, and the form
+then shows only the selected result. Radio-button walls are not used for
+content choices with descriptions or more than a trivial number of options.
 
 ## 11. Frontend and packaging technology
 

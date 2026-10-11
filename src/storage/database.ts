@@ -128,6 +128,76 @@ export class CompanionDatabase extends Dexie {
         character.preparedSpells = [...new Map([...selected, ...legacy].map((entry) => [`${entry.classEntryId}:${entry.spellId}`, entry])).values()];
       });
     });
+    this.version(7).stores({
+      characters: 'id, ruleset',
+      playState: 'characterId',
+      contentPacks: 'id',
+      contentEntities: 'id, packId',
+      settings: 'key',
+    }).upgrade(async (transaction) => {
+      // Older characters predate structured starting equipment. Treat their
+      // unrecorded currency as zero instead of guessing from a class fixture.
+      await transaction.table('characters').toCollection().modify((character: { currencyGp?: number }) => {
+        if (character.currencyGp === undefined) character.currencyGp = 0;
+      });
+    });
+    this.version(8).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      // These fields describe grants, not derived values. Legacy characters
+      // retain their existing skills and receive empty explicit collections.
+      await transaction.table('characters').toCollection().modify((character: { proficiencies?: Record<string, unknown> }) => {
+        character.proficiencies ??= {};
+        for (const key of ['weaponTraining', 'armorTraining', 'toolIds', 'languageIds']) {
+          if (!Array.isArray(character.proficiencies[key])) character.proficiencies[key] = [];
+        }
+      });
+    });
+    this.version(9).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        currencyGp?: number;
+        currency?: unknown;
+        proficiencyOverrides?: unknown;
+      }) => {
+        // Legacy characters stored only gold pieces. Preserve that exact amount
+        // in the new purse instead of inferring exchanges or deleting the value.
+        if (character.currency === undefined) {
+          character.currency = { cp: 0, sp: 0, ep: 0, gp: character.currencyGp ?? 0, pp: 0 };
+        }
+        // Overrides are an overlay on source grants, so migrated characters
+        // start empty and retain their existing calculated proficiencies.
+        if (character.proficiencyOverrides === undefined) {
+          character.proficiencyOverrides = { skills: {}, savingThrows: {} };
+        }
+      });
+    });
+    this.version(10).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        sourceChoices?: unknown;
+        grantedSpells?: unknown;
+      }) => {
+        // These collections are source-owned overlays. Existing characters
+        // deliberately receive no inferred species, background, or grants.
+        character.sourceChoices ??= [];
+        character.grantedSpells ??= [];
+      });
+    });
+    this.version(11).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        abilityScores: Record<string, number>;
+        generatedAbilityScores?: Record<string, number>;
+      }) => {
+        // Pre-origin records have no distinct generated scores. Preserve their
+        // existing playable values as the generation input rather than guess.
+        character.generatedAbilityScores ??= { ...character.abilityScores };
+      });
+    });
   }
 }
 

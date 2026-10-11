@@ -105,6 +105,25 @@ test('provides accessible labels for proficiency markers', () => {
   expect(screen.getByLabelText('Intelligence saving throw, proficient')).toBeInTheDocument();
 });
 
+test('edits currency and applies reversible skill and saving-throw overrides', () => {
+  renderSheet();
+  userEvent.click(screen.getByRole('tab', { name: 'Inventory' }));
+  userEvent.clear(screen.getByLabelText('GP currency'));
+  userEvent.type(screen.getByLabelText('GP currency'), '37');
+  expect(screen.getByLabelText('GP currency')).toHaveValue(37);
+
+  userEvent.click(screen.getByRole('tab', { name: 'Sheet' }));
+  userEvent.click(screen.getByRole('button', { name: 'Override skills' }));
+  userEvent.click(screen.getByLabelText('Arcana: expertise. Cycle proficiency'));
+  userEvent.click(screen.getByRole('button', { name: 'Save changes' }));
+  userEvent.click(screen.getByRole('button', { name: 'Override saving throws' }));
+  userEvent.click(screen.getByLabelText('Dexterity: none. Cycle proficiency'));
+  userEvent.click(screen.getByRole('button', { name: 'Save changes' }));
+  expect(screen.getByLabelText('Arcana: none')).toBeInTheDocument();
+  expect(screen.getByLabelText('Dexterity saving throw, proficient')).toBeInTheDocument();
+  expect(screen.getAllByText('O')).toHaveLength(2);
+});
+
 test('moves inventory and character information into their own accessible tab panels', () => {
   renderSheet();
 

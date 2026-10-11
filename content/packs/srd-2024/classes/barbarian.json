@@ -1,6 +1,34 @@
 {
   "choices": [],
   "class": {
+    "equipmentPackages": [
+      {
+        "currencyGp": 15,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:greataxe",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:handaxe",
+            "quantity": 4,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:explorers-pack",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 75,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "featureIds": [
       "srd-2024:feature:barbarian-ability-score-improvement",
       "srd-2024:feature:barbarian-barbarian-subclass",
@@ -81,7 +109,6 @@
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
     }
   },
-  "equipmentPackages": [],
   "features": [
     {
       "id": "srd-2024:feature:barbarian-ability-score-improvement",

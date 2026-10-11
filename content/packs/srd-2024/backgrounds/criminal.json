@@ -1,5 +1,99 @@
 {
   "background": {
+    "creation": {
+      "abilityScoreOptions": [
+        "dexterity",
+        "constitution",
+        "intelligence"
+      ],
+      "choices": [],
+      "equipmentPackages": [
+        {
+          "currencyGp": 16,
+          "entries": [
+            {
+              "itemId": "srd-2024:item:dagger",
+              "quantity": 2,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:thieves-tools",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:crowbar",
+              "quantity": 1,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:pouch",
+              "quantity": 2,
+              "type": "item"
+            },
+            {
+              "itemId": "srd-2024:item:clothes-travelers",
+              "quantity": 1,
+              "type": "item"
+            }
+          ],
+          "id": "a"
+        },
+        {
+          "currencyGp": 50,
+          "entries": [],
+          "id": "b"
+        }
+      ],
+      "featIds": [
+        "srd-2024:feat:alert"
+      ],
+      "skillGrants": [
+        "sleightOfHand",
+        "stealth"
+      ],
+      "toolGrants": [
+        "srd-2024:item:thieves-tools"
+      ]
+    },
+    "equipmentPackages": [
+      {
+        "currencyGp": 16,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:dagger",
+            "quantity": 2,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:thieves-tools",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:crowbar",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:pouch",
+            "quantity": 2,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:clothes-travelers",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 50,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "id": "srd-2024:background:criminal",
     "kind": "background",
     "name": "Criminal",

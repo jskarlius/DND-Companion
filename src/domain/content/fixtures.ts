@@ -186,6 +186,9 @@ export const minimalContentFixture: ContentFixture = {
     },
   ],
   subclasses: [],
+  species: [],
+  backgrounds: [],
+  items: [],
 };
 
 export function validateContentFixture(fixture: ContentFixture): void {
@@ -198,6 +201,7 @@ export function validateContentFixture(fixture: ContentFixture): void {
     ...fixture.resources,
     ...fixture.spells,
     ...fixture.feats,
+    ...fixture.items,
   ];
   const ids = new Set<string>();
 
@@ -238,6 +242,13 @@ export function validateContentFixture(fixture: ContentFixture): void {
     for (const spellId of characterClass.spellListIds) {
       if (!fixture.spells.some((spell) => spell.id === spellId)) {
         throw new Error(`${characterClass.id} references missing spell ${spellId}`);
+      }
+    }
+    for (const equipmentPackage of characterClass.startingEquipmentPackages ?? []) {
+      for (const entry of equipmentPackage.entries) {
+        if (entry.type === 'item' && !fixture.items.some((item) => item.id === entry.itemId)) {
+          throw new Error(`${characterClass.id} references missing starting item ${entry.itemId}`);
+        }
       }
     }
   }

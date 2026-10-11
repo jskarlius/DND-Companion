@@ -1,4 +1,4 @@
-import type { Ability } from '../character/types';
+import type { Ability, Skill } from '../character/types';
 
 /** Identifies the rules release whose mechanics an entity follows. */
 export type Ruleset = '5e-2024';
@@ -18,6 +18,130 @@ export type ScalingBasis =
 export type Recharge = 'short-rest' | 'long-rest' | 'manual';
 /** When a class is allowed to change its level-1+ spell list. */
 export type SpellSelectionMode = 'known-and-prepared' | 'prepared-from-list' | 'level-up-list';
+
+/**
+ * Reviewed creation facts which Open5e currently exposes only as prose. They
+ * describe a first class level; they are not a second, character-owned rules
+ * model. The creation planner will turn these requirements into choices.
+ */
+export interface LevelOneCreationProfile {
+  readonly skillChoices: { readonly count: number; readonly options: readonly Skill[] };
+  readonly grantedToolIds?: readonly string[];
+  /** Reviewed, stable item IDs; no tool options are inferred from display text. */
+  readonly toolChoice?: { readonly id: string; readonly count: number; readonly optionIds: readonly ContentId[] };
+  readonly languageChoiceCount?: number;
+  readonly weaponTraining: readonly string[];
+  readonly armorTraining: readonly string[];
+  /** Number of class equipment alternatives. Their item resolution remains pack-owned. */
+  readonly startingEquipmentOptionCount: number;
+  readonly choices: readonly LevelOneChoice[];
+  readonly resources: readonly LevelOneResource[];
+  readonly spellcasting?: LevelOneSpellcasting;
+}
+
+/** A source-reviewed class/background equipment alternative, resolved at creation. */
+export interface StartingEquipmentPackage {
+  readonly id: string;
+  readonly currencyGp: number;
+  readonly entries: readonly StartingEquipmentEntry[];
+}
+
+/** Reviewed rules needed to turn a species or background into character data. */
+export interface CreationProfile {
+  readonly choices: readonly LevelOneChoice[];
+  readonly skillGrants: readonly Skill[];
+  readonly toolGrants: readonly ContentId[];
+  readonly abilityScoreOptions?: readonly Ability[];
+  readonly equipmentPackages?: readonly StartingEquipmentPackage[];
+  readonly featIds?: readonly ContentId[];
+  readonly spellGrants?: readonly SpellGrantDefinition[];
+}
+
+/** Reviewed always-on facts granted by a selected species at character creation. */
+export interface SpeciesTraits {
+  readonly size: string;
+  readonly speed: number;
+  readonly senses: readonly string[];
+  readonly damageResistances: readonly string[];
+  /** A source-owned permanent maximum-HP increase per character level. */
+  readonly maximumHpPerCharacterLevel?: number;
+}
+
+export interface SpeciesChoiceOption {
+  readonly id: string;
+  readonly label: string;
+  readonly description: string;
+  readonly resource?: { readonly recharge: Recharge; readonly maximum: 'proficiency-bonus' };
+  readonly skillGrants?: readonly Skill[];
+  readonly traits?: Partial<SpeciesTraits>;
+  /** Fixed lineage/legacy spells, including spells unlocked at later character levels. */
+  readonly grantedSpells?: readonly SpeciesGrantedSpell[];
+  /** Intelligence, Wisdom, or Charisma is chosen when this option is selected. */
+  readonly requiresSpellcastingAbility?: boolean;
+}
+
+export interface SpeciesGrantedSpell {
+  readonly spellId: ContentId;
+  readonly acquiredAtCharacterLevel: number;
+  readonly preparation: 'always-prepared' | 'available';
+  readonly freeCast?: boolean;
+}
+
+export interface SpeciesChoice {
+  readonly id: string;
+  readonly label: string;
+  readonly options: readonly SpeciesChoiceOption[];
+}
+
+/** A reviewed species use tracker. Its maximum is derived from total level. */
+export interface SpeciesResource {
+  readonly id: string;
+  readonly label: string;
+  readonly recharge: Recharge;
+  readonly maximum: 'proficiency-bonus';
+}
+
+/** A source-defined spell choice that remains outside class spell ownership. */
+export interface SpellGrantDefinition {
+  readonly id: ContentId;
+  readonly spellListClassId: ContentId;
+  readonly cantripCount: number;
+  readonly spellCount: number;
+  readonly spellLevel: number;
+  readonly castingAbilityChoiceId?: string;
+  readonly replacement: 'none' | 'on-level-up';
+}
+
+export type StartingEquipmentEntry =
+  | { readonly type: 'item'; readonly itemId: ContentId; readonly quantity: number }
+  | { readonly type: 'chosen-item'; readonly choiceId: string; readonly quantity: number };
+
+export interface LevelOneChoice {
+  readonly id: string;
+  readonly label: string;
+  readonly count: number;
+  /** Stable option IDs; these may be content IDs or owner-local option keys. */
+  readonly optionIds?: readonly string[];
+  /** A reviewed category whose options are not yet content entities. */
+  readonly optionCategory?: 'skill-proficiency' | 'weapon-mastery' | 'eldritch-invocation';
+}
+
+export interface LevelOneResource {
+  readonly id: string;
+  readonly recharge: Recharge;
+  readonly maximum: { readonly basis: 'fixed' | 'ability-modifier' | 'class-level'; readonly value?: number; readonly ability?: Ability; readonly multiplier?: number; readonly minimum?: number };
+}
+
+export interface LevelOneSpellcasting {
+  readonly cantrips: number;
+  /** The persistent class-owned list chosen at creation, if any. */
+  readonly selectedSpells: number;
+  /** Wizard-style spellbook contents, distinct from the prepared subset. */
+  readonly spellbookSpells?: number;
+  readonly preparedSpells: number;
+  readonly preparationChange: 'long-rest' | 'long-rest-one' | 'on-class-level' | 'none';
+  readonly alwaysPreparedSpellIds?: readonly ContentId[];
+}
 
 export interface ContentSource {
   readonly title: string;
@@ -39,6 +163,8 @@ export interface Feature extends ContentEntity {
   readonly kind: 'feature';
   readonly automation: AutomationTier;
   readonly resourceId?: ContentId;
+  /** Reference text retained for feature displays; it is not interpreted as mechanics. */
+  readonly description?: string;
 }
 
 /** A rules-owned selection recorded on the class entry that receives it. */
@@ -85,6 +211,21 @@ export interface Feat extends ContentEntity {
   readonly automation: AutomationTier;
 }
 
+export interface Species extends ContentEntity {
+  readonly kind: 'species';
+  readonly featureIds: readonly ContentId[];
+  readonly creation?: CreationProfile;
+  readonly traits?: SpeciesTraits;
+  readonly choices?: readonly SpeciesChoice[];
+  readonly resources?: readonly SpeciesResource[];
+}
+
+export interface Background extends ContentEntity {
+  readonly kind: 'background';
+  readonly featureIds: readonly ContentId[];
+  readonly creation?: CreationProfile;
+}
+
 export type AdvancementGrant =
   | { readonly type: 'feature'; readonly featureId: ContentId }
   | { readonly type: 'resource'; readonly resourceId: ContentId; readonly amount: number }
@@ -102,6 +243,9 @@ export interface Class extends ContentEntity {
   readonly savingThrowAbilities: readonly Ability[];
   readonly advancement: readonly AdvancementLevel[];
   readonly spellListIds: readonly ContentId[];
+  /** Reviewed first-level creation requirements for this class. */
+  readonly levelOne?: LevelOneCreationProfile;
+  readonly startingEquipmentPackages?: readonly StartingEquipmentPackage[];
   /** The level at which this class asks its entry to choose a subclass. */
   readonly subclassSelectionLevel?: number;
   readonly multiclassing?: {
@@ -146,6 +290,13 @@ export interface ContentFixture {
   readonly resources: readonly Resource[];
   readonly spells: readonly Spell[];
   readonly feats: readonly Feat[];
+  readonly species: readonly Species[];
+  readonly backgrounds: readonly Background[];
+  /**
+   * Items are kept alongside the gameplay-facing fixture so creation can
+   * resolve a reviewed equipment package without reaching back into raw JSON.
+   */
+  readonly items: readonly Item[];
 }
 
 export interface ContentPackManifest {
@@ -178,6 +329,13 @@ export interface PackEntity extends ContentEntity {
    * another pack can extend a class list without replacing its class record.
    */
   readonly spellListClassIds?: readonly ContentId[];
+  readonly equipmentPackages?: readonly StartingEquipmentPackage[];
+  /** Deterministic reviewed creation facts; never inferred by the client. */
+  readonly creation?: CreationProfile;
+  /** Deterministic species facts resolved at character creation. */
+  readonly traits?: SpeciesTraits;
+  readonly choices?: readonly SpeciesChoice[];
+  readonly resources?: readonly SpeciesResource[];
 }
 
 export interface ContentPackModule {
@@ -206,4 +364,11 @@ export interface ContentPack {
 
 export interface Item extends PackEntity {
   readonly kind: 'item';
+  /** Structured weapon fields used only to present reviewed creation choices. */
+  readonly weapon?: {
+    readonly training: 'simple' | 'martial';
+    readonly properties: readonly string[];
+    /** Present only when the structured source marks a weapon mastery. */
+    readonly mastery?: string;
+  };
 }

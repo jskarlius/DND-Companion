@@ -121,7 +121,11 @@ export function planAdvancement(character: Character, playState: CharacterPlaySt
   const selectedCantrips = selections.filter((selection) => repository.getSpell(selection.spellId)?.level === 0);
   const selectedSpells = selections.filter((selection) => repository.getSpell(selection.spellId)?.level !== 0);
   if (selectedCantrips.length !== expectedCantripSelections || selectedSpells.length !== expectedSpellSelections) {
-    return { ok: false, issues: [{ field: 'spells', message: `Choose ${expectedCantripSelections} cantrip${expectedCantripSelections === 1 ? '' : 's'} and ${expectedSpellSelections} spell${expectedSpellSelections === 1 ? '' : 's'} for this level.` }] };
+    const requiredSelections = [
+      expectedCantripSelections > 0 && `${expectedCantripSelections} cantrip${expectedCantripSelections === 1 ? '' : 's'}`,
+      expectedSpellSelections > 0 && `${expectedSpellSelections} spell${expectedSpellSelections === 1 ? '' : 's'}`,
+    ].filter((value): value is string => Boolean(value));
+    return { ok: false, issues: [{ field: 'spells', message: `Choose ${requiredSelections.join(' and ')} for this level.` }] };
   }
   const invalidSpell = selections.find((selection) => selection.classEntryId !== entryId || !characterClass.spellListIds.includes(selection.spellId));
   if (invalidSpell) return { ok: false, issues: [{ field: 'spells', message: 'Each selected spell must belong to the class gaining this level.' }] };

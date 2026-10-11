@@ -1,6 +1,59 @@
 {
   "choices": [],
   "class": {
+    "equipmentPackages": [
+      {
+        "currencyGp": 7,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:studded-leather-armor",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:scimitar",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:shortsword",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:longbow",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:arrows-20",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:quiver",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:druidic-focus-sprig-of-mistletoe",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:explorers-pack",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 150,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "featureIds": [
       "srd-2024:feature:ranger-ability-score-improvement",
       "srd-2024:feature:ranger-core-traits",
@@ -83,7 +136,6 @@
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
     }
   },
-  "equipmentPackages": [],
   "features": [
     {
       "id": "srd-2024:feature:ranger-ability-score-improvement",

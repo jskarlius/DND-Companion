@@ -63,8 +63,8 @@ export function createUnchosenCharacterSheetDetails(character: Character, conten
     backstory: '',
     combat: {
       armorClass: 10 + dexterityModifier,
-      speed: 0,
-      maximumHp: Math.max(hitPointBase + constitutionModifier * totalLevel, 1),
+      speed: character.speciesTraits?.speed ?? 0,
+      maximumHp: Math.max(hitPointBase + constitutionModifier * totalLevel + (character.speciesTraits?.maximumHpPerCharacterLevel ?? 0) * totalLevel, 1),
       spellAttackBonus: spellAbility ? spellModifier + proficiency : 0,
       spellSaveDc: spellAbility ? 8 + spellModifier + proficiency : 0,
     },
@@ -87,6 +87,10 @@ export const representativeCharacter: Character = {
   longRestHitDiceRecovery: '2024-all',
   enabledContentPackIds: ['srd-2024'],
   abilityScoreGeneration: 'standard-array',
+  generatedAbilityScores: {
+    strength: 10, dexterity: 14, constitution: 14,
+    intelligence: 16, wisdom: 12, charisma: 8,
+  },
   abilityScores: {
     strength: 10,
     dexterity: 14,
@@ -119,6 +123,7 @@ export const representativeCharacter: Character = {
       perception: 'proficient',
       stealth: 'proficient',
     },
+    weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [],
   },
   knownSpellIds: [
     'srd-2024:spell:fire-bolt',
@@ -136,6 +141,7 @@ export const representativeCharacter: Character = {
     { classEntryId: 'demo:class-entry:fighter', classLevel: 1, method: 'fixed', hitPoints: 10 },
     { classEntryId: 'demo:class-entry:fighter', classLevel: 2, method: 'fixed', hitPoints: 6 },
   ],
+  currencyGp: 0,
   inventory: [
     { itemId: 'demo:item:scholar-pack', quantity: 1 },
     { itemId: 'demo:item:spellbook', quantity: 1 },

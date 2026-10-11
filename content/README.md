@@ -3,6 +3,13 @@
 This directory contains distributable, versioned public content packs. Private
 book content does not belong here or in the public repository.
 
+## SRD 2024 pack
+
+`packs/srd-2024/` is the bundled module-based public pack. Its class modules
+include reviewed level-1 starting-equipment alternatives; run the documented
+import, reviewed-equipment enrichment, and verification sequence in
+`scripts/import-content/README.md` when deliberately regenerating it.
+
 ## Bootstrap pack
 
 `generated/open5e-srd-2024-bootstrap.json` is the reviewed Slice 6.75 public

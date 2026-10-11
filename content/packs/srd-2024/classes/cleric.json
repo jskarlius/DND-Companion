@@ -1,6 +1,44 @@
 {
   "choices": [],
   "class": {
+    "equipmentPackages": [
+      {
+        "currencyGp": 7,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:chain-shirt",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:shield",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:mace",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "choiceId": "holy-symbol",
+            "quantity": 1,
+            "type": "chosen-item"
+          },
+          {
+            "itemId": "srd-2024:item:priests-pack",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 110,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "featureIds": [
       "srd-2024:feature:cleric-ability-score-improvement",
       "srd-2024:feature:cleric-blessed-strikes",
@@ -82,7 +120,6 @@
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
     }
   },
-  "equipmentPackages": [],
   "features": [
     {
       "id": "srd-2024:feature:cleric-ability-score-improvement",

@@ -1,6 +1,59 @@
 {
   "choices": [],
   "class": {
+    "equipmentPackages": [
+      {
+        "currencyGp": 8,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:leather-armor",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:dagger",
+            "quantity": 2,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:shortsword",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:shortbow",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:arrows-20",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:quiver",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:thieves-tools",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:burglars-pack",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 100,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "featureIds": [
       "srd-2024:feature:rogue-ability-score-improvement",
       "srd-2024:feature:rogue-core-traits",
@@ -77,7 +130,6 @@
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
     }
   },
-  "equipmentPackages": [],
   "features": [
     {
       "id": "srd-2024:feature:rogue-ability-score-improvement",

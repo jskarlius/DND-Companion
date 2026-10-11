@@ -94,6 +94,11 @@ export function buildCharacterSheetViewModel(
       ? characterClass.spellListIds.filter((id) => { const level = findRequired(content.spells, id).level; return level > 0 && level <= highestSpellLevel; }).map((spellId) => ({ spell: findRequired(content.spells, spellId), prepared: character.preparedSpells.some((prepared) => prepared.classEntryId === classEntry.id && prepared.spellId === spellId), classEntryId: classEntry.id }))
       : [];
   });
+  const grantedSpells = (character.grantedSpells ?? []).filter((grant) => grant.acquiredAtCharacterLevel <= totalLevel).map((grant) => ({
+    spell: findRequired(content.spells, grant.spellId),
+    prepared: true,
+    classEntryId: `origin:${grant.grantorId}`,
+  }));
   const spellcasting = character.classes.flatMap((classEntry) => {
     const characterClass = findRequired(content.classes, classEntry.classId);
     if (!characterClass.spellcasting) return [];
@@ -115,12 +120,14 @@ export function buildCharacterSheetViewModel(
     savingThrows: ABILITIES.map((ability) => ({
       ability,
       value: getCharacterSavingThrow(character, ability).value,
-      proficient: character.proficiencies.savingThrowAbilities.includes(ability),
+      proficient: (character.proficiencyOverrides?.savingThrows[ability]?.value
+        ?? (character.proficiencies.savingThrowAbilities.includes(ability) ? 'proficient' : 'none')) === 'proficient',
     })),
     skills: SKILLS.map((skill) => ({
       skill,
       value: getCharacterSkillCheck(character, skill).value,
-      proficiency: character.proficiencies.skills[skill] ?? 'none',
+      proficiency: character.proficiencyOverrides?.skills[skill]?.value
+        ?? character.proficiencies.skills[skill] ?? 'none',
     })),
     classes: character.classes.map((classEntry) => ({
       name: findRequired(content.classes, classEntry.classId).name,
@@ -153,8 +160,8 @@ export function buildCharacterSheetViewModel(
         used: Math.min(Math.max(playState.usedHitDice[classEntry.id] ?? 0, 0), classEntry.level),
       };
     }),
-    cantrips: knownSpells.filter(({ spell }) => spell.level === 0),
-    spells: [...knownSpells.filter(({ spell }) => spell.level > 0), ...preparedFromList],
+    cantrips: [...knownSpells.filter(({ spell }) => spell.level === 0), ...grantedSpells.filter(({ spell }) => spell.level === 0)],
+    spells: [...knownSpells.filter(({ spell }) => spell.level > 0), ...preparedFromList, ...grantedSpells.filter(({ spell }) => spell.level > 0)],
     features,
     resources: [...resourceIds].map((id) => ({
       resource: findRequired(content.resources, id),

@@ -1,6 +1,49 @@
 {
   "choices": [],
   "class": {
+    "equipmentPackages": [
+      {
+        "currencyGp": 15,
+        "entries": [
+          {
+            "itemId": "srd-2024:item:leather-armor",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:sickle",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:dagger",
+            "quantity": 2,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:arcane-focus-orb",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:book",
+            "quantity": 1,
+            "type": "item"
+          },
+          {
+            "itemId": "srd-2024:item:scholars-pack",
+            "quantity": 1,
+            "type": "item"
+          }
+        ],
+        "id": "a"
+      },
+      {
+        "currencyGp": 100,
+        "entries": [],
+        "id": "b"
+      }
+    ],
     "featureIds": [
       "srd-2024:feature:warlock-ability-score-improvement",
       "srd-2024:feature:warlock-cantrips",
@@ -74,7 +117,6 @@
       "url": "https://dnd.wizards.com/resources/systems-reference-document"
     }
   },
-  "equipmentPackages": [],
   "features": [
     {
       "id": "srd-2024:feature:warlock-ability-score-improvement",

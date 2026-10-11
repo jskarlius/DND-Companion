@@ -32,6 +32,19 @@ without contacting Open5e:
 npm.cmd run content:verify-srd
 ```
 
+The reviewed class starting-equipment alternatives are an intentional second
+pass because Open5e supplies them only as class-table prose. Run it after a
+fresh import and before verification:
+
+```powershell
+npm.cmd run content:import-srd
+npm.cmd run content:apply-starting-equipment
+npm.cmd run content:verify-srd
+```
+
+It adds the three missing public item records required by these packages and
+updates module/report hashes. It never guesses a package from upstream prose.
+
 Open5e currently labels the selected document "System Reference Document 5.2".
 The generated manifest records that exact upstream label. Do not describe the
 snapshot as verified SRD 5.2.1 until it is reconciled against the official 5.2.1

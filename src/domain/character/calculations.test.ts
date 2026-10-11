@@ -50,11 +50,13 @@ const multiclassCharacter: Character = {
   proficiencies: {
     savingThrowAbilities: ['intelligence', 'wisdom'],
     skills: { arcana: 'expertise', athletics: 'proficient' },
+    weaponTraining: [], armorTraining: [], toolIds: [], languageIds: [],
   },
   knownSpellIds: [],
   preparedSpellIds: [],
   spellSelections: [], preparedSpells: [],
   hitPointGains: [],
+  currencyGp: 0,
   inventory: [],
   manualOverrides: {},
 };
@@ -139,6 +141,19 @@ describe('saving throws and skills', () => {
   test('reads source proficiencies from a character without storing derived results', () => {
     expect(getCharacterSavingThrow(multiclassCharacter, 'intelligence').value).toBe(4);
     expect(getCharacterSkillCheck(multiclassCharacter, 'arcana').value).toBe(7);
+  });
+
+  test('uses a proficiency override without discarding the source grant', () => {
+    const overridden = {
+      ...multiclassCharacter,
+      proficiencyOverrides: {
+        skills: { arcana: { value: 'none' as const, reason: 'Table ruling' } },
+        savingThrows: { dexterity: { value: 'proficient' as const } },
+      },
+    };
+    expect(getCharacterSkillCheck(overridden, 'arcana').value).toBe(1);
+    expect(getCharacterSavingThrow(overridden, 'dexterity').value).toBe(6);
+    expect(overridden.proficiencies.skills.arcana).toBe('expertise');
   });
 });
 
