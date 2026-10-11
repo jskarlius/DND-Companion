@@ -153,6 +153,26 @@ export class CompanionDatabase extends Dexie {
         }
       });
     });
+    this.version(9).stores({
+      characters: 'id, ruleset', playState: 'characterId', contentPacks: 'id', contentEntities: 'id, packId', settings: 'key',
+    }).upgrade(async (transaction) => {
+      await transaction.table('characters').toCollection().modify((character: {
+        currencyGp?: number;
+        currency?: unknown;
+        proficiencyOverrides?: unknown;
+      }) => {
+        // Legacy characters stored only gold pieces. Preserve that exact amount
+        // in the new purse instead of inferring exchanges or deleting the value.
+        if (character.currency === undefined) {
+          character.currency = { cp: 0, sp: 0, ep: 0, gp: character.currencyGp ?? 0, pp: 0 };
+        }
+        // Overrides are an overlay on source grants, so migrated characters
+        // start empty and retain their existing calculated proficiencies.
+        if (character.proficiencyOverrides === undefined) {
+          character.proficiencyOverrides = { skills: {}, savingThrows: {} };
+        }
+      });
+    });
   }
 }
 

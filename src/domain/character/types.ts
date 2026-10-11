@@ -93,6 +93,28 @@ export interface HitPointGain {
 
 export type SkillProficiency = 'none' | 'proficient' | 'expertise';
 
+/** A player exception that overlays, but never replaces, a content-derived grant. */
+export interface ProficiencyOverride<T extends string> {
+  readonly value: T;
+  readonly reason?: string;
+}
+
+export interface ProficiencyOverrides {
+  readonly skills: Readonly<Partial<Record<Skill, ProficiencyOverride<SkillProficiency>>>>;
+  readonly savingThrows: Readonly<Partial<Record<Ability, ProficiencyOverride<'none' | 'proficient'>>>>;
+}
+
+/** Coin denominations are preserved individually; no implicit exchange occurs. */
+export interface CurrencyPurse {
+  readonly cp: number;
+  readonly sp: number;
+  readonly ep: number;
+  readonly gp: number;
+  readonly pp: number;
+}
+
+export const EMPTY_CURRENCY_PURSE: CurrencyPurse = { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
+
 export interface CharacterProficiencies {
   readonly savingThrowAbilities: readonly Ability[];
   readonly skills: Readonly<Partial<Record<Skill, SkillProficiency>>>;
@@ -140,6 +162,8 @@ export interface Character {
   readonly classes: readonly ClassEntry[];
   readonly choices: Readonly<Record<string, ChoiceValue>>;
   readonly proficiencies: CharacterProficiencies;
+  /** Missing only on pre-migration records; readers treat it as an empty overlay. */
+  readonly proficiencyOverrides?: ProficiencyOverrides;
   /** @deprecated Migrated to spellSelections at database/import boundaries. */
   readonly knownSpellIds: readonly string[];
   /** @deprecated Migrated to spellSelections at database/import boundaries. */
@@ -148,7 +172,9 @@ export interface Character {
   /** Class-entry-owned daily preparation state; it never changes spell ownership. */
   readonly preparedSpells: readonly PreparedSpell[];
   readonly hitPointGains: readonly HitPointGain[];
-  /** Gold pieces are a character-owned starting-equipment result, not an item. */
+  /** Currency is character-owned rather than represented by inventory items. */
+  readonly currency?: CurrencyPurse;
+  /** @deprecated Legacy value retained only until the currency migration runs. */
   readonly currencyGp: number;
   readonly inventory: readonly InventoryEntry[];
   readonly manualOverrides: ManualOverrides;

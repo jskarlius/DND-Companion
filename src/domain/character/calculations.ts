@@ -207,7 +207,10 @@ export function getCharacterSavingThrow(
     character.abilityScores,
     ability,
     getCharacterLevel(character.classes).value,
-    character.proficiencies.savingThrowAbilities.includes(ability),
+    // The optional overlay is deliberately read last so a reset immediately
+    // exposes the original class/background grant without mutating it.
+    (character.proficiencyOverrides?.savingThrows[ability]?.value
+      ?? (character.proficiencies.savingThrowAbilities.includes(ability) ? 'proficient' : 'none')) === 'proficient',
     modifiers,
   );
 }
@@ -221,7 +224,8 @@ export function getCharacterSkillCheck(
     character.abilityScores,
     skill,
     getCharacterLevel(character.classes).value,
-    character.proficiencies.skills[skill] ?? 'none',
+    character.proficiencyOverrides?.skills[skill]?.value
+      ?? character.proficiencies.skills[skill] ?? 'none',
     modifiers,
   );
 }

@@ -142,6 +142,19 @@ describe('saving throws and skills', () => {
     expect(getCharacterSavingThrow(multiclassCharacter, 'intelligence').value).toBe(4);
     expect(getCharacterSkillCheck(multiclassCharacter, 'arcana').value).toBe(7);
   });
+
+  test('uses a proficiency override without discarding the source grant', () => {
+    const overridden = {
+      ...multiclassCharacter,
+      proficiencyOverrides: {
+        skills: { arcana: { value: 'none' as const, reason: 'Table ruling' } },
+        savingThrows: { dexterity: { value: 'proficient' as const } },
+      },
+    };
+    expect(getCharacterSkillCheck(overridden, 'arcana').value).toBe(1);
+    expect(getCharacterSavingThrow(overridden, 'dexterity').value).toBe(6);
+    expect(overridden.proficiencies.skills.arcana).toBe('expertise');
+  });
 });
 
 describe('modifier pipeline and overrides', () => {

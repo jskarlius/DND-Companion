@@ -31,6 +31,10 @@ const characterFieldsSchema = z.object({
     skills: z.partialRecord(skillSchema, z.enum(['none', 'proficient', 'expertise'])),
     weaponTraining: z.array(z.string()), armorTraining: z.array(z.string()), toolIds: z.array(z.string()), languageIds: z.array(z.string()),
   }),
+  proficiencyOverrides: z.object({
+    skills: z.partialRecord(skillSchema, z.object({ value: z.enum(['none', 'proficient', 'expertise']), reason: z.string().min(1).optional() })),
+    savingThrows: z.partialRecord(abilitySchema, z.object({ value: z.enum(['none', 'proficient']), reason: z.string().min(1).optional() })),
+  }).optional(),
   knownSpellIds: z.array(z.string()),
   preparedSpellIds: z.array(z.string()),
   spellSelections: z.array(z.object({
@@ -41,6 +45,7 @@ const characterFieldsSchema = z.object({
     classEntryId: z.string().min(1), classLevel: z.number().int().min(1), method: z.enum(['fixed', 'rolled', 'custom']), hitPoints: z.number().int().min(0),
   })),
   currencyGp: z.number().int().min(0),
+  currency: z.object({ cp: z.number().int().min(0), sp: z.number().int().min(0), ep: z.number().int().min(0), gp: z.number().int().min(0), pp: z.number().int().min(0) }).optional(),
   inventory: z.array(z.object({ itemId: z.string().min(1), quantity: z.number().int().min(0) })),
   manualOverrides: z.partialRecord(manualOverrideTargetSchema, z.object({ value: z.number(), reason: z.string().min(1).optional() })),
 });

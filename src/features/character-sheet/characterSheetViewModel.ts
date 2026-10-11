@@ -115,12 +115,14 @@ export function buildCharacterSheetViewModel(
     savingThrows: ABILITIES.map((ability) => ({
       ability,
       value: getCharacterSavingThrow(character, ability).value,
-      proficient: character.proficiencies.savingThrowAbilities.includes(ability),
+      proficient: (character.proficiencyOverrides?.savingThrows[ability]?.value
+        ?? (character.proficiencies.savingThrowAbilities.includes(ability) ? 'proficient' : 'none')) === 'proficient',
     })),
     skills: SKILLS.map((skill) => ({
       skill,
       value: getCharacterSkillCheck(character, skill).value,
-      proficiency: character.proficiencies.skills[skill] ?? 'none',
+      proficiency: character.proficiencyOverrides?.skills[skill]?.value
+        ?? character.proficiencies.skills[skill] ?? 'none',
     })),
     classes: character.classes.map((classEntry) => ({
       name: findRequired(content.classes, classEntry.classId).name,

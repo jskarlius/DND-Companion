@@ -416,6 +416,10 @@ type Character = {
     toolIds: string[];
     languageIds: string[];
   };
+  proficiencyOverrides: {
+    skills: Partial<Record<Skill, { value: "none" | "proficient" | "expertise"; reason?: string }>>;
+    savingThrows: Partial<Record<Ability, { value: "none" | "proficient"; reason?: string }>>;
+  };
   /** Legacy import fields; normal play uses class-entry-owned spell selections. */
   knownSpellIds: string[];
   preparedSpellIds: string[];
@@ -431,8 +435,8 @@ type Character = {
     method: "fixed" | "rolled" | "custom";
     hitPoints: number;
   }>;
-  /** Starting and later recorded gold pieces; currency is not an item entity. */
-  currencyGp: number;
+  /** Currency is character-owned rather than represented as fictitious items. */
+  currency: { cp: number; sp: number; ep: number; gp: number; pp: number };
   inventory: InventoryEntry[];
   manualOverrides: Record<string, unknown>;
 };
@@ -484,6 +488,13 @@ DC. An override stores a separate replacement value and reason/label; removing
 it immediately returns to the underlying calculation. The data model remains
 extensible for additional override targets after play testing.
 
+Skills and saving throws retain their source grants separately from an explicit
+manual overlay. A skill override selects none, proficiency, or expertise; a
+saving-throw override selects none or proficiency. Each may carry a reason,
+is visibly marked, and can be reset to restore the underlying grant. Weapons,
+armor, tools, and languages use set-like add/remove semantics and require a
+later dedicated override contract.
+
 All core calculation results provide a final value plus a trace of contributing
 terms so the interface can expose an explanation, such as on hover or focus.
 The trace is an explanation of the calculation, never a second editable source
@@ -504,9 +515,12 @@ first-level grants. A choice that has not been modeled must be an explicit
 blocking or deferred choice in the creation flow; it must not be filled from a
 representative fixture or deferred to an unrelated character-sheet control.
 
-Starting-equipment packages may grant both items and gold pieces. Item entries
-remain references to content IDs in `inventory`; gold is stored separately as
-the character's `currencyGp` so it is not represented as a fictitious item.
+Starting-equipment packages may grant both items and currency. Item entries
+remain references to content IDs in `inventory`; currency is stored separately
+as a five-denomination (`cp`, `sp`, `ep`, `gp`, `pp`) character-owned purse, so
+coins are not represented as fictitious items. The app preserves denominations
+and does not automatically exchange them; helpers may provide a total
+copper-piece value where useful.
 
 The exact content scope and new source-data references for species, background,
 and equipment require an architecture checkpoint before implementation. Once

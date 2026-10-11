@@ -7,6 +7,11 @@ Before planning, implementing, or reviewing application changes, read:
 - `docs/IMPLEMENTATION_PLAN.md` for the current slice scope and its
   acceptance criteria.
 
+`docs/IMPLEMENTATION_PLAN.md` is the compact active plan.
+`docs/IMPLEMENTATION_HISTORY.md` preserves completed-slice detail and
+superseded sequencing; read it only when the active plan links to it or an
+earlier decision needs context.
+
 Work one slice at a time. When a slice is finished, update
 `docs/IMPLEMENTATION_PLAN.md` to mark it complete and set the next-session
 starting point before ending the work. Preserve unrelated user changes, keep
